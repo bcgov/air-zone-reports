@@ -118,7 +118,7 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
   min_year <- min(data$year, na.rm = TRUE)
   min_year <- min(data$year, na.rm = TRUE)
 
-  ggplot(annual_pm25, aes(x = year, y = ann_avg, colour = station_name)) +
+  ggplot(data, aes(x = year, y = ann_avg, colour = station_name)) +
     geom_line() +
     geom_point(aes(shape = instrument_type)) +
     geom_hline(yintercept = 10, color = "red", lty = "dashed") +
