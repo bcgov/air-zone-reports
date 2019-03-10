@@ -77,7 +77,7 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
     geom_text(aes(label = metric_value_ambient), nudge_y = 2) +
     geom_hline(yintercept = caaqs_24h, color = "red", lty = "dashed") +
     annotate(geom = "text", label = "24h CAAQS", x = 2, y = caaqs_24h + 9) +
-    scale_y_continuous(limits = c(0, max(ymax_pm25_24h + 1, caaqs_24h + 5))) +
+    scale_y_continuous(limits = c(0, max(ymax_pm25_24h + 3, caaqs_24h + 5))) +
     scale_fill_manual(values = c(FEM = "#4A8CE1", TEOM = "#070C72")) +
     labs(
       x = NULL,
@@ -94,7 +94,7 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
     aes(x = reorder(station_name, metric_value_ambient, sum), y = metric_value_ambient)
   ) +
     geom_bar(stat = "identity", aes(fill = instrument_type)) +
-    geom_text(aes(label = metric_value_ambient), nudge_y = 0.5) +
+    geom_text(aes(label = metric_value_ambient), nudge_y = 0.8) +
     geom_hline(yintercept = caaqs_annual, color = "red", lty = "dashed") +
     annotate(geom = "text", label = "Annual\nCAAQS", x = 2, y = caaqs_annual + 2) +
     scale_y_continuous(limits = c(0, max(ymax_pm25_annual + 1, caaqs_annual + 5))) +
