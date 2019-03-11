@@ -140,3 +140,59 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
 }
 
 ## Tables ----------------------------------------------------
+
+## Choose color for cell based on management level
+ozone_color <- function(mgmt_level) {
+  switch(
+    as.character(mgmt_level),
+    "Actions for Achieving Air Zone CAAQS" = "#EA3420",
+    "Actions for Preventing CAAQS Exceedance" = "#F7C143",
+    "Actions for Preventing Air Quality Deterioration" = "#FFFD53",
+    "Actions for Keeping Clean Areas Clean" = "#9FCD60"
+  )
+}
+
+create_ozone_table <- function(data) {
+  overall_color <- ozone_color(max(data$mgmt_level))
+
+  data %>%
+    ## Select columns of interest
+    select(
+      station_name,
+      n_years,
+      metric_value_ambient,
+      metric_value_mgmt,
+      mgmt_level
+    ) %>%
+    ## Color management level cells
+    mutate(
+      metric_value_mgmt = map2_chr(
+        metric_value_mgmt,
+        mgmt_level,
+        function(x, y) {
+          cell_spec(x, "latex", background = ozone_color(y))
+        }
+      )
+    ) %>%
+    ## Group management level column to maximum value
+    mutate(mgmt_level = max(mgmt_level)) %>%
+    ## Rename column headers
+    rename(
+      Location = station_name,
+      `No. Valid Years` = n_years,
+      `As Measured` = metric_value_ambient,
+      `TF/EE Influences Removed` = metric_value_mgmt,
+      `Air Zone Management Level` = mgmt_level
+    ) %>%
+    kable("latex", escape = FALSE, align = "c") %>%
+    column_spec(2, width = "0.5in") %>%
+    column_spec(3:4, width = "0.75in") %>%
+    ## Color in the Air Zone Managemetn Level column
+    column_spec(5, width = "1.5in", background = overall_color) %>%
+    add_header_above(c(
+      " " = 2,
+      "4th Highest Daily \n 8-hour Maxima" = 2,
+      " " = 1
+    )) %>%
+    collapse_rows(columns = 5)
+}

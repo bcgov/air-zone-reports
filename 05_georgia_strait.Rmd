@@ -1,5 +1,11 @@
 ---
 title: Georgia Strait Air Zone
+header-includes:
+- \usepackage{booktabs}
+- \usepackage{makecell}
+- \usepackage{multirow}
+- \usepackage{colortbl}
+- \usepackage{xcolor}
 output: pdf_document
 params:
   ozone: !r ozone_caaqs_results
@@ -14,7 +20,7 @@ params:
 ## Load packages
 library("tidyverse")
 library("patchwork")
-library("gt")
+library("kableExtra")
 
 ## Filter data to air zone
 airzone <- params$airzone
@@ -59,6 +65,10 @@ annual_pm25 <- params$annual_pm25 %>%
 plot_pm25_station_timeseries(annual_pm25, airzone)
 ```
 
-## Table 2: 
+## Table 2:  Summary of ozone concentrations as measured and air zone management levels for the `r airzone` Air Zone
 
-## Table 3:
+```{r table-2, echo = FALSE}
+create_ozone_table(ozone)
+```
+
+## Table 3: Summary of PM2.5 concentrations as measured and air zone management levels for the `r airzone` Air Zone
