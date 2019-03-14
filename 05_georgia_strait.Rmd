@@ -11,6 +11,7 @@ params:
   ozone: !r ozone_caaqs_results
   annual_ozone: !r ozone_caaqs$ann_4th_highest
   pm25: !r pm_caaqs_combined_results
+  pm25_24h: !r pm_24h_caaqs_results
   annual_pm25: !r pm25_caaqs_annual$yearly_avg
   stations: !r stations_az
   airzone: "Georgia Strait"
@@ -72,3 +73,7 @@ create_ozone_table(ozone)
 ```
 
 ## Table 3: Summary of PM2.5 concentrations as measured and air zone management levels for the `r airzone` Air Zone
+
+```{r table-3, echo = FALSE}
+create_pm25_table(params$pm25_24h)
+```

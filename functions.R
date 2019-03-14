@@ -142,7 +142,7 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
 ## Tables ----------------------------------------------------
 
 ## Choose color for cell based on management level
-ozone_color <- function(mgmt_level) {
+mgmt_level_color <- function(mgmt_level) {
   switch(
     as.character(mgmt_level),
     "Actions for Achieving Air Zone CAAQS" = "#EA3420",
@@ -152,9 +152,13 @@ ozone_color <- function(mgmt_level) {
   )
 }
 
-create_ozone_table <- function(data) {
-  overall_color <- ozone_color(max(data$mgmt_level))
+## Color cells by management level
+color_by_mgmt_level <- function(value, mgmt_level) {
+  cell_spec(value, "latex", background = mgmt_level_color(mgmt_level))
+}
 
+create_ozone_table <- function(data) {
+  overall_color <- mgmt_level_color(max(data$mgmt_level))
   data %>%
     ## Select columns of interest
     select(
@@ -169,9 +173,7 @@ create_ozone_table <- function(data) {
       metric_value_mgmt = map2_chr(
         metric_value_mgmt,
         mgmt_level,
-        function(x, y) {
-          cell_spec(x, "latex", background = ozone_color(y))
-        }
+        color_by_mgmt_level
       )
     ) %>%
     ## Group management level column to maximum value
@@ -187,12 +189,55 @@ create_ozone_table <- function(data) {
     kable("latex", escape = FALSE, align = "c") %>%
     column_spec(2, width = "0.5in") %>%
     column_spec(3:4, width = "0.75in") %>%
-    ## Color in the Air Zone Managemetn Level column
+    ## Color in the Air Zone Management Level column
     column_spec(5, width = "1.5in", background = overall_color) %>%
-    add_header_above(c(
-      " " = 2,
-      "4th Highest Daily \n 8-hour Maxima" = 2,
-      " " = 1
-    )) %>%
+    add_header_above(
+      c(" " = 1, " " = 1, "4th Highest Daily \n 8-hour Maxima" = 2, " " = 1)
+    ) %>%
     collapse_rows(columns = 5)
 }
+
+create_pm25_table <- function(data) {
+  overall_color <- mgmt_level_color(max(data$mgmt_level))
+
+  data %>%
+    select(
+      station_name,
+      instrument_type,
+      n_years,
+      metric_value_ambient,
+      metric_value_mgmt,
+      mgmt_level
+    ) %>%
+  mutate(
+    metric_value_mgmt = map2_chr(
+      metric_value_mgmt,
+      mgmt_level,
+      color_by_mgmt_level
+    )
+  ) %>%
+    mutate(mgmt_level = max(mgmt_level)) %>%
+    rename(
+      Location = station_name,
+      `Monitor type` = instrument_type,
+      `No. valid years` = n_years,
+      `As measured` = metric_value_ambient,
+      `TF/EE Removed` = metric_value_mgmt,
+      `Air Zone Management Level` = mgmt_level
+    ) %>%
+    kable("latex", escape = FALSE, align = "c") %>%
+    column_spec(1, width = "1.5in") %>%
+    column_spec(2:5, width = "0.5in") %>%
+    column_spec(6, width = "1.5in", background = overall_color) %>%
+    add_header_above(
+      c(
+        " " = 1,
+        " " = 1,
+        " " = 1,
+        "Daily Mean (98th \n Percentile)" = 2,
+        " " = 1
+      )
+    ) %>%
+    collapse_rows(columns = 6)
+}
+
