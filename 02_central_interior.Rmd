@@ -1,5 +1,5 @@
 ---
-title: Georgia Strait Air Zone
+title: Central Interior Air Zone
 header-includes:
 - \usepackage{booktabs}
 - \usepackage{makecell}
@@ -14,7 +14,7 @@ params:
   pm25_24h: !r pm_24h_caaqs_results
   annual_pm25: !r pm25_caaqs_annual$yearly_avg
   stations: !r stations_az
-  airzone: "Georgia Strait"
+  airzone: "Central Interior"
 ---
 
 ```{r setup, echo = FALSE, message = FALSE}
