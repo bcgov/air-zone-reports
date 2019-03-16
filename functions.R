@@ -204,7 +204,20 @@ create_ozone_table <- function(data) {
       `TF/EE Influences Removed` = metric_value_mgmt,
       `Air Zone Management Level` = mgmt_level
     ) %>%
-    kable("latex", escape = FALSE, align = "c") %>%
+    kable(
+      "latex",
+      escape = FALSE,
+      align = "c",
+      caption = paste0(
+        "Summary of ozone concentrations as measured and air zone management levels for the ",
+        airzone,
+        " Air Zone (based on ",
+        min(data$min_year, na.rm = TRUE),
+        "-",
+        max(data$max_year, na.rm = TRUE),
+        " data). All concentrations in ppb."
+      )
+    ) %>%
     column_spec(2, width = "0.5in") %>%
     column_spec(3:4, width = "0.75in") %>%
     ## Color in the Air Zone Management Level column
@@ -250,7 +263,20 @@ create_pm25_table <- function(data) {
       `TF/EE Removed` = metric_value_mgmt,
       `Air Zone Management Level` = mgmt_level
     ) %>%
-    kable("latex", escape = FALSE, align = "c") %>%
+    kable(
+      "latex",
+      escape = FALSE,
+      align = "c",
+      caption = paste0(
+        "Summary of PM$_{2.5}$ concentrations as measured and air zone management levels for the ",
+        airzone,
+        " Air Zone (based on ",
+        min(ozone$min_year, na.rm = TRUE),
+        "-",
+        max(ozone$max_year, na.rm = TRUE),
+        " data). All concentrations in $\\mu$g/m$^3$."
+      )
+    ) %>%
     column_spec(1, width = "1.5in") %>%
     column_spec(2:5, width = "0.5in") %>%
     column_spec(
