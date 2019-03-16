@@ -231,7 +231,8 @@ create_ozone_table <- function(data) {
       c(" " = 1, " " = 1, "4th Highest Daily \n 8-hour Maxima" = 2, " " = 1)
     ) %>%
     collapse_rows(columns = 5) %>%
-    row_spec(0, background = "white")
+    row_spec(0, background = "white") %>%
+    kable_styling(latex_options = "hold_position")
 }
 
 create_pm25_table <- function(data) {
@@ -295,6 +296,7 @@ create_pm25_table <- function(data) {
       )
     ) %>%
     collapse_rows(columns = 6) %>%
-    row_spec(0, background = "white")
+    row_spec(0, background = "white") %>%
+    kable_styling(latex_options = "hold_position")
 }
 
