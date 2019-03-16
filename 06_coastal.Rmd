@@ -18,18 +18,13 @@ params:
 ---
 
 ```{r setup, echo = FALSE, message = FALSE}
-## Load packages
-library("tidyverse")
-library("patchwork")
-library("kableExtra")
+## Source plotting and table functions. Also loads packages.
+source("functions.R")
 
 ## Filter data to air zone
 airzone <- params$airzone
 ozone <- filter(params$ozone, airzone == !!airzone)
 pm25 <- filter(params$pm25, airzone == !!airzone)
-
-## Source plotting and table functions
-source("functions.R")
 ```
 
 ## Fig 2: 3 year ozone concentration by station

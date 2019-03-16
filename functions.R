@@ -2,6 +2,13 @@
 ####  Functions to generate results for air zone reports  ####
 ##############################################################
 
+## Load packages  --------------------------------------------
+
+library("tidyverse")
+library("patchwork")
+library("kableExtra")
+library("rcaaqs")
+
 ## Plots -----------------------------------------------------
 
 ## Ozone concentration based on annual 4th highest daily 8-hour maxima, 3 year
