@@ -26,17 +26,17 @@ output:
 & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}$\text{O}_3$\\ (ppb)\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}$\text{PM}_{2.5}$ – Annual\\ ($\mu \text{g/m}^3$)\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}$\text{PM}_{2.5}$ - 24h\\ ($\mu \text{g/m}^3$)\end{tabular}} \\ \cline{2-7}
 \rowcolor[HTML]{D9D9D9} 
 \multirow{-2}{*}{Management Level} & 2015 & 2020 & 2015 & 2020 & 2015 & 2020 \\ \hline
-\rowcolor[HTML]{EA3420}
-{\color[HTML]{000000} Red} & \multicolumn{6}{c|}{\cellcolor[HTML]{EA3420}{\color[HTML]{FFFFFF} Actions for Achieving Air Zone CAAQS}} \\ \hline
+\rowcolor[HTML]{A50026}
+{\color[HTML]{FFFFFF} Red} & \multicolumn{6}{c|}{\cellcolor[HTML]{A50026}{\color[HTML]{FFFFFF} Actions for Achieving Air Zone CAAQS}} \\ \hline
 Threshold (CAAQS) & 63 & 62 & 10 & 8.8 & 28 & 27 \\ \hline
-\rowcolor[HTML]{F7C143}
-Orange & \multicolumn{6}{c|}{\cellcolor[HTML]{F7C143}Actions for Preventing CAAQS Exceedance} \\ \hline
+\rowcolor[HTML]{F46D43}
+Orange & \multicolumn{6}{c|}{\cellcolor[HTML]{F46D43}Actions for Preventing CAAQS Exceedance} \\ \hline
 Threshold & \multicolumn{2}{c|}{56} & \multicolumn{2}{c|}{6.4} & \multicolumn{2}{c|}{19} \\ \hline
-\rowcolor[HTML]{FFFD53}
-Yellow & \multicolumn{6}{c|}{\cellcolor[HTML]{FFFD53}Actions for Preventing Air Quality Deterioration} \\ \hline
+\rowcolor[HTML]{FEE08B}
+Yellow & \multicolumn{6}{c|}{\cellcolor[HTML]{FEE08B}Actions for Preventing Air Quality Deterioration} \\ \hline
 Threshold & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{4} & \multicolumn{2}{c|}{10} \\ \hline
-\rowcolor[HTML]{9FCD60}
-Green & \multicolumn{6}{c|}{\cellcolor[HTML]{9FCD60}Actions for Keeping Clean Areas Clean} \\ \hline
+\rowcolor[HTML]{A6D96A}
+Green & \multicolumn{6}{c|}{\cellcolor[HTML]{A6D96A}Actions for Keeping Clean Areas Clean} \\ \hline
 \end{tabular}
 \end{table}
 ```

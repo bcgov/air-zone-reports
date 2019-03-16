@@ -143,22 +143,33 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
 
 ## Choose color for cell based on management level
 mgmt_level_color <- function(mgmt_level) {
-  switch(
-    as.character(mgmt_level),
-    "Actions for Achieving Air Zone CAAQS" = "#EA3420",
-    "Actions for Preventing CAAQS Exceedance" = "#F7C143",
-    "Actions for Preventing Air Quality Deterioration" = "#FFFD53",
-    "Actions for Keeping Clean Areas Clean" = "#9FCD60"
-  )
+  rcaaqs::get_colours(type = "management")[mgmt_level]
 }
 
 ## Color cells by management level
 color_by_mgmt_level <- function(value, mgmt_level) {
-  cell_spec(value, "latex", background = mgmt_level_color(mgmt_level))
+  cell_spec(
+    value,
+    "latex",
+    color = text_color(mgmt_level),
+    background = mgmt_level_color(mgmt_level)
+  )
+}
+
+## If mgmt level is Actions for Achieving Air Zone CAAQS, text color should be
+## white
+text_color <- function(mgmt_level) {
+  switch(
+    as.character(mgmt_level),
+    "Actions for Achieving Air Zone CAAQS" = "white",
+    "black"
+  )
 }
 
 create_ozone_table <- function(data) {
   overall_color <- mgmt_level_color(max(data$mgmt_level))
+  overall_text <- text_color(max(data$mgmt_level))
+
   data %>%
     ## Select columns of interest
     select(
@@ -190,7 +201,12 @@ create_ozone_table <- function(data) {
     column_spec(2, width = "0.5in") %>%
     column_spec(3:4, width = "0.75in") %>%
     ## Color in the Air Zone Management Level column
-    column_spec(5, width = "1.5in", background = overall_color) %>%
+    column_spec(
+      5,
+      width = "1.5in",
+      color = overall_text,
+      background = overall_color
+    ) %>%
     add_header_above(
       c(" " = 1, " " = 1, "4th Highest Daily \n 8-hour Maxima" = 2, " " = 1)
     ) %>%
@@ -200,6 +216,7 @@ create_ozone_table <- function(data) {
 
 create_pm25_table <- function(data) {
   overall_color <- mgmt_level_color(max(data$mgmt_level))
+  overall_text <- text_color(max(data$mgmt_level))
 
   data %>%
     select(
@@ -229,7 +246,12 @@ create_pm25_table <- function(data) {
     kable("latex", escape = FALSE, align = "c") %>%
     column_spec(1, width = "1.5in") %>%
     column_spec(2:5, width = "0.5in") %>%
-    column_spec(6, width = "1.5in", background = overall_color) %>%
+    column_spec(
+      6,
+      width = "1.5in",
+      color = overall_text,
+      background = overall_color
+    ) %>%
     add_header_above(
       c(
         " " = 1,
