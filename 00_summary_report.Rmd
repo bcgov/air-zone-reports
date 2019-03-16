@@ -1,7 +1,6 @@
 ---
 title: Air Zone Summary Report
 header-includes:
-  - \usepackage[utf8]{inputenc}    
   - \usepackage[table,xcdraw]{xcolor}
   - \usepackage{multicol}
   - \usepackage{booktabs}
@@ -12,6 +11,8 @@ header-includes:
 output:
   pdf_document:
     md_extensions: +raw_attribute
+    latex_engine: lualatex
+mainfont: Arial
 ---
 
 ## Air zone map

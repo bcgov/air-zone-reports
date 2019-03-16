@@ -6,7 +6,10 @@ header-includes:
 - \usepackage{multirow}
 - \usepackage{colortbl}
 - \usepackage{xcolor}
-output: pdf_document
+output:
+  pdf_document:
+    latex_engine: lualatex
+mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
   annual_ozone: !r ozone_caaqs$ann_4th_highest
