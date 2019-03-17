@@ -2,13 +2,6 @@
 ####  Functions to generate results for air zone reports  ####
 ##############################################################
 
-## Load packages  --------------------------------------------
-
-library("tidyverse")
-library("patchwork")
-library("kableExtra")
-library("rcaaqs")
-
 ## Plots -----------------------------------------------------
 
 ## Ozone concentration based on annual 4th highest daily 8-hour maxima, 3 year
@@ -144,6 +137,56 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
       shape = "Instrument"
     ) +
     theme(plot.title = element_text(hjust = 0.5))
+}
+
+## Captions --------------------------------------------------
+
+ozone_by_station_cap <- function(airzone, ozone) {
+  paste0(
+    "Ozone concentrations in the ",
+    airzone,
+    " Air Zone, based on annual 4th highest daily 8-hour maxima, averaged over ",
+    min(ozone$min_year, na.rm = TRUE),
+    "-",
+    max(ozone$max_year, na.rm = TRUE),
+    ". Red dashed line identifies the CAAQS of 63 ppb."
+  )
+}
+
+annual_ozone_cap <- function(annual_ozone) {
+  paste0(
+    "Annual trends in ozone concentrations (",
+    min(annual_ozone$year, na.rm = TRUE),
+    "-",
+    max(annual_ozone$year, na.rm = TRUE),
+    "), based on annual 4th highest daily 8-hour maxima for a single year. Red dashed line identifies CAAQS of 63 ppb."
+  )
+}
+
+pm25_by_station_cap <- function(airzone, pm25) {
+  pm25_by_station_cap <- paste0(
+    "PM$_{2.5}$ concentrations in the ",
+    airzone,
+    " Air Zone. Upper plot based on 24-hour concentration (annual 98th percentile, averaged over ",
+    min(pm25$min_year, na.rm = TRUE),
+    "-",
+    max(pm25$max_year, na.rm = TRUE),
+    "). Lower plot based on annual mean concentration (averaged over ",
+    min(pm25$min_year, na.rm = TRUE),
+    "-",
+    max(pm25$max_year, na.rm = TRUE),
+    "). Red dashed lines identify CAAQS of 28 $\\mu$g/m$^3$ (upper plot) and 10 $\\mu$g/m$^3$ (lower plot)."
+  )
+}
+
+annual_pm25_cap <- function(annual_pm25) {
+  annual_pm25_cap <- paste0(
+    "Trends in PM$_{2.5}$ concentrations (",
+    min(annual_pm25$year, na.rm = TRUE),
+    "-",
+    max(annual_pm25$year, na.rm = TRUE),
+    "), based on annual mean concentrations from a single year. The CAAQS value of 10 $\\mu$g/m$^3$ is shown by the dashed line. PM$_{2.5}$ measurements prior to 2011 are reported at 25\\textdegree C and 1 atm. From 2011 onward, measurements are reported at local conditions."
+  )
 }
 
 ## Tables ----------------------------------------------------

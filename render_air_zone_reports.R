@@ -19,5 +19,7 @@ load(file.path(pm25_dir, "tmp/analysed.RData"))
 ## using default parameters
 walk(
   list.files(pattern = "\\d{2}(.+)Rmd"),
-  render
+  render,
+  output_dir = "rendered_reports"
 )
+
