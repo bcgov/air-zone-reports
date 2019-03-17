@@ -17,10 +17,11 @@ mainfont: Arial
 
 ## Air zone map
 
-## Table 1. Air zone management framework for ground-level ozone and PM2.5. The CAAQS define the upper threshold, separating the "red" and "orange" management levels. 
+<!-- Air zone management framework table -->
 
 ```{=latex}
 \begin{table}[h]
+\caption{Air zone management framework for ground-level ozone and PM$_{2.5}$. The CAAQS define the upper threshold, separating the "red" and "orange" management levels.}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{D9D9D9}
@@ -41,7 +42,6 @@ Green & \multicolumn{6}{c|}{\cellcolor[HTML]{A6D96A}Actions for Keeping Clean Ar
 \end{tabular}
 \end{table}
 ```
-
 
 ## Air zone summary plot for 24-hour average and annual average PM2.5, and 8-hour average ozone
 
