@@ -236,36 +236,60 @@ create_ozone_table <- function(data) {
 }
 
 create_pm25_table <- function(data) {
-  overall_color <- mgmt_level_color(max(data$mgmt_level))
-  overall_text <- text_color(max(data$mgmt_level))
-
-  data %>%
+  ## Split the combined results and join to get separate columns for the metrics
+  joined <- data %>%
     select(
       station_name,
       instrument_type,
       n_years,
       metric_value_ambient,
       metric_value_mgmt,
-      mgmt_level
-    ) %>%
-  mutate(
-    metric_value_mgmt = map2_chr(
-      metric_value_mgmt,
       mgmt_level,
-      color_by_mgmt_level
-    )
-  ) %>%
-    mutate(mgmt_level = max(mgmt_level)) %>%
-    rename(
-      Location = station_name,
-      `Monitor type` = instrument_type,
-      `No. valid years` = n_years,
-      `As measured` = metric_value_ambient,
-      `TF/EE Removed` = metric_value_mgmt,
-      `Air Zone Management Level` = mgmt_level
+      metric
     ) %>%
+    split(.$metric) %>%
+    Reduce(
+      function(...) left_join(..., by = c("station_name", "instrument_type")),
+      .
+    )
+
+  max_level <- max(joined$mgmt_level.x, joined$mgmt_level.y)
+  overall_color <- mgmt_level_color(max_level)
+  overall_text <- text_color(max_level)
+
+  joined %>%
+    ## Set mgmt_level column to maximum management level
+    mutate(mgmt_level = max_level) %>%
+    ## Color management columns
+    mutate(
+      metric_value_mgmt.x = map2_chr(
+        metric_value_mgmt.x,
+        mgmt_level.x,
+        color_by_mgmt_level
+      )
+    ) %>%
+    mutate(
+      metric_value_mgmt.y = map2_chr(
+        metric_value_mgmt.y,
+        mgmt_level.y,
+        color_by_mgmt_level
+      )
+    ) %>%
+    ## Drop extra columns
+    select(-mgmt_level.x, -mgmt_level.y, -n_years.y, -metric.x, -metric.y) %>%
+    ## Create table
     kable(
       "latex",
+      col.names = c(
+        "Location",
+        "Monitor Type",
+        "No. Valid Years",
+        "As Measured",
+        "TF/EE Removed",
+        "As Measured",
+        "TF/EE Removed",
+        "Air Zone Management Level"
+      ),
       escape = FALSE,
       align = "c",
       caption = paste0(
@@ -278,11 +302,13 @@ create_pm25_table <- function(data) {
         " data). All concentrations in $\\mu$g/m$^3$."
       )
     ) %>%
-    column_spec(1, width = "1.5in") %>%
-    column_spec(2:5, width = "0.5in") %>%
+    column_spec(1, width = "1.25in") %>%
+    column_spec(2, width = "0.5in") %>%
+    column_spec(3, width = "0.3in") %>%
+    column_spec(4:7, width = "0.5in") %>%
     column_spec(
-      6,
-      width = "1.5in",
+      8,
+      width = "1in",
       color = overall_text,
       background = overall_color
     ) %>%
@@ -292,10 +318,11 @@ create_pm25_table <- function(data) {
         " " = 1,
         " " = 1,
         "Daily Mean (98th \n Percentile)" = 2,
+        "Annual Mean" = 2,
         " " = 1
       )
     ) %>%
-    collapse_rows(columns = 6) %>%
+    collapse_rows(columns = 8) %>%
     row_spec(0, background = "white") %>%
     kable_styling(latex_options = "hold_position")
 }
