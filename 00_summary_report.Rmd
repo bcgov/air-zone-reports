@@ -13,9 +13,17 @@ output:
     md_extensions: +raw_attribute
     latex_engine: lualatex
 mainfont: Arial
+params:
+  ozone_summary_plot: !r ambient_summary_plot
+  ozone_caaqs_mgmt_map: !r management_map
+  ozone_caaqs_mgmt_chart: !r management_chart
 ---
 
-## Air zone map
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<!-- TODO: Air zone map -->
 
 <!-- Air zone management framework table -->
 
@@ -43,6 +51,18 @@ Green & \multicolumn{6}{c|}{\cellcolor[HTML]{A6D96A}Actions for Keeping Clean Ar
 \end{table}
 ```
 
-## Air zone summary plot for 24-hour average and annual average PM2.5, and 8-hour average ozone
+<!-- Ozone summary plots -->
 
-## Air zone/station CAAQS mgmt level map and achievement chart for both PM2.5 and ozone.
+```{r ozone_summary_plot, echo = FALSE, fig.cap = "Air zone summary plot for 8-hour average ozone"}
+params$ozone_summary_plot
+```
+
+```{r ozone_caaqs_mgmt_map, fig.cap = "Management level map for ozone."}
+params$ozone_caaqs_mgmt_map
+```
+
+```{r ozone_caaqs_mgmt_chart, fig.cap = "Management level achievement chart for ozone."}
+params$ozone_caaqs_mgmt_chart
+```
+
+<!-- TODO: PM2.5 summary plots -->

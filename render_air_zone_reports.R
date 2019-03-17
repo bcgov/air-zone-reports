@@ -11,6 +11,7 @@ pm25_dir  <- "../pm25-caaqs-indicator/"
 
 load(file.path(ozone_dir, "tmp/ozone_clean.RData"))
 load(file.path(ozone_dir, "tmp/analysed.RData"))
+load(file.path(ozone_dir, "tmp/plots.RData"))
 
 load(file.path(pm25_dir, "tmp/pm25_clean.rda"))
 load(file.path(pm25_dir, "tmp/analysed.RData"))
