@@ -216,7 +216,7 @@ text_color <- function(mgmt_level) {
   )
 }
 
-create_ozone_table <- function(data) {
+create_ozone_table <- function(data, airzone) {
   overall_color <- mgmt_level_color(max(data$mgmt_level))
   overall_text <- text_color(max(data$mgmt_level))
 
@@ -278,7 +278,7 @@ create_ozone_table <- function(data) {
     kable_styling(latex_options = "hold_position")
 }
 
-create_pm25_table <- function(data) {
+create_pm25_table <- function(data, airzone) {
   ## Split the combined results and join to get separate columns for the metrics
   joined <- data %>%
     select(
@@ -339,9 +339,9 @@ create_pm25_table <- function(data) {
         "Summary of PM$_{2.5}$ concentrations as measured and air zone management levels for the ",
         airzone,
         " Air Zone (based on ",
-        min(ozone$min_year, na.rm = TRUE),
+        min(data$min_year, na.rm = TRUE),
         "-",
-        max(ozone$max_year, na.rm = TRUE),
+        max(data$max_year, na.rm = TRUE),
         " data). All concentrations in $\\mu$g/m$^3$."
       )
     ) %>%

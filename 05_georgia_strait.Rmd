@@ -23,9 +23,11 @@ params:
   airzone: "Georgia Strait"
 ---
 
-```{r setup, echo = FALSE, message = FALSE}
-## Source plotting and table functions. Also loads packages.
-source("functions.R")
+<!-- Load functions, filter data to airzone -->
+
+```{r setup, echo = FALSE, message = FALSE, include = FALSE}
+## Load packages
+source("components/packages.R")
 
 ## Filter data to air zone
 airzone <- params$airzone
@@ -42,42 +44,42 @@ annual_pm25 <- params$annual_pm25 %>%
   left_join(params$stations, by = c("ems_id", "station_name")) %>%
   filter(airzone == !!airzone)  
   
-## Figure captions
-source("captions.R")
+## Source plotting and table functions
+source("components/functions.R")
 ```
 
 <!-- Ozone by station -->
 
-```{r ozone-by-station, echo = FALSE, warn = FALSE, fig.cap = ozone_by_station_cap}
+```{r ozone-by-station, echo = FALSE, warn = FALSE, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
 ```
 
 <!-- Annual trends in ozone concentrations -->
 
-```{r annual-ozone, echo = FALSE, warning = FALSE, fig.cap = annual_ozone_cap}
+```{r annual-ozone, echo = FALSE, warning = FALSE, fig.cap = annual_ozone_cap(annual_ozone)}
 plot_ozone_station_timeseries(annual_ozone, airzone)
 ```
 
 <!-- PM2.5 by station -->
 
-```{r pm25-by-station, echo = FALSE, warning = FALSE, fig.asp = 1.3, fig.cap = pm25_by_station_cap}
+```{r pm25-by-station, echo = FALSE, warning = FALSE, fig.asp = 1.3, fig.cap = pm25_by_station_cap(airzone, pm25)}
 plot_pm25_by_station(pm25)
 ```
 
 <!-- PM Annual trends in PM 2.5 -->
 
-```{r annual-pm25, echo = FALSE, warning = FALSE, fig.cap = annual_pm25_cap}
+```{r annual-pm25, echo = FALSE, warning = FALSE, fig.cap = annual_pm25_cap(annual_pm25)}
 plot_pm25_station_timeseries(annual_pm25, airzone)
 ```
 
 <!-- Summary of ozone concentrations as measured and air zone management levels -->
 
 ```{r table-2, echo = FALSE}
-create_ozone_table(ozone)
+create_ozone_table(ozone, airzone)
 ```
 
 <!-- Summary of PM2.5 concentrations as measured and air zone management levels -->
 
 ```{r table-3, echo = FALSE}
-create_pm25_table(pm25)
+create_pm25_table(pm25, airzone)
 ```
