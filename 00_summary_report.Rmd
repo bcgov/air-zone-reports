@@ -21,6 +21,7 @@ params:
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library("ggplot2")
 ```
 
 <!-- TODO: Air zone map -->
@@ -53,16 +54,23 @@ Green & \multicolumn{6}{c|}{\cellcolor[HTML]{A6D96A}Actions for Keeping Clean Ar
 
 <!-- Ozone summary plots -->
 
-```{r ozone_summary_plot, echo = FALSE, fig.cap = "Air zone summary plot for 8-hour average ozone"}
-params$ozone_summary_plot
+```{r ozone_summary_plot, fig.width = 4, fig.asp = 1.4, fig.cap = "Air zone summary plot for 8-hour average ozone"}
+params$ozone_summary_plot +
+  theme(text = element_text(size = 8))
 ```
 
-```{r ozone_caaqs_mgmt_map, fig.cap = "Management level map for ozone."}
+```{r ozone_caaqs_mgmt_map, fig.width = 3, fig.asp = 1, fig.cap = "Management level map for ozone."}
 params$ozone_caaqs_mgmt_map
 ```
 
-```{r ozone_caaqs_mgmt_chart, fig.cap = "Management level achievement chart for ozone."}
-params$ozone_caaqs_mgmt_chart
+```{r ozone_caaqs_mgmt_chart, fig.width = 4, fig.asp = 1, fig.cap = "Management level achievement chart for ozone."}
+params$ozone_caaqs_mgmt_chart +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    legend.text = element_text(size = 8),
+    legend.title = element_text(size = 10)
+  )
 ```
 
 <!-- TODO: PM2.5 summary plots -->

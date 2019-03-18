@@ -106,7 +106,10 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       fill = "Instrument",
       title = "24-Hr PM2.5"
     ) +
-    theme(plot.margin = unit(c(2, 0, 0, 0), "lines")) +
+    theme(
+      plot.margin = unit(c(2, 0, 0, 0), "lines"),
+      plot.title = element_text(hjust = 0.5)
+    ) +
     coord_flip(clip = "off")
 
   ## Annual
@@ -137,8 +140,12 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       fill = "Instrument",
       title = "Annual PM2.5"
     ) +
-    theme(plot.margin = unit(c(2, 0, 0, 0), "lines")) +
+    theme(
+      plot.margin = unit(c(2, 0, 0, 0), "lines"),
+      plot.title = element_text(hjust = 0.5)
+    ) +
     coord_flip(clip = "off")
+
   plot_24h / plot_annual
 
 }
