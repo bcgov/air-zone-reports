@@ -15,8 +15,11 @@ output:
 mainfont: Arial
 params:
   ozone_summary_plot: !r ambient_summary_plot
-  ozone_caaqs_mgmt_map: !r management_map
+  ozone_caaqs_mgmt_map: !r management_map_pdf
   ozone_caaqs_mgmt_chart: !r management_chart
+  pm25_summary_plot: !r pm_ambient_summary_plot
+  pm25_caaqs_mgmt_map: !r pm_mgmt_map
+  pm25_caaqs_mgmt_chart: !r pm_mgmt_chart
 ---
 
 ```{r setup, echo = FALSE}
@@ -118,7 +121,7 @@ params$ozone_summary_plot +
   theme(text = element_text(size = 8))
 ```
 
-```{r ozone_caaqs_mgmt_map, fig.width = 3, fig.asp = 1, fig.cap = "Management level map for ozone."}
+```{r ozone_caaqs_mgmt_map, fig.width = 5, fig.asp = 1, fig.cap = "Management level map for ozone."}
 params$ozone_caaqs_mgmt_map
 ```
 
@@ -147,5 +150,27 @@ sit amet tempor lacus. Vivamus nec erat id sem viverra bibendum auctor non sem.
 Orci varius natoque penatibus et magnis dis parturient montes, nascetur
 ridiculus mus.
 
+<!-- PM2.5 summary plots -->
 
-<!-- TODO: PM2.5 summary plots -->
+```{r pm25_summary_plot, fig.width = 4, fig.asp = 1.4, fig.cap = "Air zone summary plot for annual and 24h PM$_{2.5}$"}
+params$pm25_summary_plot +
+  theme(text = element_text(size = 8))
+```
+
+```{r pm25_caaqs_mgmt_map, fig.width = 5, fig.asp = 1, fig.cap = "Management level map for PM$_{2.5}$."}
+params$pm25_caaqs_mgmt_map
+```
+
+```{r pm25_caaqs_mgmt_chart, fig.width = 4, fig.asp = 1.4, fig.cap = "Management level achievement chart for PM$_{2.5}$."}
+params$pm25_caaqs_mgmt_chart +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    legend.text = element_text(size = 8),
+    legend.title = element_text(size = 10),
+    ## Make strips a bit smaller
+    strip.text = element_text(size = 8, margin = margin(1, 0, 1, 0)),
+    # Add a little space so the last axis label doesn't get cut off
+    plot.margin = unit(c(0, 1, 0, 0), "cm")
+  )  
+```
