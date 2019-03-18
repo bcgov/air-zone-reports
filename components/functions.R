@@ -76,7 +76,13 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
     geom_bar(stat = "identity", aes(fill = instrument_type)) +
     geom_text(aes(label = metric_value_ambient), nudge_y = 2) +
     geom_hline(yintercept = caaqs_24h, color = "red", lty = "dashed") +
-    annotate(geom = "text", label = "24h CAAQS", x = 2, y = caaqs_24h + 9) +
+    annotation_custom(
+      grob = textGrob("24h CAAQS", vjust = 1),
+      xmin = length(unique(pm25_annual$station_name)) + 0.8,
+      xmax = length(unique(pm25_annual$station_name)) + 0.8,
+      ymin = caaqs_24h,
+      ymax = caaqs_24h
+    ) +
     scale_y_continuous(limits = c(0, max(ymax_pm25_24h + 3, caaqs_24h + 5))) +
     scale_fill_manual(values = c(FEM = "#4A8CE1", TEOM = "#070C72")) +
     labs(
@@ -85,18 +91,27 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       fill = "Instrument",
       title = "24-Hr PM2.5"
     ) +
-    coord_flip() +
-    theme(plot.title = element_text(hjust = 0.5))
+    theme(plot.margin = unit(c(2, 1, 1, 1), "lines")) +
+    coord_flip(clip = "off")
 
   ## Annual
   plot_annual <- ggplot(
     pm25_annual,
-    aes(x = reorder(station_name, metric_value_ambient, sum), y = metric_value_ambient)
+    aes(
+      x = reorder(station_name, metric_value_ambient, sum),
+      y = metric_value_ambient
+    )
   ) +
     geom_bar(stat = "identity", aes(fill = instrument_type)) +
     geom_text(aes(label = metric_value_ambient), nudge_y = 0.8) +
     geom_hline(yintercept = caaqs_annual, color = "red", lty = "dashed") +
-    annotate(geom = "text", label = "Annual\nCAAQS", x = 2, y = caaqs_annual + 2) +
+    annotation_custom(
+      grob = textGrob("Annual\nCAAQS", vjust = 1),
+      xmin = length(unique(pm25_annual$station_name)) + 1.1,
+      xmax = length(unique(pm25_annual$station_name)) + 1.1,
+      ymin = caaqs_annual,
+      ymax = caaqs_annual
+    ) +
     scale_y_continuous(limits = c(0, max(ymax_pm25_annual + 1, caaqs_annual + 5))) +
     scale_fill_manual(values = c(FEM = "#81EDA1", TEOM = "#4A875B")) +
     labs(
@@ -105,9 +120,8 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       fill = "Instrument",
       title = "Annual PM2.5"
     ) +
-    coord_flip() +
-    theme(plot.title = element_text(hjust = 0.5))
-
+    theme(plot.margin = unit(c(2, 1, 1, 1), "lines")) +
+    coord_flip(clip = "off")
   plot_24h / plot_annual
 
 }
