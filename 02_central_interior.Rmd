@@ -45,7 +45,7 @@ source("components/functions.R")
 
 <!-- Ozone by station -->
 
-```{r ozone-by-station, fig.align = "center", fig.asp = 1, out.width = "90%", fig.cap = ozone_by_station_cap(airzone, ozone)}
+```{r ozone-by-station, fig.width = 4.5, fig.asp = 0.55, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
 ```
 
@@ -57,7 +57,7 @@ plot_ozone_station_timeseries(annual_ozone, airzone)
 
 <!-- PM2.5 by station -->
 
-```{r pm25-by-station, fig.asp = 1.3, fig.cap = pm25_by_station_cap(airzone, pm25)}
+```{r pm25-by-station, fig.width = 5, fig.asp = 0.85, fig.cap = pm25_by_station_cap(airzone, pm25)}
 plot_pm25_by_station(pm25)
 ```
 

@@ -18,12 +18,18 @@ plot_ozone_by_station <- function(data, airzone, caaqs = 63) {
     )
   ) +
     geom_bar(stat = "identity", fill = "#A488F7") +
-    geom_text(aes(label = metric_value_ambient), nudge_y = 2) +
+    geom_text(aes(label = metric_value_ambient), nudge_y = 3, size = 2.82) +
     geom_hline(yintercept = caaqs, color = "red", lty = "dashed") +
-    annotate(geom = "text", label = "CAAQS", x = 1, y = caaqs + 5) +
+    annotate(
+      geom = "text",
+      label = "CAAQS",
+      x = 1,
+      y = caaqs + 7,
+      size = 2.82
+    ) +
     ## Set y scale to ensure CAAQS text doesn't get cut off (but if the max ozone
-    ## value is greater, take that value instead + 5 for padding)
-    scale_y_continuous(limits = c(0, max(ymax_oz + 5, caaqs + 8))) +
+    ## value is greater, take that value instead + 10 for padding)
+    scale_y_continuous(limits = c(0, max(ymax_oz + 10, caaqs + 10))) +
     labs(
       x = "Station",
       y = "Ozone concentration (ppb)",
@@ -44,7 +50,13 @@ plot_ozone_station_timeseries <- function(data, airzone, caaqs = 63) {
   ggplot(data, aes(x = year, y = ann_4th_highest, colour = station_name)) +
     geom_line() +
     geom_hline(yintercept = caaqs, color = "red", lty = "dashed") +
-    annotate(geom = "text", label = "CAAQS", x = 2016, y = caaqs + 5) +
+    annotate(
+      geom = "text",
+      label = "CAAQS",
+      x = 2016,
+      y = caaqs + 5,
+      size = 2.82
+    ) +
     labs(
       x = "Year",
       y = "Ozone concentration (ppb)",
@@ -71,15 +83,18 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
   ## 24 hour
   plot_24h <- ggplot(
     pm25_24h,
-    aes(x = reorder(station_name, metric_value_ambient, sum), y = metric_value_ambient)
+    aes(
+      x = reorder(station_name, metric_value_ambient, sum),
+      y = metric_value_ambient
+    )
   ) +
     geom_bar(stat = "identity", aes(fill = instrument_type)) +
-    geom_text(aes(label = metric_value_ambient), nudge_y = 2) +
+    geom_text(aes(label = metric_value_ambient), nudge_y = 2.5, size = 2.82) +
     geom_hline(yintercept = caaqs_24h, color = "red", lty = "dashed") +
     annotation_custom(
-      grob = textGrob("24h CAAQS", vjust = 1),
-      xmin = length(unique(pm25_annual$station_name)) + 0.8,
-      xmax = length(unique(pm25_annual$station_name)) + 0.8,
+      grob = textGrob("24h CAAQS", vjust = 1, gp = gpar(fontsize = 8)),
+      xmin = -0.35,
+      xmax = -0.35,
       ymin = caaqs_24h,
       ymax = caaqs_24h
     ) +
@@ -91,7 +106,7 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       fill = "Instrument",
       title = "24-Hr PM2.5"
     ) +
-    theme(plot.margin = unit(c(2, 1, 1, 1), "lines")) +
+    theme(plot.margin = unit(c(2, 0, 0, 0), "lines")) +
     coord_flip(clip = "off")
 
   ## Annual
@@ -103,16 +118,18 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
     )
   ) +
     geom_bar(stat = "identity", aes(fill = instrument_type)) +
-    geom_text(aes(label = metric_value_ambient), nudge_y = 0.8) +
+    geom_text(aes(label = metric_value_ambient), nudge_y = 0.8, size = 2.82) +
     geom_hline(yintercept = caaqs_annual, color = "red", lty = "dashed") +
-    annotation_custom(
-      grob = textGrob("Annual\nCAAQS", vjust = 1),
-      xmin = length(unique(pm25_annual$station_name)) + 1.1,
-      xmax = length(unique(pm25_annual$station_name)) + 1.1,
-      ymin = caaqs_annual,
-      ymax = caaqs_annual
+    annotate(
+      geom = "text",
+      label = "Annual\nCAAQS",
+      x = 1,
+      y = caaqs_annual + 2,
+      size = 2.82
     ) +
-    scale_y_continuous(limits = c(0, max(ymax_pm25_annual + 1, caaqs_annual + 5))) +
+    scale_y_continuous(
+      limits = c(0, max(ymax_pm25_annual + 3, caaqs_annual + 6))
+    ) +
     scale_fill_manual(values = c(FEM = "#81EDA1", TEOM = "#4A875B")) +
     labs(
       x = NULL,
@@ -120,7 +137,7 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       fill = "Instrument",
       title = "Annual PM2.5"
     ) +
-    theme(plot.margin = unit(c(2, 1, 1, 1), "lines")) +
+    theme(plot.margin = unit(c(2, 0, 0, 0), "lines")) +
     coord_flip(clip = "off")
   plot_24h / plot_annual
 
@@ -136,7 +153,13 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
     geom_line() +
     geom_point(aes(shape = instrument_type)) +
     geom_hline(yintercept = 10, color = "red", lty = "dashed") +
-    annotate(geom = "text", label = "CAAQS", x = 2016, y = caaqs_annual + 1) +
+    annotate(
+      geom = "text",
+      label = "CAAQS",
+      x = 2016,
+      y = caaqs_annual + 1,
+      size = 2.82
+    ) +
     scale_x_continuous(
       breaks = function(x) floor(pretty(seq(min(x), max(x), by = 1)))
     ) +
