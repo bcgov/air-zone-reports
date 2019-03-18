@@ -1,17 +1,11 @@
 ---
 title: Lower Fraser Valley Air Zone
-header-includes:
-  - \usepackage{booktabs}
-  - \usepackage{makecell}
-  - \usepackage{multirow}
-  - \usepackage{colortbl}
-  - \usepackage{xcolor}
-  - \usepackage{textcomp}
-  - \usepackage{float}
-  - \floatplacement{figure}{H}
 output:
   pdf_document:
     latex_engine: lualatex
+    fig_caption: true
+    includes:
+      in_header: components/header.tex
 mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
