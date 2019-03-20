@@ -21,8 +21,8 @@ params:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 
-## Load packages
-source("components/packages.R")
+## Load packages, functions, etc.
+source("components/functions.R")
 
 ## Filter data to air zone
 airzone <- params$airzone
@@ -38,9 +38,6 @@ annual_ozone <- params$annual_ozone %>%
 annual_pm25 <- params$annual_pm25 %>%
   left_join(params$stations, by = c("ems_id", "station_name")) %>%
   filter(airzone == !!airzone)  
-  
-## Source plotting and table functions
-source("components/functions.R")
 ```
 
 <!-- Ozone by station -->

@@ -2,6 +2,16 @@
 ####  Functions to generate results for air zone reports  ####
 ##############################################################
 
+## Load packages
+library("tidyverse")
+library("patchwork")
+library("kableExtra")
+library("rcaaqs")
+library("grid")
+
+## Set theme for plots
+theme_set(theme_grey(base_size = 10))
+
 ## Plots -----------------------------------------------------
 
 ## Ozone concentration based on annual 4th highest daily 8-hour maxima, 3 year
@@ -142,7 +152,8 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
     ) +
     theme(
       plot.margin = unit(c(2, 0, 0, 0), "lines"),
-      plot.title = element_text(hjust = 0.5)
+      plot.title = element_text(hjust = 0.5),
+      axis.title.x = element_text(margin = margin(t = 20))
     ) +
     coord_flip(clip = "off")
 
