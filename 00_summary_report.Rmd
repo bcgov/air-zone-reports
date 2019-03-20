@@ -8,6 +8,8 @@ header-includes:
   - \usepackage{multirow}
   - \usepackage{colortbl}
   - \usepackage{amsmath}
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
 output:
   pdf_document:
     md_extensions: +raw_attribute
@@ -25,6 +27,8 @@ params:
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library("ggplot2")
+library("bcmaps")
+library("sf")
 ```
 
 ## Introduction
@@ -43,7 +47,49 @@ torquent per conubia nostra, per inceptos himenaeos. In consequat urna id velit
 dignissim, quis sagittis nunc volutpat. Fusce non facilisis ligula. Nulla mollis
 in purus vitae bibendum. Morbi bibendum tempus lectus sed egestas.
 
-<!-- TODO: Air zone map -->
+```{r air-zones-map, fig.width = 4, fig.asp = 1, fig.cap = "Air zones and major population centers of British Columbia."}
+## Cities to show on map
+cities <- c("Victoria", "Vancouver", "Kamloops", "Prince George", "Fort St. John")
+cities_to_plot <- bc_cities() %>%
+  filter(NAME %in% cities)
+
+## Where to place labels for air zones and cities (not their actual locations;
+## chosen to fit nicely on the plot)
+airzone_labels <- tribble(
+  ~name,                  ~x,        ~y,
+  "Coastal",              730000,    710000,
+  "Northeast",            1150000,   1550000,
+  "Northwest",            825000,    1460000,
+  "Central\nInterior",    1050000,   1008000,
+  "Southern\nInterior",   1600000,   630000,
+  "Georgia Strait",       1200000,   340000,
+  "Lower Fraser Valley",  1550000,   420000
+)
+
+cities <- tribble(
+  ~name,            ~x,        ~y,
+  "Victoria",       1130000,   410000,
+  "Vancouver",      1290000,   510000,
+  "Kamloops",       1350000,   680000,
+  "Prince\nGeorge",  1300000,   930000,
+  "Fort\nSt. John",  1320000,   1200000
+)
+
+ggplot() +
+  geom_sf(data = airzones(), aes(fill = Airzone), colour = "grey50") +
+  geom_sf(data = bc_bound(), fill = NA, colour = "grey50") +
+  geom_sf(data = cities_to_plot) +
+  geom_text(data = airzone_labels, aes(x, y, label = name), size = 4) +
+  geom_text(data = cities, aes(x, y, label = name), size = 2) +
+  scale_fill_brewer(palette = "Set3") +
+  coord_sf(datum = NA) +
+  labs(title = "Air Zones of British Columbia") +
+  theme_void() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5)
+  )
+```
 
 ## Additional section 1
 
