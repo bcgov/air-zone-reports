@@ -73,7 +73,7 @@ cities <- tribble(
   "Vancouver",      1290000,   510000,
   "Kamloops",       1350000,   680000,
   "Prince\nGeorge",  1300000,   930000,
-  "Fort\nSt. John",  1320000,   1200000
+  "Fort\nSt. John",  1310000,   1200000
 )
 
 ggplot() +
