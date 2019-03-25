@@ -8,9 +8,52 @@ library("patchwork")
 library("kableExtra")
 library("rcaaqs")
 library("grid")
+library("sf")
+library("bcmaps")
+library("ggrepel")
 
 ## Set theme for plots
 theme_set(theme_grey(base_size = 10))
+
+## Maps ------------------------------------------------------
+
+airzone_map <- function(airzone) {
+  ## Get bounding box to set plot limits
+  box <- st_bbox(filter(airzones(), Airzone == airzone))
+
+  ## Top cities by population
+  top_pop <- bc_cities() %>%
+    st_join(airzones()) %>%
+    filter(Airzone == airzone) %>%
+    top_n(5, POP_2000)
+
+  ggplot() +
+    ## Plot major boundaries, air zones, and top cities
+    geom_sf(data = bc_neighbours(), aes(fill = iso_a2)) +
+    geom_sf(data = airzones(), color = "red", fill = NA) +
+    geom_sf(data = top_pop) +
+    ## Label cities
+    geom_label_repel(
+      data = top_pop,
+      aes(label = NAME, geometry = geometry),
+      stat = "sf_coordinates",
+      min.segment.length = 0,
+      size = 2,
+      label.size = NA
+    ) +
+    coord_sf(
+      datum = NA,
+      xlim = c(box$xmin, box$xmax),
+      ylim = c(box$ymin, box$ymax)
+    ) +
+    scale_fill_manual(
+      name = NULL,
+      values = c(OC = "lightblue", CA = "white", US = "grey90")
+    ) +
+    theme_void() +
+    theme(legend.position = "none") +
+    labs(title = paste(airzone, "Air Zone"))
+}
 
 ## Plots -----------------------------------------------------
 

@@ -40,6 +40,12 @@ annual_pm25 <- params$annual_pm25 %>%
   filter(airzone == !!airzone)  
 ```
 
+<!-- Airzone map-->
+
+```{r airzone-map, fig.width = 3, fig.cap = paste(airzone, "Air Zone")}
+airzone_map(airzone)
+```
+
 <!-- Ozone by station -->
 
 ```{r ozone-by-station, fig.width = 4.5, fig.asp = 0.618, fig.cap = ozone_by_station_cap(airzone, ozone)}
