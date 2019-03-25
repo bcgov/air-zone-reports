@@ -29,13 +29,14 @@ plot_ozone_by_station <- function(data, airzone, caaqs = 63) {
   ) +
     geom_bar(stat = "identity", fill = "#A488F7") +
     geom_text(aes(label = metric_value_ambient), nudge_y = 3, size = 2.82) +
-    geom_hline(yintercept = caaqs, color = "red", lty = "dashed") +
-    annotate(
-      geom = "text",
-      label = "CAAQS",
-      x = 1,
-      y = caaqs + 7,
-      size = 2.82
+    geom_hline(
+      aes(linetype = "CAAQS", yintercept = caaqs),
+      color = "red"
+    ) +
+    scale_linetype_manual(
+      name = NULL,
+      values = 2,
+      guide = guide_legend(override.aes = list(color = "red"))
     ) +
     ## Set y scale to ensure CAAQS text doesn't get cut off (but if the max ozone
     ## value is greater, take that value instead + 10 for padding)
@@ -59,13 +60,14 @@ plot_ozone_station_timeseries <- function(data, airzone, caaqs = 63) {
 
   ggplot(data, aes(x = year, y = ann_4th_highest, colour = station_name)) +
     geom_line() +
-    geom_hline(yintercept = caaqs, color = "red", lty = "dashed") +
-    annotate(
-      geom = "text",
-      label = "CAAQS",
-      x = 2016,
-      y = caaqs + 5,
-      size = 2.82
+    geom_hline(
+      aes(linetype = "CAAQS", yintercept = caaqs),
+      color = "red"
+    ) +
+    scale_linetype_manual(
+      name = NULL,
+      values = 2,
+      guide = guide_legend(override.aes = list(color = "red"))
     ) +
     labs(
       x = "Year",
@@ -100,13 +102,14 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
   ) +
     geom_bar(stat = "identity", aes(fill = instrument_type)) +
     geom_text(aes(label = metric_value_ambient), nudge_y = 2.5, size = 2.82) +
-    geom_hline(yintercept = caaqs_24h, color = "red", lty = "dashed") +
-    annotation_custom(
-      grob = textGrob("24h CAAQS", vjust = 1, gp = gpar(fontsize = 8)),
-      xmin = -0.35,
-      xmax = -0.35,
-      ymin = caaqs_24h,
-      ymax = caaqs_24h
+    geom_hline(
+      aes(linetype = "24h CAAQS", yintercept = caaqs_24h),
+      color = "red"
+    ) +
+    scale_linetype_manual(
+      name = NULL,
+      values = 2,
+      guide = guide_legend(override.aes = list(color = "red"))
     ) +
     scale_y_continuous(limits = c(0, max(ymax_pm25_24h + 3, caaqs_24h + 5))) +
     scale_fill_manual(values = c(FEM = "#4A8CE1", TEOM = "#070C72")) +
@@ -132,13 +135,14 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
   ) +
     geom_bar(stat = "identity", aes(fill = instrument_type)) +
     geom_text(aes(label = metric_value_ambient), nudge_y = 0.8, size = 2.82) +
-    geom_hline(yintercept = caaqs_annual, color = "red", lty = "dashed") +
-    annotate(
-      geom = "text",
-      label = "Annual\nCAAQS",
-      x = 1,
-      y = caaqs_annual + 2,
-      size = 2.82
+    geom_hline(
+      aes(linetype = "Annual CAAQS", yintercept = caaqs_annual),
+      color = "red"
+    ) +
+    scale_linetype_manual(
+      name = NULL,
+      values = 2,
+      guide = guide_legend(override.aes = list(color = "red"))
     ) +
     scale_y_continuous(
       limits = c(0, max(ymax_pm25_annual + 3, caaqs_annual + 6))
@@ -170,13 +174,14 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
   ggplot(data, aes(x = year, y = ann_avg, colour = station_name)) +
     geom_line() +
     geom_point(aes(shape = instrument_type)) +
-    geom_hline(yintercept = 10, color = "red", lty = "dashed") +
-    annotate(
-      geom = "text",
-      label = "CAAQS",
-      x = 2016,
-      y = caaqs_annual + 1,
-      size = 2.82
+    geom_hline(
+      aes(linetype = "CAAQS", yintercept = caaqs_annual),
+      color = "red"
+    ) +
+    scale_linetype_manual(
+      name = NULL,
+      values = 2,
+      guide = guide_legend(override.aes = list(color = "red"))
     ) +
     scale_x_continuous(
       breaks = function(x) floor(pretty(seq(min(x), max(x), by = 1)))
