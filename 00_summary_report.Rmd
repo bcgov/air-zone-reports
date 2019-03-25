@@ -25,9 +25,9 @@ params:
   pm25_caaqs_mgmt_chart: !r pm_mgmt_chart
 ---
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
-library("ggplot2")
+library("tidyverse")
 library("bcmaps")
 library("sf")
 ```
