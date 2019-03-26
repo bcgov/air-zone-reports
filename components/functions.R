@@ -60,7 +60,6 @@ airzone_map <- function(airzone) {
 ## Ozone concentration based on annual 4th highest daily 8-hour maxima, 3 year
 ## average bar chart by station (fig. 2)
 plot_ozone_by_station <- function(data, airzone, caaqs = 63) {
-  ymax_oz <- max(data$metric_value_ambient, na.rm = TRUE)
   ozone_year <- max(data$max_year)
 
   ggplot(
@@ -81,9 +80,6 @@ plot_ozone_by_station <- function(data, airzone, caaqs = 63) {
       values = 2,
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
-    ## Set y scale to ensure CAAQS text doesn't get cut off (but if the max ozone
-    ## value is greater, take that value instead + 10 for padding)
-    scale_y_continuous(limits = c(0, max(ymax_oz + 10, caaqs + 10))) +
     labs(
       x = "Station",
       y = "Ozone concentration (ppb)",
@@ -99,7 +95,6 @@ plot_ozone_station_timeseries <- function(data, airzone, caaqs = 63) {
   ozone_year <- max(data$year)
   min_year <- min(data$year, na.rm = TRUE)
   max_year <- max(data$year, na.rm = TRUE)
-  ymax_oz <- max(data$ann_4th_highest, na.rm = TRUE)
 
   ggplot(data, aes(x = year, y = ann_4th_highest, colour = station_name)) +
     geom_line() +
@@ -121,7 +116,6 @@ plot_ozone_station_timeseries <- function(data, airzone, caaqs = 63) {
     scale_x_continuous(
       breaks = function(x) floor(pretty(seq(min(x), max(x), by = 1)))
     ) +
-    scale_y_continuous(limits = c(0, max(ymax_oz + 5, 72))) +
     theme(plot.title = element_text(hjust = 0.5))
 }
 
@@ -130,10 +124,7 @@ plot_ozone_station_timeseries <- function(data, airzone, caaqs = 63) {
 plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
   ## Filter data
   pm25_24h <- filter(data, metric == "pm2.5_24h")
-  ymax_pm25_24h <- max(pm25_24h$metric_value_ambient, na.rm = TRUE)
-
   pm25_annual <- filter(data, metric == "pm2.5_annual")
-  ymax_pm25_annual <- max(pm25_annual$metric_value_ambient, na.rm = TRUE)
 
   ## 24 hour
   plot_24h <- ggplot(
@@ -154,7 +145,6 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       values = 2,
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
-    scale_y_continuous(limits = c(0, max(ymax_pm25_24h + 3, caaqs_24h + 5))) +
     scale_fill_manual(values = c(FEM = "#4A8CE1", TEOM = "#070C72")) +
     labs(
       x = NULL,
@@ -187,9 +177,6 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       values = 2,
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
-    scale_y_continuous(
-      limits = c(0, max(ymax_pm25_annual + 3, caaqs_annual + 6))
-    ) +
     scale_fill_manual(values = c(FEM = "#81EDA1", TEOM = "#4A875B")) +
     labs(
       x = NULL,
@@ -210,7 +197,6 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
 
 ## Annual trends in mean PM2.5 concentration line chart
 plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
-  ymax_pm25 <- max(data$ann_avg)
   min_year <- min(data$year, na.rm = TRUE)
   min_year <- min(data$year, na.rm = TRUE)
 
@@ -229,9 +215,6 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
     scale_x_continuous(
       breaks = function(x) floor(pretty(seq(min(x), max(x), by = 1)))
     ) +
-    ## Set y scale from 0 to either: maximum pm2.5 value + a buffer, OR
-    ## CAAQS + a buffer, whichever is larger
-    scale_y_continuous(limits = c(0, max(ymax_pm25 + 3, caaqs_annual + 3))) +
     labs(
       x = "Year",
       y = expression(PM[2.5]~Concentration~"("*mu~g/m^3~")"),
