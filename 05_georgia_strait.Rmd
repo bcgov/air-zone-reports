@@ -38,13 +38,7 @@ annual_ozone <- params$annual_ozone %>%
 ## Filter and add station names to annual pm25
 annual_pm25 <- params$annual_pm25 %>%
   left_join(params$stations, by = c("ems_id", "station_name")) %>%
-  filter(airzone == !!airzone)  
-```
-
-<!-- Airzone map-->
-
-```{r airzone-map, fig.width = 3, fig.cap = paste(airzone, "Air Zone")}
-airzone_map(airzone)
+  filter(airzone == !!airzone)
 ```
 
 ## Introduction
@@ -57,11 +51,13 @@ vitae feugiat neque. Quisque eu vestibulum enim. Nam convallis nec nunc ut
 rutrum. Fusce laoreet convallis scelerisque.
 
 ```{=latex}
-\begin{wrapfigure}{R}{.6\textwidth}
+\begin{wrapfigure}{R}{.3\textwidth}
 ```
 
-```{r airzone-map, fig.align = "center", out.width = "90%", fig.cap = "Map of air zone"}
-knitr::include_graphics("placeholdermap.png")
+<!-- Airzone map-->
+
+```{r airzone-map, fig.cap = paste(airzone, "Air Zone")}
+airzone_map(airzone)
 ```
 
 ```{=latex}
@@ -77,12 +73,12 @@ torquent per conubia nostra, per inceptos himenaeos. In consequat urna id velit
 dignissim, quis sagittis nunc volutpat. Fusce non facilisis ligula. Nulla mollis
 in purus vitae bibendum. Morbi bibendum tempus lectus sed egestas.
 
-<!-- Ozone by station -->
-
 ```{=latex}
-\newpage
+\clearpage
 \begin{wrapfigure}{R}{.6\textwidth}
 ```
+
+<!-- Ozone by station -->
 
 ```{r ozone-by-station, fig.width = 4.5, fig.asp = 0.618, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
@@ -123,7 +119,7 @@ plot_ozone_station_timeseries(annual_ozone, airzone)
 <!-- PM2.5 by station -->
 
 ```{=latex}
-\newpage
+\clearpage
 \begin{wrapfigure}{R}{.6\textwidth}
 ```
 
@@ -174,19 +170,16 @@ plot_pm25_station_timeseries(annual_pm25, airzone)
 \end{wrapfigure}
 ```
 
-<!-- Summary of ozone concentrations as measured and air zone management levels -->
-
 ```{=latex}
-\newpage
+\clearpage
 ```
 
-## \newpage Air Zone Management Levels
+## Air Zone Management Levels
 
 Aenean in pellentesque justo, finibus tincidunt tortor. Nulla ac rutrum lorem.
 Sed mattis a ex id fermentum. Proin eget neque aliquet, maximus nisi at, mollis
 sapien. Cras consequat diam lorem. Maecenas vulputate odio ac pellentesque
 scelerisque. Cras molestie ultrices turpis, in accumsan lectus dictum et.
-
 
 Donec non libero pharetra, aliquam nulla et, bibendum dui. Donec at sodales dui.
 Sed eget elit malesuada arcu dapibus consequat ut sed felis. Donec at dui nec
@@ -196,15 +189,13 @@ sit amet tempor lacus. Vivamus nec erat id sem viverra bibendum auctor non sem.
 Orci varius natoque penatibus et magnis dis parturient montes, nascetur
 ridiculus mus.
 
+<!-- Summary of ozone concentrations as measured and air zone management levels -->
+
 ```{r table-2}
 create_ozone_table(ozone, airzone)
 ```
 
 <!-- Summary of PM2.5 concentrations as measured and air zone management levels -->
-
-```{=latex}
-\newpage
-```
 
 ```{r table-3}
 create_pm25_table(pm25, airzone)
