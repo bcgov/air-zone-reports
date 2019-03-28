@@ -10,8 +10,10 @@ mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
   annual_ozone: !r ozone_caaqs$ann_4th_highest
+  ems_ids_ozone: !r NA
   pm25: !r pm_caaqs_combined_results
   annual_pm25: !r pm25_caaqs_annual$yearly_avg
+  ems_ids_pm25: !r NA
   airzone: "Northeast"
 ---
 
@@ -27,8 +29,19 @@ source("components/functions.R")
 airzone <- params$airzone
 ozone <- filter(params$ozone, airzone == !!airzone)
 pm25 <- filter(params$pm25, airzone == !!airzone)
-annual_ozone <- filter(params$annual_ozone, ems_id %in% ozone$ems_id)
-annual_pm25 <- filter(params$annual_pm25, ems_id %in% pm25$ems_id)
+
+## Filter annual data to EMS ids provided if present, otherwise use the same
+## ones as in the summary data
+if (!is.na(params$ems_ids_ozone)) {
+  annual_ozone <- filter(params$annual_ozone, ems_id %in% params$ems_ids_ozone)
+} else {
+  annual_ozone <- filter(params$annual_ozone, ems_id %in% ozone$ems_id)
+}
+if (!is.na(params$ems_ids_pm25)) {
+  annual_pm25 <- filter(params$annual_pm25, ems_id %in% params$ems_ids_pm25)
+} else {
+  annual_pm25 <- filter(params$annual_pm25, ems_id %in% pm25$ems_id)
+}
 ```
 
 ## Introduction
