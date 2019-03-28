@@ -146,6 +146,10 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
     scale_fill_manual(values = c(FEM = "#4A8CE1", TEOM = "#070C72")) +
+    guides(
+      fill = guide_legend(order = 2),
+      linetype = guide_legend(order = 1)
+    ) +
     labs(
       x = NULL,
       y = NULL,
@@ -178,6 +182,10 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
     scale_fill_manual(values = c(FEM = "#81EDA1", TEOM = "#4A875B")) +
+    guides(
+      fill = guide_legend(order = 2),
+      linetype = guide_legend(order = 1)
+    ) +
     labs(
       x = NULL,
       y = expression(PM[2.5]~Concentration~"("*mu~g/m^3~")"),
