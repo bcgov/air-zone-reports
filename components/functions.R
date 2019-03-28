@@ -150,7 +150,7 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       x = NULL,
       y = NULL,
       fill = "Instrument",
-      title = "24-Hr PM2.5"
+      title = expression(paste("24-Hr", ~PM[2.5]))
     ) +
     theme(
       plot.margin = unit(c(2, 0, 0, 0), "lines"),
@@ -182,7 +182,7 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       x = NULL,
       y = expression(PM[2.5]~Concentration~"("*mu~g/m^3~")"),
       fill = "Instrument",
-      title = "Annual PM2.5"
+      title = expression(Annual~PM[2.5])
     ) +
     theme(
       plot.margin = unit(c(2, 0, 0, 0), "lines"),
