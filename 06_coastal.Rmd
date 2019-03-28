@@ -40,11 +40,43 @@ annual_pm25 <- params$annual_pm25 %>%
   filter(airzone == !!airzone)  
 ```
 
+## Introduction
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet ultrices
+lacus, eleifend vehicula erat. Suspendisse suscipit nec ante a bibendum. Orci
+varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+mus. Ut ac diam lectus. Nullam non tincidunt leo. Quisque sed egestas mauris,
+vitae feugiat neque. Quisque eu vestibulum enim. Nam convallis nec nunc ut
+rutrum. Fusce laoreet convallis scelerisque.
+
+## Background
+
+Nunc sit amet sem in purus iaculis commodo at a felis. Curabitur lacus purus,
+interdum eu mauris quis, ultrices auctor risus. Vestibulum orci nulla, volutpat
+sit amet hendrerit id, laoreet eu leo. Class aptent taciti sociosqu ad litora
+torquent per conubia nostra, per inceptos himenaeos. In consequat urna id velit
+dignissim, quis sagittis nunc volutpat. Fusce non facilisis ligula. Nulla mollis
+in purus vitae bibendum. Morbi bibendum tempus lectus sed egestas.
+
 <!-- Airzone map-->
 
 ```{r airzone-map, fig.width = 3, fig.cap = paste(airzone, "Air Zone")}
 airzone_map(airzone)
 ```
+
+## Ozone
+
+Suspendisse sed dictum est. Fusce vitae sollicitudin enim. Maecenas nisi nisi,
+sollicitudin eu lacus ac, porttitor gravida ipsum. Morbi nisi lectus, blandit ut
+neque at, pretium posuere augue. Nullam lacus nisi, molestie id posuere vel,
+vehicula elementum dolor. Sed quis eros eget nibh laoreet porttitor pellentesque
+sit amet ex. Donec ultricies felis et rutrum sagittis. Sed feugiat aliquet
+turpis, in tincidunt neque hendrerit in. Donec volutpat neque sed mattis
+porttitor. Donec quis erat sagittis, ultrices lectus quis, semper massa. Quisque
+vel neque lacinia, euismod ante ut, porttitor ligula. Aenean varius lorem id
+nisl mollis, in sollicitudin quam viverra. Mauris sit amet mauris ut felis
+facilisis hendrerit. Nulla eu commodo ipsum, et cursus arcu. Cras pretium tortor
+ut dapibus condimentum.
 
 <!-- Ozone by station -->
 
@@ -58,6 +90,30 @@ plot_ozone_by_station(ozone, airzone)
 plot_ozone_station_timeseries(annual_ozone, airzone)
 ```
 
+## PM$_{2.5}$ levels
+
+Aliquam non condimentum mauris. Integer non nunc ut lacus luctus ullamcorper.
+Aenean id vulputate metus. Integer tristique tempus sapien sed pellentesque.
+Nulla elementum consequat felis, at eleifend ex rutrum vitae. Cras ultricies
+quam justo, ac vulputate mauris blandit non. Aliquam convallis viverra egestas.
+Pellentesque dictum ipsum id venenatis sagittis. Vestibulum feugiat ullamcorper
+hendrerit. Etiam vitae purus at augue laoreet lacinia. Vestibulum quis fringilla
+neque. Pellentesque habitant morbi tristique senectus et netus et malesuada
+fames ac turpis egestas.
+
+Nam eu nisl eu eros convallis viverra et pulvinar elit. Pellentesque porttitor
+pretium scelerisque. Quisque vel augue at risus dapibus fermentum. In in dolor
+eu risus lacinia dignissim. Aliquam sed porta eros. Nullam vel arcu ut turpis
+scelerisque molestie. Morbi convallis euismod imperdiet.
+
+Ut vehicula, tortor quis placerat rhoncus, quam velit aliquam magna, ac
+pellentesque sapien dui et odio. Vestibulum a ligula a libero suscipit pulvinar
+nec ut mi. Phasellus in odio et quam semper lobortis eu quis lacus. In non lacus
+dui. Proin a feugiat eros. Donec ultrices rutrum porttitor. Proin tempor urna ac
+nunc faucibus volutpat. Nunc pharetra orci a mi tristique pharetra. Suspendisse
+vel velit eu justo porttitor tincidunt sed scelerisque nunc. Morbi id justo at
+libero ultricies aliquam.
+
 <!-- PM2.5 by station -->
 
 ```{r pm25-by-station, fig.width = 5, fig.asp = 0.5, fig.cap = pm25_by_station_cap(airzone, pm25)}
@@ -70,6 +126,21 @@ plot_pm25_by_station(pm25)
 plot_pm25_station_timeseries(annual_pm25, airzone)
 ```
 
+## Air Zone Management Levels
+
+Aenean in pellentesque justo, finibus tincidunt tortor. Nulla ac rutrum lorem.
+Sed mattis a ex id fermentum. Proin eget neque aliquet, maximus nisi at, mollis
+sapien. Cras consequat diam lorem. Maecenas vulputate odio ac pellentesque
+scelerisque. Cras molestie ultrices turpis, in accumsan lectus dictum et.
+
+Donec non libero pharetra, aliquam nulla et, bibendum dui. Donec at sodales dui.
+Sed eget elit malesuada arcu dapibus consequat ut sed felis. Donec at dui nec
+velit dictum tincidunt. Ut posuere massa quis lectus accumsan rhoncus. Maecenas
+scelerisque turpis nec felis dictum finibus. In sodales luctus pellentesque. Sed
+sit amet tempor lacus. Vivamus nec erat id sem viverra bibendum auctor non sem.
+Orci varius natoque penatibus et magnis dis parturient montes, nascetur
+ridiculus mus.
+
 <!-- Summary of ozone concentrations as measured and air zone management levels -->
 
 ```{r table-2}
@@ -81,3 +152,9 @@ create_ozone_table(ozone, airzone)
 ```{r table-3}
 create_pm25_table(pm25, airzone)
 ```
+
+## Actions to Protect Air Quality
+
+Praesent nec tincidunt ante. Morbi pulvinar velit eget metus commodo aliquam. Nulla non diam vel leo pellentesque pretium. Maecenas eleifend et lectus nec mollis. Donec aliquet massa ac odio blandit euismod. Curabitur sed neque semper, dictum neque vitae, dictum risus. Vestibulum sit amet auctor ante, a gravida est. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer quis dignissim risus.
+
+Sed a urna lectus. Morbi arcu est, tincidunt a pharetra a, fringilla sit amet ligula. Donec pellentesque non ex a tristique. Donec a malesuada felis, vitae blandit nibh. Quisque quis pretium dolor, ut vehicula elit. Sed enim ligula, consectetur auctor massa vitae, venenatis bibendum leo. Interdum et malesuada fames ac ante ipsum primis in faucibus.
