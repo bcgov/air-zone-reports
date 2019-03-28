@@ -12,7 +12,6 @@ params:
   annual_ozone: !r ozone_caaqs$ann_4th_highest
   pm25: !r pm_caaqs_combined_results
   annual_pm25: !r pm25_caaqs_annual$yearly_avg
-  stations: !r stations_az
   airzone: "Northeast"
 ---
 
@@ -28,16 +27,8 @@ source("components/functions.R")
 airzone <- params$airzone
 ozone <- filter(params$ozone, airzone == !!airzone)
 pm25 <- filter(params$pm25, airzone == !!airzone)
-
-## Filter and add station names to annual ozone
-annual_ozone <- params$annual_ozone %>%
-  left_join(params$stations, by = c("ems_id", "station_name")) %>%
-  filter(airzone == !!airzone)
-
-## Filter and add station names to annual pm25
-annual_pm25 <- params$annual_pm25 %>%
-  left_join(params$stations, by = c("ems_id", "station_name")) %>%
-  filter(airzone == !!airzone)  
+annual_ozone <- filter(params$annual_ozone, ems_id %in% ozone$ems_id)
+annual_pm25 <- filter(params$annual_pm25, ems_id %in% pm25$ems_id)
 ```
 
 ## Introduction
