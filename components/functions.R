@@ -38,7 +38,7 @@ airzone_map <- function(airzone) {
       aes(label = NAME, geometry = geometry),
       stat = "sf_coordinates",
       min.segment.length = 0,
-      size = 2,
+      size = 3,
       label.size = NA
     ) +
     coord_sf(
