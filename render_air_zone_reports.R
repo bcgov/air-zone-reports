@@ -25,3 +25,11 @@ walk(
   output_dir = "rendered_reports"
 )
 
+## To render a report with modified parameters, provide a named list of the
+## parameters you want to change. For example:
+
+## render(
+##   "05_georgia_strait.Rmd",
+##   output_dir = "rendered_reports",
+##   params = list(ems_ids_ozone = c("E227431", "E229797", "E231866"))
+## )

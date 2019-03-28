@@ -38,7 +38,7 @@ airzone_map <- function(airzone) {
       aes(label = NAME, geometry = geometry),
       stat = "sf_coordinates",
       min.segment.length = 0,
-      size = 2,
+      size = 3,
       label.size = NA
     ) +
     coord_sf(
@@ -146,11 +146,15 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
     scale_fill_manual(values = c(FEM = "#4A8CE1", TEOM = "#070C72")) +
+    guides(
+      fill = guide_legend(order = 2),
+      linetype = guide_legend(order = 1)
+    ) +
     labs(
       x = NULL,
       y = NULL,
       fill = "Instrument",
-      title = "24-Hr PM2.5"
+      title = expression(paste("24-Hr", ~PM[2.5]))
     ) +
     theme(
       plot.margin = unit(c(2, 0, 0, 0), "lines"),
@@ -178,11 +182,15 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
     scale_fill_manual(values = c(FEM = "#81EDA1", TEOM = "#4A875B")) +
+    guides(
+      fill = guide_legend(order = 2),
+      linetype = guide_legend(order = 1)
+    ) +
     labs(
       x = NULL,
       y = expression(PM[2.5]~Concentration~"("*mu~g/m^3~")"),
       fill = "Instrument",
-      title = "Annual PM2.5"
+      title = expression(Annual~PM[2.5])
     ) +
     theme(
       plot.margin = unit(c(2, 0, 0, 0), "lines"),
