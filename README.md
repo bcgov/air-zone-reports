@@ -6,7 +6,23 @@ Creation of Air Zone reports for reporting achievement of Canadian Ambient Air Q
 
 ### Usage
 
+These reports depend on outputs from the [Ozone CAAQS Analysis](https://github.com/bcgov/ozone-caaqs-indicator/) and [Fine Particulate Matter CAAQS Analysis](https://github.com/bcgov/pm25-caaqs-indicator). To get started:
+
+* Clone these repositories
+* Check out the `update-2018` branch
+* Run the analysis scripts in each repository (or at least number 01-04)
+
+Then, in a *clean* R session, run the `render_airzone_reports.R` script in this
+repository. It is important to run this script in a clean R session, and not the
+one in which you ran the ozone and PM2.5 analyses. Those analyses create some
+objects with the same names, which will create problems when rendering the
+reports. `render_airzone_reports.R` loads only the objects it needs.
+
 #### Example
+
+```r
+source("render_airzone_reports.R")
+```
 
 ### Project Status
 
