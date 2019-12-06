@@ -1,7 +1,7 @@
 ---
 title: Air Zone Summary Report
 header-includes:
-  - \usepackage[table,xcdraw]{xcolor}
+  - \PassOptionsToPackage{table,xcdraw}{xcolor}
   - \usepackage{multicol}
   - \usepackage{booktabs}
   - \usepackage{makecell}
