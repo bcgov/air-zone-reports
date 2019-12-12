@@ -16,7 +16,7 @@ Then, in a *clean* R session, run the `render_air_zone_reports.R` script in this
 repository. It is important to run this script in a clean R session, and not the
 one in which you ran the ozone and PM2.5 analyses. Those analyses create some
 objects with the same names, which will create problems when rendering the
-reports. `render_airzone_reports.R` loads only the objects it needs.
+reports. `render_air_zone_reports.R` loads only the objects it needs.
 
 #### Example
 
