@@ -21,7 +21,7 @@ reports. `render_airzone_reports.R` loads only the objects it needs.
 #### Example
 
 ```r
-source("render_airzone_reports.R")
+source("render_air_zone_reports.R")
 ```
 
 ### Project Status
