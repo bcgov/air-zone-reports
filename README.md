@@ -12,16 +12,16 @@ These reports depend on outputs from the [Ozone CAAQS Analysis](https://github.c
 * Check out the `update-2018` branch
 * Run the analysis scripts in each repository (or at least number 01-04)
 
-Then, in a *clean* R session, run the `render_airzone_reports.R` script in this
+Then, in a *clean* R session, run the `render_air_zone_reports.R` script in this
 repository. It is important to run this script in a clean R session, and not the
 one in which you ran the ozone and PM2.5 analyses. Those analyses create some
 objects with the same names, which will create problems when rendering the
-reports. `render_airzone_reports.R` loads only the objects it needs.
+reports. `render_air_zone_reports.R` loads only the objects it needs.
 
 #### Example
 
 ```r
-source("render_airzone_reports.R")
+source("render_air_zone_reports.R")
 ```
 
 ### Project Status
