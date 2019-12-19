@@ -46,7 +46,7 @@ if (!is.na(params$ems_ids_pm25)) {
 
 ## Introduction
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet ultrices
+Lorem text ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet ultrices
 lacus, eleifend vehicula erat. Suspendisse suscipit nec ante a bibendum. Orci
 varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
 mus. Ut ac diam lectus. Nullam non tincidunt leo. Quisque sed egestas mauris,
