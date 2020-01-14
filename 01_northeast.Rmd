@@ -46,7 +46,11 @@ if (!is.na(params$ems_ids_pm25)) {
 
 ## Introduction
 
+<<<<<<< HEAD
 This is the fourth air quality report for the Northeast Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O3) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at:<http://www.env.gov.bc.ca/soe/indicators/air/>.
+=======
+This is the fourth air quality report for the Northeast Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O3) and fine particulates (PM2.5), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at: http://www.env.gov.bc.ca/soe/indicators/air/. 
+>>>>>>> 9f76a7c4711c7d1d299428436d8cc2f6dfd29dab
 
 ## Background
 
@@ -78,7 +82,11 @@ plot_ozone_station_timeseries(annual_ozone, airzone)
 
 ## PM$_{2.5}$ levels
 
+<<<<<<< HEAD
 PM~2.5~ refers to inhalable particles up to 2.5 micrometres in diameter. PM~2.5~ monitoring was initiated in 2015 at the Fort St. John Key Learning Centre, and measurements are summarized in Figure 4. All measurements for this reporting period were based on the Federal Equivalent Method (FEM), which provides a more complete measure of PM~2.5~ than the older TEOM instruments. 
+=======
+PM2.5 refers to inhalable particles up to 2.5 micrometres in diameter. PM2.5 monitoring was initiated in 2015 at the Fort St. John Key Learning Centre, and measurements are summarized in Figure 4. All measurements for this reporting period were based on the Federal Equivalent Method (FEM), which provides a more complete measure of PM2.5 than the older TEOM instruments. 
+>>>>>>> 9f76a7c4711c7d1d299428436d8cc2f6dfd29dab
 
 Between MIN_YR and MAX_YR, X complete years of data were collected.  A 24-hour average value of XX ???g/m3 and an annual mean of XX ???g/m3 were obtained,  indicating that PM2.5 levels at this site are below those of the national standards of 28 and 10 ???g/m3, respectively. 
 
@@ -120,6 +128,12 @@ create_pm25_table(pm25, airzone)
 
 ## Actions to Protect Air Quality
 
+<<<<<<< HEAD
 Air quality activities in the Northeast Air Zone have largely focussed on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the Northeast Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: <https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf>). 
 
 A description of other activities underway in B.C. air zones can be found in the "Air Zone Management Response for British Columbia" (see:<https://www2.gov.bc.ca/gov/content/environment/air-land-water/air>). 
+=======
+Air quality activities in the Northeast Air Zone have largely focussed on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the Northeast Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf). 
+
+A description of other activities underway in B.C. air zones can be found in the "Air Zone Management Response for British Columbia" (see: www.gov.bc.ca/bcairquality). 
+>>>>>>> 9f76a7c4711c7d1d299428436d8cc2f6dfd29dab
