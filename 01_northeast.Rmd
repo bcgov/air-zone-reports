@@ -46,7 +46,7 @@ if (!is.na(params$ems_ids_pm25)) {
 
 ## Introduction
 
-This is the fourth air quality report for the Northeast Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O3) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at:<http://www.env.gov.bc.ca/soe/indicators/air/>.
+This is the fourth air quality report for the Northeast Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O3) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at:<https://www2.gov.bc.ca/gov/content?id=C7BA872425D9498084C808B98EA7AF52>.
 
 
 ## Background
@@ -61,7 +61,17 @@ airzone_map(airzone)
 
 ## Ozone
 
-Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between MIN and MAX_YR, ozone concentrations at the THREE sites ranged from MIN_O3 to MAX_O3 ppb. These levels were BELOW/ABOVE the national standard of 63 ppb. 
+```{r calc threshold value, echo = FALSE, results = "asis"}
+ abovethreshold <- if(max(ozone$metric_value_ambient, na.rm = TRUE)< 63) {TRUE}
+if(abovethreshold) {
+  cat ("below") 
+} 
+
+```
+
+
+Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$min_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
+`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels were ABOVE/BELOW the national standard of 63 ppb. 
 
 Trends in annual ozone levels are shown in Figure 3.   Concentrations have remained BELOW/ABOVE the level of the national standard over the period of record. 
 
@@ -82,7 +92,7 @@ plot_ozone_station_timeseries(annual_ozone, airzone)
 PM~2.5~ refers to inhalable particles up to 2.5 micrometres in diameter. PM~2.5~ monitoring was initiated in 2015 at the Fort St. John Key Learning Centre, and measurements are summarized in Figure 4. All measurements for this reporting period were based on the Federal Equivalent Method (FEM), which provides a more complete measure of PM~2.5~ than the older TEOM instruments. 
 
 
-Between MIN_YR and MAX_YR, X complete years of data were collected.  A 24-hour average value of XX ???g/m3 and an annual mean of XX ???g/m3 were obtained,  indicating that PM2.5 levels at this site are below those of the national standards of 28 and 10 ???g/m3, respectively. 
+Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$min_year, na.rm = TRUE)`, `r max(pm25$min_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of XX ???g/m3 and an annual mean of XX ???g/m3 were obtained,  indicating that PM~2.5~ levels at this site are ABOVE/below those of the national standards of 28 and 10 ???g/m3, respectively. 
 
 Trends in annual mean concentrations for 2016-2018 are shown Figure 5. 
 
@@ -122,7 +132,7 @@ create_pm25_table(pm25, airzone)
 
 ## Actions to Protect Air Quality
 
-<<<<<<< HEAD
+
 Air quality activities in the Northeast Air Zone have largely focussed on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the Northeast Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: <https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf>). 
 
 A description of other activities underway in B.C. air zones can be found in the "Air Zone Management Response for British Columbia" (see:<https://www2.gov.bc.ca/gov/content/environment/air-land-water/air>). 
