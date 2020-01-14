@@ -46,21 +46,11 @@ if (!is.na(params$ems_ids_pm25)) {
 
 ## Introduction
 
-Lorem text ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet ultrices
-lacus, eleifend vehicula erat. Suspendisse suscipit nec ante a bibendum. Orci
-varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-mus. Ut ac diam lectus. Nullam non tincidunt leo. Quisque sed egestas mauris,
-vitae feugiat neque. Quisque eu vestibulum enim. Nam convallis nec nunc ut
-rutrum. Fusce laoreet convallis scelerisque.
+This is the fourth air quality report for the Northeast Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O3) and fine particulates (PM2.5), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at: http://www.env.gov.bc.ca/soe/indicators/air/. 
 
 ## Background
 
-Nunc sit amet sem in purus iaculis commodo at a felis. Curabitur lacus purus,
-interdum eu mauris quis, ultrices auctor risus. Vestibulum orci nulla, volutpat
-sit amet hendrerit id, laoreet eu leo. Class aptent taciti sociosqu ad litora
-torquent per conubia nostra, per inceptos himenaeos. In consequat urna id velit
-dignissim, quis sagittis nunc volutpat. Fusce non facilisis ligula. Nulla mollis
-in purus vitae bibendum. Morbi bibendum tempus lectus sed egestas.
+The AQMS is the national approach to managing air quality in Canada. Under the AQMS, the CAAQS are developed to drive action to protect human health and the environment. Air zones are areas that exhibit similar air quality characteristics, issues and trends, and that form the basis for monitoring, reporting and taking action on air quality. The Northeast Air Zone (see Figure 1) is one of seven broad air zones across the province. Under the AQMS, progressively more rigorous actions are expected as air quality approaches or exceeds the CAAQS. The level of action is guided by the Air Zone Management Framework outlined in Table 1. 
 
 <!-- Airzone map-->
 
@@ -70,17 +60,9 @@ airzone_map(airzone)
 
 ## Ozone
 
-Suspendisse sed dictum est. Fusce vitae sollicitudin enim. Maecenas nisi nisi,
-sollicitudin eu lacus ac, porttitor gravida ipsum. Morbi nisi lectus, blandit ut
-neque at, pretium posuere augue. Nullam lacus nisi, molestie id posuere vel,
-vehicula elementum dolor. Sed quis eros eget nibh laoreet porttitor pellentesque
-sit amet ex. Donec ultricies felis et rutrum sagittis. Sed feugiat aliquet
-turpis, in tincidunt neque hendrerit in. Donec volutpat neque sed mattis
-porttitor. Donec quis erat sagittis, ultrices lectus quis, semper massa. Quisque
-vel neque lacinia, euismod ante ut, porttitor ligula. Aenean varius lorem id
-nisl mollis, in sollicitudin quam viverra. Mauris sit amet mauris ut felis
-facilisis hendrerit. Nulla eu commodo ipsum, et cursus arcu. Cras pretium tortor
-ut dapibus condimentum.
+Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between MIN_YR and MAX_YR, ozone concentrations at the THREE sites ranged from MIN_O3 to MAX_O3 ppb. These levels were BELOW/ABOVE the national standard of 63 ppb. 
+
+Trends in annual ozone levels are shown in Figure 3.   Concentrations have remained BELOW/ABOVE the level of the national standard over the period of record. 
 
 <!-- Ozone by station -->
 
@@ -96,27 +78,11 @@ plot_ozone_station_timeseries(annual_ozone, airzone)
 
 ## PM$_{2.5}$ levels
 
-Aliquam non condimentum mauris. Integer non nunc ut lacus luctus ullamcorper.
-Aenean id vulputate metus. Integer tristique tempus sapien sed pellentesque.
-Nulla elementum consequat felis, at eleifend ex rutrum vitae. Cras ultricies
-quam justo, ac vulputate mauris blandit non. Aliquam convallis viverra egestas.
-Pellentesque dictum ipsum id venenatis sagittis. Vestibulum feugiat ullamcorper
-hendrerit. Etiam vitae purus at augue laoreet lacinia. Vestibulum quis fringilla
-neque. Pellentesque habitant morbi tristique senectus et netus et malesuada
-fames ac turpis egestas.
+PM2.5 refers to inhalable particles up to 2.5 micrometres in diameter. PM2.5 monitoring was initiated in 2015 at the Fort St. John Key Learning Centre, and measurements are summarized in Figure 4. All measurements for this reporting period were based on the Federal Equivalent Method (FEM), which provides a more complete measure of PM2.5 than the older TEOM instruments. 
 
-Nam eu nisl eu eros convallis viverra et pulvinar elit. Pellentesque porttitor
-pretium scelerisque. Quisque vel augue at risus dapibus fermentum. In in dolor
-eu risus lacinia dignissim. Aliquam sed porta eros. Nullam vel arcu ut turpis
-scelerisque molestie. Morbi convallis euismod imperdiet.
+Between MIN_YR and MAX_YR, X complete years of data were collected.  A 24-hour average value of XX ???g/m3 and an annual mean of XX ???g/m3 were obtained,  indicating that PM2.5 levels at this site are below those of the national standards of 28 and 10 ???g/m3, respectively. 
 
-Ut vehicula, tortor quis placerat rhoncus, quam velit aliquam magna, ac
-pellentesque sapien dui et odio. Vestibulum a ligula a libero suscipit pulvinar
-nec ut mi. Phasellus in odio et quam semper lobortis eu quis lacus. In non lacus
-dui. Proin a feugiat eros. Donec ultrices rutrum porttitor. Proin tempor urna ac
-nunc faucibus volutpat. Nunc pharetra orci a mi tristique pharetra. Suspendisse
-vel velit eu justo porttitor tincidunt sed scelerisque nunc. Morbi id justo at
-libero ultricies aliquam.
+Trends in annual mean concentrations for 2016-2018 are shown Figure 5. 
 
 <!-- PM2.5 by station -->
 
@@ -132,18 +98,13 @@ plot_pm25_station_timeseries(annual_pm25, airzone)
 
 ## Air Zone Management Levels
 
-Aenean in pellentesque justo, finibus tincidunt tortor. Nulla ac rutrum lorem.
-Sed mattis a ex id fermentum. Proin eget neque aliquet, maximus nisi at, mollis
-sapien. Cras consequat diam lorem. Maecenas vulputate odio ac pellentesque
-scelerisque. Cras molestie ultrices turpis, in accumsan lectus dictum et.
+Air zone management levels are assigned on the basis of the highest concentrations within an air zone, excluding contributions from transboundary flows (TF) and exceptional events (EE) such as wildfires. This is done so that long-term management strategies are not developed on the basis of events that are beyond local or provincial control. 
 
-Donec non libero pharetra, aliquam nulla et, bibendum dui. Donec at sodales dui.
-Sed eget elit malesuada arcu dapibus consequat ut sed felis. Donec at dui nec
-velit dictum tincidunt. Ut posuere massa quis lectus accumsan rhoncus. Maecenas
-scelerisque turpis nec felis dictum finibus. In sodales luctus pellentesque. Sed
-sit amet tempor lacus. Vivamus nec erat id sem viverra bibendum auctor non sem.
-Orci varius natoque penatibus et magnis dis parturient montes, nascetur
-ridiculus mus.
+In the Northeast Air Zone, wildfires are the primary contributor to TF/EE. The methodology for identifying wildfire-influenced data is provided in Appendix I. 
+
+Table 2 summarizes ozone concentrations as measured and after consideration of any TF/EE influences. TF/EE influences DID/DID NOT affect management levels. Consequently, the Northeast Air Zone is assigned a "COLOUR_O3" management level, based on ozone levels in Fort St. John. This indicates that any ozone-related actions should focus on ACTION.
+
+Table 3 summarizes both as-measured PM2.5 concentrations and management levels once estimated wildfire influences have been removed. As discussed further in Appendix II, wildfire influences were identified, but the impact on management levels was small. The air zone is assigned a "COLOUR_PM" management level for PM2.5. This means that PM2.5-related actions should focus on ACTION.
 
 <!-- Summary of ozone concentrations as measured and air zone management levels -->
 
@@ -159,6 +120,6 @@ create_pm25_table(pm25, airzone)
 
 ## Actions to Protect Air Quality
 
-Praesent nec tincidunt ante. Morbi pulvinar velit eget metus commodo aliquam. Nulla non diam vel leo pellentesque pretium. Maecenas eleifend et lectus nec mollis. Donec aliquet massa ac odio blandit euismod. Curabitur sed neque semper, dictum neque vitae, dictum risus. Vestibulum sit amet auctor ante, a gravida est. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer quis dignissim risus.
+Air quality activities in the Northeast Air Zone have largely focussed on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the Northeast Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf). 
 
-Sed a urna lectus. Morbi arcu est, tincidunt a pharetra a, fringilla sit amet ligula. Donec pellentesque non ex a tristique. Donec a malesuada felis, vitae blandit nibh. Quisque quis pretium dolor, ut vehicula elit. Sed enim ligula, consectetur auctor massa vitae, venenatis bibendum leo. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+A description of other activities underway in B.C. air zones can be found in the "Air Zone Management Response for British Columbia" (see: www.gov.bc.ca/bcairquality). 
