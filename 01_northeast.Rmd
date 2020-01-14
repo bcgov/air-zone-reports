@@ -61,7 +61,7 @@ airzone_map(airzone)
 
 ## Ozone
 
-Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between MIN_YR and MAX_YR, ozone concentrations at the THREE sites ranged from MIN_O3 to MAX_O3 ppb. These levels were BELOW/ABOVE the national standard of 63 ppb. 
+Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between MIN and MAX_YR, ozone concentrations at the THREE sites ranged from MIN_O3 to MAX_O3 ppb. These levels were BELOW/ABOVE the national standard of 63 ppb. 
 
 Trends in annual ozone levels are shown in Figure 3.   Concentrations have remained BELOW/ABOVE the level of the national standard over the period of record. 
 
