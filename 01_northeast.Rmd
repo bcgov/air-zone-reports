@@ -1,11 +1,12 @@
 ---
 title: Northeast Air Zone
-output:
-  pdf_document:
-    latex_engine: lualatex
+output: 
+  word_document: 
+#  pdf_document:
+#    latex_engine: lualatex
     fig_caption: true
-    includes:
-      in_header: components/header.tex
+    #includes:
+    #  in_header: components/header.tex
 mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
@@ -73,7 +74,7 @@ if(abovethreshold) {
 Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$min_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
 `r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels were ABOVE/BELOW the national standard of 63 ppb. 
 
-Trends in annual ozone levels are shown in Figure 3.   Concentrations have remained BELOW/ABOVE the level of the national standard over the period of record. 
+Trends in annual ozone levels are shown in Figure 3. Concentrations have remained BELOW/ABOVE the level of the national standard over the period of record. 
 
 <!-- Ozone by station -->
 
