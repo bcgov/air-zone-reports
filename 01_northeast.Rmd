@@ -1,12 +1,12 @@
 ---
 title: Northeast Air Zone
 output: 
-  word_document: 
-#  pdf_document:
-#    latex_engine: lualatex
+#  word_document: 
+  pdf_document:
+    latex_engine: lualatex
     fig_caption: true
-    #includes:
-    #  in_header: components/header.tex
+    includes:
+      in_header: components/header.tex
 mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
@@ -43,59 +43,83 @@ if (!is.na(params$ems_ids_pm25)) {
 } else {
   annual_pm25 <- filter(params$annual_pm25, ems_id %in% pm25$ems_id)
 }
+
 ```
 
 ## Introduction
 
-This is the fourth air quality report for the Northeast Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O3) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at:<https://www2.gov.bc.ca/gov/content?id=C7BA872425D9498084C808B98EA7AF52>.
+This is the fourth air quality report for the`r airzone` Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O3) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at: <https://www2.gov.bc.ca/gov/content?id=C7BA872425D9498084C808B98EA7AF52>.
 
 
 ## Background
 
-The AQMS is the national approach to managing air quality in Canada. Under the AQMS, the CAAQS are developed to drive action to protect human health and the environment. Air zones are areas that exhibit similar air quality characteristics, issues and trends, and that form the basis for monitoring, reporting and taking action on air quality. The Northeast Air Zone (see Figure 1) is one of seven broad air zones across the province. Under the AQMS, progressively more rigorous actions are expected as air quality approaches or exceeds the CAAQS. The level of action is guided by the Air Zone Management Framework outlined in Table 1. 
+The AQMS is the national approach to managing air quality in Canada. Under the AQMS, the CAAQS are developed to drive action to protect human health and the environment. Air zones are areas that exhibit similar air quality characteristics, issues and trends, and that form the basis for monitoring, reporting and taking action on air quality. The `r airzone` Air Zone (see Figure 1) is one of seven broad air zones across the province. Under the AQMS, progressively more rigorous actions are expected as air quality approaches or exceeds the CAAQS. The level of action is guided by the Air Zone Management Framework outlined in Table 1. 
 
 <!-- Airzone map-->
 
 ```{r airzone-map, fig.width = 3, fig.cap = paste(airzone, "Air Zone")}
+
 airzone_map(airzone)
+
 ```
 
 ## Ozone
 
 ```{r calc threshold value, echo = FALSE, results = "asis"}
- abovethreshold <- if(max(ozone$metric_value_ambient, na.rm = TRUE)< 63) {TRUE}
-if(abovethreshold) {
-  cat ("below") 
-} 
+
+threshold <- ifelse(max(ozone$metric_value_ambient, na.rm = TRUE) < 63, "below","above")
 
 ```
 
 
-Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$min_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
-`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels were ABOVE/BELOW the national standard of 63 ppb. 
+Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$max_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
+`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels were `r threshold` the national standard of 63 ppb. 
 
-Trends in annual ozone levels are shown in Figure 3. Concentrations have remained BELOW/ABOVE the level of the national standard over the period of record. 
+Trends in annual ozone levels are shown in Figure 3. Concentrations have remained `r threshold` the level of the national standard over the period of record. 
 
 <!-- Ozone by station -->
 
 ```{r ozone-by-station, fig.width = 4.5, fig.asp = 0.5, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
+
 ```
 
 <!-- Annual trends in ozone concentrations -->
 
 ```{r annual-ozone, fig.cap = annual_ozone_cap(annual_ozone)}
+
 plot_ozone_station_timeseries(annual_ozone, airzone)
+
 ```
 
 ## PM$_{2.5}$ levels
 
 PM~2.5~ refers to inhalable particles up to 2.5 micrometres in diameter. PM~2.5~ monitoring was initiated in 2015 at the Fort St. John Key Learning Centre, and measurements are summarized in Figure 4. All measurements for this reporting period were based on the Federal Equivalent Method (FEM), which provides a more complete measure of PM~2.5~ than the older TEOM instruments. 
 
+```{r calc pm values}
+pm24 <- pm25 %>%
+  filter(metric == "pm2.5_24h") %>%
+  select(metric_value_ambient) %>%
+  pull()
 
-Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$min_year, na.rm = TRUE)`, `r max(pm25$min_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of XX ???g/m3 and an annual mean of XX ???g/m3 were obtained,  indicating that PM~2.5~ levels at this site are ABOVE/below those of the national standards of 28 and 10 ???g/m3, respectively. 
+pm24threshold <- ifelse(max(pm24 , na.rm = TRUE) <= 28, "below","above")
 
-Trends in annual mean concentrations for 2016-2018 are shown Figure 5. 
+pmAve <- pm25 %>%
+  filter(metric == "pm2.5_annual") %>%
+  select(metric_value_ambient) %>%
+  pull()
+
+pmAvethreshold <- ifelse(max(pmAve , na.rm = TRUE) < 10, "below","above")
+
+pmthresh = ifelse("above" %in% unique(c(pm24threshold, pmAvethreshold)), "above", "below")
+
+```
+
+
+Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r max(pm25$max_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of `r pm24`g/m3 and an annual mean of `r pmAve` g/m3 were obtained,  indicating that PM~2.5~ levels at this site are `r pmthresh` those of the national standards of 28 and 10 g/m3, respectively. 
+
+
+Trends in annual mean concentrations for `r min(pm25$min_year, na.rm = TRUE)`-`r max(pm25$max_year, na.rm = TRUE)` are shown Figure 5. 
 
 <!-- PM2.5 by station -->
 
@@ -111,13 +135,93 @@ plot_pm25_station_timeseries(annual_pm25, airzone)
 
 ## Air Zone Management Levels
 
+```{r calculations for air zone mangement}
+
+# calculate ozone management level 
+
+oz_man <- ifelse(max(ozone$metric_value_ambient, na.rm = TRUE) == 
+                   max(ozone$metric_value_mgmt, na.rm = TRUE), "did not","dd")
+
+# calc management level pm24hr
+pm24man <- pm25 %>%
+  filter(metric == "pm2.5_24h") %>%
+  select(metric_value_mgmt) %>%
+  pull()
+
+man_impact <- ifelse(pm24 == pm24man, "did not","did")
+
+# calc management level annual 
+pmAveman <- pm25 %>%
+  filter(metric == "pm2.5_annual") %>%
+  select(metric_value_mgmt) %>%
+  pull()
+
+man_impact_annual <- ifelse(pmAve == pmAveman, "did not","did")
+
+```
+
+
+
+```{r, echo = TRUE}
+
+#function(data, airzone)
+  
+  data = ozone
+airzone = airzone
+
+ joined <- data %>%
+    select(
+      station_name,
+   #   instrument_type,
+      n_years,
+      metric_value_ambient,
+      metric_value_mgmt,
+      mgmt_level,
+      metric
+    ) %>%
+    split(.$metric) %>%
+    Reduce(
+      function(...) left_join(..., by = c("station_name", "instrument_type")),
+      .
+    )
+
+  max_level <- max(joined$mgmt_level.x, joined$mgmt_level.y)
+  overall_color <- mgmt_level_color(max_level)
+  overall_text <- text_color(max_level)
+
+  joined %>%
+    ## Set mgmt_level column to maximum management level
+    mutate(mgmt_level = max_level) %>%
+    ## Color management columns
+    mutate(
+      metric_value_mgmt.x = map2_chr(
+        metric_value_mgmt.x,
+        mgmt_level.x,
+        color_by_mgmt_level
+      )
+    ) %>%
+    mutate(
+      metric_value_mgmt.y = map2_chr(
+        metric_value_mgmt.y,
+        mgmt_level.y,
+        color_by_mgmt_level
+      )
+    ) 
+
+  
+ joined
+  
+  
+```
+
+
 Air zone management levels are assigned on the basis of the highest concentrations within an air zone, excluding contributions from transboundary flows (TF) and exceptional events (EE) such as wildfires. This is done so that long-term management strategies are not developed on the basis of events that are beyond local or provincial control. 
 
-In the Northeast Air Zone, wildfires are the primary contributor to TF/EE. The methodology for identifying wildfire-influenced data is provided in Appendix I. 
+In the `r airzone` Air Zone, wildfires are the primary contributor to TF/EE. The methodology for identifying wildfire-influenced data is provided in Appendix I. 
 
-Table 2 summarizes ozone concentrations as measured and after consideration of any TF/EE influences. TF/EE influences DID/DID NOT affect management levels. Consequently, the Northeast Air Zone is assigned a "COLOUR_O3" management level, based on ozone levels in Fort St. John. This indicates that any ozone-related actions should focus on ACTION.
+Table 2 summarizes ozone concentrations as measured before and after consideration of any TF/EE influences. TF/EE influences `r oz_man` affect management levels. Consequently, the `r airzone`  Air Zone is assigned a "COLOUR_O3" management level, based on ozone levels in Fort St. John. This indicates that any ozone-related actions should focus on `r ozone$mgmt_level`.
 
-Table 3 summarizes both as-measured PM2.5 concentrations and management levels once estimated wildfire influences have been removed. As discussed further in Appendix II, wildfire influences were identified, but the impact on management levels was small. The air zone is assigned a "COLOUR_PM" management level for PM2.5. This means that PM2.5-related actions should focus on ACTION.
+Table 3 summarizes both as-measured PM2.5 concentrations and management levels once estimated wildfire influences have been removed. As discussed further in Appendix II, wildfire influences were identified, but the impact on management levels was small. The air zone is assigned a "COLOUR_PM" management level for PM2.5. This means that PM2.5-related actions should focus on `r pm25$mgmt_level `.
 
 <!-- Summary of ozone concentrations as measured and air zone management levels -->
 
@@ -134,7 +238,7 @@ create_pm25_table(pm25, airzone)
 ## Actions to Protect Air Quality
 
 
-Air quality activities in the Northeast Air Zone have largely focussed on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the Northeast Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: <https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf>). 
+Air quality activities in the `r airzone` Air Zone have largely focussed on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the `r airzone` Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: <https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf>). 
 
 A description of other activities underway in B.C. air zones can be found in the "Air Zone Management Response for British Columbia" (see:<https://www2.gov.bc.ca/gov/content/environment/air-land-water/air>). 
 
