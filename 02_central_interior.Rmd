@@ -64,7 +64,7 @@ in purus vitae bibendum. Morbi bibendum tempus lectus sed egestas.
 
 <!-- Airzone map-->
 
-```{r airzone-map, fig.width = 3, fig.cap = paste(airzone, "Air Zone")}
+```{r airzone-map, fig.width = 6, fig.cap = paste(airzone, "Air Zone")}
 airzone_map(airzone)
 ```
 
@@ -84,7 +84,7 @@ ut dapibus condimentum.
 
 <!-- Ozone by station -->
 
-```{r ozone-by-station, fig.width = 4.5, fig.asp = 0.55, fig.cap = ozone_by_station_cap(airzone, ozone)}
+```{r ozone-by-station, fig.width = 6, fig.height=4, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
 ```
 
@@ -121,7 +121,7 @@ libero ultricies aliquam.
 
 <!-- PM2.5 by station -->
 
-```{r pm25-by-station, fig.width = 5, fig.asp = 0.85, fig.cap = pm25_by_station_cap(airzone, pm25)}
+```{r pm25-by-station, fig.width = 6, fig.height=8.5, fig.cap = pm25_by_station_cap(airzone, pm25)}
 plot_pm25_by_station(pm25)
 ```
 
