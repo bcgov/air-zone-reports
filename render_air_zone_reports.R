@@ -19,17 +19,17 @@ load(file.path(pm25_dir, "tmp/plots.RData"))
 
 ## Render all reports, named 01_northeast.Rmd, 02_central_interior.Rmd, etc.
 ## using default parameters
-walk(
-  list.files(pattern = "\\d{2}(.+)Rmd"),
-  render,
-  output_dir = "rendered_reports"
-)
+#walk(
+#  list.files(pattern = "\\d{2}(.+)Rmd"),
+#  render,
+#  output_dir = "rendered_reports"
+#)
 
 ## To render a report with modified parameters, provide a named list of the
 ## parameters you want to change. For example:
 
-# render(
-#   "01_northeast.Rmd",
-#   output_dir = "rendered_reports",
+render(
+   "01_northeast.Rmd",
+   output_dir = "rendered_reports" #,
 #   params = list(ems_ids_ozone = c("E227431", "E229797", "E231866"))
-#)
+)
