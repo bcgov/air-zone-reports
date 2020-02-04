@@ -161,60 +161,6 @@ man_impact_annual <- ifelse(pmAve == pmAveman, "did not","did")
 ```
 
 
-
-```{r, echo = TRUE}
-
-#function(data, airzone)
-  
-  data = ozone
-airzone = airzone
-
- joined <- data %>%
-    select(
-      station_name,
-   #   instrument_type,
-      n_years,
-      metric_value_ambient,
-      metric_value_mgmt,
-      mgmt_level,
-      metric
-    ) %>%
-    split(.$metric) %>%
-    Reduce(
-      function(...) left_join(..., by = c("station_name", "instrument_type")),
-      .
-    )
-
-  max_level <- max(joined$mgmt_level.x, joined$mgmt_level.y)
-  overall_color <- mgmt_level_color(max_level)
-  overall_text <- text_color(max_level)
-
-  joined %>%
-    ## Set mgmt_level column to maximum management level
-    mutate(mgmt_level = max_level) %>%
-    ## Color management columns
-    mutate(
-      metric_value_mgmt.x = map2_chr(
-        metric_value_mgmt.x,
-        mgmt_level.x,
-        color_by_mgmt_level
-      )
-    ) %>%
-    mutate(
-      metric_value_mgmt.y = map2_chr(
-        metric_value_mgmt.y,
-        mgmt_level.y,
-        color_by_mgmt_level
-      )
-    ) 
-
-  
- joined
-  
-  
-```
-
-
 Air zone management levels are assigned on the basis of the highest concentrations within an air zone, excluding contributions from transboundary flows (TF) and exceptional events (EE) such as wildfires. This is done so that long-term management strategies are not developed on the basis of events that are beyond local or provincial control. 
 
 In the `r airzone` Air Zone, wildfires are the primary contributor to TF/EE. The methodology for identifying wildfire-influenced data is provided in Appendix I. 
