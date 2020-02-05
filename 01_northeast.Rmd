@@ -71,11 +71,11 @@ The AQMS is the national approach to managing air quality in Canada. Under the A
 airzone_map(airzone)
 ```
 
-## Ozone
+## Ozone levels
 
 Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$max_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
 `r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels were 
-`r calc_threshold(ozone_az$caaqs_ambient)` the national standard of `r achievement_level("03")` ppb.
+`r calc_threshold(ozone_az$caaqs_ambient)` the national standard of `r achievement_level("o3")` ppb.
 
 Trends in annual ozone levels are shown in Figure 3. Concentrations have remained `r calc_threshold(ozone_az$caaqs_ambient)` the level of the national standard over the period of record.
 
@@ -163,7 +163,7 @@ In the `r airzone` Air Zone, wildfires are the primary contributor to TF/EE. The
 
 Table 2 summarizes ozone concentrations as measured before and after consideration of any TF/EE influences. TF/EE influences `r oz_man` affect management levels. Consequently, the `r airzone`  Air Zone is assigned a `r oz_col `  management level, based on ozone levels in Fort St. John. This indicates that any ozone-related actions should focus on `r as.character(ozone_az$mgmt_level)`.
 
-Table 3 summarizes both as-measured PM2.5 concentrations and management levels once estimated wildfire influences have been removed. As discussed further in Appendix II, wildfire influences were identified, but the impact on management levels was small. The air zone is assigned a `r pm_col` management level for PM2.5. This means that PM2.5-related actions should focus on `r pm25_mgmt$mgmt_level`.
+Table 3 summarizes both as-measured PM~2.5~ concentrations and management levels once estimated wildfire influences have been removed. As discussed further in Appendix II, wildfire influences were identified, but the impact on management levels was small. The air zone is assigned a `r pm_col` management level for PM~2.5~. This means that PM~2.5~-related actions should focus on `r pm25_mgmt$mgmt_level`.
 
 <!-- Summary of ozone concentrations as measured and air zone management levels -->
 
