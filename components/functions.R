@@ -114,6 +114,7 @@ plot_ozone_station_timeseries <- function(data, airzone, caaqs = 63) {
       colour = "Location"
     ) +
     scale_x_continuous(
+      limits = c(max_year - 9, max_year),
       breaks = function(x) floor(pretty(seq(min(x), max(x), by = 1)))
     ) +
     theme(plot.title = element_text(hjust = 0.5))
@@ -206,7 +207,7 @@ plot_pm25_by_station <- function(data, caaqs_24h = 28, caaqs_annual = 10) {
 ## Annual trends in mean PM2.5 concentration line chart
 plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
   min_year <- min(data$year, na.rm = TRUE)
-  min_year <- min(data$year, na.rm = TRUE)
+  max_year <- max(data$year, na.rm = TRUE)
 
   ggplot(data, aes(x = year, y = ann_avg, colour = station_name)) +
     geom_line() +
@@ -221,6 +222,7 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
     scale_x_continuous(
+      limits = c(max_year - 9, max_year),
       breaks = function(x) floor(pretty(seq(min(x), max(x), by = 1)))
     ) +
     labs(
