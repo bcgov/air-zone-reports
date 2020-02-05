@@ -464,3 +464,20 @@ create_pm25_table <- function(data, airzone) {
     kable_styling(latex_options = "hold_position")
 }
 
+achievement_level <- function(param) {
+  rcaaqs::achievement_levels$upper_breaks[
+    rcaaqs::achievement_levels$parameter == param & 
+      rcaaqs::achievement_levels$labels == "Achieved"
+  ]
+}
+
+calc_threshold <- function(achievement_status) {
+  # convert to character in case it's a factor!
+  achievement_status <- as.character(achievement_status)
+  
+  unname(
+    c("Achieved" = "below", 
+      "Not Achieved" = "above", 
+      "Insufficient Data" = "Not enough data")[achievement_status]
+  )
+}

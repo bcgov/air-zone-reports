@@ -10,9 +10,11 @@ mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
   annual_ozone: !r ozone_caaqs$ann_4th_highest
+  ozone_az: !r ozone_az
   ems_ids_ozone: !r NA
   pm25: !r pm_caaqs_combined_results
   annual_pm25: !r pm25_caaqs_annual$yearly_avg
+  pm25_az: !r az_ambient
   ems_ids_pm25: !r NA
   airzone: "Northeast"
 ---
@@ -29,6 +31,10 @@ source("components/functions.R")
 airzone <- params$airzone
 ozone <- filter(params$ozone, airzone == !!airzone)
 pm25 <- filter(params$pm25, airzone == !!airzone)
+
+# Get airzone-level metrics
+ozone_az <- filter(params$ozone_az, airzone == !!airzone)
+pm25_az <- filter(params$pm25_az, airzone == !!airzone)
 
 ## Filter annual data to EMS ids provided if present, otherwise use the same
 ## ones as in the summary data
@@ -63,23 +69,16 @@ airzone_map(airzone)
 
 ## Ozone
 
-```{r calc threshold value, echo = FALSE, results = "asis"}
-
-threshold <- ifelse(max(ozone$metric_value_ambient, na.rm = TRUE) < 63, "below","above")
-
-```
-
-
 Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$max_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
-`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels were `r threshold` the national standard of 63 ppb. 
+`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels were 
+`r calc_threshold(ozone_az$caaqs_ambient)` the national standard of `r achievement_level("03")` ppb.
 
-Trends in annual ozone levels are shown in Figure 3. Concentrations have remained `r threshold` the level of the national standard over the period of record. 
+Trends in annual ozone levels are shown in Figure 3. Concentrations have remained `r calc_threshold(ozone_az$caaqs_ambient)` the level of the national standard over the period of record.
 
 <!-- Ozone by station -->
 
 ```{r ozone-by-station, fig.width = 6, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
-
 ```
 
 <!-- Annual trends in ozone concentrations -->
@@ -94,27 +93,22 @@ plot_ozone_station_timeseries(annual_ozone, airzone)
 
 PM~2.5~ refers to inhalable particles up to 2.5 micrometres in diameter. PM~2.5~ monitoring was initiated in 2015 at the Fort St. John Key Learning Centre, and measurements are summarized in Figure 4. All measurements for this reporting period were based on the Federal Equivalent Method (FEM), which provides a more complete measure of PM~2.5~ than the older TEOM instruments. 
 
-```{r calc pm values}
+```{r calc-pm-values}
+pm25 <- pm25 %>% 
+  mutate(threshold = calc_threshold(caaqs_ambient))
+
 pm24 <- pm25 %>%
-  filter(metric == "pm2.5_24h") %>%
-  select(metric_value_ambient) %>%
-  pull()
+  filter(metric == "pm2.5_24h") 
 
-pm24threshold <- ifelse(max(pm24 , na.rm = TRUE) <= 28, "below","above")
+pm_annual <- pm25 %>%
+  filter(metric == "pm2.5_annual")
 
-pmAve <- pm25 %>%
-  filter(metric == "pm2.5_annual") %>%
-  select(metric_value_ambient) %>%
-  pull()
-
-pmAvethreshold <- ifelse(max(pmAve , na.rm = TRUE) < 10, "below","above")
-
-pmthresh = ifelse("above" %in% unique(c(pm24threshold, pmAvethreshold)), "above", "below")
+pmthresh = ifelse("above" %in% unique(pm25$threshold), "above", "below")
 
 ```
 
 
-Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r max(pm25$max_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of `r pm24`g/m3 and an annual mean of `r pmAve` g/m3 were obtained,  indicating that PM~2.5~ levels at this site are `r pmthresh` those of the national standards of 28 and 10 g/m3, respectively. 
+Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r max(pm25$max_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of `r pm24$metric_value_ambient` g/m3 and an annual mean of `r pm_annual$metric_value_ambient` g/m3 were obtained,  indicating that PM~2.5~ levels at this site are `r pmthresh` those of the national standards of `r achievement_level("pm2.5_24h")` and `r achievement_level("pm2.5_annual")` g/m3, respectively. 
 
 
 Trends in annual mean concentrations for `r min(pm25$min_year, na.rm = TRUE)`-`r max(pm25$max_year, na.rm = TRUE)` are shown Figure 5. 
@@ -135,39 +129,23 @@ plot_pm25_station_timeseries(annual_pm25, airzone)
 
 ```{r calculations for air zone mangement}
 
-mgmt_colours <- tribble(
-  ~mgmt_level, ~mgmt_col,
-  "Actions for Keeping Clean Areas Clean", "green",
-  "Actions for Preventing Air Quality Deterioration", "yellow",
-  "Actions for Preventing CAAQS Exceedance", "orange",
-  "Actions for Achieving Air Zone CAAQS", "red"
-)
+mgmt_colours <- rcaaqs::management_levels %>% 
+  select(mgmt_level = labels, mgmt_col = colour_text) %>% 
+  distinct()
 
 # calculate ozone management level 
 oz_man <- ifelse(max(ozone$metric_value_ambient, na.rm = TRUE) == 
                    max(ozone$metric_value_mgmt, na.rm = TRUE), "did not", "did")
 
+oz_col <- mgmt_colours$mgmt_col[mgmt_colours$mgmt_level == ozone_az$mgmt_level]
 
-oz_col <- ozone %>%
-  filter(metric_value_mgmt == max(metric_value_mgmt)) %>% 
-  left_join(mgmt_colours) %>% pull(mgmt_col)
+pm24_man_impact <- ifelse(
+  pm24$metric_value_ambient == pm24$metric_value_mgmt, "did not", "did"
+)
 
-
-# calc management level pm24hr
-pm24man <- pm25 %>%
-  filter(metric == "pm2.5_24h") %>%
-  select(metric_value_mgmt) %>%
-  pull()
-
-man_impact <- ifelse(pm24 == pm24man, "did not", "did")
-
-# calc management level annual 
-pmAveman <- pm25 %>%
-  filter(metric == "pm2.5_annual") %>%
-  select(metric_value_mgmt) %>%
-  pull()
-
-man_impact_annual <- ifelse(pmAve == pmAveman, "did not", "did")
+pm_annual_man_impact <- ifelse(
+  pm_annual$metric_value_ambient == pm_annual$metric_value_mgmt, "did not", "did"
+)
 
 
 ```
