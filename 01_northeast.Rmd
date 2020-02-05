@@ -15,6 +15,7 @@ params:
   pm25: !r pm_caaqs_combined_results
   annual_pm25: !r pm25_caaqs_annual$yearly_avg
   pm25_az: !r az_ambient
+  pm25_mgmt: !r az_mgmt
   ems_ids_pm25: !r NA
   airzone: "Northeast"
 ---
@@ -22,7 +23,7 @@ params:
 <!-- Load functions, filter data to airzone -->
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.width = 6)
 
 ## Load packages, functions, etc.
 source("components/functions.R")
@@ -35,6 +36,9 @@ pm25 <- filter(params$pm25, airzone == !!airzone)
 # Get airzone-level metrics
 ozone_az <- filter(params$ozone_az, airzone == !!airzone)
 pm25_az <- filter(params$pm25_az, airzone == !!airzone)
+pm25_mgmt <- filter(params$pm25_mgmt, airzone == !!airzone)
+
+
 
 ## Filter annual data to EMS ids provided if present, otherwise use the same
 ## ones as in the summary data
@@ -53,7 +57,7 @@ if (!is.na(params$ems_ids_pm25)) {
 
 ## Introduction
 
-This is the fourth air quality report for the`r airzone` Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O3) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at: <https://www2.gov.bc.ca/gov/content?id=C7BA872425D9498084C808B98EA7AF52>.
+This is the fourth air quality report for the`r airzone` Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O~3~) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at: <https://www2.gov.bc.ca/gov/content?id=C7BA872425D9498084C808B98EA7AF52>.
 
 
 ## Background
@@ -63,7 +67,7 @@ The AQMS is the national approach to managing air quality in Canada. Under the A
 <!-- Airzone map-->
 
 
-```{r airzone-map, fig.width = 5, fig.cap = paste(airzone, "Air Zone")}
+```{r airzone-map, fig.height = 4, fig.cap = paste(airzone, "Air Zone")}
 airzone_map(airzone)
 ```
 
@@ -77,7 +81,7 @@ Trends in annual ozone levels are shown in Figure 3. Concentrations have remaine
 
 <!-- Ozone by station -->
 
-```{r ozone-by-station, fig.width = 6, fig.cap = ozone_by_station_cap(airzone, ozone)}
+```{r ozone-by-station, fig.height=3, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
 ```
 
@@ -108,15 +112,15 @@ pmthresh = ifelse("above" %in% unique(pm25$threshold), "above", "below")
 ```
 
 
-Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r max(pm25$max_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of `r pm24$metric_value_ambient` g/m3 and an annual mean of `r pm_annual$metric_value_ambient` g/m3 were obtained,  indicating that PM~2.5~ levels at this site are `r pmthresh` those of the national standards of `r achievement_level("pm2.5_24h")` and `r achievement_level("pm2.5_annual")` g/m3, respectively. 
+Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r max(pm25$max_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of `r pm24$metric_value_ambient` $\mu$g/m3 and an annual mean of `r pm_annual$metric_value_ambient` $\mu$g/m3 were obtained,  indicating that PM~2.5~ levels at this site are `r pmthresh` those of the national standards of `r achievement_level("pm2.5_24h")` and `r achievement_level("pm2.5_annual")` $\mu$g/m3, respectively. 
 
 
 Trends in annual mean concentrations for `r min(pm25$min_year, na.rm = TRUE)`-`r max(pm25$max_year, na.rm = TRUE)` are shown Figure 5. 
 
 <!-- PM2.5 by station -->
 
-```{r pm25-by-station, fig.width = 6, fig.height=4, fig.cap = pm25_by_station_cap(airzone, pm25)}
-plot_pm25_by_station(pm25) & expand_limits(x = 2, y = 2)
+```{r pm25-by-station, fig.height=4, fig.cap = pm25_by_station_cap(airzone, pm25)}
+plot_pm25_by_station(pm25)
 ```
 
 <!-- PM Annual trends in PM 2.5 -->
@@ -147,6 +151,8 @@ pm_annual_man_impact <- ifelse(
   pm_annual$metric_value_ambient == pm_annual$metric_value_mgmt, "did not", "did"
 )
 
+pm_col <- mgmt_colours$mgmt_col[mgmt_colours$mgmt_level == pm25_mgmt$mgmt_level]
+
 
 ```
 
@@ -155,9 +161,9 @@ Air zone management levels are assigned on the basis of the highest concentratio
 
 In the `r airzone` Air Zone, wildfires are the primary contributor to TF/EE. The methodology for identifying wildfire-influenced data is provided in Appendix I. 
 
-Table 2 summarizes ozone concentrations as measured before and after consideration of any TF/EE influences. TF/EE influences `r oz_man` affect management levels. Consequently, the `r airzone`  Air Zone is assigned a `r oz_col `  management level, based on ozone levels in Fort St. John. This indicates that any ozone-related actions should focus on `r ozone$mgmt_level`.
+Table 2 summarizes ozone concentrations as measured before and after consideration of any TF/EE influences. TF/EE influences `r oz_man` affect management levels. Consequently, the `r airzone`  Air Zone is assigned a `r oz_col `  management level, based on ozone levels in Fort St. John. This indicates that any ozone-related actions should focus on `r as.character(ozone_az$mgmt_level)`.
 
-Table 3 summarizes both as-measured PM2.5 concentrations and management levels once estimated wildfire influences have been removed. As discussed further in Appendix II, wildfire influences were identified, but the impact on management levels was small. The air zone is assigned a "COLOUR_PM" management level for PM2.5. This means that PM2.5-related actions should focus on `r pm25$mgmt_level `.
+Table 3 summarizes both as-measured PM2.5 concentrations and management levels once estimated wildfire influences have been removed. As discussed further in Appendix II, wildfire influences were identified, but the impact on management levels was small. The air zone is assigned a `r pm_col` management level for PM2.5. This means that PM2.5-related actions should focus on `r pm25_mgmt$mgmt_level`.
 
 <!-- Summary of ozone concentrations as measured and air zone management levels -->
 
