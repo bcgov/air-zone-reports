@@ -488,7 +488,12 @@ calc_threshold <- function(achievement_status) {
 
 caaqs_standard_table <- function() {
   cat(
-"\\begin{tabular}{|l|c|c|c|c|c|c|}
+"
+\\renewcommand{\\arraystretch}{1.5}
+\\captionof{table}{Air zone management framework for ground-level ozone and 
+PM$_{2.5}$.The CAAQS define the upper threshold, separating the “red” and 
+“orange” management levels.} \\label{tab:title}
+\\begin{tabularx}{\\textwidth}{ |l| *{6}{Y|} }
 \\hline
 \\multicolumn{1}{|c|}{ } & \\multicolumn{2}{c|}{O$_3$ (ppb)} & \\multicolumn{2}{c|}{PM$_{2.5}$ - Annual ($\\mu$g/m$^3$)} & \\multicolumn{2}{c|}{PM$_{2.5}$ - 24h ($\\mu$g/m$^3$)}\\\\
 \\cline{2-3} \\cline{4-5} \\cline{6-7}
@@ -512,6 +517,12 @@ Management Level & 2015 & 2020 & 2015 & 2020 & 2015 & 2020\\\\
 \\rowcolor{green}
 \\multicolumn{1}{|l|}{\\textbf{Green}} & \\multicolumn{6}{c|}{Actions for Keeping Clean Areas Clean}\\\\
 \\hline
-\\end{tabular}"
+\\end{tabularx}
+\\renewcommand{\\arraystretch}{1}
+"
 )
+}
+
+table_1_caption <- function(){
+  "Table 1. Air zone management framework for ground-level ozoneand PM2.5.The CAAQS definethe upper threshold, separating the “red” and “orange” management levels."
 }

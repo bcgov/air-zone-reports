@@ -61,9 +61,6 @@ if (!is.na(params$ems_ids_pm25)) {
 This is the fourth air quality report for the`r airzone` Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O~3~) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at: <https://www2.gov.bc.ca/gov/content?id=C7BA872425D9498084C808B98EA7AF52>.
 
 
-## Background
-
-The AQMS is the national approach to managing air quality in Canada. Under the AQMS, the CAAQS are developed to drive action to protect human health and the environment. Air zones are areas that exhibit similar air quality characteristics, issues and trends, and that form the basis for monitoring, reporting and taking action on air quality. The `r airzone` Air Zone (see Figure 1) is one of seven broad air zones across the province. Under the AQMS, progressively more rigorous actions are expected as air quality approaches or exceeds the CAAQS. The level of action is guided by the Air Zone Management Framework outlined in Table 1. 
 
 <!-- Airzone map-->
 
@@ -71,6 +68,10 @@ The AQMS is the national approach to managing air quality in Canada. Under the A
 ```{r airzone-map, fig.height = 4, fig.cap = paste(airzone, "Air Zone")}
 airzone_map(airzone)
 ```
+
+## Background
+
+The AQMS is the national approach to managing air quality in Canada. Under the AQMS, the CAAQS are developed to drive action to protect human health and the environment. Air zones are areas that exhibit similar air quality characteristics, issues and trends, and that form the basis for monitoring, reporting and taking action on air quality. The `r airzone` Air Zone (see Figure 1) is one of seven broad air zones across the province. Under the AQMS, progressively more rigorous actions are expected as air quality approaches or exceeds the CAAQS. The level of action is guided by the Air Zone Management Framework outlined in Table 1. 
 
 ```{r results='asis'}
 caaqs_standard_table()
@@ -118,7 +119,6 @@ pmthresh = ifelse("above" %in% unique(pm25$threshold), "did not achieve", "achie
 
 
 Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r max(pm25$max_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of `r pm24$metric_value_ambient` $\mu$g/m3 and an annual mean of `r pm_annual$metric_value_ambient` $\mu$g/m3 were obtained, indicating that PM~2.5~ levels at this site `r pmthresh` the national standards of `r achievement_level("pm2.5_24h")` and `r achievement_level("pm2.5_annual")` $\mu$g/m3, respectively. 
-
 
 Trends in annual mean concentrations for `r min(pm25$min_year, na.rm = TRUE)`-`r max(pm25$max_year, na.rm = TRUE)` are shown Figure 5. 
 
