@@ -489,6 +489,7 @@ calc_threshold <- function(achievement_status) {
 caaqs_standard_table <- function() {
   cat(
 "
+\\begingroup
 \\renewcommand{\\arraystretch}{1.5}
 \\captionof{table}{Air zone management framework for ground-level ozone and 
 PM$_{2.5}$.The CAAQS define the upper threshold, separating the “red” and 
@@ -519,6 +520,7 @@ Management Level & 2015 & 2020 & 2015 & 2020 & 2015 & 2020\\\\
 \\hline
 \\end{tabularx}
 \\renewcommand{\\arraystretch}{1}
+\\endgroup
 "
 )
 }
