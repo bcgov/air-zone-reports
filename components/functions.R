@@ -483,3 +483,35 @@ calc_threshold <- function(achievement_status) {
       "Insufficient Data" = "Not enough data")[achievement_status]
   )
 }
+
+# caaqs_table
+
+caaqs_standard_table <- function() {
+  cat(
+"\\begin{tabular}{|l|c|c|c|c|c|c|}
+\\hline
+\\multicolumn{1}{|c|}{ } & \\multicolumn{2}{c|}{O$_3$ (ppb)} & \\multicolumn{2}{c|}{PM$_{2.5}$ - Annual ($\\mu$g/m$^3$)} & \\multicolumn{2}{c|}{PM$_{2.5}$ - 24h ($\\mu$g/m$^3$)}\\\\
+\\cline{2-3} \\cline{4-5} \\cline{6-7}
+Management Level & 2015 & 2020 & 2015 & 2020 & 2015 & 2020\\\\
+\\hline
+\\rowcolor{red}
+\\multicolumn{1}{|l|}{\\textbf{Red}} & \\multicolumn{6}{c|}{Actions for Achieving Air Zone CAAQS}\\\\
+\\hline
+\\hspace{1em}Threshold (CAAQS) & 63 & 62 & 10 & 8.8 & 28 & 27\\\\
+\\hline
+\\rowcolor{orange}
+\\multicolumn{1}{|l|}{\\textbf{Orange}} & \\multicolumn{6}{c|}{Actions for Preventing CAAQS Exceedence}\\\\
+\\hline
+\\hspace{1em}Threshold & \\multicolumn{2}{c|}{56} & \\multicolumn{2}{c|}{6.4} & \\multicolumn{2}{c|}{19}\\\\
+\\hline
+\\rowcolor{yellow}
+\\multicolumn{1}{|l|}{\\textbf{Yellow}} & \\multicolumn{6}{c|}{Actions for Preventing Air Quality Deterioration}\\\\
+\\hline
+\\hspace{1em}Threshold & \\multicolumn{2}{c|}{50} & \\multicolumn{2}{c|}{4} & \\multicolumn{2}{c|}{10}\\\\
+\\hline
+\\rowcolor{green}
+\\multicolumn{1}{|l|}{\\textbf{Green}} & \\multicolumn{6}{c|}{Actions for Keeping Clean Areas Clean}\\\\
+\\hline
+\\end{tabular}"
+)
+}
