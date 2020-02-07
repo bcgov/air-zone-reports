@@ -501,7 +501,7 @@ PM$_{2.5}$.The CAAQS define the upper threshold, separating the “red” and
 Management Level & 2015 & 2020 & 2015 & 2020 & 2015 & 2020\\\\
 \\hline
 \\rowcolor{caaqs_red}
-\\multicolumn{1}{|l|}{\\textbf{Red}} & \\multicolumn{6}{c|}{Actions for Achieving Air Zone CAAQS}\\\\
+\\multicolumn{1}{|l|}{\\textbf{\\color{white}Red}} & \\multicolumn{6}{c|}{\\color{white}Actions for Achieving Air Zone CAAQS}\\\\
 \\hline
 \\hspace{1em}Threshold (CAAQS) & 63 & 62 & 10 & 8.8 & 28 & 27\\\\
 \\hline
