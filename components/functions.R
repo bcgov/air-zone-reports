@@ -82,7 +82,7 @@ plot_ozone_by_station <- function(data, airzone, caaqs = 63) {
       guide = guide_legend(override.aes = list(color = "red"))
     ) +
     labs(
-      x = "Station",
+      x = NULL,
       y = "Ozone concentration (ppb)",
       title = paste0(airzone, " Air Zone ", ozone_year)
     ) +
