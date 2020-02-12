@@ -51,7 +51,8 @@ airzone_map <- function(airzone) {
       values = c(OC = "lightblue", CA = "white", US = "grey90")
     ) +
     theme_void() +
-    theme(legend.position = "none") +
+    theme(legend.position = "none",
+          panel.border = element_rect(colour = "black", fill = NA)) +
     labs(title = paste(airzone, "Air Zone"))
 }
 
