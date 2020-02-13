@@ -23,50 +23,16 @@ title: "`r params$airzone` Air Zone"
 
 <!-- Load functions, filter data to airzone -->
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.width = 6)
-
-## Load packages, functions, etc.
-source("components/functions.R")
-
-## Filter data to air zone
-airzone <- params$airzone
-ozone <- filter(params$ozone, airzone == !!airzone)
-pm25 <- filter(params$pm25, airzone == !!airzone)
-
-# Get airzone-level metrics
-o3_az <- filter(params$o3_az, airzone == !!airzone)
-pm25_az <- filter(params$pm25_az, airzone == !!airzone)
-pm25_mgmt <- filter(params$pm25_mgmt, airzone == !!airzone)
-
-## Filter annual data to EMS ids provided if present, otherwise use the same
-## ones as in the summary data
-if (!is.na(params$ems_ids_ozone)) {
-  annual_ozone <- filter(params$annual_ozone, ems_id %in% params$ems_ids_ozone)
-} else {
-  annual_ozone <- filter(params$annual_ozone, ems_id %in% ozone$ems_id)
-}
-if (!is.na(params$ems_ids_pm25)) {
-  annual_pm25 <- filter(params$annual_pm25, ems_id %in% params$ems_ids_pm25)
-} else {
-  annual_pm25 <- filter(params$annual_pm25, ems_id %in% pm25$ems_id)
-}
-
+```{r setup, include=FALSE}
+sys.source("children/setup.R", envir = knitr::knit_global())
 ```
 
-```{r, echo=FALSE, results='asis'}
-res <- knitr::knit_child("children/intro.Rmd", 
-                         envir = environment(), 
-                         quiet = TRUE)
-cat(res, sep = "\n")
+```{r intro, echo=FALSE, results='asis'}
+render_child("children/intro.Rmd")
 ```
 
-
-```{r, echo=FALSE, results='asis'}
-res <- knitr::knit_child("children/ozone.Rmd", 
-                         envir = environment(), 
-                         quiet = TRUE)
-cat(res, sep = "\n")
+```{r ozone, echo=FALSE, results='asis'}
+render_child("children/ozone.Rmd")
 ```
 
 <!-- Ozone by station -->
@@ -83,11 +49,8 @@ plot_ozone_station_timeseries(annual_ozone, airzone)
 
 ```
 
-```{r, echo=FALSE, results='asis'}
-res <- knitr::knit_child("children/pm25.Rmd", 
-                         envir = environment(), 
-                         quiet = TRUE)
-cat(res, sep = "\n")
+```{r pm25, echo=FALSE, results='asis'}
+render_child("children/pm25.Rmd")
 ```
 
 <!-- PM2.5 by station -->
@@ -102,9 +65,6 @@ plot_pm25_by_station(pm25)
 plot_pm25_station_timeseries(annual_pm25, airzone)
 ```
 
-```{r, echo=FALSE, results='asis'}
-res <- knitr::knit_child("children/aqms.Rmd", 
-                         envir = environment(), 
-                         quiet = TRUE)
-cat(res, sep = "\n")
+```{r management, echo=FALSE, results='asis'}
+render_child("children/aqms.Rmd")
 ```

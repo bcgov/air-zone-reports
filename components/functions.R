@@ -584,3 +584,10 @@ pm_achievement_sentence <- function(pm25_az_df) {
   
   paste(first_part, second_part)
 }
+
+render_child <- function(file) {
+  res <- knitr::knit_child(file, 
+                           envir = knitr::knit_global(), 
+                           quiet = TRUE)
+  cat(res, sep = "\n")
+}
