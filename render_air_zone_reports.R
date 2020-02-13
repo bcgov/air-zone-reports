@@ -4,6 +4,7 @@
 
 library("purrr")
 library("rmarkdown")
+source("components/render.R")
 
 ## Load the necessary objects from the ozone and PM2.5 analyses
 ozone_dir <- "../ozone-caaqs-indicator/"
@@ -17,38 +18,27 @@ load(file.path(pm25_dir, "tmp/pm25_clean.rda"))
 load(file.path(pm25_dir, "tmp/analysed.RData"))
 load(file.path(pm25_dir, "tmp/plots.RData"))
 
-## Render all reports, named 01_northeast.Rmd, 02_central_interior.Rmd, etc.
+## Render intermediate reports, named 01_northeast.Rmd, 02_central_interior.Rmd, etc.
 ## using default parameters
+render_intermediate("01_northeast.Rmd")
+render_intermediate("02_central_interior.Rmd")
+render_intermediate("03_southern_interior.Rmd")
+render_intermediate("04_lower_fraser_valley.Rmd")
+render_intermediate("05_georgia_strait.Rmd")
+render_intermediate("06_coastal.Rmd")
 
-#walk(
-#  list.files(pattern = "\\d{2}(.+)Rmd"),
-#  render,
-#  output_dir = "rendered_reports"
-#)
+## To render a report and specify the stations to include in plots, 
+## provide a vector of the ems_ids to the `ozone_ems_ids` and `pm25_ems_ids` 
+## arguments. E.g.:
+render_intermediate("01_northeast.Rmd", 
+                    ozone_ems_ids = c("E227431", "E229797", "E231866"))
 
-## To render a report with modified parameters, provide a named list of the
-## parameters you want to change. For example:
+## Edit the text (or figure paths etc) in the .md files that are generated, 
+## then run render_final() on those markdown files:
 
-# render(
-#    "01_northeast.Rmd",
-#    output_dir = "rendered_reports" #,
-#    params = list(ems_ids_ozone = c("E227431", "E229797", "E231866"))
-# )
-
-render(
-  "01_northeast.Rmd",
-  output_dir = "rendered_reports", 
-  output_format = md_document(),
-  output_file = "01_northeast.md"
-)
-
-render(
-  "rendered_reports/01_northeast.md",
-  output_dir = "rendered_reports",
-  output_format = pdf_document(latex_engine = "lualatex",
-                               keep_tex = TRUE,
-                               fig_caption =  TRUE,
-                               includes = includes(in_header = "../components/header.tex")),
-  output_file = "rendered_reports/01_northeast_test.pdf"
-)
-
+render_final("intermediate_reports/01_northeast_intermediate.md")
+render_final("intermediate_reports/02_central_interior_intermediate.md")
+render_final("intermediate_reports/03_southern_interior_intermediate.md")
+render_final("intermediate_reports/04_lower_fraser_valley_intermediate.md")
+render_final("intermediate_reports/05_georgia_strait_intermediate.md")
+render_final("intermediate_reports/06_coastal_intermediate.md")

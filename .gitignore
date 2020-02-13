@@ -44,3 +44,5 @@ rsconnect/
 .DS_Store
 
 rendered_reports
+intermediate_reports
+final_reports
