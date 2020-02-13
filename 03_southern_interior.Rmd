@@ -1,8 +1,8 @@
 ---
-title: Southern Interior Air Zone
-output:
+output: 
   pdf_document:
     latex_engine: lualatex
+    keep_md: true
     fig_caption: true
     includes:
       in_header: components/header.tex
@@ -10,118 +10,52 @@ mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
   annual_ozone: !r ozone_caaqs$ann_4th_highest
+  o3_az: !r ozone_az
   ems_ids_ozone: !r NA
   pm25: !r pm_caaqs_combined_results
   annual_pm25: !r pm25_caaqs_annual$yearly_avg
+  pm25_az: !r az_ambient
+  pm25_mgmt: !r az_mgmt
   ems_ids_pm25: !r NA
   airzone: "Southern Interior"
+title: "`r params$airzone` Air Zone"
 ---
 
 <!-- Load functions, filter data to airzone -->
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
-
-## Load packages, functions, etc.
-source("components/functions.R")
-
-## Filter data to air zone
-airzone <- params$airzone
-ozone <- filter(params$ozone, airzone == !!airzone)
-pm25 <- filter(params$pm25, airzone == !!airzone)
-
-## Filter annual data to EMS ids provided if present, otherwise use the same
-## ones as in the summary data
-if (!is.na(params$ems_ids_ozone)) {
-  annual_ozone <- filter(params$annual_ozone, ems_id %in% params$ems_ids_ozone)
-} else {
-  annual_ozone <- filter(params$annual_ozone, ems_id %in% ozone$ems_id)
-}
-if (!is.na(params$ems_ids_pm25)) {
-  annual_pm25 <- filter(params$annual_pm25, ems_id %in% params$ems_ids_pm25)
-} else {
-  annual_pm25 <- filter(params$annual_pm25, ems_id %in% pm25$ems_id)
-}
+```{r setup, include=FALSE}
+sys.source("children/setup.R", envir = knitr::knit_global())
 ```
 
-## Introduction
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet ultrices
-lacus, eleifend vehicula erat. Suspendisse suscipit nec ante a bibendum. Orci
-varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-mus. Ut ac diam lectus. Nullam non tincidunt leo. Quisque sed egestas mauris,
-vitae feugiat neque. Quisque eu vestibulum enim. Nam convallis nec nunc ut
-rutrum. Fusce laoreet convallis scelerisque.
-
-## Background
-
-Nunc sit amet sem in purus iaculis commodo at a felis. Curabitur lacus purus,
-interdum eu mauris quis, ultrices auctor risus. Vestibulum orci nulla, volutpat
-sit amet hendrerit id, laoreet eu leo. Class aptent taciti sociosqu ad litora
-torquent per conubia nostra, per inceptos himenaeos. In consequat urna id velit
-dignissim, quis sagittis nunc volutpat. Fusce non facilisis ligula. Nulla mollis
-in purus vitae bibendum. Morbi bibendum tempus lectus sed egestas.
-
-<!-- Airzone map-->
-
-```{r airzone-map, fig.width = 3, fig.cap = paste(airzone, "Air Zone")}
-airzone_map(airzone)
+```{r intro, echo=FALSE, results='asis'}
+render_child("children/intro.Rmd")
 ```
 
-## Ozone
-
-Suspendisse sed dictum est. Fusce vitae sollicitudin enim. Maecenas nisi nisi,
-sollicitudin eu lacus ac, porttitor gravida ipsum. Morbi nisi lectus, blandit ut
-neque at, pretium posuere augue. Nullam lacus nisi, molestie id posuere vel,
-vehicula elementum dolor. Sed quis eros eget nibh laoreet porttitor pellentesque
-sit amet ex. Donec ultricies felis et rutrum sagittis. Sed feugiat aliquet
-turpis, in tincidunt neque hendrerit in. Donec volutpat neque sed mattis
-porttitor. Donec quis erat sagittis, ultrices lectus quis, semper massa. Quisque
-vel neque lacinia, euismod ante ut, porttitor ligula. Aenean varius lorem id
-nisl mollis, in sollicitudin quam viverra. Mauris sit amet mauris ut felis
-facilisis hendrerit. Nulla eu commodo ipsum, et cursus arcu. Cras pretium tortor
-ut dapibus condimentum.
-
+```{r ozone, echo=FALSE, results='asis'}
+render_child("children/ozone.Rmd")
+```
 
 <!-- Ozone by station -->
 
-```{r ozone-by-station, fig.width = 4.5, fig.asp = 0.55, fig.cap = ozone_by_station_cap(airzone, ozone)}
+```{r ozone-by-station, fig.height = 6, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
 ```
 
 <!-- Annual trends in ozone concentrations -->
 
 ```{r annual-ozone, fig.cap = annual_ozone_cap(annual_ozone)}
+
 plot_ozone_station_timeseries(annual_ozone, airzone)
+
 ```
 
-## PM$_{2.5}$ levels
-
-Aliquam non condimentum mauris. Integer non nunc ut lacus luctus ullamcorper.
-Aenean id vulputate metus. Integer tristique tempus sapien sed pellentesque.
-Nulla elementum consequat felis, at eleifend ex rutrum vitae. Cras ultricies
-quam justo, ac vulputate mauris blandit non. Aliquam convallis viverra egestas.
-Pellentesque dictum ipsum id venenatis sagittis. Vestibulum feugiat ullamcorper
-hendrerit. Etiam vitae purus at augue laoreet lacinia. Vestibulum quis fringilla
-neque. Pellentesque habitant morbi tristique senectus et netus et malesuada
-fames ac turpis egestas.
-
-Nam eu nisl eu eros convallis viverra et pulvinar elit. Pellentesque porttitor
-pretium scelerisque. Quisque vel augue at risus dapibus fermentum. In in dolor
-eu risus lacinia dignissim. Aliquam sed porta eros. Nullam vel arcu ut turpis
-scelerisque molestie. Morbi convallis euismod imperdiet.
-
-Ut vehicula, tortor quis placerat rhoncus, quam velit aliquam magna, ac
-pellentesque sapien dui et odio. Vestibulum a ligula a libero suscipit pulvinar
-nec ut mi. Phasellus in odio et quam semper lobortis eu quis lacus. In non lacus
-dui. Proin a feugiat eros. Donec ultrices rutrum porttitor. Proin tempor urna ac
-nunc faucibus volutpat. Nunc pharetra orci a mi tristique pharetra. Suspendisse
-vel velit eu justo porttitor tincidunt sed scelerisque nunc. Morbi id justo at
-libero ultricies aliquam.
+```{r pm25, echo=FALSE, results='asis'}
+render_child("children/pm25.Rmd")
+```
 
 <!-- PM2.5 by station -->
 
-```{r pm25-by-station, fig.width = 5, fig.asp = 0.8, fig.cap = pm25_by_station_cap(airzone, pm25)}
+```{r pm25-by-station, fig.height=8, fig.cap = pm25_by_station_cap(airzone, pm25)}
 plot_pm25_by_station(pm25)
 ```
 
@@ -131,35 +65,6 @@ plot_pm25_by_station(pm25)
 plot_pm25_station_timeseries(annual_pm25, airzone)
 ```
 
-## Air Zone Management Levels
-
-Aenean in pellentesque justo, finibus tincidunt tortor. Nulla ac rutrum lorem.
-Sed mattis a ex id fermentum. Proin eget neque aliquet, maximus nisi at, mollis
-sapien. Cras consequat diam lorem. Maecenas vulputate odio ac pellentesque
-scelerisque. Cras molestie ultrices turpis, in accumsan lectus dictum et.
-
-Donec non libero pharetra, aliquam nulla et, bibendum dui. Donec at sodales dui.
-Sed eget elit malesuada arcu dapibus consequat ut sed felis. Donec at dui nec
-velit dictum tincidunt. Ut posuere massa quis lectus accumsan rhoncus. Maecenas
-scelerisque turpis nec felis dictum finibus. In sodales luctus pellentesque. Sed
-sit amet tempor lacus. Vivamus nec erat id sem viverra bibendum auctor non sem.
-Orci varius natoque penatibus et magnis dis parturient montes, nascetur
-ridiculus mus.
-
-<!-- Summary of ozone concentrations as measured and air zone management levels -->
-
-```{r table-2}
-create_ozone_table(ozone, airzone)
+```{r management, echo=FALSE, results='asis'}
+render_child("children/aqms.Rmd")
 ```
-
-<!-- Summary of PM2.5 concentrations as measured and air zone management levels -->
-
-```{r table-3}
-create_pm25_table(pm25, airzone)
-```
-
-## Actions to Protect Air Quality
-
-Praesent nec tincidunt ante. Morbi pulvinar velit eget metus commodo aliquam. Nulla non diam vel leo pellentesque pretium. Maecenas eleifend et lectus nec mollis. Donec aliquet massa ac odio blandit euismod. Curabitur sed neque semper, dictum neque vitae, dictum risus. Vestibulum sit amet auctor ante, a gravida est. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer quis dignissim risus.
-
-Sed a urna lectus. Morbi arcu est, tincidunt a pharetra a, fringilla sit amet ligula. Donec pellentesque non ex a tristique. Donec a malesuada felis, vitae blandit nibh. Quisque quis pretium dolor, ut vehicula elit. Sed enim ligula, consectetur auctor massa vitae, venenatis bibendum leo. Interdum et malesuada fames ac ante ipsum primis in faucibus.

@@ -23,64 +23,18 @@ title: "`r params$airzone` Air Zone"
 
 <!-- Load functions, filter data to airzone -->
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.width = 6)
-
-## Load packages, functions, etc.
-source("components/functions.R")
-
-## Filter data to air zone
-airzone <- params$airzone
-ozone <- filter(params$ozone, airzone == !!airzone)
-pm25 <- filter(params$pm25, airzone == !!airzone)
-
-# Get airzone-level metrics
-o3_az <- filter(params$o3_az, airzone == !!airzone)
-pm25_az <- filter(params$pm25_az, airzone == !!airzone)
-pm25_mgmt <- filter(params$pm25_mgmt, airzone == !!airzone)
-
-## Filter annual data to EMS ids provided if present, otherwise use the same
-## ones as in the summary data
-if (!is.na(params$ems_ids_ozone)) {
-  annual_ozone <- filter(params$annual_ozone, ems_id %in% params$ems_ids_ozone)
-} else {
-  annual_ozone <- filter(params$annual_ozone, ems_id %in% ozone$ems_id)
-}
-if (!is.na(params$ems_ids_pm25)) {
-  annual_pm25 <- filter(params$annual_pm25, ems_id %in% params$ems_ids_pm25)
-} else {
-  annual_pm25 <- filter(params$annual_pm25, ems_id %in% pm25$ems_id)
-}
-
+```{r setup, include=FALSE}
+sys.source("children/setup.R", envir = knitr::knit_global())
 ```
 
-## Introduction
-
-This is the fourth air quality report for the`r airzone` Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O~3~) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at: <https://www2.gov.bc.ca/gov/content?id=C7BA872425D9498084C808B98EA7AF52>.
-
-
-
-<!-- Airzone map-->
-
-
-```{r airzone-map, fig.height = 4, fig.cap = paste(airzone, "Air Zone")}
-airzone_map(airzone)
+```{r, echo=FALSE, results='asis'}
+render_child("children/intro.Rmd")
 ```
 
-## Background
 
-The AQMS is the national approach to managing air quality in Canada. Under the AQMS, the CAAQS are developed to drive action to protect human health and the environment. Air zones are areas that exhibit similar air quality characteristics, issues and trends, and that form the basis for monitoring, reporting and taking action on air quality. The `r airzone` Air Zone (see Figure 1) is one of seven broad air zones across the province. Under the AQMS, progressively more rigorous actions are expected as air quality approaches or exceeds the CAAQS. The level of action is guided by the Air Zone Management Framework outlined in Table 1. 
-
-```{r results='asis'}
-caaqs_standard_table()
+```{r, echo=FALSE, results='asis'}
+render_child("children/ozone.Rmd")
 ```
-
-## Ozone levels
-
-Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$max_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
-`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. This demonstrates that the national standard of `r achievement_level("o3")` ppb was `r tolower(as.character(o3_az$caaqs_ambient))`.
-
-Trends in annual ozone levels are shown in Figure 3. Concentrations have remained `r calc_threshold(o3_az$caaqs_ambient)` the level of the national standard over the period of record.
 
 <!-- Ozone by station -->
 
@@ -96,26 +50,9 @@ plot_ozone_station_timeseries(annual_ozone, airzone)
 
 ```
 
-## PM$_{2.5}$ levels
-
-PM~2.5~ refers to inhalable particles up to 2.5 micrometres in diameter. PM~2.5~ monitoring was initiated in 2015 at the Fort St. John Key Learning Centre, and measurements are summarized in Figure 4. All measurements for this reporting period were based on the Federal Equivalent Method (FEM), which provides a more complete measure of PM~2.5~ than the older TEOM instruments. 
-
-```{r calc-pm-values}
-pm25 <- pm25 %>% 
-  mutate(threshold = calc_threshold(caaqs_ambient))
-
-pm24 <- pm25 %>%
-  filter(metric == "pm2.5_24h") 
-
-pm_annual <- pm25 %>%
-  filter(metric == "pm2.5_annual")
+```{r, echo=FALSE, results='asis'}
+render_child("children/pm25.Rmd")
 ```
-
-
-Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r min(pm25_az$n_years_ambient, na.rm = TRUE)` complete years of data were collected. 
-`r pm_achievement_sentence(pm25_az)`
-
-Trends in annual mean concentrations for `r min(pm25$min_year, na.rm = TRUE)`-`r max(pm25$max_year, na.rm = TRUE)` are shown Figure 5. 
 
 <!-- PM2.5 by station -->
 
@@ -129,56 +66,6 @@ plot_pm25_by_station(pm25)
 plot_pm25_station_timeseries(annual_pm25, airzone)
 ```
 
-## Air Zone Management Levels
-
-```{r calculations for air zone mangement}
-
-mgmt_colours <- rcaaqs::management_levels %>% 
-  select(mgmt_level = labels, mgmt_col = colour_text) %>% 
-  distinct()
-
-# calculate ozone management level 
-oz_man <- ifelse(max(ozone$metric_value_ambient, na.rm = TRUE) == 
-                   max(ozone$metric_value_mgmt, na.rm = TRUE), "did not", "did")
-
-oz_col <- mgmt_colours$mgmt_col[mgmt_colours$mgmt_level == o3_az$mgmt_level]
-
-pm24_man_impact <- ifelse(
-  pm24$metric_value_ambient == pm24$metric_value_mgmt, "did not", "did"
-)
-
-pm_annual_man_impact <- ifelse(
-  pm_annual$metric_value_ambient == pm_annual$metric_value_mgmt, "did not", "did"
-)
-
-pm_col <- mgmt_colours$mgmt_col[mgmt_colours$mgmt_level == pm25_mgmt$mgmt_level]
+```{r, echo=FALSE, results='asis'}
+render_child("children/aqms.Rmd")
 ```
-
-
-Air zone management levels are assigned on the basis of the highest concentrations within an air zone, excluding contributions from transboundary flows (TF) and exceptional events (EE) such as wildfires. This is done so that long-term management strategies are not developed on the basis of events that are beyond local or provincial control. 
-
-In the `r airzone` Air Zone, wildfires are the primary contributor to TF/EE. The methodology for identifying wildfire-influenced data is provided in Appendix I. 
-
-Table 2 summarizes ozone concentrations as measured before and after consideration of any TF/EE influences. TF/EE influences `r oz_man` affect management levels. Consequently, the `r airzone`  Air Zone is assigned a `r oz_col `  management level, based on ozone levels in Fort St. John. This indicates that any ozone-related actions should focus on `r as.character(o3_az$mgmt_level)`.
-
-Table 3 summarizes both as-measured PM~2.5~ concentrations and management levels once estimated wildfire influences have been removed. As discussed further in Appendix II, wildfire influences were identified, but the impact on management levels was small. The air zone is assigned a `r pm_col` management level for PM~2.5~. This means that PM~2.5~-related actions should focus on `r pm25_mgmt$mgmt_level`.
-
-<!-- Summary of ozone concentrations as measured and air zone management levels -->
-
-```{r table-2}
-create_ozone_table(ozone, airzone)
-```
-
-<!-- Summary of PM2.5 concentrations as measured and air zone management levels -->
-
-```{r table-3}
-create_pm25_table(pm25, airzone)
-```
-
-## Actions to Protect Air Quality
-
-
-Air quality activities in the `r airzone` Air Zone have largely focussed on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the `r airzone` Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: <https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf>). 
-
-A description of other activities underway in B.C. air zones can be found in the "Air Zone Management Response for British Columbia" (see:<https://www2.gov.bc.ca/gov/content/environment/air-land-water/air>). 
-
