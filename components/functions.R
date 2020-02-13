@@ -111,7 +111,7 @@ plot_ozone_station_timeseries <- function(data, airzone, caaqs = 63) {
     labs(
       x = "Year",
       y = "Ozone concentration (ppb)",
-      title = paste0(airzone, " Air Zone ", min_year, "-", max_year),
+      title = paste0(airzone, " Air Zone\n", min_year, "-", max_year),
       colour = "Location"
     ) +
     scale_x_continuous(
@@ -229,7 +229,7 @@ plot_pm25_station_timeseries <- function(data, airzone, caaqs_annual = 10) {
     labs(
       x = "Year",
       y = expression(PM[2.5]~Concentration~"("*mu~g/m^3~")"),
-      title = paste0(airzone, " Air Zone ", min_year, "-", max_year),
+      title = paste0(airzone, " Air Zone\n", min_year, "-", max_year),
       colour = "Location",
       shape = "Instrument"
     ) +
@@ -372,7 +372,7 @@ create_ozone_table <- function(data, airzone) {
     ) %>%
     collapse_rows(columns = 5) %>%
     row_spec(0, background = "white") %>%
-    kable_styling(latex_options = "hold_position")
+    kable_styling(latex_options = "HOLD_position")
 }
 
 create_pm25_table <- function(data, airzone) {
@@ -464,13 +464,14 @@ create_pm25_table <- function(data, airzone) {
     ) %>%
     collapse_rows(columns = 8) %>%
     row_spec(0, background = "white") %>%
-    kable_styling(latex_options = "hold_position")
+    kable_styling(latex_options = "HOLD_position")
   
   # Add hline at the bottom of the table (kable doesn't add it for some reason)
-  gsub("\\end{tabular}\n\\end{table}", 
-       "\\\\\n\\hline\n\\end{tabular}\n\\end{table}", 
-       tex_table, 
-       fixed = TRUE)
+  # gsub("\\end{tabular}\n\\end{table}", 
+  #      "\\\\\n\\hline\n\\end{tabular}\n\\end{table}", 
+  #      tex_table, 
+  #      fixed = TRUE)
+  tex_table
 }
 
 achievement_level <- function(param) {
