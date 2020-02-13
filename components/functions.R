@@ -467,10 +467,12 @@ create_pm25_table <- function(data, airzone) {
     kable_styling(latex_options = "HOLD_position")
   
   # Add hline at the bottom of the table (kable doesn't add it for some reason)
-  # gsub("\\end{tabular}\n\\end{table}", 
-  #      "\\\\\n\\hline\n\\end{tabular}\n\\end{table}", 
-  #      tex_table, 
-  #      fixed = TRUE)
+  if (!grepl("\\hline\n\\end{tabular}\n\\end{table}", tex_table, fixed = TRUE)) {
+    return(gsub("\\end{tabular}\n\\end{table}",
+                "\\\\\n\\hline\n\\end{tabular}\n\\end{table}",
+                tex_table,
+                fixed = TRUE))
+  }
   tex_table
 }
 
