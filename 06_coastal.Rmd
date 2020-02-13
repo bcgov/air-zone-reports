@@ -37,7 +37,7 @@ render_child("children/ozone.Rmd")
 
 <!-- Ozone by station -->
 
-```{r ozone-by-station, fig.height = 6, fig.cap = ozone_by_station_cap(airzone, ozone)}
+```{r ozone-by-station, fig.height = 3, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
 ```
 
@@ -55,7 +55,7 @@ render_child("children/pm25.Rmd")
 
 <!-- PM2.5 by station -->
 
-```{r pm25-by-station, fig.height=8, fig.cap = pm25_by_station_cap(airzone, pm25)}
+```{r pm25-by-station, fig.height=4, fig.cap = pm25_by_station_cap(airzone, pm25)}
 plot_pm25_by_station(pm25)
 ```
 

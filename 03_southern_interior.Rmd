@@ -37,7 +37,7 @@ render_child("children/ozone.Rmd")
 
 <!-- Ozone by station -->
 
-```{r ozone-by-station, fig.height = 6, fig.cap = ozone_by_station_cap(airzone, ozone)}
+```{r ozone-by-station, fig.height = 4, fig.cap = ozone_by_station_cap(airzone, ozone)}
 plot_ozone_by_station(ozone, airzone)
 ```
 
