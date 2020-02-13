@@ -1,0 +1,20 @@
+## PM$_{2.5}$ levels
+
+PM~2.5~ refers to inhalable particles up to 2.5 micrometres in diameter. [*Background information about monitoritn PM~2.5~ in this air zone*], and measurements are summarized in Figure 4. All measurements for this reporting period were based on the Federal Equivalent Method (FEM), which provides a more complete measure of PM~2.5~ than the older TEOM instruments. 
+
+```{r calc-pm-values}
+pm25 <- pm25 %>% 
+  mutate(threshold = calc_threshold(caaqs_ambient))
+
+pm24 <- pm25 %>%
+  filter(metric == "pm2.5_24h") 
+
+pm_annual <- pm25 %>%
+  filter(metric == "pm2.5_annual")
+```
+
+
+Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r min(pm25_az$n_years_ambient, na.rm = TRUE)` complete years of data were collected. 
+`r pm_achievement_sentence(pm25_az)`
+
+Trends in annual mean concentrations for `r min(pm25$min_year, na.rm = TRUE)`-`r max(pm25$max_year, na.rm = TRUE)` are shown Figure 5. 

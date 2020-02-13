@@ -1,0 +1,6 @@
+## Ozone levels
+
+[*Background information on monitoring in this air zone*]. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$max_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
+`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. This demonstrates that the national standard of `r achievement_level("o3")` ppb was `r tolower(as.character(o3_az$caaqs_ambient))`.
+
+Trends in annual ozone levels are shown in Figure 3. Concentrations have remained `r calc_threshold(o3_az$caaqs_ambient)` the level of the national standard over the period of record.
