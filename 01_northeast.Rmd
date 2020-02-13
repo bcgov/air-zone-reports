@@ -1,9 +1,8 @@
 ---
-title: Northeast Air Zone
 output: 
   pdf_document:
     latex_engine: lualatex
-    keep_tex: true
+    keep_md: true
     fig_caption: true
     includes:
       in_header: components/header.tex
@@ -19,6 +18,7 @@ params:
   pm25_mgmt: !r az_mgmt
   ems_ids_pm25: !r NA
   airzone: "Northeast"
+title: "`r params$airzone`"
 ---
 
 <!-- Load functions, filter data to airzone -->
@@ -38,8 +38,6 @@ pm25 <- filter(params$pm25, airzone == !!airzone)
 o3_az <- filter(params$o3_az, airzone == !!airzone)
 pm25_az <- filter(params$pm25_az, airzone == !!airzone)
 pm25_mgmt <- filter(params$pm25_mgmt, airzone == !!airzone)
-
-
 
 ## Filter annual data to EMS ids provided if present, otherwise use the same
 ## ones as in the summary data
@@ -80,8 +78,7 @@ caaqs_standard_table()
 ## Ozone levels
 
 Ozone monitoring at the Fort St. John Key Learning Centre was initiated in late 2014 and has been operated continuously since early 2015. Ozone monitoring in Taylor and Rolla began in 2016. Based on data collected between `r min(ozone$min_year, na.rm = TRUE)` and `r max(ozone$max_year, na.rm = TRUE)`, ozone concentrations at the `r length(unique(ozone$ems_id))` sites ranged from 
-`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels were 
-`r calc_threshold(o3_az$caaqs_ambient)` the national standard of `r achievement_level("o3")` ppb.
+`r min(ozone$metric_value_ambient, na.rm = TRUE)` to `r max(ozone$metric_value_ambient, na.rm = TRUE)` ppb. These levels `r tolower(as.character(o3_az$caaqs_ambient))` the national standard of `r achievement_level("o3")` ppb.
 
 Trends in annual ozone levels are shown in Figure 3. Concentrations have remained `r calc_threshold(o3_az$caaqs_ambient)` the level of the national standard over the period of record.
 
@@ -112,13 +109,11 @@ pm24 <- pm25 %>%
 
 pm_annual <- pm25 %>%
   filter(metric == "pm2.5_annual")
-
-pmthresh = ifelse("above" %in% unique(pm25$threshold), "did not achieve", "achieved")
-
 ```
 
 
-Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r max(pm25$max_year, na.rm = TRUE)-min(pm25$min_year, na.rm = TRUE)` complete years of data were collected.  A 24-hour average value of `r pm24$metric_value_ambient` $\mu$g/m3 and an annual mean of `r pm_annual$metric_value_ambient` $\mu$g/m3 were obtained, indicating that PM~2.5~ levels at this site `r pmthresh` the national standards of `r achievement_level("pm2.5_24h")` and `r achievement_level("pm2.5_annual")` $\mu$g/m3, respectively. 
+Between `r min(pm25$min_year, na.rm = TRUE)` and `r max(pm25$max_year, na.rm = TRUE)`, `r min(pm25_az$n_years_ambient, na.rm = TRUE)` complete years of data were collected. 
+`r pm_achievement_sentence(pm25_az)`
 
 Trends in annual mean concentrations for `r min(pm25$min_year, na.rm = TRUE)`-`r max(pm25$max_year, na.rm = TRUE)` are shown Figure 5. 
 
@@ -157,8 +152,6 @@ pm_annual_man_impact <- ifelse(
 )
 
 pm_col <- mgmt_colours$mgmt_col[mgmt_colours$mgmt_level == pm25_mgmt$mgmt_level]
-
-
 ```
 
 

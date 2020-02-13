@@ -535,3 +535,49 @@ Management Level & 2015 & 2020 & 2015 & 2020 & 2015 & 2020\\\\
 table_1_caption <- function(){
   "Table 1. Air zone management framework for ground-level ozoneand PM2.5.The CAAQS definethe upper threshold, separating the “red” and “orange” management levels."
 }
+
+pm_achievement_sentence <- function(pm25_az_df) {
+  pm24_az <- pm25_az_df %>%
+    filter(metric == "pm2.5_24h") 
+  
+  pm_annual_az <- pm25_az_df %>%
+    filter(metric == "pm2.5_annual")
+  
+  first_part <- paste(
+    "Over this time period, a 24-hour average value of", 
+    pm24_az$metric_value_ambient, 
+    "$\\mu$g/m\\textsuperscript{3} and an annual mean of", 
+    pm_annual_az$metric_value_ambient, 
+    "$\\mu$g/m\\textsuperscript{3} were obtained."
+  )
+  
+  which_achieved <- pm25_az_df$metric[as.character(pm25_az_df$caaqs_ambient) == "Achieved"]
+  which_not_achieved <- pm25_az_df$metric[as.character(pm25_az_df$caaqs_ambient) == "Not Achieved"]
+  both_achieved <- length(which_achieved) == 2L
+  none_achieved <- length(which_not_achieved) == 2L
+  
+  second_part <- if (both_achieved || none_achieved) {
+    paste(
+      "This indcates that PM~2.5~ levels at this site achieved", 
+      ifelse(both_achieved, "both", "neither"), 
+      "the 24-hour", 
+      ifelse(both_achieved, "and", "nor the"),
+      "annual national standards of", 
+      achievement_level("pm2.5_24h"), "and",
+      achievement_level("pm2.5_annual"),  
+      "$\\mu$g/m\\textsuperscript{3}, respectively."
+    )
+  } else {
+    which_achieved_english <- gsub("h$", "-hour", strsplit(which_achieved, "_")[[1]][2])
+    which_not_achieved_english <- gsub("h$", "-hour", strsplit(which_not_achieved, "_")[[1]][2])
+    paste(
+      "This indcates that PM~2.5~ levels at this site achieved the", 
+      which_achieved_english, "annual national standard of", 
+      achievement_level(which_achieved), "$\\mu$g/m\\textsuperscript{3} but not the", 
+      which_not_achieved_english, "standard of", 
+      achievement_level(which_not_achieved), "$\\mu$g/m\\textsuperscript{3}."
+    )
+  }
+  
+  paste(first_part, second_part)
+}
