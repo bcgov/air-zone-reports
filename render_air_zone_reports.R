@@ -37,10 +37,18 @@ load(file.path(pm25_dir, "tmp/plots.RData"))
 
 render(
   "01_northeast.Rmd",
-  output_dir = "rendered_reports"
+  output_dir = "rendered_reports", 
+  output_format = md_document(),
+  output_file = "01_northeast.md"
 )
 
 render(
-  "02_central_interior.Rmd",
-  output_dir = "rendered_reports"
+  "rendered_reports/01_northeast.md",
+  output_dir = "rendered_reports",
+  output_format = pdf_document(latex_engine = "lualatex",
+                               keep_tex = TRUE,
+                               fig_caption =  TRUE,
+                               includes = includes(in_header = "../components/header.tex")),
+  output_file = "rendered_reports/01_northeast_test.pdf"
 )
+
