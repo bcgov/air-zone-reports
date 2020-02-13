@@ -17,9 +17,9 @@ render_intermediate <- function(file,
     output_format = "pdf_document",
     output_file = outfile
   )
-  message("\n*****\nPreview \"", file.path(outdir, outfile), "\".\n",
-          "Edit \"", file.path(outdir, outmd), "\".\n",
-          "Finally, run:\n    render_final(\"", 
+  message("\n*****\n1. Preview \"", file.path(outdir, outfile), "\".\n",
+          "2. Edit \"", file.path(outdir, outmd), "\".\n",
+          "3. Finally, run:\n    render_final(\"", 
           file.path(outdir, outmd), "\")\n*****\n")
 }
 
