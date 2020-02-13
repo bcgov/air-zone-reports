@@ -52,7 +52,7 @@ airzone_map <- function(airzone) {
     ) +
     theme_void() +
     theme(legend.position = "none",
-          panel.border = element_rect(colour = "black", fill = NA)) +
+          panel.border = element_rect(colour = "black", fill = NA, size = 1.5)) +
     labs(title = paste(airzone, "Air Zone"))
 }
 
