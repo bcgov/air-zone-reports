@@ -26,7 +26,7 @@ params:
 ---
 
 ```{r setup, echo = FALSE, message = FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.width = 6)
 library("tidyverse")
 library("bcmaps")
 library("sf")
@@ -163,16 +163,17 @@ libero ultricies aliquam.
 
 <!-- Ozone summary plots -->
 
-```{r ozone_summary_plot, fig.width = 4, fig.asp = 1.4, fig.cap = "Air zone summary plot for 8-hour average ozone"}
+```{r ozone_summary_plot, fig.width = 5, fig.height=8, fig.cap = "Air zone summary plot for 8-hour average ozone"}
 params$ozone_summary_plot +
-  theme(text = element_text(size = 8))
+  theme(text = element_text(size = 10))
 ```
 
 ```{r ozone_caaqs_mgmt_map, fig.width = 5, fig.asp = 1, fig.cap = "Management level map for ozone."}
-params$ozone_caaqs_mgmt_map
+params$ozone_caaqs_mgmt_map + 
+  theme(text = element_text(size = 12))
 ```
 
-```{r ozone_caaqs_mgmt_chart, fig.width = 4, fig.asp = 1, fig.cap = "Management level achievement chart for ozone."}
+```{r ozone_caaqs_mgmt_chart, fig.width = 5, fig.asp = 1, fig.cap = "Management level achievement chart for ozone."}
 params$ozone_caaqs_mgmt_chart +
   theme(
     axis.text = element_text(size = 8),
@@ -199,16 +200,18 @@ ridiculus mus.
 
 <!-- PM2.5 summary plots -->
 
-```{r pm25_summary_plot, fig.width = 4, fig.asp = 1.4, fig.cap = "Air zone summary plot for annual and 24h PM$_{2.5}$"}
+```{r pm25_summary_plot, fig.width = 5, fig.height=8, fig.cap = "Air zone summary plot for annual and 24h PM$_{2.5}$"}
 params$pm25_summary_plot +
-  theme(text = element_text(size = 8))
+  theme(text = element_text(size = 10))
 ```
 
 ```{r pm25_caaqs_mgmt_map, fig.width = 5, fig.asp = 1, fig.cap = "Management level map for PM$_{2.5}$."}
+# TODO: fix label size
+# params$pm25_caaqs_mgmt_map$layers[[2]]$aes_params$size <- 4
 params$pm25_caaqs_mgmt_map
 ```
 
-```{r pm25_caaqs_mgmt_chart, fig.width = 4, fig.asp = 1.4, fig.cap = "Management level achievement chart for PM$_{2.5}$."}
+```{r pm25_caaqs_mgmt_chart, fig.width = 5, fig.asp = 1.4, fig.cap = "Management level achievement chart for PM$_{2.5}$."}
 params$pm25_caaqs_mgmt_chart +
   theme(
     axis.text = element_text(size = 8),

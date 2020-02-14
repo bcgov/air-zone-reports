@@ -18,6 +18,10 @@ load(file.path(pm25_dir, "tmp/pm25_clean.rda"))
 load(file.path(pm25_dir, "tmp/analysed.RData"))
 load(file.path(pm25_dir, "tmp/plots.RData"))
 
+## Render summary report
+render("00_summary_report.Rmd", 
+       output_dir = "final_reports")
+
 ## Render intermediate reports, named 01_northeast.Rmd, 02_central_interior.Rmd, etc.
 ## using default parameters
 render_intermediate("01_northeast.Rmd")
