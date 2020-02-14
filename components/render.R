@@ -41,3 +41,4 @@ render_final <- function(file) {
     output_file = file.path(out_dir, outfile)
   )
 }
+
