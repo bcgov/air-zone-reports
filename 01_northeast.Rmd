@@ -19,6 +19,8 @@ params:
   ems_ids_pm25: !r NA
   airzone: "Northeast"
 title: "`r params$airzone` Air Zone"
+header-includes:
+  - \fancyhead[L]{`r params$airzone` Air Zone}
 ---
 
 <!-- Load functions, filter data to airzone -->

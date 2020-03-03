@@ -1,3 +1,5 @@
+\thispagestyle{firststyle}
+
 ## Introduction
 
 This is the fourth air quality report for the `r airzone` Air Zone. Annual air zone reporting is a commitment under the national Air Quality Management System (AQMS). This report describes achievement of the Canadian Ambient Air Quality Standards (CAAQS) for ground-level ozone (O~3~) and fine particulates (PM~2.5~), the associated management levels and recent actions to improve air quality. A province-wide summary can be found at: <https://www2.gov.bc.ca/gov/content?id=C7BA872425D9498084C808B98EA7AF52>.
