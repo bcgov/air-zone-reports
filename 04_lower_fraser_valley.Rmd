@@ -5,7 +5,9 @@ output:
     keep_md: true
     fig_caption: true
     includes:
-      in_header: components/header.tex
+      in_header: 
+        - components/header.tex
+        - components/header-logo.tex
 mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
