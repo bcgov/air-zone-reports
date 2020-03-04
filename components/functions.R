@@ -372,7 +372,8 @@ create_ozone_table <- function(data, airzone) {
     ) %>%
     collapse_rows(columns = 5) %>%
     row_spec(0, background = "white") %>%
-    kable_styling(latex_options = "HOLD_position")
+    kable_styling(latex_options = "HOLD_position") %>% 
+    bottom_hline()
 }
 
 create_pm25_table <- function(data, airzone) {
@@ -397,7 +398,7 @@ create_pm25_table <- function(data, airzone) {
   overall_color <- mgmt_level_color(max_level)
   overall_text <- text_color(max_level)
 
-  tex_table <- joined %>%
+  joined %>%
     ## Set mgmt_level column to maximum management level
     mutate(mgmt_level = max_level) %>%
     ## Color management columns
@@ -464,16 +465,18 @@ create_pm25_table <- function(data, airzone) {
     ) %>%
     collapse_rows(columns = 8) %>%
     row_spec(0, background = "white") %>%
-    kable_styling(latex_options = "HOLD_position")
-  
-  # Add hline at the bottom of the table (kable doesn't add it for some reason)
-  if (!grepl("\\hline\n\\end{tabular}\n\\end{table}", tex_table, fixed = TRUE)) {
-    return(gsub("\\end{tabular}\n\\end{table}",
-                "\\\\\n\\hline\n\\end{tabular}\n\\end{table}",
-                tex_table,
-                fixed = TRUE))
+    kable_styling(latex_options = "HOLD_position") %>%
+    bottom_hline()
+}
+
+bottom_hline <- function(tex_table) {
+  if (grepl("\\hline\n\\end{tabular}\n\\end{table}", tex_table, fixed = TRUE)) {
+    return(tex_table)
   }
-  tex_table
+  gsub("\\end{tabular}\n\\end{table}",
+       "\\\\\n\\hline\n\\end{tabular}\n\\end{table}",
+       tex_table,
+       fixed = TRUE)
 }
 
 achievement_level <- function(param) {
