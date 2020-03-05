@@ -15,12 +15,12 @@ pm25_mgmt <- filter(params$pm25_mgmt, airzone == !!airzone)
 
 ## Filter annual data to EMS ids provided if present, otherwise use the same
 ## ones as in the summary data
-if (!is.na(params$ems_ids_ozone)) {
+if (!all(is.na(params$ems_ids_ozone))) {
   annual_ozone <- filter(params$annual_ozone, ems_id %in% params$ems_ids_ozone)
 } else {
   annual_ozone <- filter(params$annual_ozone, ems_id %in% ozone$ems_id)
 }
-if (!is.na(params$ems_ids_pm25)) {
+if (!all(is.na(params$ems_ids_pm25))) {
   annual_pm25 <- filter(params$annual_pm25, ems_id %in% params$ems_ids_pm25)
 } else {
   annual_pm25 <- filter(params$annual_pm25, ems_id %in% pm25$ems_id)
