@@ -290,7 +290,9 @@ annual_pm25_cap <- function(annual_pm25) {
 
 ## Choose color for cell based on management level
 mgmt_level_color <- function(mgmt_level) {
-  rcaaqs::get_colours(type = "management")[mgmt_level]
+  ret <- as.character(rcaaqs::get_colours(type = "management")[mgmt_level])
+  ret[is.na(ret)] <- "white"
+  ret
 }
 
 ## Color cells by management level
@@ -393,8 +395,10 @@ create_pm25_table <- function(data, airzone) {
       function(...) left_join(..., by = c("station_name", "instrument_type")),
       .
     )
+  
+  joined <- pad_rows(joined)
 
-  max_level <- max(joined$mgmt_level.x, joined$mgmt_level.y)
+  max_level <- max(joined$mgmt_level.x, joined$mgmt_level.y, na.rm = TRUE)
   overall_color <- mgmt_level_color(max_level)
   overall_text <- text_color(max_level)
 
@@ -467,6 +471,14 @@ create_pm25_table <- function(data, airzone) {
     row_spec(0, background = "white") %>%
     kable_styling(latex_options = "HOLD_position") %>%
     bottom_hline()
+}
+
+pad_rows <- function(data) {
+  nr <- nrow(data)
+  if (nr < 4) {
+    suppressWarnings(data[(nr + 1):4, ] <- "")
+  }
+  data
 }
 
 bottom_hline <- function(tex_table) {
