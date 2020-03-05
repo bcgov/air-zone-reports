@@ -33,8 +33,8 @@ render_intermediate("06_coastal.Rmd")
 ## To render a report and specify the stations to include in plots, 
 ## provide a vector of the ems_ids to the `ozone_ems_ids` and `pm25_ems_ids` 
 ## arguments. E.g.:
-render_intermediate("01_northeast.Rmd", 
-                    ozone_ems_ids = c("E227431", "E229797", "E231866"))
+# render_intermediate("01_northeast.Rmd", 
+#                     ozone_ems_ids = c("E227431", "E229797", "E231866"))
 
 ## Edit the text (or figure paths etc) in the .md files that are generated, 
 ## then run render_final() on those markdown files:
