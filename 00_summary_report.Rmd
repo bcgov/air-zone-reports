@@ -10,13 +10,6 @@ header-includes:
   - \usepackage{amsmath}
   - \usepackage{float}
   - \floatplacement{figure}{H}
-output:
-  pdf_document:
-    md_extensions: +raw_attribute
-    latex_engine: lualatex
-    fig_caption: true
-    includes:
-      in_header: components/header-logo.tex
 mainfont: Arial
 params:
   ozone_summary_plot: !r ambient_summary_plot

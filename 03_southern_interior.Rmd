@@ -1,13 +1,4 @@
 ---
-output: 
-  pdf_document:
-    latex_engine: lualatex
-    keep_md: true
-    fig_caption: true
-    includes:
-      in_header: 
-        - components/header.tex
-        - components/header-logo.tex
 mainfont: Arial
 params:
   ozone: !r ozone_caaqs_results
