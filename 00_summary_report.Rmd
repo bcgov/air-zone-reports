@@ -72,7 +72,7 @@ cities <- tribble(
   "Prince\nGeorge",  1300000,   930000,
   "Fort\nSt. John",  1310000,   1200000
 )
-
+#
 ggplot() +
   geom_sf(data = airzones(), aes(fill = Airzone), colour = "grey50") +
   geom_sf(data = bc_bound(), fill = NA, colour = "grey50") +
