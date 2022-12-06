@@ -46,6 +46,6 @@ create_pm25_table(pm25, airzone)
 
 ## Actions to Protect Air Quality
 
-Air quality activities in the `r airzone` Air Zone have largely focussed on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the `r airzone` Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: <https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf>). 
+Air quality activities in the `r airzone` Air Zone have largely focused on characterizing air quality in this region and identifying potential impacts from the oil and gas sector. As part of the `r airzone` Air Quality Monitoring Project, surveillance monitoring was conducted in a number of smaller communities that are closer to oil and gas production. An analysis of this monitoring data is summarized in the "Northeast Air Quality Monitoring Report" (see: <https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/northeast_bc_air_quality_assessment_report.pdf>). 
 
 A description of other activities underway in B.C. air zones can be found in the "Air Zone Management Response for British Columbia" (see:<https://www2.gov.bc.ca/gov/content/environment/air-land-water/air>). 

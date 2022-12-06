@@ -1,0 +1,307 @@
+---
+title: &nbsp
+output: 
+   html_document:
+     css: ["css/custom-main.css","css/bootstrap.min.css"]
+---
+
+```{=html}
+
+     <html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <meta name="navigaton_title" content=""/>
+    <meta name="dcterms.publisher" content="Province of British Columbia"/>
+    <meta name="dcterms.created" content="2015-06-05"/>
+    <meta name="dcterms.modified" content="2016-12-30"/>
+    <meta name="security_label" content="Public"/>
+    <meta name="security_classification" content="Low"/>
+    <meta name="dcterms.subject" content=""/>
+    <meta name="dcterms.subject" content=""/>
+    <meta name="dcterms.creator" content=""/>
+    <meta name="dcsext.creator" content=""/>
+    <meta name="dcterms.language" content="eng"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content="">
+    <link rel="apple-touch-icon" sizes="57x57" href="icons/apple-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="60x60" href="icons/apple-icon-60x60.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="icons/apple-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="icons/apple-icon-76x76.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="icons/apple-icon-114x114.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/apple-icon-120x120.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png"/>
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/android-icon-192x192.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png"/>
+    <link rel="manifest" href="icons/manifest.json"/>
+    <link rel="icon" type="image/png" href="images/favicon.ico"/>
+    <meta name="msapplication-TileColor" content="#ffffff"/>
+    <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png"/>
+    <meta name="theme-color" content="#ffffff"/>
+
+    <title>Air Zone Report</title>
+
+     <!-- BOOTSTRAP CORE CSS v3.3.6 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" href="css/ie10-viewport-bug-workaround.css"/>
+
+    <!-- STANDARD CSS -->
+    <link type="text/css" href="css/main.css" rel="stylesheet"/>
+
+    <!-- FONTS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
+    <!-- CUSTOM CSS -->
+    <link href="css/custom-main.css" rel="stylesheet"/>
+    <link href="css/custom-form.css" rel="stylesheet"/>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+    <!-- HEADER -->
+    <div id="header" role="banner">
+        <div id="header-main" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div id="header-main-row" class="row">
+                    <!-- GOV TITLE -->
+                    <div class="col-sm-3 col-md-2 col-lg-2 header-main-left">
+                        <div id="logo">
+                            <a href="http://gov.bc.ca"><img src="images/gov3_bc_logo.png" alt="Province of British Columbia" title="Province of British Columbia logo" /></a>
+                        </div>
+                        <div id="access">
+                            <ul>
+                                <li aria-label="Keyboard Tab Skip">
+                                    <a accesskey="0" href="#main-content-anchor" aria-label="Skip to main content">Skip to main content</a>
+                                </li>
+                                <li aria-label="Keyboard Tab Skip">
+                                    <a accesskey="0" href="#navigation-anchor" aria-label="Skip to navigation" aria-label="Skip to navigation">Skip to navigation</a>
+                                </li>
+                                <li aria-label="Keyboard Tab Skip">
+                                    <a accesskey="0" href="http://gov.bc.ca/webaccessibility/" aria-label="Accessibility Statement">Accessibility Statement</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button type="button" class="navbar-toggle gov-button-custom collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-label="Burger Navigation">
+                            <img src="images/menu-open-mobile.png" />
+                        </button>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-6 hidden-xs">
+                      
+                    </div>
+                    <!-- /GOV & ENV TITLE -->
+
+                    <!-- COLLAPSING NAVBAR -->
+                    <div id="navbar" class="collapse navbar-collapse" role="navigation">
+<a id="navigation-anchor"></a>
+<!--
+                        <ul class="nav navbar-nav">
+                            <li><a href="##In This Report">Air Quality Management System</a></li>
+                            <li><a href="#">CAAQS</a></li>
+                            <li><a href="#">Navigation Link 3</a></li>
+                            <li><a href="#">Navigation Link 4</a></li>
+                        </ul>
+                        -->
+                    </div>
+                    <!-- /COLLAPSING NAVBAR -->
+                </div>
+            </div>
+            <div class="navigationRibbon">
+                <div class="level2Navigation">
+                    <div class="container">
+                        <a href="#TestingSection">In This Report</a>
+                        <a href="#">Navigation Link 2</a>
+                        <a href="#">Navigation Link 3</a>
+                        <a href="#">Navigation Link 4</a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /HEADER -->
+    <!-- BODY CONTENT -->
+
+    <!-- /BODY CONTENT -->
+    <!--div id="shareIcons">
+
+    </div>
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/misc.js"></script>
+    <script src="js/navMenu.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+   
+
+ 
+<!--
+</body>
+
+</html>
+-->
+```
+<!--# Modify Breadcrumbs here. These are navigation tools to guide user through windows -->
+
+```{=html}
+
+      <div id="topicTemplate" class="template container gov-container">
+        <div id="breadcrumbContainer">
+            <ol class="breadcrumb">
+
+                <li>
+                    <a href="#">Air Zone Report</a>
+                </li>
+                <!--
+                <li>
+                    <a href="#">Breadcrumb Link</a>
+                </li>
+                <li>
+                    <a href="#">Breadcrumb Link</a>
+                </li>
+                <li>
+                    <a href="#">Breadcrumb Link</a>
+                </li>
+                -->
+            </ol>
+        </div>
+       
+    </div>
+    <body style="background-color:#fff";>
+    
+    
+```
+# Air Zone Report (2019-2021)
+
+Air zone reports are prepared each year by the B.C. government to summarize the levels of air pollutants in broad reporting areas called "air zones". B.C. is divided into seven distinct air zones based on
+
+The reports compare pollution levels to the [Canadian Ambient Air Quality Standards (CAAQS)](https://www.ccme.ca/en/air-quality-report#slide-7) and assign colour-coded management levels. The assignment of management levels also defines levels of actions that are recommended under the national Air Quality Management System.
+
+Communities in the air zones have limited control over wildfire and other exceptional events, as well as pollutants from far beyond its borders. These transboundary flows and exceptional events are presented in this report but are not included when communities and air zones are assessed for achievement of CAAQS and management levels. This helps communities focus on actions from local sources of pollution.
+
+## In This Report
+
+-   The Central Interior and Southern Interior
+
+# 
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis hendrerit dolor magna eget est. Id aliquet risus feugiat in ante metus dictum at. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Arcu cursus euismod quis viverra nibh cras pulvinar. Laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean. Blandit cursus risus at ultrices mi tempus imperdiet. Leo vel orci porta non. Odio morbi quis commodo odio aenean sed adipiscing diam. Massa sapien faucibus et molestie. Amet dictum sit amet justo donec enim diam vulputate. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Augue eget arcu dictum varius duis. Pretium lectus quam id leo in vitae turpis massa sed. Ultricies tristique nulla aliquet enim tortor at auctor urna nunc. Aliquam faucibus purus in massa tempor nec feugiat. Vestibulum sed arcu non odio euismod lacinia at quis risus. Neque vitae tempus quam pellentesque nec nam aliquam sem et.
+
+Placerat vestibulum lectus mauris ultrices eros. In metus vulputate eu scelerisque felis imperdiet proin fermentum. Nullam vehicula ipsum a arcu cursus. Sed velit dignissim sodales ut eu sem. Amet consectetur adipiscing elit ut aliquam purus sit amet luctus. Netus et malesuada fames ac turpis. Imperdiet nulla malesuada pellentesque elit eget gravida cum. Sed id semper risus in hendrerit. Ultrices dui sapien eget mi proin sed libero. Nam libero justo laoreet sit amet. Augue ut lectus arcu bibendum at varius. Ut eu sem integer vitae justo eget. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Donec et odio pellentesque diam. In hendrerit gravida rutrum quisque non tellus. Sagittis vitae et leo duis ut diam.
+
+Id velit ut tortor pretium viverra suspendisse potenti nullam ac. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla. Sit amet justo donec enim diam vulputate ut pharetra. Massa tincidunt dui ut ornare lectus sit amet est. Arcu dui vivamus arcu felis bibendum ut. Amet mauris commodo quis imperdiet massa tincidunt. Vitae tempus quam pellentesque nec nam aliquam sem. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Vestibulum lectus mauris ultrices eros in cursus turpis massa. Ullamcorper malesuada proin libero nunc consequat interdum varius sit. Adipiscing commodo elit at imperdiet. Ultrices tincidunt arcu non sodales neque sodales ut etiam sit. Duis at tellus at urna condimentum mattis pellentesque id nibh. Neque volutpat ac tincidunt vitae. Augue lacus viverra vitae congue eu consequat ac. Varius quam quisque id diam vel quam elementum pulvinar etiam. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Risus feugiat in ante metus dictum at.
+
+Tincidunt eget nullam non nisi est sit. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Morbi enim nunc faucibus a pellentesque sit amet. Aliquam id diam maecenas ultricies mi. Dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo. Proin fermentum leo vel orci porta. Senectus et netus et malesuada. Fusce ut placerat orci nulla pellentesque. Orci porta non pulvinar neque laoreet. Risus ultricies tristique nulla aliquet enim tortor at auctor. Augue eget arcu dictum varius duis at.
+
+```{=html}
+<!-- Jumping Points -->
+<a id="TestingSection"></a>
+```
+## Testing Section
+
+Lorem ipsum dolor sit amet consectetur adipiscing. Amet risus nullam eget felis. Donec adipiscing tristique risus nec feugiat in fermentum posuere urna. Justo eget magna fermentum iaculis eu non diam. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat est. Non diam phasellus vestibulum lorem. Justo eget magna fermentum iaculis. Suspendisse interdum consectetur libero id faucibus nisl tincidunt. Condimentum id venenatis a condimentum. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit ut aliquam. Lectus nulla at volutpat diam. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Praesent tristique magna sit amet purus gravida quis. Condimentum lacinia quis vel eros donec ac.
+
+```{=html}
+<!---Space before the footer-->
+<h2 style ="
+     margin-top: 20px;">&nbsp</h2>
+```
+```{=html}
+<!-- FOOTER -->
+</body>
+
+
+<div id="shareIcons">
+
+</div>
+
+
+<div id="footer" role="contentinfo">
+  <img class="back-to-top" src="images/back-to-top.png" alt="Back to top" title="Back to top" style="display: inline;">
+  <div id="footerWrapper">
+    <div id="footerAdminSection">
+      <div id="footerAdminLinksContainer" class="container">
+        <div id="footerAdminLinks" class="row">
+          <ul class="inline">
+            <li>
+              <a href="http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B">Home</a>
+            </li>
+            <li>
+              <a href="http://www2.gov.bc.ca/gov/content?id=8AE54AF142D7473991B1D60CF69DA195" target="_self">About this site</a>
+            </li>
+            <li>
+              <a href="http://gov.bc.ca/disclaimer/" target="_self">Disclaimer</a>
+            </li>
+            <li>
+              <a href="http://gov.bc.ca/privacy/" target="_self">Privacy</a>
+            </li>
+            <li>
+              <a href="http://gov.bc.ca/webaccessibility/" target="_self">Accessibility</a>
+            </li>
+            <li>
+              <a href="http://gov.bc.ca/copyright" target="_self">Copyright</a>
+            </li>
+            <li>
+              <a href="http://www2.gov.bc.ca/gov/content?id=8AE54AF142D7473991B1D60CF69DA195" target="_self">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /FOOTER -->
+
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/soe/js/bootstrap.min.js"></script>
+  <script src="/soe/js/misc.js"></script>
+  <script src="/soe/js/navMenu.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="/soe/js/ie10-viewport-bug-workaround.js"></script>
+
+<!--CUSTOM EnvReportBC js file (e.g. 4 pane model design)-->
+ <script src="/soe/js/envreportbc.js"></script>
+
+<!-- Script to add data license link to data sources -->
+<script type="text/javascript">
+    $(".data.license-ogl-bc").append(' (Licence: <a href="http://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61">Open Government Licence - British Columbia</a>)');
+    $(".data.license-bc-crown").append(' (Licence: <a href="http://www2.gov.bc.ca/gov/content?id=1AAACC9C65754E4D89A118B875E0FBDA">B.C. Crown Copyright</a>)');
+    $(".data.license-ogl-canada").append(' (Licence: <a href="http://open.canada.ca/en/open-government-licence-canada">Open Government Licence - Canada</a>)');
+    $(".data.license-statscan").append(' (Licence: <a href="http://www.statcan.gc.ca/eng/reference/licence">Statistics Canada Open Licence Agreement</a>)');
+  </script>
+
+
+
+
+</html>
+```
