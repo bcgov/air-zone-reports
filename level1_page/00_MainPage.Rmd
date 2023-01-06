@@ -109,18 +109,6 @@ output:
                     </div>
                     <!-- /GOV & ENV TITLE -->
 
-                    <!-- COLLAPSING NAVBAR -->
-                    <div id="navbar" class="collapse navbar-collapse" role="navigation">
-<a id="navigation-anchor"></a>
-<!--
-                        <ul class="nav navbar-nav">
-                            <li><a href="##In This Report">Air Quality Management System</a></li>
-                            <li><a href="#">CAAQS</a></li>
-                            <li><a href="#">Navigation Link 3</a></li>
-                            <li><a href="#">Navigation Link 4</a></li>
-                        </ul>
-                        -->
-                    </div>
                     <!-- /COLLAPSING NAVBAR -->
                 </div>
             </div>
@@ -173,11 +161,11 @@ output:
       <div id="topicTemplate" class="template container gov-container">
         <div id="breadcrumbContainer">
             <ol class="breadcrumb">
-
+<!--
                 <li>
                     <a href="#">Air Zone Report</a>
                 </li>
-                <!--
+                
                 <li>
                     <a href="#">Breadcrumb Link</a>
                 </li>
@@ -198,17 +186,22 @@ output:
 ```
 # Air Zone Report (2019-2021)
 
-Air zone reports are prepared each year by the B.C. government to summarize the levels of air pollutants in broad reporting areas called "air zones". B.C. is divided into seven distinct air zones based on
+Air zone reports are prepared each year by the B.C. government to summarize the levels of air pollutants in broad reporting areas called "air zones". B.C. is divided into seven distinct air zones based on geography, meteorology, and political boundaries. It combines areas with similar air quality concerns in order to provide an effective process of air quality management that follows the Air Quality Management System (AQMS).
 
-The reports compare pollution levels to the [Canadian Ambient Air Quality Standards (CAAQS)](https://www.ccme.ca/en/air-quality-report#slide-7) and assign colour-coded management levels. The assignment of management levels also defines levels of actions that are recommended under the national Air Quality Management System.
+In this report, air zones are assessed for achievement of the [Canadian Ambient Air Quality Standards (CAAQS)](https://www.ccme.ca/en/air-quality-report#slide-7) and assigned colour-coded management levels. Each colour defines levels of air quality management actions that are recommended under the AQMS. In this report, the air zones are assessed for their levels of four major pollutants: fine particulate matter, ozone, nitrogen dioxide, and sulphur dioxide.
+
+Air quality monitoring stations are found across various communities in
+
+and assign colour-coded management levels. The assignment of management levels also defines levels of actions that are recommended under the national Air Quality Management System.
 
 Communities in the air zones have limited control over wildfire and other exceptional events, as well as pollutants from far beyond its borders. These transboundary flows and exceptional events are presented in this report but are not included when communities and air zones are assessed for achievement of CAAQS and management levels. This helps communities focus on actions from local sources of pollution.
 
-## In This Report
+## Air Quality Highlights
 
--   The Central Interior and Southern Interior
-
-# 
+-   Due to wildfire, the Canadian Ambient Air Quality Standards for fine particulate matter are exceeded at xx locations,
+-   The Central Interior and Southern Interior air zones exceeded the Canadian Ambient Air Quality Standards for fine particulate matter (PM~2.5~).
+-   The Southern Interior air zone also exceeded the Canadian Ambient Air Quality Standards for Sulphur Dioxide.
+-   
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis hendrerit dolor magna eget est. Id aliquet risus feugiat in ante metus dictum at. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Arcu cursus euismod quis viverra nibh cras pulvinar. Laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean. Blandit cursus risus at ultrices mi tempus imperdiet. Leo vel orci porta non. Odio morbi quis commodo odio aenean sed adipiscing diam. Massa sapien faucibus et molestie. Amet dictum sit amet justo donec enim diam vulputate. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Augue eget arcu dictum varius duis. Pretium lectus quam id leo in vitae turpis massa sed. Ultricies tristique nulla aliquet enim tortor at auctor urna nunc. Aliquam faucibus purus in massa tempor nec feugiat. Vestibulum sed arcu non odio euismod lacinia at quis risus. Neque vitae tempus quam pellentesque nec nam aliquam sem et.
 
@@ -222,9 +215,36 @@ Tincidunt eget nullam non nisi est sit. Dictumst vestibulum rhoncus est pellente
 <!-- Jumping Points -->
 <a id="TestingSection"></a>
 ```
-## Testing Section
+```{r, echo=FALSE,results='hide',message=FALSE,warning=FALSE}
+#NOTE: Please update the map to include details on the left side and some clickability
+source('../assets/dev_map_airzone.R')
+a <- graph_managementmap(2021,tfee_filter = TRUE,dataDirectory = '../data/out',size = c('400px','400px'))
+```
 
-Lorem ipsum dolor sit amet consectetur adipiscing. Amet risus nullam eget felis. Donec adipiscing tristique risus nec feugiat in fermentum posuere urna. Justo eget magna fermentum iaculis eu non diam. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat est. Non diam phasellus vestibulum lorem. Justo eget magna fermentum iaculis. Suspendisse interdum consectetur libero id faucibus nisl tincidunt. Condimentum id venenatis a condimentum. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit ut aliquam. Lectus nulla at volutpat diam. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Praesent tristique magna sit amet purus gravida quis. Condimentum lacinia quis vel eros donec ac.
+```{r, echo=FALSE}
+a
+```
+
+## Key Air Contaminants
+
+<REPHRASE>
+
+According to the Environmental Management Act of British Columbia, an air contaminant is a substance introduced into the air that can affect the health or safety of a person, affects visibility, can cause damage or injury to propery, lifeform, and the environment. British Columbia monitors the levels of several air pollutants that are associated with effects on health and the environment. These pollutants have various diverse sources including vehicular traffic, residential woodstoves, industrial emissions, and wildfires. There are four air pollutants that are included in an air zone reports. These are the pollutants considered to be major public health concern due to prevalence and potential to affect health.
+
+## Most Polluted Communities
+
+```{r, echo = FALSE}
+knitr::include_app('http://127.0.0.1:3821/?tab=Bar Graph')
+
+```
+
+## Trends Show Progress and Improving Air Quality
+
+In British Columbia, air quality has seen improvements, particularly in the levels of fine particulate matter, ozone, nitrogen dioxide, and sulphur dioxide.
+
+## Emission of Some Pollutants are Decreasing
+
+Add description for the trends of some pollutants based on the ECCC National Pollutant Release Inventory
 
 ```{=html}
 <!---Space before the footer-->

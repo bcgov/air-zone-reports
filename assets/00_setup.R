@@ -931,3 +931,4 @@ calc_exceedances <- function(df, parameter, outputtype = 'filter', avg_type = NU
   print('outputtype error. Please choose from specified list')
   return(NULL)
 }
+
