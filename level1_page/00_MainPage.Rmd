@@ -252,7 +252,7 @@ a
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
 source('../assets/dev_airzone_exec_summary.R')
-tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2021)
+tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2020)
 
 ```
 
@@ -272,7 +272,7 @@ tbl_mgmt
 An air contaminant means a substance introduced into the air that can affect the health or safety of a person, visibility, and may cause damage or injury to property, life form, and the environment.
 
 <center>
-```{r, echo = FALSEπ}
+```{r, echo = FALSE}
 knitr::include_app('http://127.0.0.1:6539/?panel08')
 
 ```
