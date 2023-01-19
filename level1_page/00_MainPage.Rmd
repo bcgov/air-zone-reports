@@ -2,7 +2,7 @@
 title: &nbsp
 output: 
    html_document:
-     css: ["css/custom-main.css","css/bootstrap.min.css"]
+     css: ["css/custom-main.css","css/bootstrap.min.css","css/main.css","css/envreportbc.css"]
 ---
 
 ```{=html}
@@ -184,37 +184,52 @@ output:
     
     
 ```
-# Air Zone Report (2019-2021)
+```{r,message=FALSE,echo=FALSE,results='hide',warning=FALSE}
+#knitr::include_app("../test/etest_ppt.html")
+sourcefiles <- '../assets'
+for (files_ in list.files(sourcefiles)) {
+  try(source(files_))
+}
+```
 
-Air zone reports are prepared each year by the B.C. government to summarize the levels of air pollutants in broad reporting areas called "air zones". B.C. is divided into seven distinct air zones based on geography, meteorology, and political boundaries. It combines areas with similar air quality concerns in order to provide an effective process of air quality management that follows the Air Quality Management System (AQMS).
+![](../assets/photos/title_page_filled.jpg)
 
-In this report, air zones are assessed for achievement of the [Canadian Ambient Air Quality Standards (CAAQS)](https://www.ccme.ca/en/air-quality-report#slide-7) and assigned colour-coded management levels. Each colour defines levels of air quality management actions that are recommended under the AQMS. In this report, the air zones are assessed for their levels of four major pollutants: fine particulate matter, ozone, nitrogen dioxide, and sulphur dioxide.
+```{=html}
+<!--
+<div>
+<object data="../test/etest_ppt.html" frameborder="0"  style="padding-top:0%;"></object>
+</div>
+      
 
-Air quality monitoring stations are found across various communities in
+<div>
+  <div style="padding-top:0%;background-color: yellow;">
+    <object data="../test/etest_ppt.html" frameborder="0" allowfullscreen
+      style="width:100%;height:100%;"></object>
+  </div>
+</div>
+-->
+```
+```{=html}
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Welcome!</h2></center></div></div>
+```
+```{=html}
+<!-- Jumping Points -->
+<a id="Welcome"></a>
+```
+Air zone reports are prepared each year by the B.C. Ministry of Environment and Climate Change Strategy to summarize the levels of air pollution in broad reporting areas called "air zones". The reports are part of our commitment under the national [Air Quality Management System (AQMS)](https://ccme.ca/en/air-quality-report#slide-2) to better protect human health and the environment.
 
-and assign colour-coded management levels. The assignment of management levels also defines levels of actions that are recommended under the national Air Quality Management System.
+This annual report, titled "Air Zone Report (2019-2021)", summarizes B.C.'s air quality status, achievement of the [Canadian Ambient Air Quality Standards (CAAQS](https://ccme.ca/en/air-quality-report#slide-7)), and assignment of management levels for the four major pollutants: fine particulate matter (PM~2.5~), ozone, nitrogen dioxide (NO~2~), and sulphur dioxide (SO~2~). Management levels are assessed based on three years (2019-2021) of monitoring data. Under the principles of the AQMS, management levels define the recommended level of actions for communities in order to keep clean areas clean and continuously improve air quality.
 
-Communities in the air zones have limited control over wildfire and other exceptional events, as well as pollutants from far beyond its borders. These transboundary flows and exceptional events are presented in this report but are not included when communities and air zones are assessed for achievement of CAAQS and management levels. This helps communities focus on actions from local sources of pollution.
+<center>![](../assets/photos/BC_ENV_H_RGB_pos.png){width="50%"}</center>
 
-## Air Quality Highlights
-
--   Due to wildfire, the Canadian Ambient Air Quality Standards for fine particulate matter are exceeded at xx locations,
--   The Central Interior and Southern Interior air zones exceeded the Canadian Ambient Air Quality Standards for fine particulate matter (PM~2.5~).
--   The Southern Interior air zone also exceeded the Canadian Ambient Air Quality Standards for Sulphur Dioxide.
--   
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis hendrerit dolor magna eget est. Id aliquet risus feugiat in ante metus dictum at. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Arcu cursus euismod quis viverra nibh cras pulvinar. Laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean. Blandit cursus risus at ultrices mi tempus imperdiet. Leo vel orci porta non. Odio morbi quis commodo odio aenean sed adipiscing diam. Massa sapien faucibus et molestie. Amet dictum sit amet justo donec enim diam vulputate. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Augue eget arcu dictum varius duis. Pretium lectus quam id leo in vitae turpis massa sed. Ultricies tristique nulla aliquet enim tortor at auctor urna nunc. Aliquam faucibus purus in massa tempor nec feugiat. Vestibulum sed arcu non odio euismod lacinia at quis risus. Neque vitae tempus quam pellentesque nec nam aliquam sem et.
-
-Placerat vestibulum lectus mauris ultrices eros. In metus vulputate eu scelerisque felis imperdiet proin fermentum. Nullam vehicula ipsum a arcu cursus. Sed velit dignissim sodales ut eu sem. Amet consectetur adipiscing elit ut aliquam purus sit amet luctus. Netus et malesuada fames ac turpis. Imperdiet nulla malesuada pellentesque elit eget gravida cum. Sed id semper risus in hendrerit. Ultrices dui sapien eget mi proin sed libero. Nam libero justo laoreet sit amet. Augue ut lectus arcu bibendum at varius. Ut eu sem integer vitae justo eget. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Donec et odio pellentesque diam. In hendrerit gravida rutrum quisque non tellus. Sagittis vitae et leo duis ut diam.
-
-Id velit ut tortor pretium viverra suspendisse potenti nullam ac. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla. Sit amet justo donec enim diam vulputate ut pharetra. Massa tincidunt dui ut ornare lectus sit amet est. Arcu dui vivamus arcu felis bibendum ut. Amet mauris commodo quis imperdiet massa tincidunt. Vitae tempus quam pellentesque nec nam aliquam sem. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Vestibulum lectus mauris ultrices eros in cursus turpis massa. Ullamcorper malesuada proin libero nunc consequat interdum varius sit. Adipiscing commodo elit at imperdiet. Ultrices tincidunt arcu non sodales neque sodales ut etiam sit. Duis at tellus at urna condimentum mattis pellentesque id nibh. Neque volutpat ac tincidunt vitae. Augue lacus viverra vitae congue eu consequat ac. Varius quam quisque id diam vel quam elementum pulvinar etiam. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Risus feugiat in ante metus dictum at.
-
-Tincidunt eget nullam non nisi est sit. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Morbi enim nunc faucibus a pellentesque sit amet. Aliquam id diam maecenas ultricies mi. Dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo. Proin fermentum leo vel orci porta. Senectus et netus et malesuada. Fusce ut placerat orci nulla pellentesque. Orci porta non pulvinar neque laoreet. Risus ultricies tristique nulla aliquet enim tortor at auctor. Augue eget arcu dictum varius duis at.
+</br> </br> </br> </br>
 
 ```{=html}
 <!-- Jumping Points -->
-<a id="TestingSection"></a>
+<a id="Air Quality Management Levels"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">B.C.'s Air Zones</h2></center></div></div>
 ```
+
 ```{r, echo=FALSE,results='hide',message=FALSE,warning=FALSE}
 #NOTE: Please update the map to include details on the left side and some clickability
 source('../assets/dev_map_airzone.R')
@@ -225,6 +240,63 @@ a <- graph_managementmap(2021,tfee_filter = TRUE,dataDirectory = '../data/out',s
 a
 ```
 
+```{=html}
+<!-- Jumping Points -->
+<a id="Air Quality Management Levels"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Levels in B.C. Air Zones</h2></center></div></div>
+```
+-   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards.
+-   The highest levels of ozone are observed in the Lower Fraser Valley air zone, resulting in an orange management level. These are due to the levels observed at Hope, Maple Ridge, and Mission.
+-   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior are under orange management level for nitrogen dioxide (NO~2~).
+-   The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under green management level.
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
+source('../assets/dev_airzone_exec_summary.R')
+tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2021)
+
+```
+
+```{r,echo=FALSE}
+tbl_mgmt
+```
+
+```{=html}
+<!-- Jumping Points -->
+<a id="Air Pollutants"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Major Air Pollutants</h2></center></div></div>
+```
+# Four Major Pollutants are Featured in This Air Zone Report
+
+##  Fine Particulate Matter, Ozone, Nitrogen Dioxide, and Sulphur Dioxide 
+
+An air contaminant means a substance introduced into the air that can affect the health or safety of a person, visibility, and may cause damage or injury to property, life form, and the environment.
+
+<center>
+```{r, echo = FALSEπ}
+knitr::include_app('http://127.0.0.1:6539/?panel08')
+
+```
+</center>
+
+British Columbia monitors the levels of several air pollutants that are associated with effects on health and the environment. These pollutants have various diverse sources including vehicular traffic, residential woodstoves, industrial emissions, and wildfires. There are four air pollutants that are included in an air zone reports. These are the pollutants considered to be major public health concern due to prevalence and potential to affect health.
+```{=html}
+<!-- Jumping Points -->
+<a id="Measurement"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Measuring Pollutants</h2></center></div></div>
+```
+
+
+```{=html}
+
+<div id="topicTemplate" class="warning">
+Test
+</div>
+```
+```{=html}
+<iframe src="../test/etest_ppt.html" style="height:200px;width:300px;"></iframe>
+```
+["../test/etest_ppt.html"](%22../test/etest_ppt.html%22)
+
 ## Key Air Contaminants
 
 <REPHRASE>
@@ -234,7 +306,7 @@ According to the Environmental Management Act of British Columbia, an air contam
 ## Most Polluted Communities
 
 ```{r, echo = FALSE}
-knitr::include_app('http://127.0.0.1:3821/?tab=Bar Graph')
+knitr::include_app('http://127.0.0.1:3821/?panel01')
 
 ```
 
@@ -243,6 +315,10 @@ knitr::include_app('http://127.0.0.1:3821/?tab=Bar Graph')
 In British Columbia, air quality has seen improvements, particularly in the levels of fine particulate matter, ozone, nitrogen dioxide, and sulphur dioxide.
 
 ## Emission of Some Pollutants are Decreasing
+
+Add description for the trends of some pollutants based on the ECCC National Pollutant Release Inventory
+
+## The Canadian Ambient Air Quality Standards
 
 Add description for the trends of some pollutants based on the ECCC National Pollutant Release Inventory
 

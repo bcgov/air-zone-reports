@@ -62,7 +62,7 @@ server <-  function(input, output,session) {
   hideTab(inputId = "navbar", target = "panel05")
   hideTab(inputId = "navbar", target = "panel06")
   hideTab(inputId = "navbar", target = "panel07")
-  
+  # hideTab(inputId = "navbar", target = "panel08")
   observe({
     query <- parseQueryString(session$clientData$url_search)
     # if (0) {query <- 'http://127.0.0.1:4200/?panel04'}
@@ -86,6 +86,9 @@ server <-  function(input, output,session) {
     }
     if (!is.null(query[['panel07']])) {
       showTab(inputId = "navbar", target = "panel07")
+    }
+    if (!is.null(query[['panel08']])) {
+      showTab(inputId = "navbar", target = "panel08")
     }
   })
   
@@ -278,6 +281,7 @@ server <-  function(input, output,session) {
     plot_woodstove(df = df_woodstove,
                    airzone = input$Woodstove_exchange)
   })
+  
   
   
 }

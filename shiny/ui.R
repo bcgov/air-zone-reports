@@ -74,84 +74,103 @@ ui <- fluidPage(
   # # tags$style(type='text/css', ".navbar{min-height: 0px; margin-bottom: 0px;}"),
   # # tags$style(type='text/css', ".navbar-brand{height: 0px; padding: 0px 0px;}"),
   # # tabsetPanel(id = "navbar",  # add yellow highlighted text to theme the navigation bar
-  navbarPage(title = "", theme = "../azreport_ui/www/bcgov.css",id='navbar',
-             tabPanel("Station Summary",value = 'panel01',
-                            selectInput("Parameter", "Select Pollutant to Display:",
-                                  list(`Parameter` = parameters)
-                      ),
-                      uiOutput("stationSelect"),
-                      plotOutput("plot1"),
-                      plotly::plotlyOutput("plot2")
-             ),
-             tabPanel('Emission Inventory',value = 'panel02',
-                     
-                      
-                      selectInput("pollutant", "Select Air Pollutant to display:",
-                                  list(`Parameter` = parameters_npri)
-                      ),
-                      plotly::plotlyOutput('plot3')
-                      
-             ),
-             tabPanel('Long Term Trends',value = 'panel03',
-                      
-                      selectInput("pollutant trend",'Select Air Pollutant to display',
-                                  list(`Parameter` = df_parameter$display)
-                      ),
-                      selectInput("airzone",'Select Airzone',
-                                  list(`Air Zone` = c('All',airzones))
-                      ),
-                      uiOutput("stationSelect2"),
-                      plotOutput('plot4')
-                      
-             ),
-             tabPanel('Map',value = 'panel04',
-                      
-                      leaflet::leafletOutput("mymap2"),
-                      p()
-                      # actionButton("recalcPM25", "PM2.5"),
-                      # actionButton("recalcOzone", "Ozone"),
-                      # actionButton("recalcNO2", "NO2"),
-                      # actionButton("recalcSO2", "SO2")
-                      
-                      
-             ),
-             tabPanel('Bar Graph',value = 'panel05',
-                     
-                      selectInput("pollutants_bar","Select Pollutant to Display",
-                                  list(`Metrics` = parameters)
-                      ),
-                      selectInput("airzone_bar",'Select Airzone',
-                                  list(`Air Zone` = airzones)
-                      ),
-                      sliderInput("year_bar",label = 'Year',
-                                  min = min(yearlist), max = max(yearlist),
-                                  value = max(yearlist),sep=''
-                      ),
-                      # selectInput("year_bar",'Select Year',
-                      #             list(`Year` = yearlist)
-                      
-                      plotOutput('plot5')
-             ),
-             tabPanel('Air Zone Emission Sources',value = 'panel06',
-                      
-                      
-                      selectInput("pollutant_emission_airzone", "Select Air Pollutant to display:",
-                                  list(`Parameter` = df_parameter$display)
-                      ),
-                      selectInput("AirZone_emission", "Select Air Zone:",
-                                  list(`Airzone` = c('All',airzones))
-                      ),
-                      plotly::plotlyOutput('plot6')
-                      
-             ),
-             tabPanel('Wood Smoke Reduction Program',value = 'panel07',
-                    
-                      selectInput("Woodstove_exchange", "Select Air Zone:",
-                                  list(`Airzone` = c('All',airzones))
-                      ),
-                      plotly::plotlyOutput('plot7')
-                      
-             )))
+  # navbarPage(title = "", theme = "../azreport_ui/www/bcgov.css",id='navbar',
+  tabPanel("Station Summary",value = 'panel01',
+           selectInput("Parameter", "Select Pollutant to Display:",
+                       list(`Parameter` = parameters)
+           ),
+           uiOutput("stationSelect"),
+           plotOutput("plot1"),
+           plotly::plotlyOutput("plot2")
+  ),
+  tabPanel('Emission Inventory',value = 'panel02',
+           
+           
+           selectInput("pollutant", "Select Air Pollutant to display:",
+                       list(`Parameter` = parameters_npri)
+           ),
+           plotly::plotlyOutput('plot3')
+           
+  ),
+  tabPanel('Long Term Trends',value = 'panel03',
+           
+           selectInput("pollutant trend",'Select Air Pollutant to display',
+                       list(`Parameter` = df_parameter$display)
+           ),
+           selectInput("airzone",'Select Airzone',
+                       list(`Air Zone` = c('All',airzones))
+           ),
+           uiOutput("stationSelect2"),
+           plotOutput('plot4')
+           
+  ),
+  tabPanel('Map',value = 'panel04',
+           
+           leaflet::leafletOutput("mymap2"),
+           p()
+           # actionButton("recalcPM25", "PM2.5"),
+           # actionButton("recalcOzone", "Ozone"),
+           # actionButton("recalcNO2", "NO2"),
+           # actionButton("recalcSO2", "SO2")
+           
+           
+  ),
+  tabPanel('Bar Graph',value = 'panel05',
+           
+           selectInput("pollutants_bar","Select Pollutant to Display",
+                       list(`Metrics` = parameters)
+           ),
+           selectInput("airzone_bar",'Select Airzone',
+                       list(`Air Zone` = airzones)
+           ),
+           sliderInput("year_bar",label = 'Year',
+                       min = min(yearlist), max = max(yearlist),
+                       value = max(yearlist),sep=''
+           ),
+           # selectInput("year_bar",'Select Year',
+           #             list(`Year` = yearlist)
+           
+           plotOutput('plot5')
+  ),
+  tabPanel('Air Zone Emission Sources',value = 'panel06',
+           
+           
+           selectInput("pollutant_emission_airzone", "Select Air Pollutant to display:",
+                       list(`Parameter` = df_parameter$display)
+           ),
+           selectInput("AirZone_emission", "Select Air Zone:",
+                       list(`Airzone` = c('All',airzones))
+           ),
+           plotly::plotlyOutput('plot6')
+           
+  ),
+  tabPanel('Wood Smoke Reduction Program',value = 'panel07',
+           
+           selectInput("Woodstove_exchange", "Select Air Zone:",
+                       list(`Airzone` = c('All',airzones))
+           ),
+           plotly::plotlyOutput('plot7')
+           
+  ),
+  tabPanel("Air Zones",value = 'panel08',
+           fluidRow(column(4,
+                           actionButton("pm25Button", HTML("PM<sub>2.5</sub></br>Fine Particulate Matter"),
+                                        style="color: #fff; background-color: #337ab7; border-color: #2e6da4"),
+                           
+                           actionButton("o3Button", HTML("O<sub>3</sub></br>Ground-Level Ozone"), 
+                                        style="color: #fff; background-color: #337ab7; border-color: #2e6da4"),
+                           
+                           actionButton("no2Button", HTML("NO<sub>2</sub></br>Nitrogen Dioxide"), 
+                                        style="color: #fff; background-color: #337ab7; border-color: #2e6da4"),
+                           
+                           actionButton("so2Button", HTML("SO<sub>2</sub></br>Sulphur Dioxide"), 
+                                        style="color: #fff; background-color: #337ab7; border-color: #2e6da4")
+           ))
+           
+  )
+  
+  
+)
 
 
 # }
