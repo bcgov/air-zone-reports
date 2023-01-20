@@ -25,11 +25,16 @@ library("bcmaps")
 
 library("rcaaqs")
 library("envreportutils")
-library(envair)
+library('envair')
 
+try(source('./shiny/00_setup.R'))
 try(source('00_setup.R'))
-saveDirectory <- '../data/out'
-list.files(saveDirectory)
+# saveDirectory <- '../data/out'
+
+
+saveDirectory <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/'
+
+# list.files(saveDirectory)
 
 az <- airzones() %>%
   st_make_valid() %>%
@@ -52,7 +57,7 @@ df_parameter <- tribble(
 aq_summary <-  readr::read_csv(paste(saveDirectory,'caaqs_results.csv',sep='/'))
 df_caaqs <- aq_summary
 df_apei <- readr::read_csv(paste(saveDirectory,'EN_APEI-Can-Prov_Terr.csv',sep='/'))
-lst_stations <- envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) %>%
+lst_stations <- readr::read_csv(paste(saveDirectory,'liststations.csv',sep='/')) %>%
   dplyr::rename(label = Label,
                 latitude  = LAT,
                 longitude = LONG,

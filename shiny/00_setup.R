@@ -31,7 +31,8 @@ library("envreportutils")
 #specify where data file were saved
 #these files were generated in './R/shiny/01_shinyload.R'
 #note that saveDirectory is relative to the location of the server.R and ui.R
-saveDirectory <- '../data/out'
+# saveDirectory <- '../data/out'
+saveDirectory <- 'https://github.com/bcgov/air-zone-reports/tree/master/data/out'
 
 #Air Zone Graphing Functions----
 
@@ -80,7 +81,7 @@ df_metric_list <- function() {
 #' @export
 plot_npri <- function(pollutant,df=NULL,categorytype = 'Source',URL=NULL,output = 'basic') {
   if (0) {
-    pollutant <- c('')
+    pollutant <- 'pm25'
     categorytype <- 'Source'
     output = 'basic'
     URL=NULL
@@ -88,7 +89,8 @@ plot_npri <- function(pollutant,df=NULL,categorytype = 'Source',URL=NULL,output 
   
   require(ggplot2)
   
-  df <- get_apei(pollutant = pollutant, df=df, categorytype = categorytype, URL = URL)
+  df <- envair::get_apei(pollutant = pollutant,  categorytype = categorytype, URL = URL)
+  
   df_npri <- df %>%
     dplyr::rename(groupingcolumn= categorytype)
   
