@@ -47,6 +47,20 @@ download.file(url = 'https://data-donnees.ec.gc.ca/data/substances/monitor/canad
               destfile = paste(saveDirectory,'EN_APEI-Can-Prov_Terr.csv',sep='/')
 )
 
+#create quick list of bc stations
+envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) %>%
+  saveRDS(paste(saveDirectory,'liststations_merged.Rds',sep='/'))
+
+#create quick mapping details
+airzones() %>%
+  st_make_valid() %>%
+  st_transform(st_crs(bc_bound())) %>%
+  st_intersection(st_geometry(bc_bound())) %>%
+  group_by(airzone = Airzone) %>%
+  summarize() %>%
+  st_transform(4326) %>%
+  saveRDS(paste(saveDirectory,'az_mgmt.Rds',sep='/'))
+  
 
 # Calculate the caaqs values----
 # Calculations are based on the rcaaqs package

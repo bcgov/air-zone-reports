@@ -454,7 +454,11 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       filter(year %in% years) %>%
       arrange(parameter,site,instrument,year,tfee)
     
-    readr::write_csv(df_result,file = savefile,append = file.exists(savefile))
+    #Remove 2019-2021 
+    
+    df_result <- df_result %>%
+      filter(!(site %in% c("North Vancouver Second Narrows") & year %in% c(2019:2021))) %>%
+      readr::write_csv(df_result,file = savefile,append = file.exists(savefile))
   }
   
   df_result <- readr::read_csv(savefile)
@@ -831,7 +835,7 @@ calc_exceedances <- function(df, parameter, outputtype = 'filter', avg_type = NU
   
   exceedance_level <- as.numeric(exceedance_level)
   df <- ungroup(df)
- 
+  
   
   for (exceed_ in exceedance_level){
     
@@ -865,7 +869,7 @@ calc_exceedances <- function(df, parameter, outputtype = 'filter', avg_type = NU
     select(-value)
   
   
-
+  
   if (tolower(outputtype) == 'freq_annual') {
     
     df_result <- df_result %>%
