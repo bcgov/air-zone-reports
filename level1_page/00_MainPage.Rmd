@@ -131,8 +131,6 @@ output:
 
     <!-- /BODY CONTENT -->
     <!--div id="shareIcons">
-
-    </div>
    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -148,6 +146,8 @@ output:
    
 
  
+
+    </div>
 <!--
 </body>
 
@@ -175,15 +175,19 @@ output:
                 <li>
                     <a href="#">Breadcrumb Link</a>
                 </li>
-                -->
+
             </ol>
         </div>
-       
+      --> 
     </div>
+    
     <body style="background-color:#fff";>
     
     
 ```
+
+
+
 ```{r,message=FALSE,echo=FALSE,results='hide',warning=FALSE}
 #knitr::include_app("../test/etest_ppt.html")
 sourcefiles <- '../assets'
@@ -227,17 +231,17 @@ This annual report, titled "Air Zone Report (2019-2021)", summarizes B.C.'s air 
 ```{=html}
 <!-- Jumping Points -->
 <a id="Air Quality Management Levels"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">B.C.'s Air Zones</h2></center></div></div>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management in B.C.</h2></center></div></div>
 ```
 
-```{r, echo=FALSE,results='hide',message=FALSE,warning=FALSE}
-#NOTE: Please update the map to include details on the left side and some clickability
-source('../assets/dev_map_airzone.R')
-a <- graph_managementmap(2021,tfee_filter = TRUE,dataDirectory = '../data/out',size = c('400px','400px'))
-```
 
-```{r, echo=FALSE}
-a
+<style>
+.main-container {
+  max-width: unset;
+}
+</style>
+```{r, echo=FALSE,out.width="100%"}
+ knitr::include_app('https://bcgov-env.shinyapps.io/airzoneexplained/',height = '600px')
 ```
 
 ```{=html}
@@ -260,6 +264,15 @@ tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 
 tbl_mgmt
 ```
 
+
+```{r, echo=FALSE,results='hide',message=FALSE,warning=FALSE}
+#NOTE: Please update the map to include details on the left side and some clickability
+source('../assets/dev_map_airzone.R')
+a <- graph_managementmap(2020,tfee_filter = TRUE,dataDirectory = '../data/out',size = c('400px','400px'))
+```
+
+
+
 ```{=html}
 <!-- Jumping Points -->
 <a id="Air Pollutants"></a>
@@ -273,7 +286,7 @@ An air contaminant means a substance introduced into the air that can affect the
 
 <center>
 ```{r, echo = FALSE}
-knitr::include_app('http://127.0.0.1:6539/?panel08')
+# knitr::include_app('http://127.0.0.1:6539/?panel08')
 
 ```
 </center>
@@ -306,7 +319,7 @@ According to the Environmental Management Act of British Columbia, an air contam
 ## Most Polluted Communities
 
 ```{r, echo = FALSE}
-knitr::include_app('http://127.0.0.1:3821/?panel01')
+# knitr::include_app('http://127.0.0.1:3821/?panel01')
 
 ```
 
@@ -395,9 +408,6 @@ Add description for the trends of some pollutants based on the ECCC National Pol
     $(".data.license-ogl-canada").append(' (Licence: <a href="http://open.canada.ca/en/open-government-licence-canada">Open Government Licence - Canada</a>)');
     $(".data.license-statscan").append(' (Licence: <a href="http://www.statcan.gc.ca/eng/reference/licence">Statistics Canada Open Licence Agreement</a>)');
   </script>
-
-
-
 
 </html>
 ```

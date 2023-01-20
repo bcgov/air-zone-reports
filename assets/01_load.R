@@ -48,7 +48,8 @@ download.file(url = 'https://data-donnees.ec.gc.ca/data/substances/monitor/canad
 )
 
 #create quick list of bc stations
-envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) %>%
+#add if active within the past 5 years
+df_list <- envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) 
   saveRDS(paste(saveDirectory,'liststations_merged.Rds',sep='/'))
 
 #create quick mapping details

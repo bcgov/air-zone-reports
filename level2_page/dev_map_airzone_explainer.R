@@ -46,14 +46,17 @@ graph_airzone <- function(airzone=NULL, size = c("900px","700px")) {
     df_colour$colour[tolower(df_colour$airzone) != airzone] <- 'white'
   }
   
+  #shortcut to retrieve from github instead
+  # az_mgmt <- airzones() %>%
+  #   st_make_valid() %>%
+  #   st_transform(st_crs(bc_bound())) %>%
+  #   st_intersection(st_geometry(bc_bound())) %>%
+  #   group_by(airzone = Airzone) %>%
+  #   summarize() %>%
+  #   st_transform(4326) %>%
+  az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
   
-  az_mgmt <- airzones() %>%
-    st_make_valid() %>%
-    st_transform(st_crs(bc_bound())) %>%
-    st_intersection(st_geometry(bc_bound())) %>%
-    group_by(airzone = Airzone) %>%
-    summarize() %>%
-    st_transform(4326) %>%
+  az_mgmt <- readRDS(url(az_mgmt_gitURL)) %>%
     left_join(df_colour)
   
   
@@ -64,7 +67,7 @@ graph_airzone <- function(airzone=NULL, size = c("900px","700px")) {
   
   a <- leaflet(width = size[1],height = size[2],
                options = leafletOptions(attributionControl=FALSE)) %>%
-    set_bc_view(zoom=4) %>%
+    set_bc_view(zoom=4.5) %>%
     addProviderTiles(providers$Stamen.TonerLines,
                      options = providerTileOptions(noWrap = TRUE)
     ) %>%
@@ -101,16 +104,11 @@ get_airzone <- function(lat,long) {
     latlong <- c(57.68,-120.614)
   }
   
-  defaultW <- getOption("warn")
-  options(warn = -1)
-  az_mgmt <- airzones() %>%
-    st_make_valid() %>%
-    st_transform(st_crs(bc_bound())) %>%
-    st_intersection(st_geometry(bc_bound())) %>%
-    group_by(airzone = Airzone) %>%
-    summarize() %>%
-    st_transform(4326) 
-  options(warn = defaultW)
+  az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
+  
+  az_mgmt <- readRDS(url(az_mgmt_gitURL))
+    
+    
   
   
   #----------------
