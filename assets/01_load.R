@@ -26,6 +26,11 @@ years <- 2015:2021
 
 print(getwd())
 
+require(sf)
+require(bcmaps)
+require(envair)
+require(envreportutils)
+require(rcaaqs)
 
 # define where data files will be saved
 
@@ -49,17 +54,17 @@ download.file(url = 'https://data-donnees.ec.gc.ca/data/substances/monitor/canad
 
 #create quick list of bc stations
 #add if active within the past 5 years
-df_list <- envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) 
+envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) %>%
   saveRDS(paste(saveDirectory,'liststations_merged.Rds',sep='/'))
 
 #create quick mapping details
-airzones() %>%
-  st_make_valid() %>%
-  st_transform(st_crs(bc_bound())) %>%
-  st_intersection(st_geometry(bc_bound())) %>%
+bcmaps::airzones() %>%
+  sf::st_make_valid() %>%
+  sf::st_transform(st_crs(bc_bound())) %>%
+  sf::st_intersection(st_geometry(bc_bound())) %>%
   group_by(airzone = Airzone) %>%
   summarize() %>%
-  st_transform(4326) %>%
+  sf::st_transform(4326) %>%
   saveRDS(paste(saveDirectory,'az_mgmt.Rds',sep='/'))
   
 

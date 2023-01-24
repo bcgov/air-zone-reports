@@ -52,7 +52,8 @@ create_metrics_annual <- function(years, savedirectory = NULL) {
   }
   
   # create annual metrics ----
-  savefile <- paste(savedirectory,'annual_results.csv',sep='/')
+  savefile_final <- paste(savedirectory,'annual_results.csv',sep='/')
+  savefile <- tempfile()
   #define non-value columns
   cols_static <- c('parameter','year','station_name','site','instrument','station','station_name_full')
   
@@ -179,11 +180,13 @@ create_metrics_annual <- function(years, savedirectory = NULL) {
     
   }
   
-  
+  #transfer from temp to final savefile
+  file.copy(from = savefile, to=savefile_final,overwrite = TRUE)
   
   
   #create captures ------
-  savefile <- paste(savedirectory,'captures.csv',sep='/')
+  savefile_final <- paste(savedirectory,'captures.csv',sep='/')
+  savefinal <- tempfile()
   for (param in c('pm25','o3','no2','so2')) {
     for (year in years) {
       try({
@@ -194,6 +197,8 @@ create_metrics_annual <- function(years, savedirectory = NULL) {
       })
     }
   }
+  file.copy(from = savefile, to=savefile_final,overwrite = TRUE)
+  
   
   
 }
@@ -210,7 +215,7 @@ create_metrics_annual <- function(years, savedirectory = NULL) {
 #' @return caaqs_results.csv file
 create_caaqs_annual <- function(years, savedirectory = NULL) {
   if (0) {
-    years <- 2013:2021
+    years <- 2019:2021
     savedirectory <- './test_data'
     
     for (files in list.files('././r/',full.names = TRUE)) {
@@ -223,8 +228,9 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
     list.files(savedirectory)
   }
   #where files will be saved
-  savefile = paste(savedirectory,'caaqs_results.csv',sep='/')
-  
+  savefile_final = paste(savedirectory,'caaqs_results.csv',sep='/')
+  #temporary save filelocation
+  savefile <- tempfile()
   #defines the resulting column names in this order
   cols_final <- c('parameter','site','instrument','year',
                   'tfee','metric_value','metric','flag_two_of_three_years')
@@ -258,20 +264,24 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
     #note for pm, instrument is included in grouping
     if (param == 'pm25') {
       df <- df %>%
+        ungroup() %>%
         dplyr::mutate(date_time = DATE_PST - lubridate::hours(1)) %>%
         dplyr::rename(value = RAW_VALUE, site = STATION_NAME, instrument = INSTRUMENT) %>%
         filter(!is.na(value)) %>%
         group_by(date_time,site,instrument) %>%
         dplyr::mutate(index = 1:n()) %>%
-        filter(index == 1) %>% select(-index)
+        filter(index == 1) %>% select(-index) %>%
+        ungroup()
     } else {
       df <- df %>%
+        ungroup() %>%
         dplyr::mutate(date_time = DATE_PST - lubridate::hours(1)) %>%
         dplyr::rename(value = RAW_VALUE, site = STATION_NAME, instrument = INSTRUMENT) %>%
         filter(!is.na(value)) %>%
         group_by(date_time,site) %>%
         dplyr::mutate(index = 1:n()) %>%
-        filter(index == 1) %>% select(-index)
+        filter(index == 1) %>% select(-index) %>%
+        ungroup() 
     }
     
     
@@ -457,10 +467,14 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
     #Remove 2019-2021 
     
     df_result <- df_result %>%
-      filter(!(site %in% c("North Vancouver Second Narrows") & year %in% c(2019:2021))) %>%
-      readr::write_csv(df_result,file = savefile,append = file.exists(savefile))
+      filter(!(site %in% c("North Vancouver Second Narrows") & year %in% c(2019:2021)))
+    
+    readr::write_csv(df_result,file = savefile,append = file.exists(savefile))
   }
   
+  #transfer to final savefile
+ 
+  file.copy(from = savefile, to=savefile_final,overwrite = TRUE)
   df_result <- readr::read_csv(savefile)
   return(df_result)
 }

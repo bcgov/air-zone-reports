@@ -153,6 +153,8 @@ output:
 
 </html>
 -->
+
+
 ```
 <!--# Modify Breadcrumbs here. These are navigation tools to guide user through windows -->
 
@@ -185,9 +187,6 @@ output:
     
     
 ```
-
-
-
 ```{r,message=FALSE,echo=FALSE,results='hide',warning=FALSE}
 #knitr::include_app("../test/etest_ppt.html")
 sourcefiles <- '../assets'
@@ -233,13 +232,17 @@ This annual report, titled "Air Zone Report (2019-2021)", summarizes B.C.'s air 
 <a id="Air Quality Management Levels"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management in B.C.</h2></center></div></div>
 ```
+### The national Air Quality Management System (AQMS) provides a collaborative and comprehensive framework for managing air quality.
 
+It is implemented across Canada to deal with reduce the emissions and levels of various pollutants of concern. In order to help manage in the management of air quality, B.C. is divided into seven air zones.
 
+```{=html}
 <style>
 .main-container {
   max-width: unset;
 }
 </style>
+```
 ```{r, echo=FALSE,out.width="100%"}
  knitr::include_app('https://bcgov-env.shinyapps.io/airzoneexplained/',height = '600px')
 ```
@@ -264,14 +267,11 @@ tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 
 tbl_mgmt
 ```
 
-
 ```{r, echo=FALSE,results='hide',message=FALSE,warning=FALSE}
 #NOTE: Please update the map to include details on the left side and some clickability
 source('../assets/dev_map_airzone.R')
 a <- graph_managementmap(2020,tfee_filter = TRUE,dataDirectory = '../data/out',size = c('400px','400px'))
 ```
-
-
 
 ```{=html}
 <!-- Jumping Points -->
@@ -280,25 +280,110 @@ a <- graph_managementmap(2020,tfee_filter = TRUE,dataDirectory = '../data/out',s
 ```
 # Four Major Pollutants are Featured in This Air Zone Report
 
-##  Fine Particulate Matter, Ozone, Nitrogen Dioxide, and Sulphur Dioxide 
+## Fine Particulate Matter, Ozone, Nitrogen Dioxide, and Sulphur Dioxide
 
 An air contaminant means a substance introduced into the air that can affect the health or safety of a person, visibility, and may cause damage or injury to property, life form, and the environment.
+```{=html}
 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+</style>
+</head>
+<body>
+
+
+<p>Click on the buttons to open the collapsible content.</p>
+
+<button class="accordion">Fine Particulate Matter (PM<sub>2.5</sub>)</button>
+<div class="panel">
+  <p>
+  Particulate matter (PM), a major component of smog, consists of airborne particles in solid or liquid form. PM may be classified as primary or secondary, depending on the process that led to its formation. Primary PM is emitted directly into the atmosphere from a source, such as a smokestack or exhaust pipe, or from wind-blown soils or vehicle traffic on a dirt road. Secondary PM is formed in the atmosphere through a series of chemical and physical reactions involving gases such as sulphur oxides (SOx) and nitrogen oxides (NOx). PM exists in various sizes and the particles of most concern for human health are those with a diameter of less than 2.5 micrometres (PM2.5).
+  
+  </p>
+</div>
+
+<button class="accordion">Ground-Level Ozone (O<sub>3</sub>)</button>
+<div class="panel">
+  Ground-level ozone (O3), is a colourless, odourless and highly irritating gas that forms close to the Earth’s surface. O3 is a major component of smog. In contrast to “primary” pollutants which are emitted directly into the atmosphere from a source, O3 is considered a “secondary” pollutant because it is formed through complex chemical reactions between nitrogen oxides (NOx) and volatile organic compounds (VOCs) in the presence of sunlight. While O3 at ground-level is a significant environmental and health concern, approximately 10 to 40 kilometres above the Earth's surface, there is a beneficial layer of stratospheric ozone which shields the earth from harmful ultraviolet radiation. Ozone is also a short-lived climate pollutant and also contributes to climate change.
+  </p>
+</div>
+
+<button class="accordion">Nitrogen Dioxide (NO<sub>2</sub>)</button>
+<div class="panel">
+  <p>
+  Nitrogen dioxide (NO2) belongs to the oxides of nitrogen group of compounds (NOx) that are formed primarily through the burning of fossil fuels. While transportation sources represent over half of all emissions, energy production and industrial processes also emit significant amounts of NOx, mainly as Nitric Oxide (NO) and Nitrogen Dioxide (NO2). NO2 at higher concentrations has a strong, harsh odour and can typically be seen over large cities as a brownish haze. Once formed, NO2 can combine with water molecules in the air to form compounds like nitric acid and nitrous acid. Ultimately, these compounds fall to earth through precipitation (such as rain, snow and fog) where they contribute to the acidification and eutrophication of ecosystems.
+  </p>
+</div>
+
+<button class="accordion">Sulphur Dioxide (SO<sub>2</sub>)</button>
+<div class="panel">
+  <p>
+  Sulphur dioxide (SO2) is a colourless gas that smells like burnt matches. It belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO2 is emitted when fossil fuels or raw materials containing sulphur are burned or used in an industrial process like metal ore smelting or electric power generation. It can also be produced in large quantities during extraction and processing of fossil fuels. SO2 contributes to the formation of PM2.5 and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain, snow and fog.
+  </p>
+</div>
+
+<!--Accordion Scripts -->
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+
+
+```
 <center>
+
 ```{r, echo = FALSE}
 # knitr::include_app('http://127.0.0.1:6539/?panel08')
 
 ```
+
 </center>
 
 British Columbia monitors the levels of several air pollutants that are associated with effects on health and the environment. These pollutants have various diverse sources including vehicular traffic, residential woodstoves, industrial emissions, and wildfires. There are four air pollutants that are included in an air zone reports. These are the pollutants considered to be major public health concern due to prevalence and potential to affect health.
+
 ```{=html}
 <!-- Jumping Points -->
 <a id="Measurement"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Measuring Pollutants</h2></center></div></div>
 ```
-
-
 ```{=html}
 
 <div id="topicTemplate" class="warning">
