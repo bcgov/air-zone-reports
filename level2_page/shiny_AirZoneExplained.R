@@ -1,6 +1,11 @@
 library(leaflet)
 library(shiny)
 library(dplyr)
+require(rcaaqs)
+require(envreportutils)
+require(sf)
+require(bcmaps)
+require(stringr)
 
 
 
@@ -12,12 +17,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
   
   markerON <- FALSE
   
-  require(leaflet)
-  require(rcaaqs)
-  require(envreportutils)
-  require(sf)
-  require(bcmaps)
-  require(dplyr)
+  
   
   if (0) {
     airzone <- NULL
@@ -68,8 +68,6 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
   
   az_mgmt <- readRDS(url(az_mgmt_gitURL)) %>%
     left_join(df_colour,by='airzone')
-  
-  
   
   if (is.null(polygon_a)) {
     
@@ -197,10 +195,9 @@ get_airzone <- function(lat,long) {
 
 ui <- fluidPage(
   sidebarLayout(
-    sidebarPanel(leafletOutput("map"),width=4),
-    
-    mainPanel(
-      htmlOutput("text")
+    sidebarPanel(leafletOutput("map"),width=5),
+      mainPanel (
+      uiOutput("md_file"),width=7
     ))
   
 )
@@ -211,9 +208,15 @@ server <- shinyServer(function(input, output) {
   
   
   #initial map
+  www_git_url <- 'https://github.com/bcgov/air-zone-reports/raw/master/level2_page/www/'
   #t_ready means it is ready to receive clicks
-  a <- graph_airzone(polygon_a=NULL,airzone=NULL,size = c('400px','400px'))
+  a <- graph_airzone(polygon_a=NULL,airzone=NULL,size = c('200px','400px'))
   output$map <- renderLeaflet(a)
+  output$md_file <- renderUI({
+    file <- paste(www_git_url,'01_airzone_intro.Rmd',sep='')
+    includeMarkdown(file)
+  })
+  
   airzone_select_previous <- ''
   # t0 <- Sys.time()
   # observe the marker click info and print to console when it is changed.
@@ -230,17 +233,20 @@ server <- shinyServer(function(input, output) {
       if (airzone_select != airzone_select_previous) {
         
         # map redrawn after click
-        
-        # a <- graph_airzone(airzone=airzone_select,size = c('400px','400px'),polygon_a = a)
-        
-        # output$map <- renderLeaflet(a)
         leafletProxy("map")%>%
-          graph_airzone(airzone=airzone_select,size = c('400px','400px'))
+          graph_airzone(airzone=airzone_select,size = c('200px','400px'))
         #insert text here  
+        html_file <- paste(stringr::str_replace_all(string=airzone_select, pattern=" ", repl=""),'.Rmd',sep='')
+        html_file <- paste(www_git_url,html_file,sep='')
+        print(html_file)
         
-        output$text <- shiny::rend
+        try({output$md_file <- renderUI({
+          file <- html_file
+          includeMarkdown(file)
+        })
+        })
         airzone_select_previous <- airzone_select
-      }
+      } 
     })
   })
   

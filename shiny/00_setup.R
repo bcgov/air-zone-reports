@@ -31,8 +31,8 @@ library("envreportutils")
 #specify where data file were saved
 #these files were generated in './R/shiny/01_shinyload.R'
 #note that saveDirectory is relative to the location of the server.R and ui.R
-# saveDirectory <- '../data/out'
-saveDirectory <- 'https://github.com/bcgov/air-zone-reports/tree/master/data/out'
+saveDirectory <- '../data/out'
+# saveDirectory <- 'https://github.com/bcgov/air-zone-reports/tree/master/data/out'
 
 #Air Zone Graphing Functions----
 

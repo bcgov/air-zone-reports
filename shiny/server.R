@@ -55,13 +55,13 @@ server <-  function(input, output,session) {
   
   #hide tabs
   
-  hideTab(inputId = "navbar", target = "panel01")
-  hideTab(inputId = "navbar", target = "panel02")
-  hideTab(inputId = "navbar", target = "panel03")
-  hideTab(inputId = "navbar", target = "panel04")
-  hideTab(inputId = "navbar", target = "panel05")
-  hideTab(inputId = "navbar", target = "panel06")
-  hideTab(inputId = "navbar", target = "panel07")
+  # hideTab(inputId = "navbar", target = "panel01")
+  # hideTab(inputId = "navbar", target = "panel02")
+  # hideTab(inputId = "navbar", target = "panel03")
+  # hideTab(inputId = "navbar", target = "panel04")
+  # hideTab(inputId = "navbar", target = "panel05")
+  # hideTab(inputId = "navbar", target = "panel06")
+  # hideTab(inputId = "navbar", target = "panel07")
   # hideTab(inputId = "navbar", target = "panel08")
   observe({
     query <- parseQueryString(session$clientData$url_search)
@@ -278,7 +278,7 @@ server <-  function(input, output,session) {
   
   #create interactive bar graph for airzone
   output$plot7 <- renderPlotly({
-    plot_woodstove(df = df_woodstove,
+    plot_woodstove(df = df_woodstove,-0
                    airzone = input$Woodstove_exchange)
   })
   

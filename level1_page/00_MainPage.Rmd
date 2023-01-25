@@ -153,8 +153,6 @@ output:
 
 </html>
 -->
-
-
 ```
 <!--# Modify Breadcrumbs here. These are navigation tools to guide user through windows -->
 
@@ -249,40 +247,17 @@ It is implemented across Canada to deal with reduce the emissions and levels of 
 
 ```{=html}
 <!-- Jumping Points -->
-<a id="Air Quality Management Levels"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Levels in B.C. Air Zones</h2></center></div></div>
-```
--   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards.
--   The highest levels of ozone are observed in the Lower Fraser Valley air zone, resulting in an orange management level. These are due to the levels observed at Hope, Maple Ridge, and Mission.
--   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior are under orange management level for nitrogen dioxide (NO~2~).
--   The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under green management level.
-
-```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
-source('../assets/dev_airzone_exec_summary.R')
-tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2020)
-
-```
-
-```{r,echo=FALSE}
-tbl_mgmt
-```
-
-```{r, echo=FALSE,results='hide',message=FALSE,warning=FALSE}
-#NOTE: Please update the map to include details on the left side and some clickability
-source('../assets/dev_map_airzone.R')
-a <- graph_managementmap(2020,tfee_filter = TRUE,dataDirectory = '../data/out',size = c('400px','400px'))
-```
-
-```{=html}
-<!-- Jumping Points -->
 <a id="Air Pollutants"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Major Air Pollutants</h2></center></div></div>
 ```
-# Four Major Pollutants are Featured in This Air Zone Report
+# There are Four Pollutants Featured in This Air Zone Report
 
 ## Fine Particulate Matter, Ozone, Nitrogen Dioxide, and Sulphur Dioxide
 
-An air contaminant means a substance introduced into the air that can affect the health or safety of a person, visibility, and may cause damage or injury to property, life form, and the environment.
+These are considered pollutants of major concern due to their effects on health and the environment. As a result of these concerns, these pollutants were priority for standards setting. The Canadian Ambient Air Quality Standards (CAAQS) was developed for fine particulate matter and ozone in 2012, and these were following by nitrogen dioxide and sulphur dioxide in 2015.
+
+According to the Environment Management Act, an air contaminant or pollutant means a substance introduced into the air that can affect the health or safety of a person, visibility, and may cause damage or injury to property, life form, and the environment.
+
 ```{=html}
 
 <head>
@@ -317,13 +292,15 @@ An air contaminant means a substance introduced into the air that can affect the
 <body>
 
 
-<p>Click on the buttons to open the collapsible content.</p>
+<p>For information about the pollutants, click the buttons below</p>
 
 <button class="accordion">Fine Particulate Matter (PM<sub>2.5</sub>)</button>
 <div class="panel">
   <p>
-  Particulate matter (PM), a major component of smog, consists of airborne particles in solid or liquid form. PM may be classified as primary or secondary, depending on the process that led to its formation. Primary PM is emitted directly into the atmosphere from a source, such as a smokestack or exhaust pipe, or from wind-blown soils or vehicle traffic on a dirt road. Secondary PM is formed in the atmosphere through a series of chemical and physical reactions involving gases such as sulphur oxides (SOx) and nitrogen oxides (NOx). PM exists in various sizes and the particles of most concern for human health are those with a diameter of less than 2.5 micrometres (PM2.5).
-  
+  Particulate matter (PM) consists of airborne particles in solid or liquid form. PM may be classified as primary or secondary, depending on the process that led to its formation. Primary PM is emitted directly into the atmosphere from a source, such as a smokestack or exhaust pipe, or from wind-blown soils or vehicle traffic on a dirt road. Secondary PM is formed in the atmosphere through a series of chemical and physical reactions involving gases such as sulphur oxides (SOx) and nitrogen oxides (NOx). PM exists in various sizes and the particles of most concern for human health are those with a diameter of less than 2.5 micrometres (PM<sub>2.5</sub>).
+  There are two metrics for PM<sub>2.5</sub>. 
+  - an annual metric for estimating long term exposure
+  - a 24-hour metric for estimating short term or acute exposure
   </p>
 </div>
 
@@ -364,20 +341,69 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 </script>
-
-
-
 ```
-<center>
+
+
+```{=html}
+<!-- Jumping Points -->
+<a id="Where Pollutants Come From"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Levels in B.C. Air Zones</h2></center></div></div>
+```
+There are many natural and non-natural (anthropogenic) sources of air pollution. An estimate of the sources of air pollution is made through emission inventories. The inentories takes into account industrial and mobile emission sources. These
 
 ```{r, echo = FALSE}
 # knitr::include_app('http://127.0.0.1:6539/?panel08')
 
 ```
 
-</center>
 
+```{=html}
+<!-- Jumping Points -->
+<a id="Measuring the Pollutants"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
+```
 British Columbia monitors the levels of several air pollutants that are associated with effects on health and the environment. These pollutants have various diverse sources including vehicular traffic, residential woodstoves, industrial emissions, and wildfires. There are four air pollutants that are included in an air zone reports. These are the pollutants considered to be major public health concern due to prevalence and potential to affect health.
+
+```{=html}
+<!-- Jumping Points -->
+<a id="Levels of Pollution"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
+```
+
+Air quality monitoring stations are installed throughout the province in order to monitor various pollutants. These monitors are located to capture local emissions 
+
+```{=html}
+<!-- Jumping Points -->
+<a id="Trends of Pollution Levels"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
+```
+<Insert the Trends in Pollution Levels>
+
+```{=html}
+<!-- Jumping Points -->
+<a id="Air Quality Management Levels"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Levels in B.C. Air Zones</h2></center></div></div>
+```
+-   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards.
+-   The highest levels of ozone are observed in the Lower Fraser Valley air zone, resulting in an orange management level. These are due to the levels observed at Hope, Maple Ridge, and Mission.
+-   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior are under orange management level for nitrogen dioxide (NO~2~).
+-   The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under green management level.
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
+source('../assets/dev_airzone_exec_summary.R')
+tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2020)
+
+```
+
+```{r,echo=FALSE}
+tbl_mgmt
+```
+
+```{r, echo=FALSE,results='hide',message=FALSE,warning=FALSE}
+#NOTE: Please update the map to include details on the left side and some clickability
+source('../assets/dev_map_airzone.R')
+a <- graph_managementmap(2020,tfee_filter = TRUE,dataDirectory = '../data/out',size = c('400px','400px'))
+```
 
 ```{=html}
 <!-- Jumping Points -->
