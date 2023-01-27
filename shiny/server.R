@@ -277,10 +277,10 @@ server <-  function(input, output,session) {
   })
   
   #create interactive bar graph for airzone
-  output$plot7 <- renderPlotly({
-    plot_woodstove(df = df_woodstove,-0
-                   airzone = input$Woodstove_exchange)
-  })
+  # output$plot7 <- renderPlotly({
+  #   plot_woodstove(df = df_woodstove,
+  #                  airzone = input$Woodstove_exchange)
+  # })
   
   
   
