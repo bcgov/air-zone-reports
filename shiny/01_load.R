@@ -29,10 +29,10 @@ library('envair')
 
 try(source('./shiny/00_setup.R'))
 try(source('00_setup.R'))
-# saveDirectory <- '../data/out'
+saveDirectory <- '../data/out'
 
 
-saveDirectory <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/'
+# saveDirectory <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/'
 
 # list.files(saveDirectory)
 

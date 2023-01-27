@@ -144,14 +144,14 @@ ui <- fluidPage(
            plotly::plotlyOutput('plot6')
            
   ),
-  tabPanel('Wood Smoke Reduction Program',value = 'panel07',
+  # tabPanel('Wood Smoke Reduction Program',value = 'panel07',
+  #          
+  #          selectInput("Woodstove_exchange", "Select Air Zone:",
+  #                      list(`Airzone` = c('All',airzones))
+  #          ),
+  #          plotly::plotlyOutput('plot7')
            
-           selectInput("Woodstove_exchange", "Select Air Zone:",
-                       list(`Airzone` = c('All',airzones))
-           ),
-           plotly::plotlyOutput('plot7')
-           
-  ),
+  # ),
   tabPanel("Air Zones",value = 'panel08',
            fluidRow(column(4,
                            actionButton("pm25Button", HTML("PM<sub>2.5</sub></br>Fine Particulate Matter"),

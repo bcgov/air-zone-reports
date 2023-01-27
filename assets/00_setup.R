@@ -464,10 +464,19 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       filter(year %in% years) %>%
       arrange(parameter,site,instrument,year,tfee)
     
-    #Remove 2019-2021 
+    #Remove 2019-2021 from North Vancouver
+    #Also remove sites that are not AQMS
+    df_stations <- envair::listBC_stations(use_CAAQS = TRUE)
+    
+    list_stations_remove <- df_stations %>%
+      mutate(AQMS = ifelse(is.na(AQMS),'N/A',AQMS)) %>%
+      filter(AQMS == 'N') %>%
+      pull(site)
+    
     
     df_result <- df_result %>%
-      filter(!(site %in% c("North Vancouver Second Narrows") & year %in% c(2019:2021)))
+      filter(!(site %in% c("North Vancouver Second Narrows") & year %in% c(2019:2021))) %>%
+      filter(!(site %in% list_stations_remove))
     
     readr::write_csv(df_result,file = savefile,append = file.exists(savefile))
   }

@@ -77,6 +77,9 @@ create_caaqs_annual(years = years, savedirectory = saveDirectory)
 
 # Create management levels summary-----
 df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
+
+
+
 readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
 
 # OPTIONAL: Create annual metrics file----

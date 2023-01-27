@@ -84,6 +84,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
     a <- leaflet(width = size[1],height = size[2],
                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
       set_bc_view(zoom=4) %>%
+      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
       addProviderTiles(providers$Stamen.TonerLines,
                        options = providerTileOptions(noWrap = TRUE)
       ) %>%
