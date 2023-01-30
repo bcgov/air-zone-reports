@@ -523,7 +523,7 @@ create_CAAQS_graph_files <- function(filedirectory = NULL) {
 get_management <- function(datafile = NULL) {
   
   if (0) {
-    datafile <- NULL
+    datafile <- './data/out/caaqs_results.csv'
   }
   #retrieve data
   
@@ -532,13 +532,71 @@ get_management <- function(datafile = NULL) {
     # list.files(datafile)
   }
   
-  print(paste('Reading data from:',datafile))
-  df <- readr::read_csv(datafile) %>%
-    dplyr::mutate(idx0 = 1:n())
+  #' Assess the levels based on the df_levels table
+  #' 
+  #' @param df is the dataframe containing the data
+  #' @param df_levels is dataframe containing level definition
+  assess_levels <- function(df,df_levels) {
+    
+    if (0) {
+      df <- df_2015
+      df_levels <- df_levels_old
+    }
+    df <- df %>% 
+      ungroup()%>%
+      dplyr::mutate(idx0 = 1:n())
+    
+    df_levels <- df_levels%>%
+      dplyr::mutate(idx1 = 1:n()) %>%
+      ungroup()
+      
+    df_levels_ <- df_levels %>%
+    select(metric,lower_breaks,upper_breaks,idx1) %>%
+      
+      dplyr::mutate(lower_breaks = ifelse(is.na(lower_breaks),-9999,lower_breaks)) %>%
+      dplyr::mutate(upper_breaks = ifelse(is.na(upper_breaks),0,upper_breaks)) %>%
+      dplyr::mutate(upper_breaks = ifelse(is.infinite(upper_breaks),99999999,upper_breaks))
+    
+    #conditions for assigning management levels
+    
+    df_ <-  df %>%
+      left_join(df_levels_) %>%
+      mutate(metric_value = ifelse(is.na(metric_value),-9999,metric_value)) %>%
+      filter(metric_value >= lower_breaks & metric_value < upper_breaks) %>%
+      # View()
+      select(-lower_breaks,-upper_breaks) %>%
+      mutate(metric_value = ifelse(metric_value == -9999,NA, metric_value)) %>%
+      left_join(df_levels) %>%
+      select(-idx0,-idx1)
+    
+    #add column called colour_order to put sorting or numerical order to the colours
+    df_colour <- tribble(
+      ~colour_text, ~colour_order,
+      'grey',0,
+      'green',1,
+      'yellow',2,
+      'orange',3,
+      'red',4
+    )
+    df_ <- left_join(df_,df_colour)
+    return(df_)
+  }
   
-  df_levels <- rcaaqs::management_levels %>%
+  #specify only the ones that changed from Current Management Levels
+  df_levels_old <- dplyr::tribble(
+    ~CAAQS_name,~start_year,~end_year,~metric,~lower_breaks,~upper_breaks,~colour_text,
+    '2015 CAAQS',2013,2019,'o3_8h',63,Inf,'red',
+    '2015 CAAQS',2013,2019,'pm25_annual',10,Inf,'red',
+    '2015 CAAQS',2013,2019,'pm25_24h',27,Inf,'red',
+    
+  )
+  
+  
+  
+  #retrieve most recent CAAQS
+  #these are in the rcaaqs package
+  df_levels_current <- rcaaqs::management_levels %>%
     dplyr::rename(metric = parameter) %>%
-    dplyr::mutate(idx1 = 1:n()) %>%
     mutate(metric = recode(metric,
                            'o3' = 'o3_8h',
                            'pm2.5_annual' = 'pm25_annual',
@@ -546,36 +604,43 @@ get_management <- function(datafile = NULL) {
                            'no2_1yr' = 'no2_ann',
                            'no2_3yr' = 'no2_1hr',
                            'so2_1yr' = 'so2_ann',
-                           'so2_3yr' = 'so2_1hr'))
+                           'so2_3yr' = 'so2_1hr')) %>%
+    mutate(index = 1:n())
   
-  df_levels_ <- df_levels %>%
-    select(metric,idx1,lower_breaks,upper_breaks) %>%
-    dplyr::mutate(lower_breaks = ifelse(is.na(lower_breaks),-9999,lower_breaks)) %>%
-    dplyr::mutate(upper_breaks = ifelse(is.na(upper_breaks),0,upper_breaks)) %>%
-    dplyr::mutate(upper_breaks = ifelse(is.infinite(upper_breaks),99999999,upper_breaks))
+  df_levels_current$CAAQS_name <- '2020 CAAQS'
   
-  #conditions for assigning management levels
-  df_ <- df %>%
-    left_join(df_levels_) %>%
-    mutate(metric_value = ifelse(is.na(metric_value),-9999,metric_value)) %>%
-    filter(metric_value >= lower_breaks & metric_value < upper_breaks) %>%
-    select(-lower_breaks,-upper_breaks) %>%
-    mutate(metric_value = ifelse(metric_value == -9999,NA, metric_value)) %>%
-    left_join(df_levels) %>%
-    select(-idx0,-idx1)
+  #fill up missing information from the old CAAQS
+  df_levels_old <- df_levels_old %>%
+    left_join(df_levels_current %>%
+    select(-CAAQS_name,-lower_breaks,-upper_breaks),
+    by = c('metric','colour_text')
+    )
+  #add the other colors
+  df_levels_old <- df_levels_old %>%
+    dplyr::bind_rows(df_levels_current %>%
+                       filter(!index %in% df_levels_old$index))
   
-  #add column called colour_order to put sorting or numerical order to the colours
-  df_colour <- tribble(
-    ~colour_text, ~colour_order,
-    'grey',0,
-    'green',1,
-    'yellow',2,
-    'orange',3,
-    'red',4
-  )
-  df_ <- left_join(df_,df_colour)
+  print(paste('Reading data from:',datafile))
+  df <- readr::read_csv(datafile)
+    
   
   
+  
+  #Calculate 2020 CAAQS and onwards
+  df_2015 <- df %>%
+    filter(metric %in% df_CAAQS_Updates$metric,
+           year <2020)
+  
+  df_2020 <- df %>%
+    filter(!(metric %in% df_CAAQS_Updates$metric &
+           year <2020))
+  
+  df_result_old <- assess_levels(df=df_2015,df_levels = df_levels_old)
+  df_result_new <- assess_levels(df_2020,df_levels = df_levels_current) 
+  #consideration for years
+  #note that CAAQS was different in other years
+  
+  df_ <- bind_rows(df_result_old,df_result_new)
   return(df_)
   
   
@@ -594,7 +659,11 @@ get_management <- function(datafile = NULL) {
 get_management_summary <- function(outputtype = 'complete',df_preload = NULL,
                                    datafile = NULL) {
   
-  
+  if (0) {
+    outputtype = 'complete'
+    df_preload = NULL
+    datafile = paste(saveDirectory,'caaqs_results.csv',sep='/')
+  }
   #define the parameter for each metric
   #arrange in terms of an order
   df_metric <- tribble(
@@ -611,12 +680,17 @@ get_management_summary <- function(outputtype = 'complete',df_preload = NULL,
   df <- df_preload
   
   if (is.null(df_preload)) {
-    lst_stations <- listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) %>%
+    lst_stations <- envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) %>%
       dplyr::rename(latitude = LAT,
                     longitude = LONG,
                     airzone = AIRZONE,
                     label = Label)
     
+    lst_stations <- lst_stations %>%
+      select(-STATION_NAME_FULL) %>%
+      group_by(site) %>%
+      slice(1) %>%
+      ungroup()
     df <- get_management(datafile = datafile)
     
     df <- df %>%

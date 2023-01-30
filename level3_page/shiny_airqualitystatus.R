@@ -33,8 +33,40 @@ df_parameter <- tribble(
   'SO\u2082','so2'
 )
 
+#' Create management level legend table
+#' This is generalized
+add_mgmt_legend <- function() {
+  df_colour_levels <- tribble(
+  ~colour_text,~colour_order,~colour,~actions,~txt_colour,
+  'N/A',0,'#dbdbdb','No Data','black',
+  'Green',1,'#A6D96A','Keep Clean Areas Clean','black',
+  'Yellow',2,'#FEE08B','Prevent Air Quality Deterioration','black',
+  'Orange',3,'#F46D43','Prevent CAAQS Exceedance','black',
+  'Red',4,'#A50026','Achieve CAAQS','white'
+) %>%
+  arrange(desc(colour_order))
 
+a <- DT::datatable(df_colour_levels %>%
+                     select(colour_text,actions) %>%
+                     rename(`Management Level` = colour_text,
+                            `Recommended Management Actions` = actions),
+                   rownames = FALSE,
+                   options = list(
+                     autoWidth = TRUE,
+                     borders = TRUE,
+                     scrollX = FALSE,
+                     paging = FALSE,
+                     ordering = FALSE,
+                     info =FALSE,
+                     searching = FALSE
+                   )
+) %>%
+  
+  formatStyle('Management Level',target = 'row',backgroundColor = styleEqual(df_colour_levels$colour_text,df_colour_levels$colour),
+              Color = styleEqual(df_colour_levels$colour_text,df_colour_levels$txt_colour)) 
 
+return(a)
+}
 
 #' Create maps of air zone and management levels
 #' 
@@ -57,6 +89,7 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
     size <- c('200px','400px')
     polygon_a = NULL
     airzone <- NULL
+    df <- readr::read_csv('./data/out/management.csv')
   }
   
   parameter <- toupper(df_parameter$parameter[df_parameter$display == parameter])
@@ -82,6 +115,20 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
     )
   
   df$colour[is.na(df$colour)] <- '#666565'  #grey colour for air zones with no value
+  
+  #add pop-up
+  df <- df %>%
+    ungroup() %>%
+    mutate(index = 1:n()) %>%
+    group_by(index) %>%
+    mutate(hover_txt =HTML(paste0('<p>',airzone,
+                                  ' Air Zone<br>Management Level:',
+                                  toupper(colour_text),'</p>',sep=''))) %>%
+    ungroup() %>% select(-index)
+  
+  
+ 
+  
   if (is.null(polygon_a)) {
     a <- leaflet(width = size[1],height = size[2],
                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
@@ -98,7 +145,7 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
       addPolygons(data = df$geometry,
                   layerId = df$airzone,
                   color = df$colour, weight = 0, opacity = 0, fillOpacity = 0.7,
-                  label = df$airzone,
+                  label = df$hover_txt,
                   labelOptions = labelOptions(textsize = "15px")) %>%
       addPolylines(data = df$geometry,
                    layerId = paste(df$airzone,'01'),
@@ -128,7 +175,7 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
       addPolygons(data = df$geometry,
                   layerId = df$airzone,
                   color = df$colour, weight = 0, opacity = 0, fillOpacity = 0.7,
-                  label = df$airzone,
+                  label = df$hover_txt,
                   labelOptions = labelOptions(textsize = "15px"))%>%
       addPolylines(data = df$geometry,
                    layerId = 'selectedairzone',
@@ -378,8 +425,11 @@ plot_bar_ranked0 <- function(df_caaqs_results,metric,year,airzone = NULL,df_stat
     dplyr::mutate(count =n()) %>%
     ungroup() %>%
     dplyr::mutate(label = ifelse(count >1,
-                                 paste(label,'\n(',tolower(instrument),')',sep=''),
+                                 paste(label,'(',tolower(instrument),')',sep=''),
                                  label)) %>%
+    mutate(label = gsub('pm25 ','',label,ignore.case = TRUE)) %>%
+    mutate(label = gsub('pm25_','',label,ignore.case = TRUE)) %>%
+    mutate(label = gsub('_','',label,ignore.case = TRUE)) %>%
     select(-count)
   #set order of site
   lvls_site <- df %>%
@@ -486,47 +536,54 @@ ui <- fluidPage(
       "))
     ),
     h1("Air Quality Status and Management Levels", class = "title"),
-           fluidRow(class = "toprow",
-           fluidRow(class = 'filters',
-             column(2,
-               tags$style(type='text/css', 
-                          '.selectize-input { font-size: 15px; line-height: 10px;} 
-                          .selectize-dropdown { font-size: 16px; line-height: 28px; }
+    fluidRow(class = "toprow",
+             fluidRow(class = 'filters',
+                      column(2,
+                             tags$style(type='text/css', 
+                                        '.selectize-input { font-size: 15px; line-height: 10px;} 
+                          .selectize-dropdown { font-size: 16px; line-height: 20px; }
                           .control-label {font-size: 24px; color: white !important;}
                           .irs-min {font-size: 0px; color: white; !important}
                           .irs-max {font-size: 0px; color: white;}
                           .irs-single {font-size: 20px; color: white;}
                           .irs-grid-text {font-size: 10px; color: white;}'
-                          ),
-               selectizeInput('pollutant',label = 'Pollutant:',
-                              choices = df_parameter$display           )
-               
-               
-               ),
-             column(6,
-               sliderInput('year_slider',label ='Year',
-                           min = min(df_management_airzones$year),
-                           max = max(df_management_airzones$year),
-                           value = year_initial,
-                           sep='')
-               ))),
+                             ),
+                             selectizeInput('pollutant',label = 'Pollutant:',
+                                            choices = df_parameter$display           )
+                             
+                             
+                      ),
+                      column(6,
+                             sliderInput('year_slider',label ='Year',
+                                         min = min(df_management_airzones$year),
+                                         max = max(df_management_airzones$year),
+                                         value = year_initial,
+                                         sep='')
+                      ))),
     
-           fluidRow(
-             column(4,leaflet::leafletOutput("map",height = 400)),
-           column(8,(div(style='height:400px;overflow-y: scroll;',
-                         plotOutput("plot1",height = "1200px")))))
-                  
-           
-           #        sidebarLayout(
-           # sidebarPanel(radioButtons("no Wildfire","wildfire-adjusted"),
-           # c('tfee' = 'tfee','notfee'='notfee')
-           # ))
-           # sidebarLayout(
-           #   sidebarPanel(leafletOutput("map"),width=5),
-           #   mainPanel (
-           #     uiOutput("md_file"),width=7
-           #   ))
-           
+    fluidRow(
+      
+      column(4,h6("Click the map to select an air zone"),
+             # fluidRow(
+             leaflet::leafletOutput("map",height = '400px')),
+             # fluidRow(
+             # DT::dataTableOutput("table1"))
+             # ),
+      column(8,h6("Use vertical scrollbar (right side of graph) to reveal more bar graphs."),(div(style='height:400px;overflow-y: scroll;',
+                    plotOutput("plot1",height = "1200px"))))),
+    fluidRow(DT::dataTableOutput("table1"))
+    
+    
+    #        sidebarLayout(
+    # sidebarPanel(radioButtons("no Wildfire","wildfire-adjusted"),
+    # c('tfee' = 'tfee','notfee'='notfee')
+    # ))
+    # sidebarLayout(
+    #   sidebarPanel(leafletOutput("map"),width=5),
+    #   mainPanel (
+    #     uiOutput("md_file"),width=7
+    #   ))
+    
   ))
 
 
@@ -539,13 +596,13 @@ server <- shinyServer(function(input, output) {
   
   output$map <- renderLeaflet(a)
   
-  output$plot1 <- renderPlot(height = "auto",res = 100,
-    plot_bar_ranked(df_caaqs_results = df_caaqs_results,
-                    pollutant = pollutant_initial,
-                    year=year_initial,
-                    airzone = NULL,
-                    df_stations = df_stations))
-  
+  output$plot1 <- renderPlot(height = "1200px",
+                             plot_bar_ranked(df_caaqs_results = df_caaqs_results,
+                                             pollutant = pollutant_initial,
+                                             year=year_initial,
+                                             airzone = NULL,
+                                             df_stations = df_stations))
+  output$table1 <- DT::renderDT(add_mgmt_legend())
   observeEvent(input$map_shape_click, {
     
     
