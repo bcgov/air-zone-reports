@@ -127,7 +127,7 @@ result_table <- a %>%
   mutate(ref_2000 = 100 *-(`2000` - `2020`)/`2000`) %>%
   mutate(ref_2010 = 100 *-(`2010` - `2020`)/`2010`) 
 
-result <- list(totals = result_totals, pollutants = result_bar_stack, table =result_table)
+result <- list(totals = result_totals, pollutants = result_bar_stack, table =result_table, data =a)
 
 return(result)
 }

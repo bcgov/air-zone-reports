@@ -154,5 +154,5 @@ plotly::plot_ly(x=~year,y=~percentAbove,color =~reorder(label,order),
   ) %>%
   plotly::layout(hovermode = 'x unified')
 
-return(list(table = result_table,ggplot = result_ggplot,plotly = result_plotly))
+return(list(table = result_table,ggplot = result_ggplot,plotly = result_plotly,data = a))
 }

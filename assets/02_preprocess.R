@@ -69,6 +69,35 @@ for (outputtype in df_exceedances$outputtype) {
 }
 
 
+#for some spatial averaging
+#average all measurements from each air zone
+#average the air zone altogether....
+#removes bias from spatial, taking each air zone equal weight
 
 
+#special look at PM2.5, 24-hour metric
 
+lst_stations <- listBC_stations(use_CAAQS=TRUE)
+
+lst_remove <- lst_stations %>%
+  filter(AQMS =='N') %>%
+  pull(STATION_NAME)
+
+raw_data_pm25 <- raw_data %>%
+  filter(PARAMETER == 'PM25') 
+
+raw_data_PM25_excess <- raw_data_pm25 %>%
+  
+  filter(!is.na(RAW_VALUE)) %>%
+  filter(!STATION_NAME %in% lst_remove) %>%
+  group_by(STATION_NAME,INSTRUMENT,DATE) %>%
+  dplyr::summarise(value_24 = mean(RAW_VALUE,na.rm = TRUE), valid_n =n()) %>%
+  filter(valid_n>=0.75*24) %>%
+  filter(envair::round2(value_24,0)>27) 
+
+saveRDS(raw_data_PM25_excess,'./data/out/pm25_excess_dates.Rds')
+
+excess_daily <- raw_data_PM25_excess %>%
+  mutate(YEAR = year(DATE), MONTH = paste(month))
+  group_by(DATE) %>%
+  mutate()
