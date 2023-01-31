@@ -250,13 +250,11 @@ It is implemented across Canada to deal with reduce the emissions and levels of 
 <a id="Air Pollutants"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Major Air Pollutants</h2></center></div></div>
 ```
-# There are Four Pollutants Featured in This Air Zone Report
+# Four Pollutants are Included in This Air Zone Report
 
-## Fine Particulate Matter, Ozone, Nitrogen Dioxide, and Sulphur Dioxide
+## Fine Particulate Matter, Ozone, Nitrogen Dioxide, and Sulphur Dioxide....
 
-These are considered pollutants of major concern due to their effects on health and the environment. As a result of these concerns, these pollutants were priority for standards setting. The Canadian Ambient Air Quality Standards (CAAQS) was developed for fine particulate matter and ozone in 2012, and these were following by nitrogen dioxide and sulphur dioxide in 2015.
-
-According to the Environment Management Act, an air contaminant or pollutant means a substance introduced into the air that can affect the health or safety of a person, visibility, and may cause damage or injury to property, life form, and the environment.
+are considered pollutants of major concern due to their effects on health and the environment. As a result of these concerns, these pollutants were priority for standards setting. The Canadian Ambient Air Quality Standards (CAAQS) was developed for fine particulate matter and ground-level ozone in 2012, and these were followed by nitrogen dioxide and sulphur dioxide in 2015.
 
 ```{=html}
 
@@ -297,8 +295,9 @@ According to the Environment Management Act, an air contaminant or pollutant mea
 <button class="accordion">Fine Particulate Matter (PM<sub>2.5</sub>)</button>
 <div class="panel">
   <p>
-  Particulate matter (PM) consists of airborne particles in solid or liquid form. PM may be classified as primary or secondary, depending on the process that led to its formation. Primary PM is emitted directly into the atmosphere from a source, such as a smokestack or exhaust pipe, or from wind-blown soils or vehicle traffic on a dirt road. Secondary PM is formed in the atmosphere through a series of chemical and physical reactions involving gases such as sulphur oxides (SOx) and nitrogen oxides (NOx). PM exists in various sizes and the particles of most concern for human health are those with a diameter of less than 2.5 micrometres (PM<sub>2.5</sub>).
-  There are two metrics for PM<sub>2.5</sub>. 
+  PM<sub>2.5</sub> refers to solid particles and liquid droplets suspended in air that are smaller than or equal to 2.5 micrometres (µm) in aerodynamic diameter. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM2.5 is considered a non-threshold pollutant, that is there are associated adverse health effects at any level of exposure
+  
+  In this report, PM<sub>2.5</sub> is presented using any of the two metrics. 
   - an annual metric for estimating long term exposure
   - a 24-hour metric for estimating short term or acute exposure
   </p>
@@ -306,21 +305,21 @@ According to the Environment Management Act, an air contaminant or pollutant mea
 
 <button class="accordion">Ground-Level Ozone (O<sub>3</sub>)</button>
 <div class="panel">
-  Ground-level ozone (O3), is a colourless, odourless and highly irritating gas that forms close to the Earth’s surface. O3 is a major component of smog. In contrast to “primary” pollutants which are emitted directly into the atmosphere from a source, O3 is considered a “secondary” pollutant because it is formed through complex chemical reactions between nitrogen oxides (NOx) and volatile organic compounds (VOCs) in the presence of sunlight. While O3 at ground-level is a significant environmental and health concern, approximately 10 to 40 kilometres above the Earth's surface, there is a beneficial layer of stratospheric ozone which shields the earth from harmful ultraviolet radiation. Ozone is also a short-lived climate pollutant and also contributes to climate change.
+  Ground-level ozone (O<sub>3</sub>), is a colourless, odourless and highly irritating gas that forms close to the Earth’s surface. O<sub>3</sub> is a major component of smog. In contrast to “primary” pollutants which are emitted directly into the atmosphere from a source, O3 is considered a “secondary” pollutant because it is formed through complex chemical reactions between nitrogen oxides (NOx) and volatile organic compounds (VOCs) in the presence of sunlight. While O<sub>3</sub> at ground-level is a significant environmental and health concern, approximately 10 to 40 kilometres above the Earth's surface, there is a beneficial layer of stratospheric ozone which shields the earth from harmful ultraviolet radiation. Ozone is also a short-lived climate pollutant and also contributes to climate change.
   </p>
 </div>
 
 <button class="accordion">Nitrogen Dioxide (NO<sub>2</sub>)</button>
 <div class="panel">
   <p>
-  Nitrogen dioxide (NO2) belongs to the oxides of nitrogen group of compounds (NOx) that are formed primarily through the burning of fossil fuels. While transportation sources represent over half of all emissions, energy production and industrial processes also emit significant amounts of NOx, mainly as Nitric Oxide (NO) and Nitrogen Dioxide (NO2). NO2 at higher concentrations has a strong, harsh odour and can typically be seen over large cities as a brownish haze. Once formed, NO2 can combine with water molecules in the air to form compounds like nitric acid and nitrous acid. Ultimately, these compounds fall to earth through precipitation (such as rain, snow and fog) where they contribute to the acidification and eutrophication of ecosystems.
+  Nitrogen dioxide (NO<sub>2</sub>) belongs to the oxides of nitrogen group of compounds (NOx) that are formed primarily through the burning of fossil fuels. While transportation sources represent over half of all emissions, energy production and industrial processes also emit significant amounts of NOx, mainly as Nitric Oxide (NO) and Nitrogen Dioxide (NO<sub>2</sub>). NO2 at higher concentrations has a strong, harsh odour and can typically be seen over large cities as a brownish haze. Once formed, NO<sub>2</sub> can combine with water molecules in the air to form compounds like nitric acid and nitrous acid. Ultimately, these compounds fall to earth through precipitation (such as rain, snow and fog) where they contribute to the acidification and eutrophication of ecosystems.
   </p>
 </div>
 
 <button class="accordion">Sulphur Dioxide (SO<sub>2</sub>)</button>
 <div class="panel">
   <p>
-  Sulphur dioxide (SO2) is a colourless gas that smells like burnt matches. It belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO2 is emitted when fossil fuels or raw materials containing sulphur are burned or used in an industrial process like metal ore smelting or electric power generation. It can also be produced in large quantities during extraction and processing of fossil fuels. SO2 contributes to the formation of PM2.5 and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain, snow and fog.
+  Sulphur dioxide (SO<sub>2</sub>) is a colourless gas that smells like burnt matches. It belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO<sub>2</sub> is emitted when fossil fuels or raw materials containing sulphur are burned or used in an industrial process like metal ore smelting or electric power generation. It can also be produced in large quantities during extraction and processing of fossil fuels. SO<sub>2</sub> contributes to the formation of PM<sub>2.5</sub> and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain, snow and fog.
   </p>
 </div>
 
@@ -347,7 +346,7 @@ for (i = 0; i < acc.length; i++) {
 ```{=html}
 <!-- Jumping Points -->
 <a id="Where Pollutants Come From"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Levels in B.C. Air Zones</h2></center></div></div>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Source Of Pollution</h2></center></div></div>
 ```
 There are many natural and non-natural (anthropogenic) sources of air pollution. An estimate of the sources of air pollution is made through emission inventories. The inentories takes into account industrial and mobile emission sources. These
 
