@@ -23,7 +23,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
     airzone <- NULL
     size = c("300px","300px")
     polygon_a = NULL
-    airzone <- 'Southern Interior'
+    airzone <- 'NULL'
   }
   
   
@@ -62,10 +62,20 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
   #   st_intersection(st_geometry(bc_bound())) %>%
   #   group_by(airzone = Airzone) %>%
   #   summarize() %>%
-  #   st_transform(4326) %>%
+  #   st_transform(4326)
+  #   saveRDS(az_mgmt,'./data/out/az_mgmt.Rds')
+  # 
+  
+  
+  
+  # left_join(df_colour,by='airzone')
+  
+  
   az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
   liststations_URL <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/liststations.csv'
   
+ 
+ 
   az_mgmt <- readRDS(url(az_mgmt_gitURL)) %>%
     left_join(df_colour,by='airzone')
   
@@ -81,14 +91,15 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
       filter(index ==1) %>% select(-index) %>%
       ungroup()
     
-    a <- leaflet(width = size[1],height = size[2],
+    a <-
+    leaflet(width = size[1],height = size[2],
                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
       set_bc_view(zoom=4) %>%
       setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-      addProviderTiles(providers$Stamen.TonerLines,
+      addProviderTiles(providers$Esri.WorldStreetMap,
                        options = providerTileOptions(noWrap = TRUE)
       ) %>%
-      add_bc_home_button() 
+      add_bc_home_button()
     
     for (airzone_ in df_colour$airzone) {
       liststations_ <- liststations %>% filter(AIRZONE == airzone_)
@@ -98,10 +109,9 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
                     layerId = airzone_,
                     color = 'black',
                     fillColor = ~colour_01,
-                    weight = 1, opacity = 1, fillOpacity = 1,
+                    weight = 1, opacity = 1, fillOpacity = 0.7,
                     label = paste(airzone_,'Air Zone'),
                     labelOptions = labelOptions(textsize = "15px"),
-                    
                     highlight = highlightOptions(weight = 3,
                                                  color = "blue",
                                                  bringToFront = TRUE))
@@ -129,7 +139,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
                     color = 'black',
                     fillColor = ~colour_01,
                     # fillColor = df_mgmt_results$colour[df_mgmt_results$airzone == 'Central Interior'],
-                    weight = 1, opacity = 1, fillOpacity = 1,
+                    weight = 1, opacity = 1, fillOpacity = 0.7,
                     # popup = '<img src="https://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/services-policies-for-government/policies-procedures-standards/web-content-development-guides/corporate-identity-assets/visid-illustrations/c00_img_bcmark_desc.gif" alt="Girl in a jacket">',
                     label = paste(airzone_,'Air Zone'),
                     labelOptions = labelOptions(textsize = "15px"),
@@ -210,6 +220,12 @@ server <- shinyServer(function(input, output) {
   
   #initial map
   www_git_url <- 'https://github.com/bcgov/air-zone-reports/raw/master/level2_page/www/'
+  
+  #debug for use of local files
+  if (0) {
+    www_git_url <- './www/'
+  }
+  
   #t_ready means it is ready to receive clicks
   a <- graph_airzone(polygon_a=NULL,airzone=NULL,size = c('200px','400px'))
   output$map <- renderLeaflet(a)
