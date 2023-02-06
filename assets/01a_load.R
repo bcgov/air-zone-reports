@@ -87,3 +87,4 @@ df_current_list %>%
 
 df_current_list_airzone %>%
   readr::write_csv(paste(dirs_location,'management_airzones.csv',sep='/'))
+

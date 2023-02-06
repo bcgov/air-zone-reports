@@ -625,14 +625,14 @@ get_management <- function(datafile = NULL) {
     
   
   
-  
+
   #Calculate 2020 CAAQS and onwards
   df_2015 <- df %>%
-    filter(metric %in% df_CAAQS_Updates$metric,
+    filter(metric %in% df_levels_current$metric,
            year <2020)
   
   df_2020 <- df %>%
-    filter(!(metric %in% df_CAAQS_Updates$metric &
+    filter(!(metric %in% df_levels_current$metric &
            year <2020))
   
   df_result_old <- assess_levels(df=df_2015,df_levels = df_levels_old)

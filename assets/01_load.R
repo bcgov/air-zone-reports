@@ -21,7 +21,7 @@
 # multiple attempts to ensuer it will be at './R'
 saveDirectory <- './data/out'
 dir.create(saveDirectory,recursive = TRUE)
-years <- 2013:2021
+years <- 2013:2022
 
 
 print(getwd())
@@ -56,6 +56,21 @@ download.file(url = 'https://data-donnees.ec.gc.ca/data/substances/monitor/canad
 #add if active within the past 5 years
 envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) %>%
   saveRDS(paste(saveDirectory,'liststations_merged.Rds',sep='/'))
+
+#create tfee list
+envair::get_tfee() %>%
+  readr::write_csv(paste(saveDirectory,'tfee.csv',sep='/'))
+
+#secondary_test tfee
+pm25_tfee_prelim <- readr::read_csv('./data/out/pm25_tfee_2022_prelim.csv') %>%
+  mutate(PARAMETER = 'PM25') 
+pm25_tfee <- envair::get_tfee() 
+
+pm25_tfee %>%
+  mutate(DATE = as.Date(DATE)) %>%
+  bind_rows(pm25_tfee_prelim) %>%
+  readr::write_csv(paste(saveDirectory,'tfee.csv',sep='/'))
+
 
 #create quick mapping details
 bcmaps::airzones() %>%
