@@ -24,7 +24,8 @@ if (0) {
 
 #define functions-------
 
-map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px','400px')) {
+map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px','400px'),
+                           airzone = NULL) {
   
   if (0) {
     source('./level4_page/03_setup.R')
@@ -40,6 +41,7 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
     size <- c('200px','400px')
     
   }
+  
   df_colour <- tribble(
     ~airzone,~colour_01,
     "Northeast",'#CDC08C',
@@ -50,6 +52,8 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
     "Coastal",'#CEAB07',
     "Northwest","#24281A"
   )
+  
+  airzone_select <- airzone
   
   lst_airzones <- az_mgmt %>%
     pull(airzone)
@@ -145,6 +149,19 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
       #            options=markerOptions())
       
     }
+  }
+  
+  #add for selected airzone
+  if (!is.null(airzone_select)) {
+    print(paste('updating,highlighting area',airzone_select))
+    a <- a %>%
+      addPolylines(data = az_mgmt %>% filter(airzone == airzone_select),
+                   layerId = 'selectedairzone',
+                   group = 'airzonehighlight',
+                   color = 'blue',weight = 5)
+  } else {
+    a <- a %>%
+      clearGroup('airzonehighlight')
   }
   plot_a <- a
   
@@ -702,7 +719,7 @@ plots_list <- graph_exceedance(exceedances = exceedances,list_airzones = lst_air
 
 #---SHINY SECTION----------------
 # Actual shiny part
-
+##ui section----
 ui <- {fluidPage(
   fluidPage(
     # CSS
@@ -770,7 +787,7 @@ ui <- {fluidPage(
   ))
 }
 
-
+##server section----
 server <- {shinyServer(function(input, output) {
   
   if (0) {
@@ -824,6 +841,9 @@ server <- {shinyServer(function(input, output) {
         output$plot1 <- renderPlotly(plots_list$plot_seasonal[[which(plots_list$plot_definition == airzone_select)]])
         print('Plot Refreshed')
       }
+      
+      leafletProxy("map") %>%
+        map_exceedance(exceedances = exceedances ,az_mgmt = az_mgmt,year =input$year_slider,airzone = airzone_select)
     })
     
     
