@@ -122,9 +122,9 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
     
     #add stations
     if (nrow(liststations_) >0) {
-      print('trace inside map function')
-      print(nrow(liststations_))
-      print(year_select)
+      # print('trace inside map function')
+      # print(nrow(liststations_))
+      # print(year_select)
       
       a <- a %>%
         #remove all stations from that airzone
@@ -535,37 +535,14 @@ get_airzone <- function(lat,long) {
   return(pnts$airzone)
   
 }
-
-#end of functions-----
-
-#define colours-----
-
-df_colour <- tribble(
-  ~airzone,~colour_01,
-  "Northeast",'#CDC08C',
-  "Georgia Strait"  ,'#F4B5BD',
-  "Southern Interior",'#9C964A',
-  "Lower Fraser Valley",'#85D4E3',
-  "Central Interior" ,'#FAD77B',
-  "Coastal",'#CEAB07',
-  "Northwest","#24281A"
-)
-lst_airzones <- df_colour$airzone
-
-#define external data------
-exceedances <- get_PM_exceedancesummary(dirs_location)
-az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
-  left_join(df_colour)
-# plots <- graph_exceedance(exceedances =exceedances )
-
 #' create graphs for days exceeding
 #' 
 #' @param exceedances is the result of get_PM_exceedance() function
-graph_exceedance <- function(exceedances,airzone = NULL,list_airzones = lst_airzones) {
+graph_exceedance <- function(exceedances,list_airzones,year = NULL) {
   if (0) {
     source('./level4_page/02_setup.R')
     dirs_location <- './data/out'
-    airzone <- NULL
+    
   }
   
   require(tidyr)
@@ -577,7 +554,7 @@ graph_exceedance <- function(exceedances,airzone = NULL,list_airzones = lst_airz
     'Summer',2,
     'Fall',1
   )
-  
+  year_select <- year
   
   
   # View(exceedances$season_stations)
@@ -607,71 +584,119 @@ graph_exceedance <- function(exceedances,airzone = NULL,list_airzones = lst_airz
   
   
   
-  # result_totals <-
   
+  vline <- function(x = 0, color = "red") {
+    list(
+      type = "line", 
+      y0 = 0, 
+      y1 = 1, 
+      yref = "paper",
+      x0 = x, 
+      x1 = x, 
+      line = list(color = color,dash = 'dash')
+      
+    )
+  }
   
-  p_annual <-   df_annual %>%
+  p_annual <-
+    df_annual %>%
     filter(!AIRZONE %in% c('BC',NA)) %>% 
-    filter(year>=2000) %>%
+    filter(year>=1997) %>%
     plotly::plot_ly(x=~year,y=~days_exceed,color = ~AIRZONE,
                     type='scatter',mode='lines',showlegend =T,
                     hoverinfo ='y',
                     hovertemplate = paste('%{y:,.0f}',' days',sep='')
                     
     ) %>%
-    layout(legend = list(orientation = 'h'),
+    layout(title = 'High PM<sub>2.5</sub> Levels in Air Zones',
+           legend = list(orientation = 'v'),
            yaxis = list(title = 'Number of Days with High PM<sub>2.5</sub> Levels'),
            xaxis = list(title = 'Year')
     ) %>%
     plotly::layout(hovermode = 'x unified',
-                   barmode = 'stack',legend = list(x = 0.1, y = 0.9))
+                   barmode = 'stack') %>%
+    layout(shapes = list(vline(year_select)))%>% 
+    event_register("plotly_click")
+  
+  
   
   #create results for BC, and all air zones
-  p_list <- NULL
-  i_list <- NULL
-  i <- 0
-  for (AIRZONE in c('BC',lst_airzones)) {
-    i <- i +1
-    
-    p_seasonal <- df_seasonal %>%
-      left_join(df_seasons) %>%
-      filter(AIRZONE %in% airzone) %>%
-      filter(year >=2000) %>%
+  {
+    p_list <- NULL
+    i_list <- NULL
+    i <- 0
+    for (AIRZONE_ in c('BC',lst_airzones)) {
+      i <- i +1
       
-      plotly::plot_ly(x=~year,y=~value,color = ~reorder(seasons,order),
-                      type='bar',mode='bar',showlegend =T,
-                      hoverinfo ='y',
-                      hovertemplate = paste('%{y:,.0f}',' days',sep=''),
-                      colors = c("navajowhite2",
-                                 "navajowhite3",
-                                 "seagreen3",
-                                 "seagreen4",
-                                 "red3",
-                                 "red4",
-                                 "slategray2",
-                                 'slategray4'
-                                 
-                                 
-                      )
-                      
-      ) %>%
-      layout(title = paste('Seasonal Plot for',AIRZONE),
-             legend = list(orientation = 'h'),
-             yaxis = list(title = 'Number of Days with High PM<sub>2.5</sub> Levels'),
-             xaxis = list(title = 'Year')
-      ) %>%
-      plotly::layout(hovermode = 'x unified',
-                     barmode = 'stack',legend = list(x = 0.1, y = 0.9))
+      p_seasonal <- df_seasonal %>%
+        left_join(df_seasons,by = 'seasons') %>%
+        filter(AIRZONE == AIRZONE_) %>%
+        filter(year >=2000) %>%
+        
+        plotly::plot_ly(x=~year,y=~value,color = ~reorder(seasons,order),
+                        type='bar',mode='bar',showlegend =T,
+                        hoverinfo ='y',
+                        hovertemplate = paste('%{y:,.0f}',' days',sep=''),
+                        colors = c("navajowhite2",
+                                   "navajowhite3",
+                                   "seagreen3",
+                                   "seagreen4",
+                                   "red3",
+                                   "red4",
+                                   "slategray2",
+                                   'slategray4'
+                                   
+                                   
+                        )
+                        
+        ) %>%
+        layout(title = paste('<br>High PM<sub>2.5</sub> Levels for',
+                             ifelse(AIRZONE == 'BC',AIRZONE_,
+                                    paste('the',AIRZONE_,'Air Zone')
+                             )),
+               
+               legend = list(orientation = 'h'),
+               yaxis = list(title = 'Number of Days with High PM<sub>2.5</sub> Levels'),
+               xaxis = list(title = 'Year')
+        ) %>%
+        plotly::layout(hovermode = 'x unified',
+                       barmode = 'stack',legend = list(x = 0.01, y = 0.9))%>%
+        layout(shapes = list(vline(year_select)))
+      
+      p_list[[i]] <- p_seasonal
+      i_list <- c(i_list,AIRZONE_)
+      
+    }
     
-    p_list[[i]] <- p_seasonal
-    i_list[[i]] <- AIRZONE
-    
-  }
-  
-  result <- list(plot_annual = p_annual,plot_seasonal = p_list,plot_definitiion = i_list, data = exceedances)
+    result <- list(plot_annual = p_annual,plot_seasonal = p_list,plot_definition = i_list, data = exceedances)
+    }
   return(result)
   
 }
+
+
+#end of functions-----
+
+#define colours-----
+
+df_colour <- tribble(
+  ~airzone,~colour_01,
+  "Northeast",'#CDC08C',
+  "Georgia Strait"  ,'#F4B5BD',
+  "Southern Interior",'#9C964A',
+  "Lower Fraser Valley",'#85D4E3',
+  "Central Interior" ,'#FAD77B',
+  "Coastal",'#CEAB07',
+  "Northwest","#24281A"
+)
+
+lst_airzones <- df_colour$airzone
+
+#define external data------
+exceedances <- get_PM_exceedancesummary(dirs_location)
+az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
+  left_join(df_colour)
+plots_list <- graph_exceedance(exceedances = exceedances,list_airzones = lst_airzones,year =  max(exceedances$annual$year))
 
 
 
@@ -708,7 +733,7 @@ ui <- {fluidPage(
                           .irs-grid-text {font-size: 10px; color: white;}'
                              ),
                              sliderInput('year_slider',label ='Year',
-                                         min = 1995,
+                                         min = 1997,
                                          max = max(exceedances$annual$year),
                                          value = max(exceedances$annual$year),
                                          sep='')
@@ -727,9 +752,9 @@ ui <- {fluidPage(
       #                                                                                             plotOutput("plot1",height = "1200px"))))
       
       
-      column(8,h6("Use vertical scrollbar (right side of graph) to reveal more bar graphs."),
-             (div(style='height:400px;overflow-y: scroll;',
-                  plotlyOutput("plot1",height = "1200px"))))
+      column(8,h6("Scroll through the graph to view the values for each year"),
+             #(div(style='height:400px;overflow-y: scroll;',
+             plotlyOutput("plot1",height = "400px"))
     )
     
     #        sidebarLayout(
@@ -751,11 +776,21 @@ server <- {shinyServer(function(input, output) {
   if (0) {
     map_exceedance(exceedances = exceedances, az_mgmt = az_mgmt, year = 2010)
   }
+  
+  #reactive_plot1 can carry over plots across events
+  reactive_plot1 <- reactiveVal(plots_list)
+  
+  
   a <-    map_exceedance(map_a = NULL,exceedances = exceedances ,az_mgmt = az_mgmt,year = max(exceedances$annual$year))
   
   output$map <- renderLeaflet(a)
   
-  output$plot1 <- renderPlotly(plots$plot_seasonal)
+  
+  output$plot1 <- renderPlotly({plot_out <- plots_list$plot_annual
+  plot_out %>% ggplotly(source = 'plot1') %>% event_register("plotly_click")}
+  )
+  
+  
   observeEvent(input$year_slider,
                {
                  print('Slider')
@@ -765,8 +800,15 @@ server <- {shinyServer(function(input, output) {
                    map_exceedance(exceedances = exceedances ,az_mgmt = az_mgmt,year =input$year_slider)
                  
                  
+                 plots_list <- graph_exceedance(exceedances = exceedances,list_airzones = lst_airzones,year = input$year_slider)
+                 reactive_plot1(plots_list)   #pass on value to reactive_plot1
+                 # output$plot1 <- renderPlotly(plots_list$plot_annual)
+                 output$plot1 <- renderPlotly({plot_out <- plots_list$plot_annual
+                 plot_out %>% ggplotly(source = 'plot1') %>% event_register("plotly_click")}
+                 )
                })
   
+  #clicking the map, an airzone is selected
   observeEvent(input$map_shape_click, {
     
     
@@ -777,84 +819,21 @@ server <- {shinyServer(function(input, output) {
       print(p$lat)
       print(p$lng)
       print(airzone_select)
+      plots_list <- reactive_plot1()
+      if (airzone_select != 'Northwest') {
+        output$plot1 <- renderPlotly(plots_list$plot_seasonal[[which(plots_list$plot_definition == airzone_select)]])
+        print('Plot Refreshed')
+      }
     })
     
     
   })
   
-  # 
-  # output$plot1 <- renderPlot(height = "1200px",
-  #                            plot_bar_ranked(df_caaqs_results = df_caaqs_results,
-  #                                            pollutant = pollutant_initial,
-  #                                            year=year_initial,
-  #                                            airzone = NULL,
-  #                                            df_stations = df_stations))
-  # output$table1 <- DT::renderDT(add_mgmt_legend())
-  # observeEvent(input$map_shape_click, {
-  #   
-  #   
-  #   p <- input$map_shape_click
-  #   
-  #   try({
-  #     airzone_select <- get_airzone(p$lat,p$lng)
-  #     print(p$lat)
-  #     print(p$lng)
-  #     print(airzone_select)
-  #     
-  #     
-  #     leafletProxy("map") %>%
-  #       map_airzone(df=df_management_airzones,az_mgmt = az_mgmt,
-  #                   parameter = input$pollutant,
-  #                   year = input$year_slider,
-  #                   tfee = tfee_initial,
-  #                   airzone = airzone_select)
-  #     
-  #     output$plot1 <- renderPlot(
-  #       plot_bar_ranked(df_caaqs_results = df_caaqs_results,
-  #                       pollutant = input$pollutant,
-  #                       year=input$year_slider,
-  #                       airzone = airzone_select,
-  #                       df_stations = df_stations))
-  #     
-  #   })
-  # })
-  # 
-  # observeEvent(input$year_slider,
-  #              {
-  #                print('Slider')
-  #                leafletProxy("map") %>%
-  #                  map_airzone(df=df_management_airzones,az_mgmt = az_mgmt,
-  #                              parameter = input$pollutant,
-  #                              year = input$year_slider,
-  #                              tfee = tfee_initial,
-  #                              airzone = NULL)
-  #                
-  #                output$plot1 <- renderPlot(
-  #                  plot_bar_ranked(df_caaqs_results = df_caaqs_results,
-  #                                  pollutant = input$pollutant,
-  #                                  year=input$year_slider,
-  #                                  airzone = NULL,
-  #                                  df_stations = df_stations))
-  #              })
-  # 
-  # observeEvent(input$pollutant,
-  #              {
-  #                print('change pollutant')
-  #                leafletProxy("map") %>%
-  #                  map_airzone(df=df_management_airzones,az_mgmt = az_mgmt,
-  #                              parameter = input$pollutant,
-  #                              year = input$year_slider,
-  #                              tfee = tfee_initial,
-  #                              airzone = NULL)
-  #                
-  #                output$plot1 <- renderPlot(
-  #                  plot_bar_ranked(df_caaqs_results = df_caaqs_results,
-  #                                  pollutant = input$pollutant,
-  #                                  year=input$year_slider,
-  #                                  airzone = NULL,
-  #                                  df_stations = df_stations))
-  #                
-  #              })
+  #clicking on the graph
+  observeEvent(event_data("plotly_click", source = "plot1"), { 
+    values$plot.click.results <- event_data("plotly_click", source = "plot1") 
+    print(values$plot.click.results)
+  })
   
 })
 }
