@@ -37,35 +37,35 @@ df_parameter <- tribble(
 #' This is generalized
 add_mgmt_legend <- function() {
   df_colour_levels <- tribble(
-  ~colour_text,~colour_order,~colour,~actions,~txt_colour,
-  'N/A',0,'#dbdbdb','No Data','black',
-  'Green',1,'#A6D96A','Keep Clean Areas Clean','black',
-  'Yellow',2,'#FEE08B','Prevent Air Quality Deterioration','black',
-  'Orange',3,'#F46D43','Prevent CAAQS Exceedance','black',
-  'Red',4,'#A50026','Achieve CAAQS','white'
-) %>%
-  arrange(desc(colour_order))
-
-a <- DT::datatable(df_colour_levels %>%
-                     select(colour_text,actions) %>%
-                     rename(`Management Level` = colour_text,
-                            `Recommended Management Actions` = actions),
-                   rownames = FALSE,
-                   options = list(
-                     autoWidth = TRUE,
-                     borders = TRUE,
-                     scrollX = FALSE,
-                     paging = FALSE,
-                     ordering = FALSE,
-                     info =FALSE,
-                     searching = FALSE
-                   )
-) %>%
+    ~colour_text,~colour_order,~colour,~actions,~txt_colour,
+    'N/A',0,'#dbdbdb','No Data','black',
+    'Green',1,'#A6D96A','Keep Clean Areas Clean','black',
+    'Yellow',2,'#FEE08B','Prevent Air Quality Deterioration','black',
+    'Orange',3,'#F46D43','Prevent CAAQS Exceedance','black',
+    'Red',4,'#A50026','Achieve CAAQS','white'
+  ) %>%
+    arrange(desc(colour_order))
   
-  formatStyle('Management Level',target = 'row',backgroundColor = styleEqual(df_colour_levels$colour_text,df_colour_levels$colour),
-              Color = styleEqual(df_colour_levels$colour_text,df_colour_levels$txt_colour)) 
-
-return(a)
+  a <- DT::datatable(df_colour_levels %>%
+                       select(colour_text,actions) %>%
+                       rename(`Management Level` = colour_text,
+                              `Recommended Management Actions` = actions),
+                     rownames = FALSE,
+                     options = list(
+                       autoWidth = TRUE,
+                       borders = TRUE,
+                       scrollX = FALSE,
+                       paging = FALSE,
+                       ordering = FALSE,
+                       info =FALSE,
+                       searching = FALSE
+                     )
+  ) %>%
+    
+    formatStyle('Management Level',target = 'row',backgroundColor = styleEqual(df_colour_levels$colour_text,df_colour_levels$colour),
+                Color = styleEqual(df_colour_levels$colour_text,df_colour_levels$txt_colour)) 
+  
+  return(a)
 }
 
 #' Create maps of air zone and management levels
@@ -91,6 +91,7 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
     airzone <- NULL
     df <- readr::read_csv('./data/out/management.csv')
   }
+  
   
   parameter <- toupper(df_parameter$parameter[df_parameter$display == parameter])
   airzone_select <- airzone
@@ -127,9 +128,10 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
     ungroup() %>% select(-index)
   
   
- 
+  
   
   if (is.null(polygon_a)) {
+    print('null polygon_a')
     a <- leaflet(width = size[1],height = size[2],
                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
       set_bc_view(zoom=3.5) %>%
@@ -566,11 +568,11 @@ ui <- fluidPage(
       column(4,h6("Click the map to select an air zone"),
              # fluidRow(
              leaflet::leafletOutput("map",height = '400px')),
-             # fluidRow(
-             # DT::dataTableOutput("table1"))
-             # ),
+      # fluidRow(
+      # DT::dataTableOutput("table1"))
+      # ),
       column(8,h6("Use vertical scrollbar (right side of graph) to reveal more bar graphs."),(div(style='height:400px;overflow-y: scroll;',
-                    plotOutput("plot1",height = "1200px"))))),
+                                                                                                  plotOutput("plot1",height = "1200px"))))),
     fluidRow(DT::dataTableOutput("table1"))
     
     
@@ -603,6 +605,7 @@ server <- shinyServer(function(input, output) {
                                              airzone = NULL,
                                              df_stations = df_stations))
   output$table1 <- DT::renderDT(add_mgmt_legend())
+  
   observeEvent(input$map_shape_click, {
     
     

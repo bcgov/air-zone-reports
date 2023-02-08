@@ -232,7 +232,7 @@ This annual report, titled "Air Zone Report (2019-2021)", summarizes B.C.'s air 
 ```
 ### The national Air Quality Management System (AQMS) provides a collaborative and comprehensive framework for managing air quality.
 
-It is implemented across Canada to deal with reduce the emissions and levels of various pollutants of concern. In order to help manage in the management of air quality, B.C. is divided into seven air zones.
+It is implemented across Canada to deal with reduce the emissions and levels of various pollutants of concern. In order to facilitate the management of air quality, B.C. is divided into seven air zones.
 
 ```{=html}
 <style>
