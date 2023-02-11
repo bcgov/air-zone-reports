@@ -1,7 +1,7 @@
 #' CREATE TRENDS of air quality in BC
 #' 
 #' @param dirs_location is the location of the data files
-get_trends <- function(dirs_location = './data/out') {
+get_trends <- function(dirs_location = './data/out',reporting_year=NULL) {
 library(dplyr)
 library(readr)
 library(ggplot2)
@@ -10,7 +10,9 @@ library(plotly)
 # dirs_location <- './data/out'  #local location, two dots for final, one dot for debug
 if (0) {
   dirs_location <- './data/out'
+  reporting_year <- 2021
 }
+
 
 list.files(dirs_location)
 
@@ -18,7 +20,12 @@ df_data_trends_caaqs <- readr::read_csv(paste(dirs_location,'caaqs_results.csv',
 df_data_trends_annual <- readr::read_csv(paste(dirs_location,'annual_results.csv',sep='/')) %>%
   filter(!is.na(value),value>-10)
 
-maxyear <- max(df_data_trends_caaqs$year)
+if (is.null(reporting_year)) {
+  reporting_year <- max(df_data_trends_caaqs$year)
+}
+
+maxyear <- reporting_year
+
 df_stations <- readr::read_csv(paste(dirs_location,'liststations.csv',sep='/')) %>%
   mutate(AQMS = ifelse(is.na(AQMS),'N/A',AQMS)) %>%
   filter(AQMS != 'N') %>%
@@ -91,9 +98,10 @@ df_data_trends_annual_airzone <- df_data_trends_annual_airzone %>%
 
 #create reference years
 #this shows how many percent increase or decrease in value
-result_table <- df_BC_summary_ref<- df_data_trends_annual_airzone %>%
+# result_table <- 
+df_BC_summary_ref<- df_data_trends_annual_airzone %>%
   filter(year %in% c(1990,2000,2010,maxyear)) %>%
-  select(parameter,year,metric,AIRZONE,value_avg) %>%
+  select(parameter,year,metric,AIRZONE,value_avg) %>% 
   tidyr::pivot_wider(names_from = year, values_from = value_avg) %>%
   mutate(perc_2000 = envair::round2((`2021`-`2000`)/`2000`*100))
 

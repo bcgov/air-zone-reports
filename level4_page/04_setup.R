@@ -1,6 +1,9 @@
 
 
-map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),map_a = NULL) {
+#define functions-------
+
+map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px','400px'),
+                           airzone = NULL) {
   
   if (0) {
     source('./level4_page/03_setup.R')
@@ -16,6 +19,7 @@ map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),ma
     size <- c('200px','400px')
     
   }
+  
   df_colour <- tribble(
     ~airzone,~colour_01,
     "Northeast",'#CDC08C',
@@ -26,7 +30,9 @@ map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),ma
     "Coastal",'#CEAB07',
     "Northwest","#24281A"
   )
- 
+  
+  airzone_select <- airzone
+  
   lst_airzones <- az_mgmt %>%
     pull(airzone)
   
@@ -44,17 +50,17 @@ map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),ma
   # station_exceedance$colorscaled <- color_scales[station_exceedance$days_exceed]
   
   if (is.null(map_a)) {
-  #create map for annual station
-  a <-  leaflet(width = size[1],height = size[2],
-                options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
-    set_bc_view(zoom=3.5) %>%
-    # setView(zoom =5) %>%
-    setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-    addProviderTiles(providers$Stamen.TonerLite,
-                     options = providerTileOptions(opacity = 1)
-    ) %>%
-    # addProviderTiles(providers$Stamen.TonerLabels) %>%
-    add_bc_home_button()
+    #create map for annual station
+    a <-  leaflet(width = size[1],height = size[2],
+                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
+      set_bc_view(zoom=3.5) %>%
+      # setView(zoom =5) %>%
+      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
+      addProviderTiles(providers$Stamen.TonerLite,
+                       options = providerTileOptions(opacity = 1)
+      ) %>%
+      # addProviderTiles(providers$Stamen.TonerLabels) %>%
+      add_bc_home_button()
   } else {
     a <- map_a
   }
@@ -71,10 +77,17 @@ map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),ma
     if (0) {
       airzone_ <- lst_airzones[1]
     }
+    
+    
     liststations_ <- lst_stations %>% 
       filter(AIRZONE == airzone_, year == year_select)
+    
     station_exceedance_ <- station_exceedance %>% 
       filter(AIRZONE == airzone_, year == year_select)
+    
+    lst_sites <- station_exceedance %>%
+      filter(AIRZONE == airzone_) %>%
+      pull(site) %>% unique()
     a <- a %>%
       
       addPolygons(data = az_mgmt %>% filter(airzone == airzone_),
@@ -87,14 +100,22 @@ map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),ma
                   highlight = highlightOptions(weight = 3,
                                                color = "blue",
                                                bringToFront = FALSE))
+    
+    
     #add stations
     if (nrow(liststations_) >0) {
+      # print('trace inside map function')
+      # print(nrow(liststations_))
+      # print(year_select)
+      
       a <- a %>%
+        #remove all stations from that airzone
+        removeMarker( layerId = lst_sites) %>%
         addCircleMarkers(lng=station_exceedance_$LONG,
                          lat = station_exceedance_$LAT,
                          layerId = station_exceedance_$site,
                          label = station_exceedance_$site,
-                         color = color_scales[station_exceedance$days_exceed],
+                         color = color_scales[station_exceedance_$days_exceed+1],
                          radius=3
                          
         )
@@ -107,24 +128,22 @@ map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),ma
       
     }
   }
+  
+  #add for selected airzone
+  if (!is.null(airzone_select)) {
+    print(paste('updating,highlighting area',airzone_select))
+    a <- a %>%
+      addPolylines(data = az_mgmt %>% filter(airzone == airzone_select),
+                   layerId = 'selectedairzone',
+                   group = 'airzonehighlight',
+                   color = 'blue',weight = 5)
+  } else {
+    a <- a %>%
+      clearGroup('airzonehighlight')
+  }
   plot_a <- a
   
   
-  if (is.null(map_a)) {
-    #create map for annual
-    b <-  leaflet(width = size[1],height = size[2],
-                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
-      set_bc_view(zoom=3.5) %>%
-      # setView(zoom =5) %>%
-      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-      addProviderTiles(providers$Esri.NatGeoWorldMap,
-                       options = providerTileOptions(opacity = 1)
-      ) %>%
-      # addProviderTiles(providers$Stamen.TonerLabels) %>%
-      add_bc_home_button()
-  } else {
-    b <- map_a
-  }
   
   
   

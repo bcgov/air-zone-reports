@@ -341,9 +341,9 @@ get_airzone <- function(lat,long) {
 
 ui <- fluidPage(
   sidebarLayout(
-    sidebarPanel(leafletOutput("map"),width=5),
+    sidebarPanel(h6("Click on the map to select an air zone"),leafletOutput("map"),width=4),
       mainPanel (
-      uiOutput("md_file"),width=7
+      uiOutput("md_file"),width=6
     ))
   
 )

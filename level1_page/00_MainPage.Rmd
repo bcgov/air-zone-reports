@@ -112,18 +112,25 @@ output:
                     <!-- /COLLAPSING NAVBAR -->
                 </div>
             </div>
+            
+            
+            
             <div class="navigationRibbon">
                 <div class="level2Navigation">
                     <div class="container">
-                        <a href="#TestingSection">In This Report</a>
-                        <a href="#">Navigation Link 2</a>
+                        <a href="#Welcome">Welcome</a>
+                        <a href="#AQManagement">Air Quality Management</a>
+                        <a href="#Pollutants">Pollutants</a>
                         <a href="#">Navigation Link 3</a>
                         <a href="#">Navigation Link 4</a>
-
+                        
 
                     </div>
                 </div>
             </div>
+            
+           
+            
         </div>
     </div>
     <!-- /HEADER -->
@@ -196,6 +203,10 @@ for (files_ in list.files(sourcefiles)) {
 ![](../assets/photos/title_page_filled.jpg)
 
 ```{=html}
+<!-- Jumping Points -->
+<a id="Welcome"></a>
+```
+```{=html}
 <!--
 <div>
 <object data="../test/etest_ppt.html" frameborder="0"  style="padding-top:0%;"></object>
@@ -213,11 +224,7 @@ for (files_ in list.files(sourcefiles)) {
 ```{=html}
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Welcome!</h2></center></div></div>
 ```
-```{=html}
-<!-- Jumping Points -->
-<a id="Welcome"></a>
-```
-Air zone reports are prepared each year by the B.C. Ministry of Environment and Climate Change Strategy to summarize the levels of air pollution in broad reporting areas called "air zones". The reports are part of our commitment under the national [Air Quality Management System (AQMS)](https://ccme.ca/en/air-quality-report#slide-2) to better protect human health and the environment.
+Air zone reports are prepared each year by the B.C. Ministry of Environment and Climate Change Strategy to summarize the levels of air pollution in reporting areas called "air zones". The reports are part of our commitment under the national [Air Quality Management System (AQMS)](https://ccme.ca/en/air-quality-report#slide-2) to better protect human health and the environment.
 
 This annual report, titled "Air Zone Report (2019-2021)", summarizes B.C.'s air quality status, achievement of the [Canadian Ambient Air Quality Standards (CAAQS](https://ccme.ca/en/air-quality-report#slide-7)), and assignment of management levels for the four major pollutants: fine particulate matter (PM~2.5~), ozone, nitrogen dioxide (NO~2~), and sulphur dioxide (SO~2~). Management levels are assessed based on three years (2019-2021) of monitoring data. Under the principles of the AQMS, management levels define the recommended level of actions for communities in order to keep clean areas clean and continuously improve air quality.
 
@@ -227,12 +234,12 @@ This annual report, titled "Air Zone Report (2019-2021)", summarizes B.C.'s air 
 
 ```{=html}
 <!-- Jumping Points -->
-<a id="Air Quality Management Levels"></a>
+<a id="AQManagement"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management in B.C.</h2></center></div></div>
 ```
-### The national Air Quality Management System (AQMS) provides a collaborative and comprehensive framework for managing air quality.
+Air pollution is recognized as one of the greatest environmental threat to human health ([WHO 2022](https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health)). Based on Health Canada estimates, approximately 15,300 Canadians--1,900 in British Columbia--prematurely die every year due to exposure to air pollution ([Health Canada 2021](https://www.canada.ca/en/health-canada/services/publications/healthy-living/2021-health-effects-indoor-air-pollution.html#a2)). In order to protect human health, ministers of the environment agreed to implement the Air Quality Management System.
 
-It is implemented across Canada to deal with reduce the emissions and levels of various pollutants of concern. In order to facilitate the management of air quality, B.C. is divided into seven air zones.
+The national Air Quality Management System (AQMS) provides a collaborative and comprehensive approach of managing ambient (outdoor) air quality. AQMS is implemented across Canada to reduce emissions and levels of major air pollutants. </br> B.C. is divided into seven air zones to help manage air quality across the province.
 
 ```{=html}
 <style>
@@ -242,19 +249,27 @@ It is implemented across Canada to deal with reduce the emissions and levels of 
 </style>
 ```
 ```{r, echo=FALSE,out.width="100%"}
- knitr::include_app('https://bcgov-env.shinyapps.io/airzoneexplained/',height = '600px')
+
+#located in air-zone-reports/level2_page/shiny_AirZoneExplained.R
+ knitr::include_app('https://bcgov-env.shinyapps.io/airzoneexplained/',height = "600px")
 ```
 
 ```{=html}
 <!-- Jumping Points -->
-<a id="Air Pollutants"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Major Air Pollutants</h2></center></div></div>
+<a id="Pollutants"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Major Ambient Air Pollutants</h2></center></div></div>
 ```
-# Four Pollutants are Included in This Air Zone Report
+# Four pollutants are included in this report
 
-## Fine Particulate Matter, Ozone, Nitrogen Dioxide, and Sulphur Dioxide....
+::: {style="float:right;position: relative; left: 5px; top: 0px;"}
+```{r echo=FALSE, out.width="300px", fig.align='right'}
+# this creates a sidebar image
+#knitr::include_graphics("https://www.shutterstock.com/image-vector/blue-waves-fresh-aroma-showing-600w-2086461628.jpg") 
 
-are considered pollutants of major concern due to their effects on health and the environment. As a result of these concerns, these pollutants were priority for standards setting. The Canadian Ambient Air Quality Standards (CAAQS) was developed for fine particulate matter and ground-level ozone in 2012, and these were followed by nitrogen dioxide and sulphur dioxide in 2015.
+```
+:::
+
+The pollutants listed below are considered to have the strongest evidence of major health concern. These pollutants have been the focus of health impact studies, and among the pollutants with established air quality objectives. Under the Air Quality Management System, the Canadian Ambient Air Quality Standards (CAAQS) were developed to serve as driver for the continuous improvement of air quality. The [Canadian Environmental Protection Act](https://www.canada.ca/en/environment-climate-change/services/canadian-environmental-protection-act-registry/guidelines-objectives-codes-practice/guidelines-objectives.html) have also established CAAQS as national air quality objectives for these four pollutants.
 
 ```{=html}
 
@@ -265,7 +280,7 @@ are considered pollutants of major concern due to their effects on health and th
   background-color: #eee;
   color: #444;
   cursor: pointer;
-  padding: 18px;
+  padding: 14px;
   width: 100%;
   border: none;
   text-align: left;
@@ -279,7 +294,7 @@ are considered pollutants of major concern due to their effects on health and th
 }
 
 .panel {
-  padding: 0 18px;
+  padding: 0 14px;
   background-color: white;
   max-height: 0;
   overflow: hidden;
@@ -287,15 +302,19 @@ are considered pollutants of major concern due to their effects on health and th
 }
 </style>
 </head>
-<body>
 
 
-<p>For information about the pollutants, click the buttons below</p>
+<!--body> -->
+</br>
+<p><i></i>Click on the list below for more information about each pollutant</p></i>
 
 <button class="accordion">Fine Particulate Matter (PM<sub>2.5</sub>)</button>
 <div class="panel">
+<div class="image">
+        <img src="https://i.pinimg.com/564x/59/32/29/593229739184504afd9507cc42a9cb86.jpg">
+      </div>
   <p>
-  PM<sub>2.5</sub> refers to solid particles and liquid droplets suspended in air that are smaller than or equal to 2.5 micrometres (µm) in aerodynamic diameter. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM2.5 is considered a non-threshold pollutant, that is there are associated adverse health effects at any level of exposure
+  Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplets that are suspended in air with sizes smaller than or equal to 2.5 micrometres (µm) in diameter. PM<sub>2.5</sub> are typically found in smoke, soot, dust, dirt, dispersed aerosol, and biological sources like mould, bacteria, pollen, and animal dander. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM2.5 is considered a non-threshold pollutant, that is there are associated  health effects at any level of exposure.
   
   In this report, PM<sub>2.5</sub> is presented using any of the two metrics. 
   - an annual metric for estimating long term exposure
@@ -341,8 +360,6 @@ for (i = 0; i < acc.length; i++) {
 }
 </script>
 ```
-
-
 ```{=html}
 <!-- Jumping Points -->
 <a id="Where Pollutants Come From"></a>
@@ -354,7 +371,6 @@ There are many natural and non-natural (anthropogenic) sources of air pollution.
 # knitr::include_app('http://127.0.0.1:6539/?panel08')
 
 ```
-
 
 ```{=html}
 <!-- Jumping Points -->
@@ -368,8 +384,7 @@ British Columbia monitors the levels of several air pollutants that are associat
 <a id="Levels of Pollution"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
 ```
-
-Air quality monitoring stations are installed throughout the province in order to monitor various pollutants. These monitors are located to capture local emissions 
+Air quality monitoring stations are installed throughout the province in order to monitor various pollutants. These monitors are located to capture local emissions
 
 ```{=html}
 <!-- Jumping Points -->
@@ -418,8 +433,6 @@ Test
 ```{=html}
 <iframe src="../test/etest_ppt.html" style="height:200px;width:300px;"></iframe>
 ```
-["../test/etest_ppt.html"](%22../test/etest_ppt.html%22)
-
 ## Key Air Contaminants
 
 <REPHRASE>
