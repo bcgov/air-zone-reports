@@ -113,7 +113,7 @@ lst_parameters <- df_data_trends_annual_airzone %>%
   mutate(parameter_label = paste(parameter,metric)) %>%
   pull(parameter_label) %>%
   unique()
-paste(lst_parameters,collapse=',')
+# paste(lst_parameters,collapse=',')
 #define parameters for recoding
 df_parameters <- tribble(
   ~parameter_label,~label,~CAAQS,~order,
@@ -149,6 +149,10 @@ ggplot(aes(x=year,y=percentAbove,colour = reorder(label,order))) +
 result_plotly <- a %>%
   mutate(percentAbove = envair::round2(percentAbove,n=1)) %>%
   mutate(hovertext = paste(percentAbove,'%',sep='')) %>%
+  mutate(label = gsub('PM2.5','PM<sub>2.5</sub>',label)) %>%
+  mutate(label = gsub('O3','O<sub>3</sub>',label)) %>%
+  mutate(label = gsub('NO2','NO<sub>2</sub>',label)) %>%
+  mutate(label = gsub('SO2','SO<sub>2</sub>',label)) %>%
   
 plotly::plot_ly(x=~year,y=~percentAbove,color =~reorder(label,order),
                 type='scatter',mode='lines+markers',showlegend =T,
@@ -162,5 +166,5 @@ plotly::plot_ly(x=~year,y=~percentAbove,color =~reorder(label,order),
   ) %>%
   plotly::layout(hovermode = 'x unified')
 
-return(list(table = result_table,ggplot = result_ggplot,plotly = result_plotly,data = a))
+return(list(table = df_BC_summary_ref,ggplot = result_ggplot,plotly = result_plotly,data = a))
 }

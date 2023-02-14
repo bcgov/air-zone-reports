@@ -264,12 +264,20 @@ The national Air Quality Management System (AQMS) provides a collaborative and c
 ::: {style="float:right;position: relative; left: 5px; top: 0px;"}
 ```{r echo=FALSE, out.width="300px", fig.align='right'}
 # this creates a sidebar image
-#knitr::include_graphics("https://www.shutterstock.com/image-vector/blue-waves-fresh-aroma-showing-600w-2086461628.jpg") 
+# knitr::include_graphics("https://www.shutterstock.com/image-vector/blue-waves-fresh-aroma-showing-600w-2086461628.jpg")
 
 ```
 :::
 
 The pollutants listed below are considered to have the strongest evidence of major health concern. These pollutants have been the focus of health impact studies, and among the pollutants with established air quality objectives. Under the Air Quality Management System, the Canadian Ambient Air Quality Standards (CAAQS) were developed to serve as driver for the continuous improvement of air quality. The [Canadian Environmental Protection Act](https://www.canada.ca/en/environment-climate-change/services/canadian-environmental-protection-act-registry/guidelines-objectives-codes-practice/guidelines-objectives.html) have also established CAAQS as national air quality objectives for these four pollutants.
+
+This report uses metrics to summarize the levels of each pollutant and compare it to the Canadian Ambient Air Quality Standards. A metric consists of:
+
+-    a numerical value that represents the concentration or level of pollutant;
+
+-   unit of measurement defines the kind of quantity that the numerical value represents; and
+
+-   statistical form that specifies how the numerical value was calculated using raw measurements.
 
 ```{=html}
 
@@ -307,38 +315,69 @@ The pollutants listed below are considered to have the strongest evidence of maj
 <!--body> -->
 </br>
 <p><i></i>Click on the list below for more information about each pollutant</p></i>
+```
+<!--PM2.5 Picture and Accordion -->
 
+```{=html}
 <button class="accordion">Fine Particulate Matter (PM<sub>2.5</sub>)</button>
 <div class="panel">
-<div class="image">
-        <img src="https://i.pinimg.com/564x/59/32/29/593229739184504afd9507cc42a9cb86.jpg">
-      </div>
-  <p>
-  Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplets that are suspended in air with sizes smaller than or equal to 2.5 micrometres (µm) in diameter. PM<sub>2.5</sub> are typically found in smoke, soot, dust, dirt, dispersed aerosol, and biological sources like mould, bacteria, pollen, and animal dander. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM2.5 is considered a non-threshold pollutant, that is there are associated  health effects at any level of exposure.
   
-  In this report, PM<sub>2.5</sub> is presented using any of the two metrics. 
-  - an annual metric for estimating long term exposure
-  - a 24-hour metric for estimating short term or acute exposure
+<div style="float:left;position: relative; right: 5px; top: 0px;">
+<p><img src="https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos/PM25_IMAGE.png" width="100px" style="display: block; margin: auto 0 auto auto;"></p>
+</div>
+ <p>
+```
+<!---PM2.5 Text--> Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplets that are suspended in air with sizes smaller than or equal to 2.5 micrometres (µm) in diameter. PM<sub>2.5</sub> are typically found in smoke, soot, dust, dirt, dispersed aerosol, and biological sources like mould, bacteria, pollen, and animal dander. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM2.5 is considered a non-threshold pollutant, that is there are associated health effects at any level of exposure.
+
+In this report, PM<sub>2.5</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure - a 24-hour metric to estimate short term or acute exposure.
+
+```{=html}
   </p>
 </div>
 
 <button class="accordion">Ground-Level Ozone (O<sub>3</sub>)</button>
 <div class="panel">
-  Ground-level ozone (O<sub>3</sub>), is a colourless, odourless and highly irritating gas that forms close to the Earth’s surface. O<sub>3</sub> is a major component of smog. In contrast to “primary” pollutants which are emitted directly into the atmosphere from a source, O3 is considered a “secondary” pollutant because it is formed through complex chemical reactions between nitrogen oxides (NOx) and volatile organic compounds (VOCs) in the presence of sunlight. While O<sub>3</sub> at ground-level is a significant environmental and health concern, approximately 10 to 40 kilometres above the Earth's surface, there is a beneficial layer of stratospheric ozone which shields the earth from harmful ultraviolet radiation. Ozone is also a short-lived climate pollutant and also contributes to climate change.
+<div style="float:left;position: relative; right: 5px; top: 0px;">
+<p><img src="https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos/O3_IMAGE.png" width="100px" style="display: block; margin: auto 0 auto auto;"></p>
+</div>
+ <p>
+```
+Ground-level ozone (O<sub>3</sub>), is a colourless, odourless and highly irritating gas that forms close to the Earth's surface. O<sub>3</sub> is a major component of smog. In contrast to "primary" pollutants which are emitted directly into the atmosphere from a source, O3 is considered a "secondary" pollutant because it is formed through complex chemical reactions between nitrogen oxides (NOx) and volatile organic compounds (VOCs) in the presence of sunlight. While O<sub>3</sub> at ground-level is a significant environmental and health concern, approximately 10 to 40 kilometres above the Earth's surface, there is a beneficial layer of stratospheric ozone which shields the earth from harmful ultraviolet radiation. Ozone is also a short-lived climate pollutant and also contributes to climate change.
+
+In this report, O<sub>3</sub> is presented using the 8-hour metric.
+
+```{=html}
   </p>
 </div>
 
 <button class="accordion">Nitrogen Dioxide (NO<sub>2</sub>)</button>
 <div class="panel">
+<div style="float:left;position: relative; right: 5px; top: 0px;">
+<p><img src="https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos/NO2_IMAGE.png" width="100px" style="display: block; margin: auto 0 auto auto;"></p>
+</div>
   <p>
-  Nitrogen dioxide (NO<sub>2</sub>) belongs to the oxides of nitrogen group of compounds (NOx) that are formed primarily through the burning of fossil fuels. While transportation sources represent over half of all emissions, energy production and industrial processes also emit significant amounts of NOx, mainly as Nitric Oxide (NO) and Nitrogen Dioxide (NO<sub>2</sub>). NO2 at higher concentrations has a strong, harsh odour and can typically be seen over large cities as a brownish haze. Once formed, NO<sub>2</sub> can combine with water molecules in the air to form compounds like nitric acid and nitrous acid. Ultimately, these compounds fall to earth through precipitation (such as rain, snow and fog) where they contribute to the acidification and eutrophication of ecosystems.
+```
+Nitrogen dioxide (NO<sub>2</sub>) belongs to the oxides of nitrogen group of compounds (NOx) that are formed primarily through the burning of fossil fuels. While transportation sources represent over half of all emissions, energy production and industrial processes also emit significant amounts of NOx, mainly as Nitric Oxide (NO) and Nitrogen Dioxide (NO<sub>2</sub>). NO2 at higher concentrations has a strong, harsh odour and can typically be seen over large cities as a brownish haze. Once formed, NO<sub>2</sub> can combine with water molecules in the air to form compounds like nitric acid and nitrous acid. Ultimately, these compounds fall to earth through precipitation (such as rain, snow and fog) where they contribute to the acidification and eutrophication of ecosystems.
+
+In this report, NO<sub>2</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure, and 1-hour metric to estimate short term or acute exposure.
+
+```{=html}
   </p>
 </div>
 
 <button class="accordion">Sulphur Dioxide (SO<sub>2</sub>)</button>
 <div class="panel">
+<div style="float:left;position: relative; right: 5px; top: 0px;">
+<p><img src="https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos/SO2_IMAGE.png" width="100px" style="display: block; margin: auto 0 auto auto;"></p>
+</div>
   <p>
-  Sulphur dioxide (SO<sub>2</sub>) is a colourless gas that smells like burnt matches. It belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO<sub>2</sub> is emitted when fossil fuels or raw materials containing sulphur are burned or used in an industrial process like metal ore smelting or electric power generation. It can also be produced in large quantities during extraction and processing of fossil fuels. SO<sub>2</sub> contributes to the formation of PM<sub>2.5</sub> and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain, snow and fog.
+```
+Sulphur dioxide (SO<sub>2</sub>) is a colourless gas that smells like burnt matches. It belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO<sub>2</sub> is emitted when fossil fuels or raw materials containing sulphur are burned or used in an industrial process like metal ore smelting or electric power generation. It can also be produced in large quantities during extraction and processing of fossil fuels. SO<sub>2</sub> contributes to the formation of PM<sub>2.5</sub> and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain, snow and fog.
+
+In this report, SO<sub>2</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure, and 1-hour metric as estimate of acute (short term) exposure.
+
+```{=html}
+  
   </p>
 </div>
 
