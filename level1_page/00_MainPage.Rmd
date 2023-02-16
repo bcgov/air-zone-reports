@@ -273,7 +273,7 @@ The pollutants listed below are considered to have the strongest evidence of maj
 
 This report uses metrics to summarize the levels of each pollutant and compare it to the Canadian Ambient Air Quality Standards. A metric consists of:
 
--    a numerical value that represents the concentration or level of pollutant;
+-   a numerical value that represents the concentration or level of pollutant;
 
 -   unit of measurement defines the kind of quantity that the numerical value represents; and
 
@@ -327,7 +327,9 @@ This report uses metrics to summarize the levels of each pollutant and compare i
 </div>
  <p>
 ```
-<!---PM2.5 Text--> Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplets that are suspended in air with sizes smaller than or equal to 2.5 micrometres (µm) in diameter. PM<sub>2.5</sub> are typically found in smoke, soot, dust, dirt, dispersed aerosol, and biological sources like mould, bacteria, pollen, and animal dander. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM2.5 is considered a non-threshold pollutant, that is there are associated health effects at any level of exposure.
+<!---PM2.5 Text-->
+
+Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplets that are suspended in air with sizes smaller than or equal to 2.5 micrometres (µm) in diameter. PM<sub>2.5</sub> are typically found in smoke, soot, dust, dirt, dispersed aerosol, and biological sources like mould, bacteria, pollen, and animal dander. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM2.5 is considered a non-threshold pollutant, that is there are associated health effects at any level of exposure.
 
 In this report, PM<sub>2.5</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure - a 24-hour metric to estimate short term or acute exposure.
 
@@ -401,29 +403,175 @@ for (i = 0; i < acc.length; i++) {
 ```
 ```{=html}
 <!-- Jumping Points -->
-<a id="Where Pollutants Come From"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Source Of Pollution</h2></center></div></div>
+<a id="Pollutant Trends"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Trends</h2></center></div></div>
 ```
-There are many natural and non-natural (anthropogenic) sources of air pollution. An estimate of the sources of air pollution is made through emission inventories. The inentories takes into account industrial and mobile emission sources. These
+# On Average, Pollution Levels are Below CAAQS
 
-```{r, echo = FALSE}
+<!--Prepare the trend functions. will not display -->
+
+```{r, echo = FALSE, results='hide',warning=FALSE,message=FALSE}
+source('../level4_page/00_setup.R')
+trends <- get_trends('../data/out',reporting_year = 2021)
+trends_BC <- trends$table %>%
+  filter(AIRZONE == 'BC') 
 # knitr::include_app('http://127.0.0.1:6539/?panel08')
+trends_BC$metric
+
+pm25_24h <- add_arrow(trends_BC$perc_2000[trends_BC$metric == 'RAW_ANNUAL_98P_24h' & 
+                      trends_BC$parameter == 'PM25'])
+pm25_annual <- add_arrow(trends_BC$perc_2000[trends_BC$metric == 'RAW_ANNUAL_MEAN_24h' & 
+                      trends_BC$parameter == 'PM25'])
+o3_8h <- add_arrow(trends_BC$perc_1990[trends_BC$metric == 'RAW_ANNUAL_4TH_D8HM' & 
+                      trends_BC$parameter == 'O3'])
+no2_1h <- add_arrow(trends_BC$perc_1990[trends_BC$metric == 'RAW_ANNUAL_98P_D1HM' & 
+                      trends_BC$parameter == 'NO2'])
+no2_annual <- add_arrow(trends_BC$perc_1990[trends_BC$metric == 'RAW_ANNUAL_MEAN_1HR' & 
+                      trends_BC$parameter == 'NO2'])
+so2_1h <- add_arrow(trends_BC$perc_1990[trends_BC$metric == 'RAW_ANNUAL_99P_D1HM' & 
+                      trends_BC$parameter == 'SO2'])
+so2_annual <- add_arrow(trends_BC$perc_1990[trends_BC$metric == 'RAW_ANNUAL_MEAN_1HR' & 
+                      trends_BC$parameter == 'SO2'])
 
 ```
 
 ```{=html}
-<!-- Jumping Points -->
-<a id="Measuring the Pollutants"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
+<div style="float:right;position: relative; left: 20px; top: 0px;">
+<p>
 ```
-British Columbia monitors the levels of several air pollutants that are associated with effects on health and the environment. These pollutants have various diverse sources including vehicular traffic, residential woodstoves, industrial emissions, and wildfires. There are four air pollutants that are included in an air zone reports. These are the pollutants considered to be major public health concern due to prevalence and potential to affect health.
+```{r, echo=FALSE,warning=FALSE}
+p <- trends$plotly %>%layout(xaxis = list(title = ""))
+htmltools::tagList(list(p))
+```
 
 ```{=html}
-<!-- Jumping Points -->
-<a id="Levels of Pollution"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
+</p>
+</div>
+ <p>
 ```
-Air quality monitoring stations are installed throughout the province in order to monitor various pollutants. These monitors are located to capture local emissions
+Pollutant levels have mostly remained lower than the Canadian Ambient Air Quality Standards and has improved throughout the years. PM<sub>2.5</sub> is an exception due to the increasing intensity and frequency of wildfire smoke.
+
+-   Fine Particulate Matter (PM<sub>2.5</sub>) annual metric, +`r pm25_annual`% (since 2000)
+
+-   Fine Particulate Matter (PM<sub>2.5</sub>) 24-hour metric, +`r pm25_24h`% (since 2000)
+
+-   Ozone (O<sub>3</sub>) 8-hour metric,`r o3_8h`% (since 1990)
+
+-   Nitrogen Dioxide (NO<sub>2</sub>) annual metric,`r no2_annual`% (since 1990)
+
+-   Nitrogen Dioxide (NO<sub>2</sub>) 1-hour metric,`r no2_1h`% (since 1990)
+
+-   Sulphur Dioxide (SO<sub>2</sub>) annual metric,`r so2_annual`% (since 1990)
+
+-   Sulphur Dioxide (SO<sub>2</sub>) 1-hour metric,`r so2_1h`% (since 1990)
+
+```{=html}
+</p>
+</br></br>
+```
+```{=html}
+<!-- Jumping Points -->
+<a id="Sources of Pollutants"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Emission Trends</h2></center></div></div>
+```
+<!--Emission Trend Calculation/Preprocess-->
+
+```{r, echo = FALSE, results='hide',warning=FALSE,message=FALSE}
+source('../level4_page/05_setup.R')
+apei <- plot_apei_complete()
+
+max_year <- max(apei$all_nodust$data$Year)
+unique(apei$all_nodust$data$pollutant)
+
+
+add_arrow <- function(value) {
+  
+  
+  if(value>0) {
+  result <- paste('<span style="color:red">↑</span>',abs(value),sep='')  
+  } else {
+    result <-  paste('<span style="color:blue">↓</span>',abs(value),sep='') 
+  }
+  return(result)
+}
+
+
+pm25_emission <- apei$all_nodust$data %>%
+  filter(Year == max_year,
+         grepl('pm25',pollutant,ignore.case = TRUE)) %>%
+  pull(perc_1990) %>%
+  add_arrow()
+
+
+pm10_emission <- apei$all_nodust$data %>%
+  filter(Year == max_year,
+         grepl('pm10',pollutant,ignore.case = TRUE)) %>%
+  pull(perc_1990)%>%
+  add_arrow()
+
+nox_emission <- apei$all_nodust$data %>%
+  filter(Year == max_year,
+         grepl('nox',pollutant,ignore.case = TRUE)) %>%
+  pull(perc_1990)%>%
+  add_arrow()
+
+sox_emission <- apei$all_nodust$data %>%
+  filter(Year == max_year,
+         grepl('sox',pollutant,ignore.case = TRUE)) %>%
+  pull(perc_1990)%>%
+  add_arrow()
+
+voc_emission <- apei$all_nodust$data %>%
+  filter(Year == max_year,
+         grepl('voc',pollutant,ignore.case = TRUE)) %>%
+  pull(perc_1990)%>%
+  add_arrow()
+co_emission <- apei$all_nodust$data %>%
+  filter(Year == max_year,
+         grepl('co',pollutant,ignore.case = TRUE)) %>%
+  pull(perc_1990)%>%
+  add_arrow()
+
+```
+
+# Emission of most pollutants are decreasing through the years
+
+```{=html}
+<!--put graph or image on right side-->
+<div style="float:right;position: relative; left: 20px; top: 0px;">
+<p>
+```
+```{r, echo=FALSE,warning=FALSE}
+p <- apei$all_nodust$plot%>%layout(xaxis = list(title = ""))
+htmltools::tagList(list(p))
+```
+
+```{=html}
+</p>
+</div>
+ <p>
+```
+<!--Emission trends Text-->
+
+Industrial and mobile emissions *(excluding dust, and smoke from woodstoves and open burns)* of key air pollutants have been declining from 1990 levels.
+
+-   Fine Particulate Matter (PM<sub>2.5</sub>) Direct Emission, `r pm25_emission`% (since 1990)
+-   Particulate Matter 10 micron (PM<sub>10</sub>) Direct Emission, `r pm10_emission`% (since 1990)
+-   Nitrogen Oxides (NO<sub>x</sub>) Emission, `r nox_emission`% (since 1990). NO<sub>x</sub> are group of compounds that include NO<sub>2</sub>. It can react with VOC to form ground-level ozone (O<sub>3</sub>.
+-   Sulfur Oxides (SO<sub>x</sub>) Emission, `r sox_emission`% (since 1990). SO<sub>x</sub> are a group of compounds that include SO<sub>2</sub>.
+-   Volatile Organic Compounds (VOC), `r voc_emission`% (since 1990). Ground-level ozone (O<sub>3</sub>can form from the complex reactions between VOC and NO<sub>x</sub>.
+-   Carbon Monoxide (CO), `r co_emission`% (since 1990)
+
+```{=html}
+</p>
+</br></br>
+```
+```{=html}
+<!-- Jumping Points -->
+<a id="Emission Sources"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Where are Emissions From</h2></center></div></div>
+```
+The Air Pollution Emission Inventory (APEI) also provides an estimate on the sources of pollutant emissions.
 
 ```{=html}
 <!-- Jumping Points -->

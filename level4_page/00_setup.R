@@ -103,7 +103,8 @@ df_BC_summary_ref<- df_data_trends_annual_airzone %>%
   filter(year %in% c(1990,2000,2010,maxyear)) %>%
   select(parameter,year,metric,AIRZONE,value_avg) %>% 
   tidyr::pivot_wider(names_from = year, values_from = value_avg) %>%
-  mutate(perc_2000 = envair::round2((`2021`-`2000`)/`2000`*100))
+  mutate(perc_2000 = envair::round2((`2021`-`2000`)/`2000`*100),
+         perc_1990 = envair::round2((`2021`-`1990`)/`1990`*100))
 
 #plot
 lst_parameters <- df_data_trends_annual_airzone %>%
@@ -160,11 +161,24 @@ plotly::plot_ly(x=~year,y=~percentAbove,color =~reorder(label,order),
                 hovertemplate = paste('%{y:.1f}','%',sep='')
                 
                 ) %>%
-  layout(legend = list(orientation = 'h'),
+  layout(title = 'Trends in Pollutant Levels',
+         legend = list(orientation = 'h'),
          yaxis = list(title = 'Percent Above/Below CAAQS'),
          xaxis = list(title = 'Annual Reporting Period')
   ) %>%
   plotly::layout(hovermode = 'x unified')
 
 return(list(table = df_BC_summary_ref,ggplot = result_ggplot,plotly = result_plotly,data = a))
+}
+
+
+add_arrow <- function(value) {
+  
+  
+  if(value>0) {
+    result <- paste('<span style="color:red">↑</span>',abs(value),sep='')  
+  } else {
+    result <-  paste('<span style="color:blue">↓</span>',abs(value),sep='') 
+  }
+  return(result)
 }

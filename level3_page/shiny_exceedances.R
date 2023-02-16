@@ -556,7 +556,7 @@ get_airzone <- function(lat,long) {
 #' create graphs for days exceeding
 #' 
 #' @param exceedances is the result of get_PM_exceedance() function
-graph_exceedance <- function(exceedances,list_airzones,year = NULL) {
+graph_exceedance <- function(exceedances,AIRZONE = NULL,year = NULL) {
   if (0) {
     source('./level4_page/02_setup.R')
     dirs_location <- './data/out'
@@ -573,11 +573,22 @@ graph_exceedance <- function(exceedances,list_airzones,year = NULL) {
     'Fall',1
   )
   year_select <- year
+  df_colour <- tribble(
+    ~airzone,~colour_01,
+    "Northeast",'#CDC08C',
+    "Georgia Strait"  ,'#F4B5BD',
+    "Southern Interior",'#9C964A',
+    "Lower Fraser Valley",'#85D4E3',
+    "Central Interior" ,'#FAD77B',
+    "Coastal",'#CEAB07',
+    "Northwest","#24281A"
+  )
   
+  list_airzones  <- df_colour$airzone
   
   # View(exceedances$season_stations)
-  if (is.null(airzone)) {
-    airzone <- 'BC'
+  if (is.null(AIRZONE)) {
+    AIRZONE <- 'BC'
   }
   df_annual <- exceedances$annual
   
@@ -714,7 +725,7 @@ lst_airzones <- df_colour$airzone
 exceedances <- get_PM_exceedancesummary(dirs_location)
 az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
   left_join(df_colour)
-plots_list <- graph_exceedance(exceedances = exceedances,list_airzones = lst_airzones,year =  max(exceedances$annual$year))
+plots_list <- graph_exceedance(exceedances = exceedances,year =  max(exceedances$annual$year))
 
 
 
