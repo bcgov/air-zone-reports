@@ -13,6 +13,7 @@ library(envreportutils)
 library(plotly)
 library(sf)
 library(bcmaps)
+library(shinyBS)
 
 
 #List of Functions ----------------
@@ -258,7 +259,7 @@ ui <- fluidPage(
       .title { text-align: center; }
       .toprow { margin: 5px 0px; padding: 5px; background-color: #38598a; }
       .filters { margin: 0px auto; }
-      .shiny-input-container { width:100% !important; }
+      .shiny-input-container { width:90% !important; }
       .table { padding: 0px; margin-top: 0px; }
       .leaflet-top { z-index:999 !important; }
       "))),
@@ -271,7 +272,8 @@ ui <- fluidPage(
   fluidRow(class = "toprow",
            fluidRow(class = 'filters',
                     h6("Select Pollutant to Display B.C. Emission Sources",style = "color:white"),
-                    actionButton(inputId = 'all',label = htmltools::HTML('<b>All</b>')),
+                    actionButton(inputId = 'all',label = htmltools::HTML('<b>All</b>')) %>%
+                      bsTooltip("Tooltip on the left", "left"),
                     actionButton(inputId = 'pm25',label = htmltools::HTML('PM<sub>2.5</sub>')),
                     actionButton(inputId = 'pm10',label = htmltools::HTML('PM<sub>10</sub>')),
                     actionButton(inputId = 'nox',label = htmltools::HTML('NO<sub>x</sub>')),
@@ -279,8 +281,10 @@ ui <- fluidPage(
                     actionButton(inputId = 'voc',label = htmltools::HTML('VOC'))
                     
            )),
-  fluidRow(plotlyOutput("plot1",height = "auto",width = '75%')
-  ),
+  fluidRow(div(style='height:400px;overflow-y: hidden;overflow-x: hidden;',plotlyOutput("plot1")))#,height = "600px",width = '600px')
+  
+  #(div(style='height:400px;overflow-y: scroll;',
+  # plotOutput("plot1",height = "1200px")))))
   # fluidRow(p("Excludes dust, and smoke from wildfires, residential sources, and open burn",
   #            style="color:red;text-align: right"))
 )

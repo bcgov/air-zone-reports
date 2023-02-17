@@ -442,6 +442,7 @@ so2_annual <- add_arrow(trends_BC$perc_1990[trends_BC$metric == 'RAW_ANNUAL_MEAN
 ```{r, echo=FALSE,warning=FALSE}
 p <- trends$plotly %>%layout(xaxis = list(title = ""))
 htmltools::tagList(list(p))
+ 
 ```
 
 ```{=html}
@@ -451,9 +452,9 @@ htmltools::tagList(list(p))
 ```
 Pollutant levels have mostly remained lower than the Canadian Ambient Air Quality Standards and has improved throughout the years. PM<sub>2.5</sub> is an exception due to the increasing intensity and frequency of wildfire smoke.
 
--   Fine Particulate Matter (PM<sub>2.5</sub>) annual metric, +`r pm25_annual`% (since 2000)
+-   Fine Particulate Matter (PM<sub>2.5</sub>) annual metric, `r pm25_annual`% (since 2000)
 
--   Fine Particulate Matter (PM<sub>2.5</sub>) 24-hour metric, +`r pm25_24h`% (since 2000)
+-   Fine Particulate Matter (PM<sub>2.5</sub>) 24-hour metric, `r pm25_24h`% (since 2000)
 
 -   Ozone (O<sub>3</sub>) 8-hour metric,`r o3_8h`% (since 1990)
 
@@ -495,6 +496,7 @@ add_arrow <- function(value) {
   return(result)
 }
 
+#these will be used to summarize data
 
 pm25_emission <- apei$all_nodust$data %>%
   filter(Year == max_year,
@@ -537,23 +539,12 @@ co_emission <- apei$all_nodust$data %>%
 # Emission of most pollutants are decreasing through the years
 
 ```{=html}
-<!--put graph or image on right side-->
-<div style="float:right;position: relative; left: 20px; top: 0px;">
 <p>
-```
-```{r, echo=FALSE,warning=FALSE}
-p <- apei$all_nodust$plot%>%layout(xaxis = list(title = ""))
-htmltools::tagList(list(p))
-```
-
-```{=html}
-</p>
-</div>
- <p>
 ```
 <!--Emission trends Text-->
 
-Industrial and mobile emissions *(excluding dust, and smoke from woodstoves and open burns)* of key air pollutants have been declining from 1990 levels.
+Emissions of key air pollutants from industrial and mobile sources *(excluding dust, and smoke from woodstoves and open burns)*  have been declining from 1990 levels. 
+In `r max_year`:
 
 -   Fine Particulate Matter (PM<sub>2.5</sub>) Direct Emission, `r pm25_emission`% (since 1990)
 -   Particulate Matter 10 micron (PM<sub>10</sub>) Direct Emission, `r pm10_emission`% (since 1990)
@@ -561,11 +552,26 @@ Industrial and mobile emissions *(excluding dust, and smoke from woodstoves and 
 -   Sulfur Oxides (SO<sub>x</sub>) Emission, `r sox_emission`% (since 1990). SO<sub>x</sub> are a group of compounds that include SO<sub>2</sub>.
 -   Volatile Organic Compounds (VOC), `r voc_emission`% (since 1990). Ground-level ozone (O<sub>3</sub>can form from the complex reactions between VOC and NO<sub>x</sub>.
 -   Carbon Monoxide (CO), `r co_emission`% (since 1990)
+```{=html}
+<style>
+.main-container {
+  max-width: unset;
+}
+</style>
+
+```
+```{r, echo=FALSE,warning=FALSE,out.width="100%"}
+# p <- apei$all_nodust$plot%>%layout(xaxis = list(title = ""))
+# htmltools::tagList(list(p))
+knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', height = "600px")
+```
 
 ```{=html}
 </p>
 </br></br>
 ```
+
+
 ```{=html}
 <!-- Jumping Points -->
 <a id="Emission Sources"></a>
