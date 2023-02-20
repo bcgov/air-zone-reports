@@ -398,7 +398,7 @@ server <- shinyServer(function(input, output) {
   
   
   #initial map
-  www_git_url <- 'https://github.com/bcgov/air-zone-reports/raw/master/level2_page/www/'
+  www_git_url <- 'https://github.com/bcgov/air-zone-reports/raw/master/level_shiny/monitors/www/'
   
   #debug for use of local files
   if (0) {

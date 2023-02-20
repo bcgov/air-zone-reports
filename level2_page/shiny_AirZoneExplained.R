@@ -302,11 +302,11 @@ get_airzone <- function(lat,long) {
     latlong <- c(57.68,-120.614)
   }
   
-  az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
-  
-  az_mgmt <- readRDS(url(az_mgmt_gitURL))
-  
-  
+  # az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
+  # 
+  # az_mgmt <- readRDS(url(az_mgmt_gitURL))
+  # 
+  # 
   
   
   #----------------
