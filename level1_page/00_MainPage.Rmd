@@ -571,13 +571,34 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', he
 </br></br>
 ```
 
+<!--Pollutants MOnitoring  -->
 
 ```{=html}
 <!-- Jumping Points -->
-<a id="Emission Sources"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Where are Emissions From</h2></center></div></div>
+<a id="Monitoring"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How we monitor</h2></center></div></div>
 ```
-The Air Pollution Emission Inventory (APEI) also provides an estimate on the sources of pollutant emissions.
+
+
+
+Air quality monitoring stations are installed to measure the levels of pollutants on communities. These stations are maintained and operated either by the Ministry of Environemtn and Climate Change Strategy, Metro Vancouver Regional District, Community air quality roundtable, industrial permit holders, and other agencies (BCHydro, Prince Rupert Port Authority, BC Oil and Gas Commission, etc.). Only stations developed to monitoring community exposure-not the fenceline stations-are included for AQMS reporting. 
+
+```{r}
+# list.files('../assets/photos/')
+knitr::include_graphics('../assets/photos/monitoring_station_plus.png')
+```
+
+Some of the stations are included in the Air Quality Health Index (AQHI) reporting. These stations contain multiple instruments for the simultaneous monitoring and near real-time reporting of PM<sub>2.5</sub>, O<sub>3</sub>, and NO<sub>2</sub>. AQHI is a tool to communicate the health impact of poor air quality.
+
+The map below shows the location of air quality monitoring stations in B.C.
+
+<!--pre-process calculation for pollutants monitoring-->
+```{r, echo = FALSE, results='hide',warning=FALSE,message=FALSE}
+
+
+```
+
+
 
 ```{=html}
 <!-- Jumping Points -->
