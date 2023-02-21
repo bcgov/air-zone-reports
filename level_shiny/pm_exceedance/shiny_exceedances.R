@@ -11,10 +11,15 @@ library(envreportutils)
 library(plotly)
 library(sf)
 library(bcmaps)
+library(readr)
+library(ggplot2)
+library(envair)
+library(rcaaqs)
 
-dirs_location <- '../data/out'  #local location, two dots for final, one dot for debug
+dirs_location <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out'
 if (0) {
   dirs_location <- './data/out'
+  dirs_location <- '../data/out'  #local location, two dots for final, one dot for debug
   list.files(dirs_location)
   test <- read_csv('./data/out/annual_results.csv') %>%
     filter(parameter=='PM25')
@@ -178,21 +183,19 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
 #' 
 #' 
 get_PM_exceedancesummary <- function(dirs_location = './data/out') {
-  library(dplyr)
-  library(readr)
-  library(ggplot2)
-  library(plotly)
+  
   
   # dirs_location <- './data/out'  #local location, two dots for final, one dot for debug
   if (0) {
     dirs_location <- './data/out'
   }
   
-  list.files(dirs_location)
+  # list.files(dirs_location)
   
+  print('get PM exceedance')
   
-  
-  df_stations <- readRDS(paste(dirs_location,'liststations_merged.Rds',sep='/'))
+  # df_stations <- readRDS(paste(dirs_location,'liststations_merged.Rds',sep='/'))
+  df_stations <- envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE)
   lst_remove <- df_stations %>%
     filter(AQMS == 'N') %>%
     pull(site)
@@ -220,9 +223,11 @@ get_PM_exceedancesummary <- function(dirs_location = './data/out') {
   #   rename(site = STATION_NAME)
   # df_exceed_seasonal <- readRDS(paste(dirs_location,'exceed_seasonal.Rds',sep='/')) %>%
   #   rename(site = STATION_NAME)
-  df_exceedances <- readRDS(paste(dirs_location,'exceedances.Rds',sep='/')) %>%
-    rename(site = STATION_NAME)
   
+  # df_exceedances <- readRDS(paste(dirs_location,'exceedances.Rds',sep='/')) %>%
+  #   rename(site = STATION_NAME)
+  df_exceedances <- read_csv(paste(dirs_location,'exceedances.csv',sep='/')) %>%
+    rename(site = STATION_NAME)
   
   # colnames(df_stations)
   df_seasons <- tibble(
@@ -560,6 +565,7 @@ graph_exceedance <- function(exceedances,AIRZONE = NULL,year = NULL) {
   if (0) {
     source('./level4_page/02_setup.R')
     dirs_location <- './data/out'
+    AIRZONE <- NULL
     
   }
   
@@ -644,8 +650,8 @@ graph_exceedance <- function(exceedances,AIRZONE = NULL,year = NULL) {
     ) %>%
     plotly::layout(hovermode = 'x unified',
                    barmode = 'stack') %>%
-    layout(shapes = list(vline(year_select)))%>% 
-    event_register("plotly_click")
+    layout(shapes = list(vline(year_select)))
+    # event_register("plotly_click")
   
   
   
@@ -725,8 +731,9 @@ lst_airzones <- df_colour$airzone
 exceedances <- get_PM_exceedancesummary(dirs_location)
 az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
   left_join(df_colour)
+print('Load az_mgmt complete')
 plots_list <- graph_exceedance(exceedances = exceedances,year =  max(exceedances$annual$year))
-
+print('Load Complete')
 
 
 #---SHINY SECTION----------------
@@ -816,8 +823,10 @@ server <- {shinyServer(function(input, output) {
   
   
   output$plot1 <- renderPlotly({plot_out <- plots_list$plot_annual
-  plot_out %>% ggplotly(source = 'plot1') %>% event_register("plotly_click")}
-  )
+  plot_out %>% ggplotly(source = 'plot1') 
+  #%>% event_register("plotly_click")
+  })
+  
   
   
   observeEvent(input$year_slider,
@@ -829,7 +838,7 @@ server <- {shinyServer(function(input, output) {
                    map_exceedance(exceedances = exceedances ,az_mgmt = az_mgmt,year =input$year_slider)
                  
                  
-                 plots_list <- graph_exceedance(exceedances = exceedances,list_airzones = lst_airzones,year = input$year_slider)
+                 plots_list <- graph_exceedance(exceedances = exceedances,year = input$year_slider)
                  reactive_plot1(plots_list)   #pass on value to reactive_plot1
                  # output$plot1 <- renderPlotly(plots_list$plot_annual)
                  output$plot1 <- renderPlotly({plot_out <- plots_list$plot_annual
@@ -862,10 +871,10 @@ server <- {shinyServer(function(input, output) {
   })
   
   #clicking on the graph
-  observeEvent(event_data("plotly_click", source = "plot1"), { 
-    values$plot.click.results <- event_data("plotly_click", source = "plot1") 
-    print(values$plot.click.results)
-  })
+  # observeEvent(event_data("plotly_click", source = "plot1"), { 
+  #   values$plot.click.results <- event_data("plotly_click", source = "plot1") 
+  #   print(values$plot.click.results)
+  # })
   
 })
 }
