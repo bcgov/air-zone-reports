@@ -29,11 +29,11 @@ raw_data <- readRDS('./data/out/raw_data_caaqs.Rds')
 #create file to save the frequency of exceedances----
 #save into 'freq_annual','freq_month','freq_hour','freq_seasonal'
 df_exceedances <- tribble(
-  ~savefile,~outputtype,
-  'exceed_annual.Rds','freq_annual',
-  'exceed_month.Rds','freq_month',
-  'exceed_seasonal.Rds','freq_seasonal',
-  'exceedances.Rds','filter'
+  ~savefile,~outputtype,~savefile2
+  'exceed_annual.Rds','freq_annual','exceed_annual.csv',
+  'exceed_month.Rds','freq_month','exceed_month.csv',
+  'exceed_seasonal.Rds','freq_seasonal','exceed_seasonal.csv',
+  'exceedances.Rds','filter','exceedances.csv'
 )
 
 df_exceedances$savefile <- paste(saveDirectory,df_exceedances$savefile,sep='/')
@@ -65,7 +65,7 @@ for (outputtype in df_exceedances$outputtype) {
   }
   
   saveRDS(df_freq,df_exceedances$savefile[df_exceedances$outputtype == outputtype])
-  
+  readr::write_csv(df_freq,df_exceedances$savefile2[df_exceedances$outputtype == outputtype])
 }
 
 
