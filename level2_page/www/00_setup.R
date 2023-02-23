@@ -186,3 +186,4 @@ for (filelist in rmd_files) {
   rmarkdown::render(filelist)
 }
 
+#need to add script to extract only <body>...</body> content from html files
