@@ -1,155 +1,598 @@
 GEO_NAME,C1_COUNT_TOTAL,Name,latitude,longitude,airzone
+"Ingenika Point, Indian settlement (S-É)",0,Ingenika Point,56.785833,-124.875278,Northwest
+"Lower Post, Indian settlement (S-É)",5,Lower Post,59.933333,-128.5,Northwest
+"Good Hope Lake, Indian settlement (S-É)",0,Good Hope Lake,59.299722,-129.275833,Northwest
+"Q'alatkú7em, Indian reserve (IRI)",50,Q'alatkú7em,0,0,NA
+"105 Mile Post 2, Indian reserve (IRI)",5,105 Mile Post 2,50.733333,-121.316667,Southern Interior
 "Abbotsford, City (CY)",153524,Abbotsford,49.05,-122.28333,Lower Fraser Valley
+"Agats Meadow 8, Indian reserve (IRI)",0,Agats Meadow 8,52.283333,-124.161111,Central Interior
+"Ahahswinis 1, Indian reserve (IRI)",150,Ahahswinis 1,49.265135,-124.8254902,Georgia Strait
+"Ahaminaquus 12, Indian reserve (IRI)",0,Ahaminaquus 12,49.6841303,-126.1195259,Coastal
+"Aitchelitch 9, Indian reserve (IRI)",45,Aitchelitch 9,49.1499768,-121.9910133,Lower Fraser Valley
+"Alberni 2, Indian reserve (IRI)",0,Alberni 2,49.2146478,-124.8103305,Georgia Strait
+"Albert Flat 5, Indian reserve (IRI)",41,Albert Flat 5,49.516667,-121.416667,Lower Fraser Valley
+"Alert Bay, Indian reserve (IRI)",382,Alert Bay,50.583889,-126.927778,NA
+"Alert Bay, Indian reserve (IRI)",382,Alert Bay,50.583889,-126.927778,NA
+"Alert Bay, Village (VL)",449,Alert Bay,50.583889,-126.927778,NA
+"Alert Bay, Village (VL)",449,Alert Bay,50.583889,-126.927778,NA
+"Alexandria, Indian reserve (IRI)",NA,Alexandria,52.633333,-122.45,Central Interior
+"Alexis 9, Indian reserve (IRI)",10,Alexis 9,49.2187512,-119.918072,Southern Interior
+"Alexis Creek 14, Indian reserve (IRI)",5,Alexis Creek 14,52.2037558,-124.3133918,Central Interior
+"Alexis Creek 16, Indian reserve (IRI)",0,Alexis Creek 16,52.1749353,-124.3156749,Central Interior
+"Alexis Creek 21, Indian reserve (IRI)",0,Alexis Creek 21,52.3169253,-124.2636336,Central Interior
+"Alexis Creek 34, Indian reserve (IRI)",0,Alexis Creek 34,52.483333,-124.283333,Central Interior
+"Alkali Lake 1, Indian reserve (IRI)",358,Alkali Lake 1,51.7882111,-122.226573,Central Interior
+"Alkali Lake 4A, Indian reserve (IRI)",5,Alkali Lake 4A,51.8235049,-122.1190912,Central Interior
+"Anacla 12, Indian reserve (IRI)",104,Anacla 12,48.799444,-125.119722,Georgia Strait
+"Anahim's Flat 1, Indian reserve (IRI)",437,Anahim's Flat 1,52.033333,-123.166667,Central Interior
+"Anahim's Meadow, Indian reserve (IRI)",10,Anahim's Meadow,52.116667,-123.233333,Central Interior
 "Anmore, Village (VL)",2356,Anmore,49.314444,-122.856389,Lower Fraser Valley
 "Armstrong, City (CY)",5323,Armstrong,50.448333,-119.196667,Southern Interior
+"Ashcroft 4, Indian reserve (IRI)",42,Ashcroft 4,50.7222129,-121.3182309,Southern Interior
 "Ashcroft, Village (VL)",1670,Ashcroft,50.721389,-121.283611,Southern Interior
+"Ashnola 10, Indian reserve (IRI)",58,Ashnola 10,49.216667,-120,Southern Interior
+"Babine 16, Indian reserve (IRI)",0,Babine 16,55.3242184,-126.6446168,Central Interior
+"Babine 17, Indian reserve (IRI)",87,Babine 17,55.0273613,-127.3386305,Central Interior
+"Babine 25, Indian reserve (IRI)",83,Babine 25,54.8178098,-126.1480991,Central Interior
+"Babine 6, Indian reserve (IRI)",75,Babine 6,55.3237355,-126.61522,Central Interior
+"Babine Lake 21B, Indian reserve (IRI)",0,Babine Lake 21B,54.4913394,-125.6482383,Central Interior
+"Baezaeko River 27, Indian reserve (IRI)",0,Baezaeko River 27,52.9882293,-123.8127059,Central Interior
+"Baptiste Meadow 2, Indian reserve (IRI)",0,Baptiste Meadow 2,51.997222,-122.554167,Central Interior
+"Barnston Island 3, Indian reserve (IRI)",NA,Barnston Island 3,49.1881261,-122.6950644,NA
 "Barriere, District municipality (DM)",1765,Barriere,51.179722,-120.123611,Southern Interior
+"Basque 18, Indian reserve (IRI)",NA,Basque 18,50.63,-121.322778,Southern Interior
+"Becher Bay 1, Indian reserve (IRI)",221,Becher Bay 1,48.339444,-123.599722,Georgia Strait
+"Belcarra, Village (VL)",687,Belcarra,49.313611,-122.915,NA
 "Bella Bella 1, Indian reserve (IRI)",1193,Bella Bella 1,52.15,-128.15,Coastal
+"Bella Coola 1, Indian reserve (IRI)",937,Bella Coola 1,52.3781888,-126.7246152,Coastal
+"Betty Creek 18, Indian reserve (IRI)",0,Betty Creek 18,52.9198205,-125.4064305,Central Interior
+"Binche 2, Indian reserve (IRI)",118,Binche 2,54.570278,-124.503056,Central Interior
+"Blind Creek 6, Indian reserve (IRI)",26,Blind Creek 6,49.183333,-119.733333,Southern Interior
+"Blueberry River 205, Indian reserve (IRI)",145,Blueberry River 205,56.7040684,-121.1043585,Northeast
+"Bonaparte 3, Indian reserve (IRI)",159,Bonaparte 3,50.85,-121.366667,Southern Interior
+"Boothroyd 13, Indian reserve (IRI)",0,Boothroyd 13,49.9890364,-121.490005,Lower Fraser Valley
+"Boothroyd 8A, Indian reserve (IRI)",0,Boothroyd 8A,50.0427283,-121.5357111,Lower Fraser Valley
+"Boston Bar 1A, Indian reserve (IRI)",0,Boston Bar 1A,49.8307007,-121.4287143,Lower Fraser Valley
 "Bowen Island, Island municipality (IM)",4256,Bowen Island,49.373056,-123.371111,Lower Fraser Valley
+"Bridge River 1, Indian reserve (IRI)",242,Bridge River 1,50.7984719,-122.0270734,Southern Interior
+"Bucktum 4, Indian reserve (IRI)",5,Bucktum 4,49.9105019,-121.4407909,Lower Fraser Valley
+"Bulkley River 19, Indian reserve (IRI)",174,Bulkley River 19,55.033333,-127.316667,Central Interior
 "Burnaby, City (CY)",249125,Burnaby,49.242778,-122.972778,Lower Fraser Valley
+"Burns Lake 18, Indian reserve (IRI)",33,Burns Lake 18,54.2383481,-125.7680943,Central Interior
 "Burns Lake, Village (VL)",1659,Burns Lake,54.230278,-125.764444,Central Interior
 "Burrard Inlet 3, Indian reserve (IRI)",2373,Burrard Inlet 3,49.3085081,-122.9753558,Lower Fraser Valley
+"Cache Creek, Village (VL)",969,Cache Creek,50.811944,-121.323334,Southern Interior
+"Campbell River 11, Indian reserve (IRI)",506,Campbell River 11,50.033333,-125.25,NA
 "Campbell River, City (CY)",35519,Campbell River,50.023056,-125.243611,Georgia Strait
+"Canal Flats, Village (VL)",802,Canal Flats,50.160278,-115.808889,Southern Interior
+"Canim Lake 1, Indian reserve (IRI)",NA,Canim Lake 1,51.783333,-121,Central Interior
+"Canim Lake 2, Indian reserve (IRI)",NA,Canim Lake 2,51.7437561,-121.1297727,Central Interior
+"Canim Lake 4, Indian reserve (IRI)",0,Canim Lake 4,51.7958118,-121.4739391,Central Interior
+"Canoe Creek 1, Indian reserve (IRI)",56,Canoe Creek 1,51.4692931,-122.1543244,Southern Interior
+"Canoe Creek 2, Indian reserve (IRI)",104,Canoe Creek 2,51.433333,-122.05,Southern Interior
+"Canoe Creek 3, Indian reserve (IRI)",0,Canoe Creek 3,51.533333,-122.25,Central Interior
+"Cape Mudge 10, Indian reserve (IRI)",145,Cape Mudge 10,50,-125.183333,Georgia Strait
 "Capilano 5, Indian reserve (IRI)",2899,Capilano 5,49.3235774,-123.1375906,Lower Fraser Valley
+"Cassimayooks (Mayook) 5, Indian reserve (IRI)",5,Cassimayooks (Mayook) 5,49.491667,-115.563889,Southern Interior
 "Castlegar, City (CY)",8338,Castlegar,49.324444,-117.666944,Southern Interior
+"Cayoosh Creek 1, Indian reserve (IRI)",66,Cayoosh Creek 1,50.666667,-121.933333,Southern Interior
 "Central Saanich, District municipality (DM)",17385,Central Saanich,48.594444,-123.420833,Georgia Strait
+"Charley Boy's Meadow 3, Indian reserve (IRI)",0,Charley Boy's Meadow 3,52.3,-124.216667,Central Interior
 "Chase, Village (VL)",2399,Chase,50.819167,-119.686111,Southern Interior
+"Chawathil 4, Indian reserve (IRI)",182,Chawathil 4,49.37401,-121.5423061,Lower Fraser Valley
+"Cheakamus 11, Indian reserve (IRI)",95,Cheakamus 11,49.8,-123.183333,Georgia Strait
+"Cheam 1, Indian reserve (IRI)",207,Cheam 1,49.2,-121.766667,Lower Fraser Valley
+"Chehalis 5, Indian reserve (IRI)",500,Chehalis 5,49.3,-121.9,Lower Fraser Valley
+"Chekwelp 26, Indian reserve (IRI)",0,Chekwelp 26,49.4102638,-123.4994707,Georgia Strait
+"Chemainus 13, Indian reserve (IRI)",818,Chemainus 13,49,-123.783333,Georgia Strait
+"Chenahkint 12, Indian reserve (IRI)",0,Chenahkint 12,49.8739232,-126.977668,NA
+"Cheslatta 1, Indian reserve (IRI)",49,Cheslatta 1,54.0018218,-125.7040948,Central Interior
 "Chetwynd, District municipality (DM)",2302,Chetwynd,55.695833,-121.638333,Northeast
+"Chilco Lake 1, Indian reserve (IRI)",NA,Chilco Lake 1,51.4125169,-124.1142669,Central Interior
+"Chilco Lake 1A, Indian reserve (IRI)",NA,Chilco Lake 1A,51.416667,-124.1,Central Interior
+"Chilhil 6, Indian reserve (IRI)",63,Chilhil 6,50.633333,-121.8,Southern Interior
 "Chilliwack, City (CY)",93203,Chilliwack,49.166667,-121.95,Lower Fraser Valley
+"Chopaka 7 & 8, Indian reserve (IRI)",86,Chopaka 7 & 8,49.043056,-119.718056,Southern Interior
+"Chuchhraischin, Indian reserve (IRI)",0,Chuchhraischin,NA,NA,NA
+"Chuchuwayha 2, Indian reserve (IRI)",86,Chuchuwayha 2,49.3719392,-120.1003604,Southern Interior
+"Chum Creek 2, Indian reserve (IRI)",53,Chum Creek 2,50.866667,-119.583333,Southern Interior
+"Clakamucus 2, Indian reserve (IRI)",0,Clakamucus 2,48.977222,-125.573611,Coastal
 "Clearwater, District municipality (DM)",2388,Clearwater,51.645556,-120.0325,Central Interior
+"Clinton, Village (VL)",568,Clinton,51.091667,-121.586667,Southern Interior
+"Coglistiko River 29, Indian reserve (IRI)",0,Coglistiko River 29,52.9892985,-123.8434084,Central Interior
 "Coldstream, District municipality (DM)",11171,Coldstream,50.223889,-119.23,Southern Interior
+"Coldwater 1, Indian reserve (IRI)",350,Coldwater 1,50.033333,-120.833333,Southern Interior
+"Cole Bay 3, Indian reserve (IRI)",266,Cole Bay 3,48.616667,-123.45,Georgia Strait
+"Columbia Lake 3, Indian reserve (IRI)",149,Columbia Lake 3,50.416667,-115.916667,Southern Interior
 "Colwood, City (CY)",18961,Colwood,48.423611,-123.493333,Georgia Strait
+"Comox 1, Indian reserve (IRI)",291,Comox 1,49.6798241,-124.9562401,Georgia Strait
 "Comox, Town (T)",14806,Comox,49.672778,-124.927778,Georgia Strait
+"Coquitlam 1, Indian reserve (IRI)",55,Coquitlam 1,49.2303997,-122.8050852,Lower Fraser Valley
+"Coquitlam 2, Indian reserve (IRI)",0,Coquitlam 2,49.2477296,-122.7922362,Lower Fraser Valley
 "Coquitlam, City (CY)",148625,Coquitlam,49.284167,-122.793611,Lower Fraser Valley
+"Coryatsaqua (Moricetown) 2, Indian reserve (IRI)",80,Coryatsaqua (Moricetown) 2,55.033333,-127.333333,Central Interior
 "Courtenay, City (CY)",28420,Courtenay,49.689444,-124.995833,Georgia Strait
+"Cowichan Lake, Indian reserve (IRI)",20,Cowichan Lake,48.875,-124.26,Georgia Strait
 "Cowichan, Indian reserve (IRI)",2420,Cowichan,48.7695142,-123.6660387,Georgia Strait
 "Cranbrook, City (CY)",20499,Cranbrook,49.508056,-115.746944,Southern Interior
+"Creston 1, Indian reserve (IRI)",93,Creston 1,49.05,-116.533333,Southern Interior
 "Creston, Town (T)",5583,Creston,49.0975,-116.513056,Southern Interior
 "Cumberland, Village (VL)",4447,Cumberland,49.618611,-125.0325,Georgia Strait
 "Dawson Creek, City (CY)",12323,Dawson Creek,55.760556,-120.235556,Northeast
+"Dead Point 5, Indian reserve (IRI)",22,Dead Point 5,50.5945861,-126.5933715,NA
+"Dease Lake 9, Indian reserve (IRI)",54,Dease Lake 9,58.4729553,-130.025873,Northwest
+"Dease River 1, Indian reserve (IRI)",39,Dease River 1,59.2875,-129.289444,Northwest
+"Deep Creek 2, Indian reserve (IRI)",111,Deep Creek 2,52.2625,-122.0875,Central Interior
 "Delta, City (CY)",108455,Delta,49.084722,-123.058611,Lower Fraser Valley
+"Dog Creek 1, Indian reserve (IRI)",88,Dog Creek 1,51.5863784,-122.2060463,Central Interior
+"Dog Creek 2, Indian reserve (IRI)",17,Dog Creek 2,51.6,-122.083333,Central Interior
+"Doig River 206, Indian reserve (IRI)",85,Doig River 206,56.566667,-120.5,Northeast
+"Dolphin Island 1, Indian reserve (IRI)",295,Dolphin Island 1,53.783333,-130.433333,NA
+"Douglas 8, Indian reserve (IRI)",66,Douglas 8,49.7575266,-122.1835038,Lower Fraser Valley
+"Douglas Lake 3, Indian reserve (IRI)",188,Douglas Lake 3,50.1658119,-120.2810469,Southern Interior
+"Dragon Lake 3, Indian reserve (IRI)",15,Dragon Lake 3,52.9712158,-122.429432,Central Interior
 "Duck Lake 7, Indian reserve (IRI)",1847,Duck Lake 7,49.999167,-119.401389,Southern Interior
+"Duncan Lake 2, Indian reserve (IRI)",5,Duncan Lake 2,54.4218198,-126.1376584,Central Interior
 "Duncan, City (CY)",5047,Duncan,48.778611,-123.708056,Georgia Strait
+"Dzitline Lee 9, Indian reserve (IRI)",15,Dzitline Lee 9,54.876944,-125.135,Central Interior
+"East Moberly Lake 169, Indian reserve (IRI)",297,East Moberly Lake 169,55.833333,-121.633333,Northeast
 "East Saanich 2, Indian reserve (IRI)",1790,East Saanich 2,48.583333,-123.383333,Georgia Strait
+"Ehatis 11, Indian reserve (IRI)",91,Ehatis 11,49.9826005,-126.8604092,Coastal
+"Elhlateese 2, Indian reserve (IRI)",10,Elhlateese 2,49.021667,-125.04,Georgia Strait
 "Elkford, District municipality (DM)",2749,Elkford,50.024444,-114.921667,Southern Interior
+"Enderby 2, Indian reserve (IRI)",440,Enderby 2,50.55,-119.133333,Southern Interior
 "Enderby, City (CY)",3028,Enderby,50.550556,-119.139444,Southern Interior
+"Entlqwekkinh 19, Indian reserve (IRI)",5,Entlqwekkinh 19,50.466667,-121.3125,Southern Interior
+"Esowista 3, Indian reserve (IRI)",90,Esowista 3,49.0754617,-125.7916131,Coastal
 "Esquimalt, District municipality (DM)",17533,Esquimalt,48.429722,-123.414444,Georgia Strait
+"Esquimalt, District municipality (DM)",17533,Esquimalt,48.429722,-123.414444,Georgia Strait
+"Esquimalt, Indian reserve (IRI)",120,Esquimalt,48.429722,-123.414444,Georgia Strait
+"Esquimalt, Indian reserve (IRI)",120,Esquimalt,48.429722,-123.414444,Georgia Strait
+"Est-Patrolas 4, Indian reserve (IRI)",26,Est-Patrolas 4,48.7136587,-123.6059347,Georgia Strait
+"Euchinico Creek 17, Indian reserve (IRI)",5,Euchinico Creek 17,53.216667,-123.5,Central Interior
 "Fernie, City (CY)",6320,Fernie,49.504167,-115.062778,Southern Interior
+"Finlay River 6, Indian reserve (IRI)",229,Finlay River 6,NA,NA,NA
+"Fishtrap 19, Indian reserve (IRI)",10,Fishtrap 19,52.359167,-125.1575,Central Interior
+"Five Mile Point 3, Indian reserve (IRI)",83,Five Mile Point 3,59.5,-133.666667,Northwest
+"Fontas 1, Indian reserve (IRI)",5,Fontas 1,58.2851339,-121.7261312,Northeast
+"Fort George 2, Indian reserve (IRI)",84,Fort George 2,54.016667,-122.626389,Central Interior
+"Fort Nelson 2, Indian reserve (IRI)",419,Fort Nelson 2,58.75,-122.583333,Northeast
+"Fort Rupert 1, Indian reserve (IRI)",58,Fort Rupert 1,50.6953242,-127.4055824,Coastal
 "Fort St. James, District municipality (DM)",1386,Fort St. James,54.444444,-124.259167,Central Interior
 "Fort St. John, City (CY)",21465,Fort St. John,56.2525,-120.846667,Northeast
+"Fort Ware 1, Indian reserve (IRI)",242,Fort Ware 1,57.433333,-125.633333,Northwest
+"Fountain 1, Indian reserve (IRI)",93,Fountain 1,50.736111,-121.861111,Southern Interior
+"Fountain 10, Indian reserve (IRI)",5,Fountain 10,50.7587258,-121.9207272,Southern Interior
+"Fountain 11, Indian reserve (IRI)",0,Fountain 11,50.720833,-121.909722,Southern Interior
+"Fountain 12, Indian reserve (IRI)",10,Fountain 12,50.6864826,-121.80786,Southern Interior
+"Fountain 1B, Indian reserve (IRI)",63,Fountain 1B,50.741667,-121.875,Southern Interior
+"Fountain 1D, Indian reserve (IRI)",25,Fountain 1D,50.7433639,-121.8652598,Southern Interior
+"Fountain 3, Indian reserve (IRI)",10,Fountain 3,50.779167,-121.844444,Southern Interior
+"Fountain 3A, Indian reserve (IRI)",0,Fountain 3A,50.7629692,-121.8334776,Southern Interior
+"Fountain Creek 8, Indian reserve (IRI)",0,Fountain Creek 8,50.7070444,-121.8363324,Southern Interior
+"Francois Lake 7, Indian reserve (IRI)",NA,Francois Lake 7,54.0092887,-125.9520241,Central Interior
+"Fraser Lake, Village (VL)",965,Fraser Lake,54.060278,-124.843889,Central Interior
 "Fruitvale, Village (VL)",1958,Fruitvale,49.115,-117.542778,Southern Interior
+"Galiano Island 9, Indian reserve (IRI)",0,Galiano Island 9,49.0068516,-123.5847811,NA
+"Garden, Indian reserve (IRI)",NA,Garden,51.4412684,-124.0480709,Central Interior
 "Gibsons, Town (T)",4758,Gibsons,49.400278,-123.508889,Georgia Strait
+"Gitanmaax 1, Indian reserve (IRI)",560,Gitanmaax 1,55.269444,-127.68056,Central Interior
+"Gitanyow 1, Indian reserve (IRI)",408,Gitanyow 1,55.266667,-128.066667,Central Interior
+"Gitsegukla 1, Indian reserve (IRI)",444,Gitsegukla 1,55.091667,-127.829167,Central Interior
+"Gitwangak 1, Indian reserve (IRI)",450,Gitwangak 1,55.1,-128.066667,Central Interior
 "Gold River, Village (VL)",1246,Gold River,49.781389,-126.046944,Coastal
 "Golden, Town (T)",3986,Golden,51.297778,-116.964722,Southern Interior
+"Gordon River 2, Indian reserve (IRI)",79,Gordon River 2,48.5749882,-124.4047095,Georgia Strait
 "Grand Forks, City (CY)",4112,Grand Forks,49.031111,-118.439167,Southern Interior
+"Granisle, Village (VL)",337,Granisle,54.884722,-126.206667,Central Interior
+"Greenwood, City (CY)",702,Greenwood,49.088333,-118.676389,Southern Interior
+"Guhthe Tah 12, Indian reserve (IRI)",142,Guhthe Tah 12,57.903889,-131.176389,Northwest
+"Gwayasdums 1, Indian reserve (IRI)",38,Gwayasdums 1,50.6946648,-126.5985983,NA
+"Hagwilget 1, Indian reserve (IRI)",183,Hagwilget 1,55.2578112,-127.5973603,Central Interior
+"Halalt 2, Indian reserve (IRI)",156,Halalt 2,48.8763063,-123.6950565,Georgia Strait
+"Halfway River 168, Indian reserve (IRI)",247,Halfway River 168,56.4734781,-121.8314946,Northeast
+"Halhalaeden, Indian reserve (IRI)",10,Halhalaeden,50.2961294,-121.6358102,Southern Interior
+"Hamilton Creek 2, Indian reserve (IRI)",0,Hamilton Creek 2,50.1608951,-120.5162844,Southern Interior
+"Harris 3, Indian reserve (IRI)",0,Harris 3,50.3871199,-119.2350991,Southern Interior
 "Harrison Hot Springs, Village (VL)",1905,Harrison Hot Springs,49.298889,-121.784444,Lower Fraser Valley
+"Hazelton, Village (VL)",257,Hazelton,55.255833,-127.675556,Central Interior
+"Hesquiat 1, Indian reserve (IRI)",NA,Hesquiat 1,49.3934562,-126.4723298,Coastal
+"High Bar 1, Indian reserve (IRI)",0,High Bar 1,51.1,-122,Southern Interior
 "Highlands, District municipality (DM)",2482,Highlands,48.480556,-123.511944,Georgia Strait
+"Holachten 8, Indian reserve (IRI)",330,Holachten 8,49.2082953,-122.026313,Lower Fraser Valley
+"Homalco 9, Indian reserve (IRI)",214,Homalco 9,49.949167,-125.243611,Georgia Strait
+"Hope Island 1, Indian reserve (IRI)",0,Hope Island 1,50.916667,-127.9,Coastal
 "Hope, District municipality (DM)",6686,Hope,49.38,-121.441389,Lower Fraser Valley
+"Hopetown 10A, Indian reserve (IRI)",0,Hopetown 10A,50.9236746,-126.8207391,NA
+"Houpsitas 6, Indian reserve (IRI)",157,Houpsitas 6,50.030556,-127.378611,Coastal
 "Houston, District municipality (DM)",3052,Houston,54.398333,-126.648333,Central Interior
+"Hudson's Hope, District municipality (DM)",841,Hudson's Hope,56.025833,-121.913611,Northeast
+"Hustalen 1, Indian reserve (IRI)",44,Hustalen 1,50.954842,-119.6438464,Southern Interior
+"Inkahtsaph 6, Indian reserve (IRI)",0,Inkahtsaph 6,50.0047992,-121.5079709,Lower Fraser Valley
+"Inkluckcheen, Indian reserve (IRI)",190,Inkluckcheen,50.2727562,-121.6046136,Southern Interior
+"Inklyuhkinatko 2, Indian reserve (IRI)",26,Inklyuhkinatko 2,50.1871635,-121.5772882,Southern Interior
 "Invermere, District municipality (DM)",3917,Invermere,50.505833,-116.030556,Southern Interior
+"Isidore's Ranch 4, Indian reserve (IRI)",0,Isidore's Ranch 4,49.5448417,-115.5993484,Southern Interior
+"Iskut 6, Indian reserve (IRI)",478,Iskut 6,57.8384183,-129.9871137,Northwest
+"Ittatsoo 1, Indian reserve (IRI)",321,Ittatsoo 1,48.938889,-125.528889,Coastal
+"Jean Baptiste 28, Indian reserve (IRI)",5,Jean Baptiste 28,54.7467228,-127.0134607,Central Interior
+"Joeyaska 2, Indian reserve (IRI)",58,Joeyaska 2,50.0898089,-120.7578324,Southern Interior
+"Johny Sticks 2, Indian reserve (IRI)",10,Johny Sticks 2,51.833333,-122.166667,Central Interior
+"Kahmoose 4, Indian reserve (IRI)",5,Kahmoose 4,49.9616141,-121.4834895,Lower Fraser Valley
+"Kahntah 3, Indian reserve (IRI)",0,Kahntah 3,58.3558124,-120.9070614,Northeast
 "Kamloops 1, Indian reserve (IRI)",3915,Kamloops 1,50.716667,-120.266667,Southern Interior
 "Kamloops, City (CY)",97902,Kamloops,50.675833,-120.339444,Southern Interior
+"Kanaka Bar, Indian reserve (IRI)",0,Kanaka Bar,50.116667,-121.56667,Southern Interior
 "Kaslo, Village (VL)",1049,Kaslo,49.910556,-116.905,Southern Interior
+"Katit 1, Indian reserve (IRI)",77,Katit 1,51.683333,-127.2,Coastal
+"Katzie 1, Indian reserve (IRI)",244,Katzie 1,49.202792,-122.6738151,Lower Fraser Valley
+"Katzie 2, Indian reserve (IRI)",26,Katzie 2,49.1943478,-122.6538151,Lower Fraser Valley
 "Kelowna, City (CY)",144576,Kelowna,49.888056,-119.495556,Southern Interior
 "Kent, District municipality (DM)",6300,Kent,49.238056,-121.7625,Lower Fraser Valley
 "Keremeos, Village (VL)",1608,Keremeos,49.204722,-119.829722,Southern Interior
+"Kil-pah-las 3, Indian reserve (IRI)",0,Kil-pah-las 3,48.7389793,-123.6122371,Georgia Strait
 "Kimberley, City (CY)",8115,Kimberley,49.685,-115.981667,Southern Interior
+"Kippase 2, Indian reserve (IRI)",220,Kippase 2,50.691863,-127.4040329,Coastal
+"Kispiox 1, Indian reserve (IRI)",578,Kispiox 1,55.351111,-127.693611,Central Interior
+"Kitamaat 2, Indian reserve (IRI)",507,Kitamaat 2,53.966667,-128.65,NA
+"Kitasoo 1, Indian reserve (IRI)",217,Kitasoo 1,52.6,-128.533333,Coastal
 "Kitimat, District municipality (DM)",8236,Kitimat,54.053333,-128.652222,Coastal
+"Kitselas 1, Indian reserve (IRI)",291,Kitselas 1,54.616667,-128.416667,Coastal
+"Kitsumkaylum 1, Indian reserve (IRI)",315,Kitsumkaylum 1,54.533333,-128.666667,Coastal
+"Kitzowit 20, Indian reserve (IRI)",21,Kitzowit 20,50.201026,-121.5724446,Southern Interior
+"Klahkamich 17, Indian reserve (IRI)",33,Klahkamich 17,50.2276877,-121.5770249,Southern Interior
+"Kleetlekut 22, Indian reserve (IRI)",15,Kleetlekut 22,50.266667,-121.566667,Southern Interior
+"Klehkoot 2, Indian reserve (IRI)",15,Klehkoot 2,49.290833,-124.900278,Coastal
+"Klickkumcheen 18, Indian reserve (IRI)",82,Klickkumcheen 18,50.2363572,-121.5783298,Southern Interior
+"Kloklowuck 7, Indian reserve (IRI)",NA,Kloklowuck 7,50.3629858,-121.2365062,Southern Interior
+"Kluskus 1, Indian reserve (IRI)",38,Kluskus 1,53.0908588,-124.4881976,Central Interior
+"Kootenay 1, Indian reserve (IRI)",145,Kootenay 1,49.616667,-115.7,Southern Interior
+"Kopchitchin 2, Indian reserve (IRI)",41,Kopchitchin 2,49.8692753,-121.4538464,Lower Fraser Valley
+"Kowtain 17, Indian reserve (IRI)",59,Kowtain 17,49.7437503,-123.1410044,Georgia Strait
+"Kshish 4, Indian reserve (IRI)",0,Kshish 4,54.5614067,-128.4800467,Coastal
+"Kulkayu (Hartley Bay) 4, Indian reserve (IRI)",58,Kulkayu (Hartley Bay) 4,53.423611,-129.259722,Coastal
+"Kulkayu (Hartley Bay) 4A, Indian reserve (IRI)",66,Kulkayu (Hartley Bay) 4A,53.4267695,-129.2481509,NA
+"Kulspai 6, Indian reserve (IRI)",73,Kulspai 6,54.4927385,-128.5846103,Coastal
+"Kumcheen 1, Indian reserve (IRI)",NA,Kumcheen 1,50.4228546,-121.3170943,Southern Interior
+"Kwawkwawapilt 6, Indian reserve (IRI)",295,Kwawkwawapilt 6,49.166667,-121.983333,Lower Fraser Valley
 "Ladysmith, Town (T)",8990,Ladysmith,48.993333,-123.815556,Georgia Strait
+"Lakahahmen 11, Indian reserve (IRI)",170,Lakahahmen 11,49.184704,-122.0766048,Lower Fraser Valley
 "Lake Country, District municipality (DM)",15817,Lake Country,50.030278,-119.4025,Southern Interior
 "Lake Cowichan, Town (T)",3325,Lake Cowichan,48.825833,-124.056389,Georgia Strait
+"Laketown 3, Indian reserve (IRI)",16,Laketown 3,53.9233039,-124.1864461,Central Interior
 "Langford, City (CY)",46584,Langford,48.449722,-123.504444,Georgia Strait
+"Langley 2, Indian reserve (IRI)",332,Langley 2,49.1874978,-122.4225715,Lower Fraser Valley
 "Langley, City (CY)",28963,Langley,49.1025,-122.658056,Lower Fraser Valley
 "Langley, City (CY)",28963,Langley,49.1025,-122.658056,Lower Fraser Valley
 "Langley, District municipality (DM)",132603,Langley,49.1025,-122.658056,Lower Fraser Valley
 "Langley, District municipality (DM)",132603,Langley,49.1025,-122.658056,Lower Fraser Valley
 "Lantzville, District municipality (DM)",3817,Lantzville,49.250556,-124.074444,Georgia Strait
+"Lax Kw'alaams 1, Indian reserve (IRI)",627,Lax Kw'alaams 1,54.483333,-130.4,Coastal
+"Lezbye 6, Indian reserve (IRI)",NA,Lezbye 6,51.416667,-124.066667,Central Interior
+"Liard River 3, Indian reserve (IRI)",114,Liard River 3,59.9306388,-128.5048911,Northwest
+"Lillooet 1, Indian reserve (IRI)",285,Lillooet 1,50.6794526,-121.9553189,Southern Interior
 "Lillooet, District municipality (DM)",2302,Lillooet,50.693889,-121.933611,Southern Interior
 "Lions Bay, Village (VL)",1390,Lions Bay,49.458611,-123.235278,Georgia Strait
+"Little Springs, Indian reserve (IRI)",20,Little Springs,51.85,-122.083333,Central Interior
 "Logan Lake, District municipality (DM)",2255,Logan Lake,50.494444,-120.813333,Southern Interior
+"Lohbiee 3, Indian reserve (IRI)",NA,Lohbiee 3,51.4681323,-123.9406451,Central Interior
+"Louis Creek 4, Indian reserve (IRI)",15,Louis Creek 4,51.134335,-120.1259453,Southern Interior
+"Lower Hat Creek 2, Indian reserve (IRI)",61,Lower Hat Creek 2,50.8786372,-121.5059306,Southern Interior
+"Lower Similkameen 2, Indian reserve (IRI)",76,Lower Similkameen 2,49.116667,-119.75,Southern Interior
+"Lukseetsissum 9, Indian reserve (IRI)",52,Lukseetsissum 9,49.35,-121.616667,Lower Fraser Valley
+"Lulu 5, Indian reserve (IRI)",15,Lulu 5,49.4034415,-120.2291197,Southern Interior
 "Lumby, Village (VL)",2063,Lumby,50.250833,-118.961944,Southern Interior
+"Lyacksun 3, Indian reserve (IRI)",30,Lyacksun 3,49.0964378,-123.675521,Georgia Strait
+"Lytton 4A, Indian reserve (IRI)",0,Lytton 4A,50.4427431,-121.7100418,Southern Interior
+"Lytton 4E, Indian reserve (IRI)",5,Lytton 4E,50.427986,-121.7082897,Southern Interior
+"Lytton 9A, Indian reserve (IRI)",10,Lytton 9A,50.3,-121.65,Southern Interior
+"Lytton 9B, Indian reserve (IRI)",0,Lytton 9B,50.2713362,-121.6260014,Southern Interior
+"Lytton, Village (VL)",210,Lytton,50.231111,-121.581389,Southern Interior
 "Mackenzie, District municipality (DM)",3281,Mackenzie,55.324444,-123.092778,Central Interior
+"Macoah 1, Indian reserve (IRI)",27,Macoah 1,48.996944,-125.380833,NA
+"Malachan 11, Indian reserve (IRI)",178,Malachan 11,48.8088146,-124.6693064,Georgia Strait
+"Malahat 11, Indian reserve (IRI)",165,Malahat 11,48.6195666,-123.529362,Georgia Strait
 "Maple Ridge, City (CY)",90990,Maple Ridge,49.22,-122.598889,Lower Fraser Valley
+"Marble Canyon 3, Indian reserve (IRI)",97,Marble Canyon 3,50.816667,-121.666667,Southern Interior
+"Marktosis 15, Indian reserve (IRI)",760,Marktosis 15,49.272689,-126.0573586,NA
+"Masset 1, Indian reserve (IRI)",475,Masset 1,54.033333,-132.166667,NA
+"Masset, Village (VL)",838,Masset,54.011111,-132.146667,Coastal
+"Matsqui 4, Indian reserve (IRI)",456,Matsqui 4,49.004979,-122.4761568,Lower Fraser Valley
+"Matsqui Main 2, Indian reserve (IRI)",119,Matsqui Main 2,49.1073877,-122.3491654,Lower Fraser Valley
+"McBride, Village (VL)",588,McBride,53.304167,-120.163889,Central Interior
+"McCartney's Flat 4, Indian reserve (IRI)",24,McCartney's Flat 4,50.6565823,-121.8930677,Southern Interior
+"McLeod Lake 1, Indian reserve (IRI)",81,McLeod Lake 1,54.983333,-123.05,Central Interior
+"McMillan Island 6, Indian reserve (IRI)",96,McMillan Island 6,49.1740426,-122.5625712,Lower Fraser Valley
 "Merritt, City (CY)",7051,Merritt,50.1125,-120.788333,Southern Interior
+"Mesilinka 7, Indian reserve (IRI)",0,Mesilinka 7,56.366164,-125.417713,Northwest
 "Metchosin, District municipality (DM)",5067,Metchosin,48.379167,-123.535833,Georgia Strait
+"Michel Gardens 36, Indian reserve (IRI)",5,Michel Gardens 36,52.1454232,-123.9157922,Central Interior
+"Midway, Village (VL)",651,Midway,49.008333,-118.778333,Southern Interior
+"Mission 1, Indian reserve (IRI)",570,Mission 1,49.3130659,-123.0890313,NA
+"Mission 5, Indian reserve (IRI)",19,Mission 5,50.7045198,-122.2804777,Southern Interior
+"Mission Lands 17, Indian reserve (IRI)",0,Mission Lands 17,54.455556,-124.27083,Central Interior
 "Mission, District municipality (DM)",41519,Mission,49.133333,-122.3,Lower Fraser Valley
 "Montrose, Village (VL)",1013,Montrose,49.078889,-117.594167,Southern Interior
+"Moricetown 1, Indian reserve (IRI)",253,Moricetown 1,55.016667,-127.316667,Central Interior
 "Mount Currie, Indian reserve (IRI)",1242,Mount Currie,50.316667,-122.71667,Georgia Strait
 "Musqueam 2, Indian reserve (IRI)",1646,Musqueam 2,49.2326524,-123.2061919,Georgia Strait
+"Musqueam 4, Indian reserve (IRI)",10,Musqueam 4,49.066667,-123.125,Lower Fraser Valley
+"Nak'azdli, Indian reserve (IRI)",528,Nak'azdli,54.431389,-124.2475,Central Interior
 "Nakusp, Village (VL)",1589,Nakusp,50.239167,-117.7975,Southern Interior
+"Nanaimo River, Indian reserve (IRI)",323,Nanaimo River,49.138333,-123.895556,Georgia Strait
+"Nanaimo Town 1, Indian reserve (IRI)",386,Nanaimo Town 1,49.1544695,-123.9272598,Georgia Strait
 "Nanaimo, City (CY)",99863,Nanaimo,49.163889,-123.938056,Georgia Strait
+"Nanoose, Indian reserve (IRI)",245,Nanoose,49.266667,-124.2,Georgia Strait
+"Nautley (Fort Fraser) 1, Indian reserve (IRI)",227,Nautley (Fort Fraser) 1,54.077778,-124.602778,Central Interior
+"Nazco 20, Indian reserve (IRI)",81,Nazco 20,52.9562689,-123.5856474,Central Interior
+"Necait 6, Indian reserve (IRI)",5,Necait 6,50.70295,-122.2975821,Southern Interior
+"Nedoats 11, Indian reserve (IRI)",0,Nedoats 11,55.05,-126.316667,Central Interior
+"Nekalliston 2, Indian reserve (IRI)",0,Nekalliston 2,51.4221974,-120.1985535,Southern Interior
+"Nekliptum 1, Indian reserve (IRI)",66,Nekliptum 1,50.1080995,-121.5544612,Southern Interior
 "Nelson, City (CY)",11106,Nelson,49.493333,-117.295833,Southern Interior
+"Nenagwas 12, Indian reserve (IRI)",0,Nenagwas 12,49.9105049,-125.2087155,Georgia Strait
+"Nequatque, Indian reserve (IRI)",155,Nequatque,50.50278,-122.545743,Georgia Strait
+"Nesikep 6, Indian reserve (IRI)",5,Nesikep 6,50.55,-121.783333,Southern Interior
+"Neskonlith, Indian reserve (IRI)",279,Neskonlith,50.7552402,-119.7329558,Southern Interior
+"Nesuch 3, Indian reserve (IRI)",95,Nesuch 3,50.3047291,-122.6551739,Georgia Strait
+"New Denver, Village (VL)",487,New Denver,49.991389,-117.377222,Southern Interior
+"New Hazelton, District municipality (DM)",602,New Hazelton,55.243333,-127.586944,Central Interior
 "New Songhees 1A, Indian reserve (IRI)",1839,New Songhees 1A,48.4461113,-123.4202926,Georgia Strait
 "New Westminster, City (CY)",78916,New Westminster,49.206667,-122.910556,Lower Fraser Valley
+"Nickel Palm 4, Indian reserve (IRI)",5,Nickel Palm 4,50.45,-121.7,Southern Interior
+"Nickeyeah 25, Indian reserve (IRI)",34,Nickeyeah 25,50.2097429,-121.5872581,Southern Interior
+"Nicola Lake 1, Indian reserve (IRI)",148,Nicola Lake 1,50.216667,-120.45,Southern Interior
+"Nicola Mameet 1, Indian reserve (IRI)",513,Nicola Mameet 1,50.166667,-120.833333,Southern Interior
+"Nicomen 1, Indian reserve (IRI)",41,Nicomen 1,50.266667,-121.4,Southern Interior
+"Nimpkish 2, Indian reserve (IRI)",0,Nimpkish 2,50.5824018,-126.9275994,NA
 "Nisga'a, Nisga'a land (NL)",1794,Nisga'a,55.1166667,-128.9,Coastal
+"Nkaih 10, Indian reserve (IRI)",5,Nkaih 10,50.3258512,-121.659227,Southern Interior
+"Nohomeen 23, Indian reserve (IRI)",5,Nohomeen 23,50.25,-121.6,Southern Interior
+"Nooaitch 10, Indian reserve (IRI)",170,Nooaitch 10,50.2,-121.083333,Southern Interior
+"Noonla 6, Indian reserve (IRI)",0,Noonla 6,54.0223561,-124.0766172,Central Interior
+"North Bay 5, Indian reserve (IRI)",45,North Bay 5,50.783333,-119.316667,Southern Interior
 "North Cowichan, District municipality (DM)",31990,North Cowichan,48.824722,-123.719722,Georgia Strait
 "North Saanich, District municipality (DM)",12235,North Saanich,48.656389,-123.432222,Georgia Strait
+"North Tacla Lake, Indian reserve (IRI)",243,North Tacla Lake,55.483333,-125.966667,Central Interior
+"North Thompson 1, Indian reserve (IRI)",181,North Thompson 1,51.2531536,-120.1605675,Southern Interior
 "North Vancouver, City (CY)",58120,North Vancouver,49.320556,-123.073889,Lower Fraser Valley
 "North Vancouver, City (CY)",58120,North Vancouver,49.320556,-123.073889,Lower Fraser Valley
 "North Vancouver, District municipality (DM)",88168,North Vancouver,49.320556,-123.073889,Lower Fraser Valley
 "North Vancouver, District municipality (DM)",88168,North Vancouver,49.320556,-123.073889,Lower Fraser Valley
 "Northern Rockies, Regional municipality (RGM)",3947,Northern Rockies,58.803889,-122.706667,Northeast
+"Numukamis 1, Indian reserve (IRI)",0,Numukamis 1,48.914722,-124.99,NA
+"Nuuautin 2, Indian reserve (IRI)",101,Nuuautin 2,50.2585575,-121.5851953,Southern Interior
 "Oak Bay, District municipality (DM)",17990,Oak Bay,48.425833,-123.318056,Georgia Strait
+"Oclucje 7, Indian reserve (IRI)",29,Oclucje 7,49.9896024,-126.9416269,Coastal
+"Ohamil 1, Indian reserve (IRI)",150,Ohamil 1,49.333333,-121.6,Lower Fraser Valley
 "Okanagan (Part) 1, Indian reserve (IRI)",3244,Okanagan (Part) 1,48.778611,-123.708056,Georgia Strait
 "Oliver, Town (T)",5094,Oliver,49.1825,-119.550833,Southern Interior
+"Omineca 1, Indian reserve (IRI)",NA,Omineca 1,53.9910381,-125.8545354,Central Interior
 "One Hundred Mile House, District municipality (DM)",1928,One Hundred Mile House,51.642778,-121.295556,Central Interior
+"Opitsat 1, Indian reserve (IRI)",153,Opitsat 1,49.1760634,-125.9119248,NA
+"Oregon Jack Creek 5, Indian reserve (IRI)",0,Oregon Jack Creek 5,50.6,-121.316667,Southern Interior
 "Osoyoos 1, Indian reserve (IRI)",1426,Osoyoos 1,49.15,-119.5,Southern Interior
 "Osoyoos, Town (T)",5556,Osoyoos,49.0325,-119.468333,Southern Interior
+"Oyster Bay 12, Indian reserve (IRI)",105,Oyster Bay 12,49.016667,-123.85,Georgia Strait
+"Palling 1, Indian reserve (IRI)",92,Palling 1,54.3313904,-125.9003708,Central Interior
+"Papyum 27, Indian reserve (IRI)",35,Papyum 27,50.2369694,-121.5936771,Southern Interior
+"Paqulh, Indian reserve (IRI)",0,Paqulh,50.121944,-122.528056,Lower Fraser Valley
 "Parksville, City (CY)",13642,Parksville,49.318056,-124.311389,Georgia Strait
+"Pashilqua 2, Indian reserve (IRI)",57,Pashilqua 2,50.65,-121.916667,Southern Interior
+"Paska Island 3, Indian reserve (IRI)",0,Paska Island 3,50.614444,-121.316111,Southern Interior
+"Paul's Basin 2, Indian reserve (IRI)",35,Paul's Basin 2,49.9929107,-120.9836158,Southern Interior
+"Pavilion 1, Indian reserve (IRI)",48,Pavilion 1,50.883333,-121.85,Southern Interior
 "Peachland, District municipality (DM)",5789,Peachland,49.773889,-119.736389,Southern Interior
 "Pemberton, Village (VL)",3407,Pemberton,50.320556,-122.807778,Georgia Strait
+"Pemynoos 9, Indian reserve (IRI)",0,Pemynoos 9,50.5,-121.266667,Southern Interior
+"Penelakut Island 7, Indian reserve (IRI)",513,Penelakut Island 7,48.963056,-123.646111,NA
 "Penticton 1, Indian reserve (IRI)",2080,Penticton 1,49.5,-119.666667,Southern Interior
 "Penticton, City (CY)",36885,Penticton,49.500833,-119.593889,Southern Interior
+"Pentledge 2, Indian reserve (IRI)",5,Pentledge 2,49.7,-125,Georgia Strait
+"Peq-Paq 22, Indian reserve (IRI)",0,Peq-Paq 22,50.6152777,-121.3799999,Southern Interior
+"Peters 1, Indian reserve (IRI)",NA,Peters 1,49.3021452,-121.6534712,Lower Fraser Valley
 "Pitt Meadows, City (CY)",19146,Pitt Meadows,49.233333,-122.68333,Lower Fraser Valley
+"Poison Creek 17A, Indian reserve (IRI)",10,Poison Creek 17A,54.2289401,-125.7850582,Central Interior
+"Popkum 1, Indian reserve (IRI)",0,Popkum 1,49.2083896,-121.7230682,Lower Fraser Valley
 "Port Alberni, City (CY)",18259,Port Alberni,49.234444,-124.805833,Georgia Strait
+"Port Alice, Village (VL)",739,Port Alice,50.426667,-127.488056,Coastal
+"Port Clements, Village (VL)",340,Port Clements,53.685556,-132.183611,NA
 "Port Coquitlam, City (CY)",61498,Port Coquitlam,49.261944,-122.780278,Lower Fraser Valley
+"Port Edward, District municipality (DM)",470,Port Edward,54.220556,-130.289444,NA
 "Port Hardy, District municipality (DM)",3902,Port Hardy,50.724444,-127.498056,Coastal
 "Port McNeill, Town (T)",2356,Port McNeill,50.589444,-127.083611,Georgia Strait
 "Port Moody, City (CY)",33535,Port Moody,49.282222,-122.829444,Lower Fraser Valley
+"Portier Pass 5, Indian reserve (IRI)",0,Portier Pass 5,49.0164462,-123.5972837,NA
+"Pouce Coupe, Village (VL)",762,Pouce Coupe,55.714722,-120.133611,Northeast
 "Powell River, City (CY)",13943,Powell River,49.835556,-124.524444,Georgia Strait
+"Priest's Valley 6, Indian reserve (IRI)",367,Priest's Valley 6,50.2465171,-119.338797,Southern Interior
 "Prince George, City (CY)",76708,Prince George,53.913056,-122.745278,Central Interior
 "Prince Rupert, City (CY)",12300,Prince Rupert,54.312778,-130.325278,Coastal
 "Princeton, Town (T)",2894,Princeton,49.460278,-120.507778,Southern Interior
+"Prophet River 4, Indian reserve (IRI)",107,Prophet River 4,58.083333,-122.7,Northeast
+"Puckatholetchin 11, Indian reserve (IRI)",10,Puckatholetchin 11,49.4448041,-121.4325094,Lower Fraser Valley
+"Puntzi Lake 2, Indian reserve (IRI)",5,Puntzi Lake 2,52.2060462,-124.056248,Central Interior
+"Quaaout 1, Indian reserve (IRI)",284,Quaaout 1,50.883333,-119.583333,Southern Interior
+"Quaee 7, Indian reserve (IRI)",111,Quaee 7,50.966667,-126.183333,Coastal
 "Qualicum Beach, Town (T)",9303,Qualicum Beach,49.348056,-124.443889,Georgia Strait
+"Qualicum, Indian reserve (IRI)",82,Qualicum,49.4,-124.616667,NA
+"Quatsino Subdivision 18, Indian reserve (IRI)",246,Quatsino Subdivision 18,50.616667,-127.566667,Coastal
+"Queen Charlotte, Village (VL)",964,Queen Charlotte,53.254167,-132.08472,Coastal
+"Quesnel 1, Indian reserve (IRI)",110,Quesnel 1,52.9478525,-122.4637677,Central Interior
 "Quesnel, City (CY)",9889,Quesnel,52.979722,-122.493611,Central Interior
+"Quinsam 12, Indian reserve (IRI)",312,Quinsam 12,50.016667,-125.3,Georgia Strait
 "Radium Hot Springs, Village (VL)",1339,Radium Hot Springs,50.62,-116.076111,Southern Interior
+"Redstone Flat 1, Indian reserve (IRI)",181,Redstone Flat 1,52.1375,-123.957778,Central Interior
+"Refuge Cove 6, Indian reserve (IRI)",NA,Refuge Cove 6,49.3674971,-126.2719555,Coastal
 "Revelstoke, City (CY)",8275,Revelstoke,50.998889,-118.195833,Southern Interior
 "Richmond, City (CY)",209937,Richmond,49.163333,-123.163333,Lower Fraser Valley
 "Rossland, City (CY)",4140,Rossland,49.076944,-117.802222,Southern Interior
+"Ruby Creek 2, Indian reserve (IRI)",19,Ruby Creek 2,49.3546144,-121.608046,Lower Fraser Valley
+"S1/2 Tsimpsean 2, Indian reserve (IRI)",NA,S1/2 Tsimpsean 2,54.359167,-130.439167,Coastal
 "Saanich, District municipality (DM)",117735,Saanich,48.456667,-123.373333,Georgia Strait
+"Sachsa 4, Indian reserve (IRI)",0,Sachsa 4,48.837222,-125.106111,NA
+"Sachteen, Indian reserve (IRI)",5,Sachteen,49.990833,-122.458333,Lower Fraser Valley
+"Saddle Rock 9, Indian reserve (IRI)",0,Saddle Rock 9,49.6301863,-121.3961218,Lower Fraser Valley
+"Sahhaltkum 4, Indian reserve (IRI)",316,Sahhaltkum 4,50.816667,-119.75,Southern Interior
 "Salmo, Village (VL)",1140,Salmo,49.193333,-117.278611,Southern Interior
 "Salmon Arm, City (CY)",19432,Salmon Arm,50.7,-119.26667,Southern Interior
+"Salmon River 1, Indian reserve (IRI)",NA,Salmon River 1,50.5,-119.316667,Southern Interior
+"Salmon River Meadow 7, Indian reserve (IRI)",0,Salmon River Meadow 7,52.970833,-125.161111,Central Interior
+"Sandy Harry 4, Indian reserve (IRI)",0,Sandy Harry 4,51.816667,-122.1,Central Interior
+"Sayward, Village (VL)",334,Sayward,50.378889,-125.959444,Coastal
+"Schelowat 1, Indian reserve (IRI)",5,Schelowat 1,49.183333,-121.833333,Lower Fraser Valley
+"Schkam 2, Indian reserve (IRI)",62,Schkam 2,49.4,-121.45,Lower Fraser Valley
+"Scotch Creek 4, Indian reserve (IRI)",30,Scotch Creek 4,50.916667,-119.483333,Southern Interior
+"Scowlitz 1, Indian reserve (IRI)",5,Scowlitz 1,49.2323395,-121.9374518,Lower Fraser Valley
+"Seabird Island, Indian reserve (IRI)",800,Seabird Island,49.277222,-121.716667,Lower Fraser Valley
+"Seah 5, Indian reserve (IRI)",10,Seah 5,50.5,-121.733333,Southern Interior
+"Seaichem 16, Indian reserve (IRI)",15,Seaichem 16,49.7554667,-123.1419946,Georgia Strait
+"Seaspunkut 4, Indian reserve (IRI)",10,Seaspunkut 4,54.05,-124.766667,Central Interior
+"Sechelt (Part), Indian government district (IGD)",21,Sechelt (Part),49.471667,-123.763333,Georgia Strait
 "Sechelt, District municipality (DM)",10847,Sechelt,49.471667,-123.763333,Georgia Strait
+"Semiahmoo, Indian reserve (IRI)",71,Semiahmoo,49.0126119,-122.7685011,Lower Fraser Valley
+"Seton Lake 5, Indian reserve (IRI)",0,Seton Lake 5,50.6678959,-121.9885791,Southern Interior
+"Seymour Creek 2, Indian reserve (IRI)",105,Seymour Creek 2,49.3009636,-123.0282033,NA
+"Shackan 11, Indian reserve (IRI)",50,Shackan 11,50.283333,-121.2,Southern Interior
+"Shawniken 4B, Indian reserve (IRI)",NA,Shawniken 4B,50.4167137,-121.3560325,Southern Interior
+"Shingle Point 4, Indian reserve (IRI)",0,Shingle Point 4,49.043611,-123.639167,Georgia Strait
+"Shuswap, Indian reserve (IRI)",319,Shuswap,50.533333,-116.01667,Southern Interior
 "Sicamous, District municipality (DM)",2613,Sicamous,50.836111,-118.98,Southern Interior
 "Sidney, Town (T)",12318,Sidney,48.650556,-123.398333,Georgia Strait
+"Sik-e-dakh 2, Indian reserve (IRI)",209,Sik-e-dakh 2,55.309854,-127.69197,Central Interior
+"Silverton, Village (VL)",149,Silverton,49.952778,-117.357222,Southern Interior
+"Siska Flat, Indian reserve (IRI)",101,Siska Flat,50.1390623,-121.5698321,Southern Interior
+"Skawahlook 1, Indian reserve (IRI)",10,Skawahlook 1,49.3644978,-121.5914278,Lower Fraser Valley
+"Skeetchestn, Indian reserve (IRI)",242,Skeetchestn,50.805556,-120.958333,Southern Interior
+"Skidegate 1, Indian reserve (IRI)",697,Skidegate 1,53.266667,-132,Coastal
+"Skins Lake 16A, Indian reserve (IRI)",10,Skins Lake 16A,53.998192,-125.8795393,Central Interior
+"Skins Lake 16B, Indian reserve (IRI)",0,Skins Lake 16B,53.95,-125.65,Central Interior
+"Skookumchuck 4, Indian reserve (IRI)",30,Skookumchuck 4,49.944167,-122.410833,Lower Fraser Valley
+"Skowkale, Indian reserve (IRI)",983,Skowkale,49.1366344,-121.9512899,Lower Fraser Valley
+"Skuppah 2A, Indian reserve (IRI)",0,Skuppah 2A,50.1941632,-121.5780062,Southern Interior
+"Skuppah 4, Indian reserve (IRI)",10,Skuppah 4,50.1723328,-121.578582,Southern Interior
+"Skwah 4, Indian reserve (IRI)",245,Skwah 4,49.1751367,-121.976865,Lower Fraser Valley
+"Skwali 3, Indian reserve (IRI)",0,Skwali 3,49.183333,-121.966667,Lower Fraser Valley
+"Skway 5, Indian reserve (IRI)",89,Skway 5,49.166667,-122,Lower Fraser Valley
+"Skwayaynope 26, Indian reserve (IRI)",5,Skwayaynope 26,50.1922186,-121.591315,Southern Interior
+"Skweahm 10, Indian reserve (IRI)",228,Skweahm 10,49.1714583,-122.0874034,Lower Fraser Valley
+"Sliammon 1, Tla'amin Lands (TAL)",797,Sliammon 1,49.904722,-124.604167,Georgia Strait
+"Slocan, Village (VL)",379,Slocan,49.767778,-117.466111,Southern Interior
+"Slosh 1, Indian reserve (IRI)",215,Slosh 1,50.733333,-122.216667,Southern Interior
 "Smithers, Town (T)",5378,Smithers,54.779167,-127.176111,Central Interior
+"Soda Creek 1, Indian reserve (IRI)",30,Soda Creek 1,52.316667,-122.266667,Central Interior
 "Sooke, District municipality (DM)",15086,Sooke,48.382778,-123.731944,Georgia Strait
+"Soowahlie 14, Indian reserve (IRI)",255,Soowahlie 14,49.083333,-121.95,Lower Fraser Valley
+"South Saanich 1, Indian reserve (IRI)",712,South Saanich 1,48.583333,-123.45,Georgia Strait
+"Sowchea 3, Indian reserve (IRI)",5,Sowchea 3,54.420833,-124.394444,Central Interior
 "Spallumcheen, District municipality (DM)",5307,Spallumcheen,50.4025,-119.2175,Southern Interior
 "Sparwood, District municipality (DM)",4148,Sparwood,49.733333,-114.885833,Southern Interior
+"Spences Bridge, Indian reserve (IRI)",NA,Spences Bridge,50.416667,-121.35,Southern Interior
+"Speyum 3, Indian reserve (IRI)",0,Speyum 3,49.933333,-121.466667,Lower Fraser Valley
+"Spintlum Flat 3, Indian reserve (IRI)",5,Spintlum Flat 3,50.333333,-121.65,Southern Interior
+"Spuzzum 1, Indian reserve (IRI)",55,Spuzzum 1,49.6581275,-121.4154109,Lower Fraser Valley
+"Squaam 2, Indian reserve (IRI)",0,Squaam 2,51.0781265,-119.7786072,Southern Interior
 "Squamish, District municipality (DM)",23819,Squamish,49.698056,-123.155833,Georgia Strait
+"Squaw-Hay-One 11, Indian reserve (IRI)",29,Squaw-Hay-One 11,48.9,-123.7,NA
+"Squawkum Creek 3, Indian reserve (IRI)",130,Squawkum Creek 3,49.239673,-122.0052013,Lower Fraser Valley
+"Squiaala, Indian reserve (IRI)",158,Squiaala,49.15,-121.983333,Lower Fraser Valley
+"Squinas 2, Indian reserve (IRI)",137,Squinas 2,52.4773655,-125.2955853,Central Interior
+"Squirrel Cove 8, Indian reserve (IRI)",0,Squirrel Cove 8,50.1444737,-124.9206965,Georgia Strait
+"St. Mary's, Indian reserve (IRI)",10,St. Mary's,49.5826539,-115.7530181,Southern Interior
+"Stawamus 24, Indian reserve (IRI)",98,Stawamus 24,49.6900674,-123.1507616,Georgia Strait
+"Stellaquo (Stella) 1, Indian reserve (IRI)",189,Stellaquo (Stella) 1,54.05,-124.916667,Central Interior
+"Stequmwhulpa 5, Indian reserve (IRI)",26,Stequmwhulpa 5,50.8454465,-119.6167962,Southern Interior
+"Stewart, District municipality (DM)",517,Stewart,55.938333,-129.991111,NA
+"Stone 1, Indian reserve (IRI)",219,Stone 1,51.935688,-123.1554694,Central Interior
+"Stony Creek 1, Indian reserve (IRI)",323,Stony Creek 1,53.94227,-124.1166769,Central Interior
+"Stryen 9, Indian reserve (IRI)",57,Stryen 9,50.283333,-121.633333,Southern Interior
+"Stullawheets 8, Indian reserve (IRI)",76,Stullawheets 8,49.4706568,-121.4226818,Lower Fraser Valley
 "Summerland, District municipality (DM)",12042,Summerland,49.602222,-119.681944,Southern Interior
 "Sun Peaks Mountain, Village (VL)",1404,Sun Peaks Mountain,50.884444,-119.879444,Southern Interior
+"Sundayman's Meadow 3, Indian reserve (IRI)",0,Sundayman's Meadow 3,53.1208885,-124.3341373,Central Interior
 "Surrey, City (CY)",568322,Surrey,49.111667,-122.8275,Lower Fraser Valley
+"Swan Lake 3, Indian reserve (IRI)",0,Swan Lake 3,51.8405022,-122.1142028,Central Interior
+"Switsemalph 3, Indian reserve (IRI)",64,Switsemalph 3,50.716667,-119.333333,Southern Interior
+"Switsemalph, Indian reserve (IRI)",209,Switsemalph,50.716667,-119.333333,Southern Interior
+"T'Sou-ke, Indian reserve (IRI)",230,T'Sou-ke,48.386111,-123.696389,Georgia Strait
+"Tache 1, Indian reserve (IRI)",400,Tache 1,54.665278,-124.754167,Central Interior
+"Tacla Lake (Ferry Landing) 9, Indian reserve (IRI)",15,Tacla Lake (Ferry Landing) 9,55.3214384,-126.0256015,Central Interior
+"Tadinlay 15, Indian reserve (IRI)",0,Tadinlay 15,55.0693237,-126.5086849,Central Interior
+"Tahltan 1, Indian reserve (IRI)",0,Tahltan 1,58.0101529,-130.9952443,Northwest
+"Tahsis, Village (VL)",393,Tahsis,49.916389,-126.664444,Coastal
+"Tanakut 4, Indian reserve (IRI)",NA,Tanakut 4,51.483333,-123.85,Central Interior
+"Tatla't East 2, Indian reserve (IRI)",0,Tatla't East 2,53.9875,-126.4875,Central Interior
+"Tatla West 11, Indian reserve (IRI)",0,Tatla West 11,53.9875,-126.497222,Central Interior
 "Taylor, District municipality (DM)",1317,Taylor,56.159167,-120.686667,Northeast
+"Telegraph Creek, Indian reserve (IRI)",51,Telegraph Creek,57.9,-131.16667,Northwest
 "Telkwa, Village (VL)",1474,Telkwa,54.696667,-127.050833,Central Interior
 "Terrace, City (CY)",12017,Terrace,54.516389,-128.599722,Coastal
+"Theik 2, Indian reserve (IRI)",48,Theik 2,48.7425272,-123.6368829,Georgia Strait
+"Thomas Point 5, Indian reserve (IRI)",0,Thomas Point 5,50.6971036,-127.3832306,NA
+"Thomas Point 5A, Indian reserve (IRI)",0,Thomas Point 5A,50.6983031,-127.3871192,NA
+"Thomas Squinas Ranch 2A, Indian reserve (IRI)",5,Thomas Squinas Ranch 2A,52.487298,-125.3113357,Central Interior
+"Tin Wis 11, Indian reserve (IRI)",26,Tin Wis 11,49.130833,-125.898611,Coastal
+"Tipella 7, Indian reserve (IRI)",0,Tipella 7,49.7740242,-122.2221203,Lower Fraser Valley
+"Tlaa Gaa Aawtlaas 28, Indian reserve (IRI)",70,Tlaa Gaa Aawtlaas 28,53.994444,-132.134722,Coastal
+"Tobacco Plains 2, Indian reserve (IRI)",96,Tobacco Plains 2,49.05,-115.1,Southern Interior
 "Tofino, District municipality (DM)",2516,Tofino,49.153056,-125.904444,Georgia Strait
+"Toosey 1, Indian reserve (IRI)",104,Toosey 1,51.919444,-122.483333,Central Interior
+"Tork 7, Indian reserve (IRI)",60,Tork 7,50.133333,-124.933333,Georgia Strait
+"Towdystan Lake 3, Indian reserve (IRI)",15,Towdystan Lake 3,52.283333,-125.116667,Central Interior
+"Towinock 2, Indian reserve (IRI)",16,Towinock 2,50.583333,-121.85,Southern Interior
 "Trail, City (CY)",7920,Trail,49.094444,-117.709167,Southern Interior
+"Trout Lake Alec 16, Indian reserve (IRI)",0,Trout Lake Alec 16,53.183333,-123.533333,Central Interior
+"Tsa Xana 18, Indian reserve (IRI)",205,Tsa Xana 18,49.813333,-126.073611,Coastal
+"Tsahaheh 1, Indian reserve (IRI)",596,Tsahaheh 1,49.269722,-124.859167,Georgia Strait
+"Tsaukan 12, Indian reserve (IRI)",0,Tsaukan 12,50.3733463,-121.6803463,Southern Interior
 "Tsawwassen, Tsawwassen Lands (TWL)",2256,Tsawwassen,49.016667,-123.08333,Lower Fraser Valley
+"Tseatah 2, Indian reserve (IRI)",15,Tseatah 2,49.216667,-121.75,Lower Fraser Valley
 "Tsinstikeptum 10, Indian reserve (IRI)",1766,Tsinstikeptum 10,49.884,-119.536,Southern Interior
 "Tsinstikeptum 9, Indian reserve (IRI)",9134,Tsinstikeptum 9,49.85,-119.6,Southern Interior
+"Tsulquate 4, Indian reserve (IRI)",451,Tsulquate 4,50.733333,-127.5,Coastal
+"Tsussie 6, Indian reserve (IRI)",82,Tsussie 6,48.883611,-123.675833,NA
+"Tuckkwiowhum 1, Indian reserve (IRI)",31,Tuckkwiowhum 1,49.833333,-121.433333,Lower Fraser Valley
 "Tumbler Ridge, District municipality (DM)",2399,Tumbler Ridge,55.133333,-121,Northeast
+"Twoyqhalsht 16, Indian reserve (IRI)",0,Twoyqhalsht 16,50.4280729,-121.33716,Southern Interior
+"Tzart-Lam 5, Indian reserve (IRI)",27,Tzart-Lam 5,48.7594844,-123.829187,Georgia Strait
 "Tzeachten 13, Indian reserve (IRI)",3089,Tzeachten 13,49.116667,-121.933333,Lower Fraser Valley
 "Ucluelet, District municipality (DM)",2066,Ucluelet,48.942778,-125.546111,Coastal
+"Ulkatcho 13, Indian reserve (IRI)",0,Ulkatcho 13,52.375,-125.0459,Central Interior
+"Ulkatcho 14A, Indian reserve (IRI)",116,Ulkatcho 14A,52.45,-125.266667,Central Interior
+"Uncha Lake 13A, Indian reserve (IRI)",NA,Uncha Lake 13A,53.933333,-125.666667,Central Interior
+"Union Bay 4, Indian reserve (IRI)",109,Union Bay 4,48.6644186,-123.4487392,Georgia Strait
+"Unnamed 10, Indian reserve (IRI)",18,Unnamed 10,59.5683985,-133.702685,Northwest
+"Upper Hat Creek 1, Indian reserve (IRI)",15,Upper Hat Creek 1,50.816667,-121.583333,Southern Interior
+"Upper Nepa 6, Indian reserve (IRI)",15,Upper Nepa 6,50.666667,-121.266667,Southern Interior
+"Upper Sumas 6, Indian reserve (IRI)",232,Upper Sumas 6,49.05,-122.2,Lower Fraser Valley
 "Valemount, Village (VL)",1052,Valemount,52.829444,-119.28,Central Interior
 "Vancouver, City (CY)",662248,Vancouver,49.261111,-123.113889,Lower Fraser Valley
 "Vanderhoof, District municipality (DM)",4346,Vanderhoof,54.0175,-124.0075,Central Interior
 "Vernon, City (CY)",44519,Vernon,50.266667,-119.271667,Southern Interior
 "Victoria, City (CY)",91867,Victoria,48.428333,-123.364722,Georgia Strait
 "View Royal, Town (T)",11575,View Royal,48.451944,-123.434167,Georgia Strait
+"Village Island 1, Indian reserve (IRI)",0,Village Island 1,50.011389,-127.4025,NA
+"Waiwakum 14, Indian reserve (IRI)",224,Waiwakum 14,49.770568,-123.1622403,Georgia Strait
 "Warfield, Village (VL)",1753,Warfield,49.094167,-117.749167,Southern Interior
+"Wells, District municipality (DM)",218,Wells,53.1,-121.56667,Central Interior
 "West Kelowna, City (CY)",36078,West Kelowna,49.83,-119.628611,Southern Interior
+"West Moberly Lake 168A, Indian reserve (IRI)",99,West Moberly Lake 168A,55.8,-121.916667,Northeast
 "West Vancouver, District municipality (DM)",44122,West Vancouver,49.331111,-123.159722,Lower Fraser Valley
+"Whispering Pines 4, Indian reserve (IRI)",57,Whispering Pines 4,50.991667,-120.240278,Southern Interior
 "Whistler, District municipality (DM)",13982,Whistler,50.1166667,-122.9541667,Georgia Strait
 "White Rock, City (CY)",21939,White Rock,49.023611,-122.798333,Lower Fraser Valley
+"Whonnock 1, Indian reserve (IRI)",5,Whonnock 1,49.1755227,-122.460327,Lower Fraser Valley
+"Williams Lake 1, Indian reserve (IRI)",248,Williams Lake 1,52.116667,-122,Central Interior
 "Williams Lake, City (CY)",10947,Williams Lake,52.129167,-122.14,Central Interior
+"Williams Prairie Meadow 1A, Indian reserve (IRI)",20,Williams Prairie Meadow 1A,54.472222,-124.194444,Central Interior
+"Windy Mouth 7, Indian reserve (IRI)",5,Windy Mouth 7,51.85,-121.583333,Central Interior
+"Woyenne 27, Indian reserve (IRI)",548,Woyenne 27,54.2387738,-125.7622936,Central Interior
+"Yakweakwioose 12, Indian reserve (IRI)",49,Yakweakwioose 12,49.133333,-121.933333,Lower Fraser Valley
+"Yale Town 1, Indian reserve (IRI)",5,Yale Town 1,49.5622439,-121.4217741,Lower Fraser Valley
+"Yawaucht 11, Indian reserve (IRI)",5,Yawaucht 11,50.3469058,-121.6729575,Southern Interior
+"Ye Koo Che 3, Indian reserve (IRI)",90,Ye Koo Che 3,54.601389,-125.066111,Central Interior
+"Yekwaupsum 18, Indian reserve (IRI)",17,Yekwaupsum 18,49.7258969,-123.1619949,Georgia Strait
+"Yuquot 1, Indian reserve (IRI)",0,Yuquot 1,49.5948827,-126.6344919,Coastal
+"Zacht 5, Indian reserve (IRI)",5,Zacht 5,50.1536884,-121.5753642,Southern Interior
+"Zeballos, Village (VL)",126,Zeballos,49.9825,-126.846111,Coastal
+"Zoht 4, Indian reserve (IRI)",20,Zoht 4,50.183333,-120.666667,Southern Interior
