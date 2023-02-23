@@ -269,15 +269,17 @@ The national Air Quality Management System (AQMS) provides a collaborative and c
 ```
 :::
 
-The pollutants listed below are considered to have the strongest evidence of major health concern. These pollutants have been the focus of health impact studies, and among the pollutants with established air quality objectives. Under the Air Quality Management System, the Canadian Ambient Air Quality Standards (CAAQS) were developed to serve as driver for the continuous improvement of air quality. The [Canadian Environmental Protection Act](https://www.canada.ca/en/environment-climate-change/services/canadian-environmental-protection-act-registry/guidelines-objectives-codes-practice/guidelines-objectives.html) have also established CAAQS as national air quality objectives for these four pollutants.
+The four pollutants listed below are recognized as having the most significant evidence of causing health issues and have been the primary focus of health impact studies. These pollutants are also among those that have established air quality objectives. As part of the Air Quality Management System, the Canadian Ambient Air Quality Standards (CAAQS) were created to act as a driver for the continuous improvement of air quality. The CAAQS for these four pollutants have also been established as national air quality objectives under the [Canadian Environmental Protection Act](https://www.canada.ca/en/environment-climate-change/services/canadian-environmental-protection-act-registry/guidelines-objectives-codes-practice/guidelines-objectives.html).
 
-This report uses metrics to summarize the levels of each pollutant and compare it to the Canadian Ambient Air Quality Standards. A metric consists of:
+This report utilizes metrics to provide a summary of each pollutant's levels and compare it to the Canadian Ambient Air Quality Standards. These metrics consist of three components:
 
--   a numerical value that represents the concentration or level of pollutant;
+-   A numerical value that represents the concentration or level of the pollutant being measured.
 
--   unit of measurement defines the kind of quantity that the numerical value represents; and
+-   A unit of measurement that defines the kind of quantity that the numerical value represents, such as micrograms per cubic meter (μg/m3) for fine particulate matter.
 
--   statistical form that specifies how the numerical value was calculated using raw measurements.
+-   A statistical form that specifies how the numerical value was calculated using raw measurements, such as an annual average or a maximum daily average.
+
+By utilizing these metrics, the report is able to apply CAAQS as reference to a comprehensive and standardized overview of the air quality in each reporting area,making it easier to identify and compare areas where action may be needed to improve air quality and protect public health.
 
 ```{=html}
 
@@ -333,6 +335,9 @@ Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplet
 
 In this report, PM<sub>2.5</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure - a 24-hour metric to estimate short term or acute exposure.
 
+Health Effects: 
+
+
 ```{=html}
   </p>
 </div>
@@ -374,7 +379,7 @@ In this report, NO<sub>2</sub> is presented using any of the two metrics. - an a
 </div>
   <p>
 ```
-Sulphur dioxide (SO<sub>2</sub>) is a colourless gas that smells like burnt matches. It belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO<sub>2</sub> is emitted when fossil fuels or raw materials containing sulphur are burned or used in an industrial process like metal ore smelting or electric power generation. It can also be produced in large quantities during extraction and processing of fossil fuels. SO<sub>2</sub> contributes to the formation of PM<sub>2.5</sub> and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain, snow and fog.
+Sulphur dioxide (SO<sub>2</sub>) is a colourless gas that belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO<sub>2</sub> is emitted when fossil fuels or raw materials containing sulphur are burned in industrial processes (ore processing, smelting), electric power generation, or marine transportation. Large quantities are also during the extraction and processing of fossil fuels. SO<sub>2</sub> contributes to the formation of PM<sub>2.5</sub> and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain.
 
 In this report, SO<sub>2</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure, and 1-hour metric as estimate of acute (short term) exposure.
 
@@ -406,7 +411,7 @@ for (i = 0; i < acc.length; i++) {
 <a id="Pollutant Trends"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Trends</h2></center></div></div>
 ```
-# On Average, Pollution Levels are Below CAAQS
+# On Average, Pollution in B.C. are Below CAAQS Levels
 
 <!--Prepare the trend functions. will not display -->
 
@@ -451,6 +456,8 @@ htmltools::tagList(list(p))
  <p>
 ```
 Pollutant levels have mostly remained lower than the Canadian Ambient Air Quality Standards and has improved throughout the years. PM<sub>2.5</sub> is an exception due to the increasing intensity and frequency of wildfire smoke.
+
+In 2021:
 
 -   Fine Particulate Matter (PM<sub>2.5</sub>) annual metric, `r pm25_annual`% (since 2000)
 
@@ -538,27 +545,25 @@ co_emission <- apei$all_nodust$data %>%
 
 # Emission of most pollutants are decreasing through the years
 
-```{=html}
 <p>
-```
+
 <!--Emission trends Text-->
 
-Emissions of key air pollutants from industrial and mobile sources *(excluding dust, and smoke from woodstoves and open burns)*  have been declining from 1990 levels. 
-In `r max_year`:
+Emissions of key air pollutants from industrial and mobile sources *(excluding dust, and smoke from woodstoves and open burns)* have been declining from 1990 levels. In `r max_year`:
 
 -   Fine Particulate Matter (PM<sub>2.5</sub>) Direct Emission, `r pm25_emission`% (since 1990)
 -   Particulate Matter 10 micron (PM<sub>10</sub>) Direct Emission, `r pm10_emission`% (since 1990)
 -   Nitrogen Oxides (NO<sub>x</sub>) Emission, `r nox_emission`% (since 1990). NO<sub>x</sub> are group of compounds that include NO<sub>2</sub>. It can react with VOC to form ground-level ozone (O<sub>3</sub>.
 -   Sulfur Oxides (SO<sub>x</sub>) Emission, `r sox_emission`% (since 1990). SO<sub>x</sub> are a group of compounds that include SO<sub>2</sub>.
--   Volatile Organic Compounds (VOC), `r voc_emission`% (since 1990). Ground-level ozone (O<sub>3</sub>can form from the complex reactions between VOC and NO<sub>x</sub>.
+-   Volatile Organic Compounds (VOC), `r voc_emission`% (since 1990). Ground-level ozone (O<sub>3</sub>) are formed from the complex reactions between VOC and NO<sub>x</sub>.
 -   Carbon Monoxide (CO), `r co_emission`% (since 1990)
+
 ```{=html}
 <style>
 .main-container {
   max-width: unset;
 }
 </style>
-
 ```
 ```{r, echo=FALSE,warning=FALSE,out.width="100%"}
 # p <- apei$all_nodust$plot%>%layout(xaxis = list(title = ""))
@@ -570,7 +575,6 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', he
 </p>
 </br></br>
 ```
-
 <!--Pollutants MOnitoring  -->
 
 ```{=html}
@@ -578,12 +582,9 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', he
 <a id="Monitoring"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How we monitor</h2></center></div></div>
 ```
+Air quality monitoring stations are installed to measure the levels of pollutants on communities. These stations are maintained and operated either by the Ministry of Environemtn and Climate Change Strategy, Metro Vancouver Regional District, Community air quality roundtable, industrial permit holders, and other agencies (BCHydro, Prince Rupert Port Authority, BC Oil and Gas Commission, etc.). Only stations developed to monitoring community exposure-not the fenceline stations-are included for AQMS reporting.
 
-
-
-Air quality monitoring stations are installed to measure the levels of pollutants on communities. These stations are maintained and operated either by the Ministry of Environemtn and Climate Change Strategy, Metro Vancouver Regional District, Community air quality roundtable, industrial permit holders, and other agencies (BCHydro, Prince Rupert Port Authority, BC Oil and Gas Commission, etc.). Only stations developed to monitoring community exposure-not the fenceline stations-are included for AQMS reporting. 
-
-```{r}
+```{r, echo = FALSE}
 # list.files('../assets/photos/')
 knitr::include_graphics('../assets/photos/monitoring_station_plus.png')
 ```
@@ -593,29 +594,42 @@ Some of the stations are included in the Air Quality Health Index (AQHI) reporti
 The map below shows the location of air quality monitoring stations in B.C.
 
 <!--pre-process calculation for pollutants monitoring-->
-```{r, echo = FALSE, results='hide',warning=FALSE,message=FALSE}
 
+```{r, echo = FALSE}
 
+knitr::include_app('https://bcgov-env.shinyapps.io/airzonemonitors/',height = "600px")
 ```
 
-
-
-```{=html}
-<!-- Jumping Points -->
-<a id="Trends of Pollution Levels"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
-```
-<Insert the Trends in Pollution Levels>
+<!--Management Levels -->
 
 ```{=html}
 <!-- Jumping Points -->
 <a id="Air Quality Management Levels"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Levels in B.C. Air Zones</h2></center></div></div>
 ```
--   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards.
--   The highest levels of ozone are observed in the Lower Fraser Valley air zone, resulting in an orange management level. These are due to the levels observed at Hope, Maple Ridge, and Mission.
--   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior are under orange management level for nitrogen dioxide (NO~2~).
--   The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under green management level.
+Each air zone is assigned a colour-based management level for each of the four pollutants (particulate matter, ozone, nitrogen dioxide, and sulfur dioxide). These management levels are based on the levels of pollution measured from communities inside the air zone.The management levels also correspond to air zone management actions that are recommended under the Air Quality Management System. Provinces and territories, in collaboration with communities, use the management levels as framework to develop action plans and policies to address the issue of the pollutant.
+
+<!--preprocess management level-->
+
+```{r, echo=FALSE}
+#display management level table
+a <- add_mgmt_legend()
+print(a)
+```
+
+Pollutants that traveled across boundaries (trans-boundary) or are formed from exceptional events such as wildfires, are typically omitted from the assessment in order to focus on community-level actions and continuously improve air quality. The AQMS also applies other regulatory and non-regulatory instruments. This includes Base Level Industrial Emission Requirements to reduce emissions from industry and industrial equipment, and an inter-governmental collaboration to reduce vehicle emissions.
+
+<!--preprocess management level-->
+
+```{r, echo=FALSE}
+#display management level table
+a <- add_mgmt_legend()
+
+```
+
+#### Summary of Management Levels
+
+-   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards. - The highest levels of ozone are observed in the Lower Fraser Valley air zone, resulting in an orange management level. These are due to the levels observed at Hope, Maple Ridge, and Mission. - The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior are under orange management level for nitrogen dioxide (NO~2~). - The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under green management level.
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
 source('../assets/dev_airzone_exec_summary.R')
@@ -631,6 +645,20 @@ tbl_mgmt
 #NOTE: Please update the map to include details on the left side and some clickability
 source('../assets/dev_map_airzone.R')
 a <- graph_managementmap(2020,tfee_filter = TRUE,dataDirectory = '../data/out',size = c('400px','400px'))
+```
+
+<!--Wildfire -->
+
+```{=html}
+<!-- Jumping Points -->
+<a id="Wildfire"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Particulate Matter Pollution</h2></center></div></div>
+```
+Pollution from fine particulate matter remains the major problem in B.C. These pollution mostly comes from smoke from the seasonal wildfire season. However, there are also winter-time events that are
+
+```{r, echo = FALSE}
+
+knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "600px")
 ```
 
 ```{=html}
@@ -671,6 +699,13 @@ Add description for the trends of some pollutants based on the ECCC National Pol
 ## The Canadian Ambient Air Quality Standards
 
 Add description for the trends of some pollutants based on the ECCC National Pollutant Release Inventory
+
+```{=html}
+<!-- Jumping Points -->
+<a id="Trends of Pollution Levels"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
+```
+<!--Do not modify below. These are part of footer-->
 
 ```{=html}
 <!---Space before the footer-->

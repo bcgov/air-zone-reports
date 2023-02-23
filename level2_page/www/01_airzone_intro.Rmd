@@ -1,3 +1,13 @@
+---
+title: "Untitled"
+author: "Jerome Robles"
+date: "2023-02-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 ## Air Zones
 
 British Columbia is divided into seven air zones. The air zones were defined based on common characteristics such as air quality, geography, meteorology, pollution sources, and other factors to efficiently help manage air quality.

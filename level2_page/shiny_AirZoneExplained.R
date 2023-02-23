@@ -6,7 +6,13 @@ require(envreportutils)
 require(sf)
 require(bcmaps)
 require(stringr)
-library(kableExtra)
+# library(kableExtra)
+
+az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
+liststations_URL <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/liststations.csv'
+# 
+az_mgmt0 <- readRDS(url(az_mgmt_gitURL))
+liststations0 <- readr::read_csv(liststations_URL)
 
 
 #----FUNCTIONS--------------
@@ -55,34 +61,14 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
   df_colour$colour_01[tolower(df_colour$airzone) != airzone] <- 'white'
   
   
-  #shortcut to retrieve from github instead
-  # az_mgmt <- airzones() %>%
-  #   st_make_valid() %>%
-  #   st_transform(st_crs(bc_bound())) %>%
-  #   st_intersection(st_geometry(bc_bound())) %>%
-  #   group_by(airzone = Airzone) %>%
-  #   summarize() %>%
-  #   st_transform(4326)
-  #   saveRDS(az_mgmt,'./data/out/az_mgmt.Rds')
-  # 
-  
-  
-  
-  # left_join(df_colour,by='airzone')
-  
-  
-  az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
-  liststations_URL <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/liststations.csv'
-  
  
- 
-  az_mgmt <- readRDS(url(az_mgmt_gitURL)) %>%
+  az_mgmt <- az_mgmt0 %>%
     left_join(df_colour,by='airzone')
   
   if (is.null(polygon_a)) {
     
     
-    liststations <- readr::read_csv(liststations_URL) %>%
+    liststations <- liststations0 %>%
       mutate(AQMS = ifelse(is.na(AQMS),'UNKNOWN',AQMS)) %>%
       select(Label,LAT,LONG,STATUS,AQMS,AIRZONE) %>%
       filter(AQMS != 'N',STATUS == 'ACTIVE') %>%
@@ -158,139 +144,6 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
   return(a)
 }
 
-map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),map_a = NULL) {
-  
-  if (0) {
-    source('./level4_page/03_setup.R')
-    source('./level4_page/02_setup.R')
-    dirs_location <- './data/out'
-    year = 2017
-    map_a <- NULL
-    exceedances <- get_PM_exceedancesummary()
-    
-    az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
-      left_join(df_colour)
-    
-    size <- c('200px','400px')
-    
-  }
-  df_colour <- tribble(
-    ~airzone,~colour_01,
-    "Northeast",'#CDC08C',
-    "Georgia Strait"  ,'#F4B5BD',
-    "Southern Interior",'#9C964A',
-    "Lower Fraser Valley",'#85D4E3',
-    "Central Interior" ,'#FAD77B',
-    "Coastal",'#CEAB07',
-    "Northwest","#24281A"
-  )
-  
-  lst_airzones <- az_mgmt %>%
-    pull(airzone)
-  
-  airzone_exceedance_season <- exceedances$season
-  airzone_exceedance <- exceedances$annual
-  station_exceedance <- exceedances$annual_stations
-  station_exceedance_season <- exceedances$season_stations
-  lst_stations <- exceedances$stations
-  year_select <- year
-  
-  
-  colfunc <- colorRampPalette(c("blue", "red"))
-  
-  
-  # station_exceedance$colorscaled <- color_scales[station_exceedance$days_exceed]
-  
-  if (is.null(map_a)) {
-    #create map for annual station
-    a <-  leaflet(width = size[1],height = size[2],
-                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
-      set_bc_view(zoom=3.5) %>%
-      # setView(zoom =5) %>%
-      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-      addProviderTiles(providers$Stamen.TonerLite,
-                       options = providerTileOptions(opacity = 1)
-      ) %>%
-      # addProviderTiles(providers$Stamen.TonerLabels) %>%
-      add_bc_home_button()
-  } else {
-    a <- map_a
-  }
-  
-  #add colour for the station circles
-  max_days <- station_exceedance %>%
-    filter(year == year_select) %>%
-    pull(days_exceed) %>%
-    max()
-  
-  color_scales <- colfunc(max_days)
-  for (airzone_ in lst_airzones) {
-    
-    if (0) {
-      airzone_ <- lst_airzones[1]
-    }
-    liststations_ <- lst_stations %>% 
-      filter(AIRZONE == airzone_, year == year_select)
-    station_exceedance_ <- station_exceedance %>% 
-      filter(AIRZONE == airzone_, year == year_select)
-    a <- a %>%
-      
-      addPolygons(data = az_mgmt %>% filter(airzone == airzone_),
-                  layerId = airzone_,
-                  color = 'black',
-                  fillColor = ~colour_01,
-                  weight = 1, opacity = 1, fillOpacity = 0.6,
-                  label = paste(airzone_,'Air Zone'),
-                  labelOptions = labelOptions(textsize = "15px"),
-                  highlight = highlightOptions(weight = 3,
-                                               color = "blue",
-                                               bringToFront = FALSE))
-    #add stations
-    if (nrow(liststations_) >0) {
-      a <- a %>%
-        addCircleMarkers(lng=station_exceedance_$LONG,
-                         lat = station_exceedance_$LAT,
-                         layerId = station_exceedance_$site,
-                         label = station_exceedance_$site,
-                         color = color_scales[station_exceedance$days_exceed],
-                         radius=3
-                         
-        )
-      # addMarkers(lng=liststations_$LONG,
-      #            lat=liststations_$LAT,
-      #            # layerId = liststations$AIRZONE,
-      #            # group = airzone_,
-      #            label = liststations_$site,
-      #            options=markerOptions())
-      
-    }
-  }
-  plot_a <- a
-  
-  
-  if (is.null(map_a)) {
-    #create map for annual
-    b <-  leaflet(width = size[1],height = size[2],
-                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
-      set_bc_view(zoom=3.5) %>%
-      # setView(zoom =5) %>%
-      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-      addProviderTiles(providers$Esri.NatGeoWorldMap,
-                       options = providerTileOptions(opacity = 1)
-      ) %>%
-      # addProviderTiles(providers$Stamen.TonerLabels) %>%
-      add_bc_home_button()
-  } else {
-    b <- map_a
-  }
-  
-  
-  
-  
-  
-  return(a)
-}
-
 
 #' Determine the air zone based on lat longs
 #' 
@@ -302,9 +155,7 @@ get_airzone <- function(lat,long) {
     latlong <- c(57.68,-120.614)
   }
   
-  az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
-  # 
-  az_mgmt <- readRDS(url(az_mgmt_gitURL))
+  
   # 
   # 
   
@@ -319,7 +170,7 @@ get_airzone <- function(lat,long) {
                                        function(i) {st_point(as.numeric(pnts[i, ]))}), list("crs" = 4326))) 
   
   pnts_trans <- st_transform(pnts_sf, 2163) # apply transformation to pnts sf
-  tt1_trans <- st_transform(az_mgmt, 2163)      # apply transformation to polygons sf
+  tt1_trans <- st_transform(az_mgmt0, 2163)      # apply transformation to polygons sf
   
   # intersect and extract state name
   pnts$airzone <- apply(st_intersects(tt1_trans, pnts_trans, sparse = FALSE), 2, 
@@ -343,7 +194,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(h6("Click on the map to select an air zone"),leafletOutput("map"),width=4),
       mainPanel (
-      uiOutput("md_file"),width=6
+      uiOutput("fileOutputs"),width=6
     ))
   
 )
@@ -364,9 +215,9 @@ server <- shinyServer(function(input, output) {
   #t_ready means it is ready to receive clicks
   a <- graph_airzone(polygon_a=NULL,airzone=NULL,size = c('200px','400px'))
   output$map <- renderLeaflet(a)
-  output$md_file <- renderUI({
-    file <- paste(www_git_url,'01_airzone_intro.Rmd',sep='')
-    includeMarkdown(file)
+  output$fileOutputs  <- renderUI({
+    file <- paste(www_git_url,'01_airzone_intro.html',sep='')
+    includeHTML(file)
   })
   
   airzone_select_previous <- ''
@@ -382,7 +233,8 @@ server <- shinyServer(function(input, output) {
     try({
       airzone_select <- get_airzone(p$lat,p$lng)
       
-      if (airzone_select != airzone_select_previous) {
+      # if (airzone_select != airzone_select_previous) 
+        {
         
         # map redrawn after click
         leafletProxy("map")%>%
@@ -392,7 +244,7 @@ server <- shinyServer(function(input, output) {
         html_file <- paste(www_git_url,html_file,sep='')
         print(html_file)
         
-        try({output$md_file <- renderUI({
+        try({output$fileOutputs  <- renderUI({
           file <- html_file
           includeHTML(file)
         })
