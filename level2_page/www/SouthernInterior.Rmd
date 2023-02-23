@@ -1,3 +1,23 @@
 ## Southern Interior Air Zone
 
 The Southern Interior Air Zone (see Figure 1) is one of seven broad air zones across B.C. It is located in the southeast part of the province covering parts of the Thompson-Okanagan Region, and the Kootenay-Boundary Region. It covers a broad area of southern BC between the Coast Mountains and the Alberta border. The Southern Interior Air Zone includes major population centres such as Kamloops, Kelowna, Vernon, Penticton, and Cranbrook.
+
+#### Major Municipalities
+
+The top five most populous cities/towns in the Southern Interior Air Zone are:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
+library(dplyr)
+library(kableExtra)
+df_cities <- readr::read_csv('https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/cities.csv')
+
+tbl_cities <- df_cities %>%
+  filter(airzone == 'Southern Interior')  %>%
+  select(Name,C1_COUNT_TOTAL) %>%
+  rename(Municipality = Name, `Population (2021)` = C1_COUNT_TOTAL) %>%
+  arrange(desc(`Population (2021)`)) %>%
+  ungroup() %>%
+  dplyr::slice_head(n=5)
+
+nrow(tbl_cities)
+```

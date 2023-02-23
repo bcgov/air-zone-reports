@@ -1,3 +1,29 @@
 ## Coastal Air Zone
 
-The Coastal Air Zone (Figure 1) is one of seven air zones across B.C. It covers coastal areas of B.C. outside of the Georgia Basin and includes Haida Gwaii, the north and central coasts, and northern Vancouver Island. Air quality monitoring in the Coastal Air Zone includes a Ministry-operated station in Terrace, a Prince Rupert Port Authority-operated station in Prince Rupert, and monitoring stations in Kitimat. Kitimat has three monitoring stations, one equipped to measure PM2.5, Ozone, NO2, and SO2 and the others, equipped to measure PM2.5, SO2 and other pollutants. Kitimat also has several fenceline stations to monitor industrial emissions.
+The Coastal Air Zone (Figure 1) is one of seven air zones across B.C. It covers coastal areas of B.C. outside of the Georgia Basin and includes Haida Gwaii, the north and central coasts, and northern Vancouver Island. Air quality monitoring in the Coastal Air Zone includes a Ministry-operated station in Terrace, a Prince Rupert Port Authority-operated station in Prince Rupert, and monitoring stations in Kitimat. Kitimat has three monitoring stations, one equipped to measure PM<sub>2.5</sub>, Ozone, NO<sub>2</sub>, and SO<sub>2</sub> and the others, equipped to measure PM2.5, SO2 and other pollutants. Kitimat also has several fenceline stations to monitor industrial emissions.
+
+#### Major Municipalities
+
+The top five most populous cities/towns in the Coastal Air Zone are:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
+library(dplyr)
+library(kableExtra)
+df_cities <- readr::read_csv('https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/cities.csv')
+
+tbl_cities <- df_cities %>%
+  filter(airzone == 'Coastal')  %>%
+  select(Name,C1_COUNT_TOTAL) %>%
+  rename(Municipality = Name, `Population (2021)` = C1_COUNT_TOTAL) %>%
+  arrange(desc(`Population (2021)`)) %>%
+  ungroup() %>%
+  dplyr::slice_head(n=5)
+
+nrow(tbl_cities)
+```
+
+```{r, echo = FALSE}
+
+kable(tbl_cities)%>%
+ kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```

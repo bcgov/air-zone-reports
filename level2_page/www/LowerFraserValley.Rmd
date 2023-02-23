@@ -1,3 +1,23 @@
 ## Lower Fraser Valley Air Zone
 
 The LFV Air Zone is one of seven air zones across B.C. It is located in southwestern B.C., along the coast and along the border of Washington State. Within the LFV Air Zone are the Metro Vancouver Regional District (MVRD) and the Fraser Valley Regional District (FVRD). MVRD represents the largest and most densely populated metropolitan area of B.C. It has the delegated authority under the Environmental Management Act  to manage air pollution and air quality within its borders. It also has the highest number and density of air quality monitoring stations, with more than 20 stations equipped to monitor at least one CAAQS-defined pollutant.
+
+#### Major Municipalities
+
+The top five most populous cities/towns in the Lower Fraser Valley are:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
+library(dplyr)
+library(kableExtra)
+df_cities <- readr::read_csv('https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/cities.csv')
+
+tbl_cities <- df_cities %>%
+  filter(airzone == 'Lower Fraser Valley')  %>%
+  select(Name,C1_COUNT_TOTAL) %>%
+  rename(Municipality = Name, `Population (2021)` = C1_COUNT_TOTAL) %>%
+  arrange(desc(`Population (2021)`)) %>%
+  ungroup() %>%
+  dplyr::slice_head(n=5)
+
+nrow(tbl_cities)
+```
