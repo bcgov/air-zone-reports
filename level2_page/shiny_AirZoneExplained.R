@@ -6,7 +6,7 @@ require(envreportutils)
 require(sf)
 require(bcmaps)
 require(stringr)
-
+library(kableExtra)
 
 
 #----FUNCTIONS--------------
@@ -302,9 +302,9 @@ get_airzone <- function(lat,long) {
     latlong <- c(57.68,-120.614)
   }
   
-  # az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
+  az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
   # 
-  # az_mgmt <- readRDS(url(az_mgmt_gitURL))
+  az_mgmt <- readRDS(url(az_mgmt_gitURL))
   # 
   # 
   
@@ -388,13 +388,13 @@ server <- shinyServer(function(input, output) {
         leafletProxy("map")%>%
           graph_airzone(airzone=airzone_select,size = c('200px','400px'))
         #insert text here  
-        html_file <- paste(stringr::str_replace_all(string=airzone_select, pattern=" ", repl=""),'.Rmd',sep='')
+        html_file <- paste(stringr::str_replace_all(string=airzone_select, pattern=" ", repl=""),'.html',sep='')
         html_file <- paste(www_git_url,html_file,sep='')
         print(html_file)
         
         try({output$md_file <- renderUI({
           file <- html_file
-          includeMarkdown(file)
+          includeHTML(file)
         })
         })
         airzone_select_previous <- airzone_select

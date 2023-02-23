@@ -14,10 +14,17 @@ df_cities <- readr::read_csv('https://raw.githubusercontent.com/bcgov/air-zone-r
 tbl_cities <- df_cities %>%
   filter(airzone == 'Southern Interior')  %>%
   select(Name,C1_COUNT_TOTAL) %>%
+  mutate(C1_COUNT_TOTAL = format(C1_COUNT_TOTAL,big.mark = ',')) %>%
   rename(Municipality = Name, `Population (2021)` = C1_COUNT_TOTAL) %>%
   arrange(desc(`Population (2021)`)) %>%
   ungroup() %>%
   dplyr::slice_head(n=5)
 
 nrow(tbl_cities)
+```
+```{r, echo = FALSE}
+
+ kable(tbl_cities)%>%
+ kable_styling(bootstrap_options = "striped", full_width = F, position = "left") 
+  
 ```

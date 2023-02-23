@@ -14,6 +14,7 @@ df_cities <- readr::read_csv('https://raw.githubusercontent.com/bcgov/air-zone-r
 tbl_cities <- df_cities %>%
   filter(airzone == 'Central Interior')  %>%
   select(Name,C1_COUNT_TOTAL) %>%
+   mutate(C1_COUNT_TOTAL = format(C1_COUNT_TOTAL,big.mark = ',')) %>%
   rename(Municipality = Name, `Population (2021)` = C1_COUNT_TOTAL) %>%
   arrange(desc(`Population (2021)`)) %>%
   ungroup() %>%
