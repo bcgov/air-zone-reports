@@ -8,7 +8,7 @@ table_management_level <- function(dataDirectory = '../data/out',current_year) {
   
   if (0) {
     dataDirectory = './data/out'
-    current_year <- 2020
+    current_year <- 2021
   }
   require(dplyr)
   require(ggplot2)
@@ -63,7 +63,7 @@ table_management_level <- function(dataDirectory = '../data/out',current_year) {
   df_mgmt_results <- df_mgmt_results %>%
     bind_rows(
       df_mgmt_results %>% 
-        filter(parameter == lst_no_tfee_param) %>%
+        filter(parameter %in% lst_no_tfee_param) %>%
         mutate(tfee = TRUE))
   
   # colnames(df_mgmt_results)

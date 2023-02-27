@@ -562,7 +562,7 @@ get_management <- function(datafile = NULL) {
     df_ <-  df %>%
       left_join(df_levels_) %>%
       mutate(metric_value = ifelse(is.na(metric_value),-9999,metric_value)) %>%
-      filter(metric_value >= lower_breaks & metric_value < upper_breaks) %>%
+      filter(metric_value > lower_breaks & metric_value <= upper_breaks) %>%
       # View()
       select(-lower_breaks,-upper_breaks) %>%
       mutate(metric_value = ifelse(metric_value == -9999,NA, metric_value)) %>%

@@ -11,7 +11,7 @@ az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/ou
 liststations_URL <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/liststations.csv'
 results_URL <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/annual_results.csv'
 
-
+az_mgmt0 <- readRDS(url(az_mgmt_gitURL)) 
 
 station_data <-  readr::read_csv(results_URL) %>%
   filter(year>=2020) %>%
@@ -108,12 +108,13 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
   
   
   
-  az_mgmt <- readRDS(url(az_mgmt_gitURL)) %>%
+  az_mgmt <- az_mgmt0 %>%
     left_join(df_colour,by='airzone')
   
+  print('graph airzone function')
   if (is.null(polygon_a)) {
     
-    
+    print('NULL Polygon')
     
     
     a <-
@@ -155,6 +156,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
     }
     
   } else {
+    print('not null polygon')
     a <- polygon_a
     
     for (airzone_ in df_colour$airzone) {
@@ -350,7 +352,7 @@ get_airzone <- function(lat,long) {
   # 
   # az_mgmt <- readRDS(url(az_mgmt_gitURL))
   
-  
+  az_mgmt <- az_mgmt0
   
   
   #----------------
@@ -410,6 +412,7 @@ server <- shinyServer(function(input, output) {
   output$map <- renderLeaflet(a)
   output$md_file <- renderUI({
     file <- paste(www_git_url,'station_intro.Rmd',sep='')
+    
     includeMarkdown(file)
   })
   
@@ -426,23 +429,23 @@ server <- shinyServer(function(input, output) {
     try({
       airzone_select <- get_airzone(p$lat,p$lng)
       
-      if (airzone_select != airzone_select_previous) {
-        
-        # map redrawn after click
-        leafletProxy("map")%>%
-          graph_airzone(airzone=airzone_select,size = c('200px','400px'))
-        #insert text here  
-        html_file <- paste(stringr::str_replace_all(string=airzone_select, pattern=" ", repl=""),'.Rmd',sep='')
-        html_file <- paste(www_git_url,'station_',html_file,sep='')
-        print(html_file)
-        
-        try({output$md_file <- renderUI({
-          file <- html_file
-          includeMarkdown(file)
-        })
-        })
-        airzone_select_previous <- airzone_select
-      } 
+      
+      
+      # map redrawn after click
+      leafletProxy("map")%>%
+        graph_airzone(airzone=airzone_select,size = c('200px','400px'))
+      #insert text here  
+      html_file <- paste(stringr::str_replace_all(string=airzone_select, pattern=" ", repl=""),'.Rmd',sep='')
+      html_file <- paste(www_git_url,'station_',html_file,sep='')
+      print(html_file)
+      
+      try({output$md_file <- renderUI({
+        file <- html_file
+        includeMarkdown(file)
+      })
+      })
+      airzone_select_previous <- airzone_select
+      
     })
   })
   

@@ -257,7 +257,7 @@ The national Air Quality Management System (AQMS) provides a collaborative and c
 ```{=html}
 <!-- Jumping Points -->
 <a id="Pollutants"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Major Ambient Air Pollutants</h2></center></div></div>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Major Ambient (Outdoor) Air Pollutants</h2></center></div></div>
 ```
 # Four pollutants are included in this report
 
@@ -335,8 +335,15 @@ Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplet
 
 In this report, PM<sub>2.5</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure - a 24-hour metric to estimate short term or acute exposure.
 
-Health Effects: 
+**Health Effects:**
 
+-   cardiovascular and respiratory mortality
+
+-   reduced lung function
+
+-   chronic bronchitis
+
+-   asthma
 
 ```{=html}
   </p>
@@ -353,6 +360,16 @@ Ground-level ozone (O<sub>3</sub>), is a colourless, odourless and highly irrita
 
 In this report, O<sub>3</sub> is presented using the 8-hour metric.
 
+**Health Effects:**
+
+-   coughing
+
+-   irritation of the eyes, nose, throat
+
+-   shortness of breath
+
+-   reduced lung function
+
 ```{=html}
   </p>
 </div>
@@ -364,9 +381,17 @@ In this report, O<sub>3</sub> is presented using the 8-hour metric.
 </div>
   <p>
 ```
-Nitrogen dioxide (NO<sub>2</sub>) belongs to the oxides of nitrogen group of compounds (NOx) that are formed primarily through the burning of fossil fuels. While transportation sources represent over half of all emissions, energy production and industrial processes also emit significant amounts of NOx, mainly as Nitric Oxide (NO) and Nitrogen Dioxide (NO<sub>2</sub>). NO2 at higher concentrations has a strong, harsh odour and can typically be seen over large cities as a brownish haze. Once formed, NO<sub>2</sub> can combine with water molecules in the air to form compounds like nitric acid and nitrous acid. Ultimately, these compounds fall to earth through precipitation (such as rain, snow and fog) where they contribute to the acidification and eutrophication of ecosystems.
+Nitrogen dioxide (NO<sub>2</sub>) belongs to the oxides of nitrogen group of compounds (NOx) that are formed primarily through the burning of fossil fuels. While transportation sources represent more than half of all emissions, energy extraction and industrial processes also emit significant amounts of NOx, mainly as Nitrogen Oxide (NO) and Nitrogen Dioxide (NO<sub>2</sub>). NO2 at higher concentrations has a strong, harsh odour and can typically be seen over large cities as a brownish haze. Once formed, NO<sub>2</sub> can combine with water molecules in the air to form compounds like nitric acid and nitrous acid. Ultimately, these compounds fall to earth through precipitation (such as rain, snow and fog) where they contribute to the acidification and eutrophication of ecosystems.
 
 In this report, NO<sub>2</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure, and 1-hour metric to estimate short term or acute exposure.
+
+**Health Effects:**
+
+-   reduced lung function
+
+-   breathing problems such as coughing and wheezing
+
+-   aggravate asthma
 
 ```{=html}
   </p>
@@ -382,6 +407,10 @@ In this report, NO<sub>2</sub> is presented using any of the two metrics. - an a
 Sulphur dioxide (SO<sub>2</sub>) is a colourless gas that belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO<sub>2</sub> is emitted when fossil fuels or raw materials containing sulphur are burned in industrial processes (ore processing, smelting), electric power generation, or marine transportation. Large quantities are also during the extraction and processing of fossil fuels. SO<sub>2</sub> contributes to the formation of PM<sub>2.5</sub> and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain.
 
 In this report, SO<sub>2</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure, and 1-hour metric as estimate of acute (short term) exposure.
+
+**Health Effects:**
+
+-   harms the respiratory system of high risk individuals
 
 ```{=html}
   
@@ -582,20 +611,22 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', he
 <a id="Monitoring"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How we monitor</h2></center></div></div>
 ```
-Air quality monitoring stations are installed to measure the levels of pollutants on communities. These stations are maintained and operated either by the Ministry of Environemtn and Climate Change Strategy, Metro Vancouver Regional District, Community air quality roundtable, industrial permit holders, and other agencies (BCHydro, Prince Rupert Port Authority, BC Oil and Gas Commission, etc.). Only stations developed to monitoring community exposure-not the fenceline stations-are included for AQMS reporting.
+Air quality monitoring stations are installed in areas where air pollution can be a significant concern, such as near industrial facilities, busy roads, or areas with high population density. These stations are operated by various agencies, including the Ministry of Environment and Climate Change Strategy, Metro Vancouver Regional District, community airshed groups and roundtables, industrial permit holders, and other agencies like BCHydro, Prince Rupert Port Authority, and the British Columbia Energy Regulator (formerly BC Oil and Gas Commission).
+
+It's worth noting that only stations designed to monitor community exposure, rather than fenceline stations, are included in AQMS reporting. Fenceline stations are typically located at the perimeter of industrial facilities and are designed to monitor the emissions from those facilities rather than the exposure of nearby communities.
+
+Approximately 27 of these stations are used for calculating the Air Quality Health Index (AQHI), which is an essential tool for near real-time communication of the health impacts of poor air quality. The AQHI provides important advice to vulnerable populations in impacted areas, allowing them to make informed decisions to reduce their exposure to pollutants.
 
 ```{r, echo = FALSE}
 # list.files('../assets/photos/')
 knitr::include_graphics('../assets/photos/monitoring_station_plus.png')
 ```
 
-Some of the stations are included in the Air Quality Health Index (AQHI) reporting. These stations contain multiple instruments for the simultaneous monitoring and near real-time reporting of PM<sub>2.5</sub>, O<sub>3</sub>, and NO<sub>2</sub>. AQHI is a tool to communicate the health impact of poor air quality.
-
 The map below shows the location of air quality monitoring stations in B.C.
 
 <!--pre-process calculation for pollutants monitoring-->
 
-```{r, echo = FALSE}
+```{r, echo = FALSE,out.width="100%"}
 
 knitr::include_app('https://bcgov-env.shinyapps.io/airzonemonitors/',height = "600px")
 ```
@@ -607,14 +638,14 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonemonitors/',height = "6
 <a id="Air Quality Management Levels"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Levels in B.C. Air Zones</h2></center></div></div>
 ```
-Each air zone is assigned a colour-based management level for each of the four pollutants (particulate matter, ozone, nitrogen dioxide, and sulfur dioxide). These management levels are based on the levels of pollution measured from communities inside the air zone.The management levels also correspond to air zone management actions that are recommended under the Air Quality Management System. Provinces and territories, in collaboration with communities, use the management levels as framework to develop action plans and policies to address the issue of the pollutant.
+Each air zone (except the Northwest) is assigned a colour-based management level for each of the four pollutants (fine particulate matter, ozone, nitrogen dioxide, and sulfur dioxide). These management levels are based on the levels of pollution measured from communities inside the air zone.The management levels also correspond to air zone management actions that are recommended under the Air Quality Management System. Provinces and territories, in collaboration with communities, use the management levels as framework to develop action plans and policies to address the issue of the pollutant.
 
 <!--preprocess management level-->
 
 ```{r, echo=FALSE}
 #display management level table
 a <- add_mgmt_legend()
-print(a)
+# print(a)
 ```
 
 Pollutants that traveled across boundaries (trans-boundary) or are formed from exceptional events such as wildfires, are typically omitted from the assessment in order to focus on community-level actions and continuously improve air quality. The AQMS also applies other regulatory and non-regulatory instruments. This includes Base Level Industrial Emission Requirements to reduce emissions from industry and industrial equipment, and an inter-governmental collaboration to reduce vehicle emissions.
@@ -622,18 +653,22 @@ Pollutants that traveled across boundaries (trans-boundary) or are formed from e
 <!--preprocess management level-->
 
 ```{r, echo=FALSE}
+#this did not display, for some reason
 #display management level table
-a <- add_mgmt_legend()
+# a <- add_mgmt_legend()
 
 ```
 
-#### Summary of Management Levels
+### Summary of Management Levels
 
--   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards. - The highest levels of ozone are observed in the Lower Fraser Valley air zone, resulting in an orange management level. These are due to the levels observed at Hope, Maple Ridge, and Mission. - The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior are under orange management level for nitrogen dioxide (NO~2~). - The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under green management level.
+-   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards.
+-   The highest levels of ozone are observed in the Lower Fraser Valley air zone, resulting in an orange management level. These are due to the levels observed at Hope, Maple Ridge, and Mission.
+-   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior are under orange management level for nitrogen dioxide (NO~2~).
+-   The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under yellow or green management levels.
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
 source('../assets/dev_airzone_exec_summary.R')
-tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2020)
+tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2021)
 
 ```
 
@@ -641,10 +676,9 @@ tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 
 tbl_mgmt
 ```
 
-```{r, echo=FALSE,results='hide',message=FALSE,warning=FALSE}
-#NOTE: Please update the map to include details on the left side and some clickability
-source('../assets/dev_map_airzone.R')
-a <- graph_managementmap(2020,tfee_filter = TRUE,dataDirectory = '../data/out',size = c('400px','400px'))
+```{r, echo = FALSE,out.width="100%"}
+
+knitr::include_app('https://bcgov-env.shinyapps.io/airzonemanagementlevels/',height = "900px")
 ```
 
 <!--Wildfire -->
@@ -654,57 +688,31 @@ a <- graph_managementmap(2020,tfee_filter = TRUE,dataDirectory = '../data/out',s
 <a id="Wildfire"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Particulate Matter Pollution</h2></center></div></div>
 ```
-Pollution from fine particulate matter remains the major problem in B.C. These pollution mostly comes from smoke from the seasonal wildfire season. However, there are also winter-time events that are
+Pollution from fine particulate matter (PM<sub>2.5</sub>) remains a major air quality issue in British Columbia and many other parts of the world. The World Health Organization (WHO) considers PM\<2ub\>2.5</sub> the most dangerous because of its health effects and the number of people affected. WHO estimates around 4.2 million people die each year due to pollution from fine particulate matter.
 
-```{r, echo = FALSE}
+The Western part of North America experiences severe air quality issues from PM<sub>2.5</sub> during late summer and early fall due to the prevalence of wildfires. Smoke from wildfires can travel vast distances and affect large areas.
 
-knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "600px")
+Wood burning for residential heating during the winter months can also cause local air pollution problems. This method of heating releases several pollutants, including PM<sub>2.5</sub>, which can have negative effects on air quality and public health.
+
+The interactive graphics below shows the number of days that B.C.'s air zones experience 24-hour PM<sub>2.5</sub> levels that are higher than the Canadian Ambient Air Quality Standards (CAAQS) of 27 µg/m<sup>3</sup>. In 2021, the Central and Southern Interior air zones observes more than 50 days of high PM<sub>2.5</sub> levels.
+
+```{r, echo = FALSE,out.width="100%"}
+
+knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "800px")
 ```
 
-```{=html}
-<!-- Jumping Points -->
-<a id="Measurement"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Measuring Pollutants</h2></center></div></div>
-```
-```{=html}
+The graph above shows that in 2021:
 
-<div id="topicTemplate" class="warning">
-Test
-</div>
-```
-```{=html}
-<iframe src="../test/etest_ppt.html" style="height:200px;width:300px;"></iframe>
-```
-## Key Air Contaminants
+-   In the Central Interior, there were 70 days where PM2.5 levels exceed CAAQS
 
-<REPHRASE>
+    -   only 15 of these days were considered the result of seasonal wildfires,
 
-According to the Environmental Management Act of British Columbia, an air contaminant is a substance introduced into the air that can affect the health or safety of a person, affects visibility, can cause damage or injury to propery, lifeform, and the environment. British Columbia monitors the levels of several air pollutants that are associated with effects on health and the environment. These pollutants have various diverse sources including vehicular traffic, residential woodstoves, industrial emissions, and wildfires. There are four air pollutants that are included in an air zone reports. These are the pollutants considered to be major public health concern due to prevalence and potential to affect health.
+    -   33 of these days were during winter time
 
-## Most Polluted Communities
+-   The Southern Interior observed 57 days where PM2.5 levels exceeded CAAQS.
 
-```{r, echo = FALSE}
-# knitr::include_app('http://127.0.0.1:3821/?panel01')
+    -   50 of these days are from wildfires
 
-```
-
-## Trends Show Progress and Improving Air Quality
-
-In British Columbia, air quality has seen improvements, particularly in the levels of fine particulate matter, ozone, nitrogen dioxide, and sulphur dioxide.
-
-## Emission of Some Pollutants are Decreasing
-
-Add description for the trends of some pollutants based on the ECCC National Pollutant Release Inventory
-
-## The Canadian Ambient Air Quality Standards
-
-Add description for the trends of some pollutants based on the ECCC National Pollutant Release Inventory
-
-```{=html}
-<!-- Jumping Points -->
-<a id="Trends of Pollution Levels"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How do We Measure</h2></center></div></div>
-```
 <!--Do not modify below. These are part of footer-->
 
 ```{=html}

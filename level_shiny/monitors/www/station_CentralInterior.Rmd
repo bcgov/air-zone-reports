@@ -1,4 +1,37 @@
-## Central Interior Air Zone
+```{r,echo=FALSE,message=FALSE,warning=FALSE,results='hide'}
+airzone <- 'Central Interior'
 
-The Central Interior Air Zone is one of seven broad air zones across B.C. It covers parts of the Skeena, Omineca, and the Cariboo Regions and includes population centres such as Smithers, Prince George, Quesnel, and Williams Lake. Air quality monitoring stations in the Central Interior Air Zone include those operated by the Ministry, by a community through an airshed management roundtable, and by industry. Stations are concentrated around major populations centres and near major industrial sources. In recent years, this region has experienced major air quality events due to increasing frequency of large-scale wildfires. 
 
+
+library(kableExtra)
+library(readr)
+
+source('00_setupmonitors.R')
+# setwd('../../../../')
+aqhi_stations   #retrieved from above
+stations
+
+  aqhi_stations_airzone <- aqhi_stations %>%
+    rename(AIRZONE = airzone) %>%
+    filter(AIRZONE %in% airzone)
+
+stations_airzone <- stations %>%
+  filter(AIRZONE %in% airzone) %>%
+  distinct()
+
+station_env <- stations_airzone %>%
+  filter(OWNER == 'ENV') %>%
+  nrow()
+station_env <- stations_airzone %>%
+  filter(OWNER == 'INDUSTRY') %>%
+  nrow()
+```
+
+## Monitoring in the `r airzone` Air Zone
+
+There are `r nrow(stations_airzone)` monitoring stations in the `r airzone` Air Zone. There are `r nrow(aqhi_stations_airzone)` Air Quality Health Index (AQHI) locations in the air zone. AQHI is a communication tool used to report the health impacts of poor air quality. It is calculated from the measured levels of fine particulate matter(PM<sub>2.5</sub>), ground-level ozone(O<sub>3</sub>), and nitrogen dioxide(NO<sub>2</sub>). 
+
+```{r}
+stations %>%
+  select()
+```

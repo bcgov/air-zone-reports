@@ -269,6 +269,23 @@ plot_bar_ranked <- function(df_caaqs_results,pollutant,year,airzone = NULL,df_st
   ) %>%
     dplyr::filter(tolower(pollutant) == tolower(pollutant_filter))
   
+  #escape for Northwest air zone
+  #create a blank plot
+  try(
+if (airzone == 'Northwest') {
+
+  a <- ggplot() +
+    scale_x_continuous(limits = c(0,1)) +
+    scale_y_continuous(limits = c(0,1)) +
+    theme(legend.position = 'none',axis.text = element_blank(),
+          panel.background = element_blank(),
+          panel.border = element_rect(fill=NA, colour='black'),
+          axis.title.x = element_blank(),axis.title.y = element_blank()) +
+    annotate('text',x=0,y=1,label = 'Northwest air zone does \nnot have enough data',
+             hjust = 0)
+  return(a)
+  
+})
   
   df_caaqs_results_ <- df_caaqs_results
   year_ <- year
@@ -279,6 +296,7 @@ plot_bar_ranked <- function(df_caaqs_results,pollutant,year,airzone = NULL,df_st
   
   a <- plot_bar_ranked0(df_caaqs_results = df_caaqs_results_,metric = df_metric$metric[1],df_stations = df_stations_,
                         year = year_, airzone = airzone_)
+  
   
   if (nrow(df_metric) == 2)
   {

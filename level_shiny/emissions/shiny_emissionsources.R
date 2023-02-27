@@ -189,7 +189,7 @@ plot_apei <- function(pollutant,df=NULL,categorytype = 'Source',URL=NULL,output 
       ) %>%
       layout(title = 'Trends in Pollutant Emissions',
              legend = list(orientation = 'h'),
-             yaxis = list(title = 'Percent Change From 1990'),
+             yaxis = list(title = 'Change from 1990 Emissions (%)'),
              xaxis = list(title = 'Year')
       ) %>%
       plotly::layout(hovermode = 'x unified',
@@ -272,8 +272,7 @@ ui <- fluidPage(
   fluidRow(class = "toprow",
            fluidRow(class = 'filters',
                     h6("Select Pollutant to Display B.C. Emission Sources",style = "color:white"),
-                    actionButton(inputId = 'all',label = htmltools::HTML('<b>All</b>')) %>%
-                      bsTooltip("Tooltip on the left", "left"),
+                    actionButton(inputId = 'all',label = htmltools::HTML('<b>All</b>')),
                     actionButton(inputId = 'pm25',label = htmltools::HTML('PM<sub>2.5</sub>')),
                     actionButton(inputId = 'pm10',label = htmltools::HTML('PM<sub>10</sub>')),
                     actionButton(inputId = 'nox',label = htmltools::HTML('NO<sub>x</sub>')),
@@ -311,7 +310,8 @@ server <- function(input, output) {
                     showarrow = F, 
                     xref='paper', 
                     yref='paper')
-      )
+      )%>% 
+      layout(yaxis =list(title='Change from 1990 Emissions (%)'))
   })
   observeEvent(input$pm25, {
     v$data <- apei$pm25 %>%
@@ -321,7 +321,8 @@ server <- function(input, output) {
                     showarrow = F, 
                     xref='paper', 
                     yref='paper')
-      )
+      )%>% 
+      layout(yaxis =list(title='B.C. Annual Emission (tonnes/year)'))
   })
   observeEvent(input$pm10, {
     v$data <- apei$pm10 %>%
@@ -331,7 +332,8 @@ server <- function(input, output) {
                     showarrow = F, 
                     xref='paper', 
                     yref='paper')
-      )
+      )%>% 
+      layout(yaxis =list(title='B.C. Annual Emission (tonnes/year)'))
   })
   observeEvent(input$nox, {
     v$data <- apei$nox %>%
@@ -341,19 +343,21 @@ server <- function(input, output) {
                     showarrow = F, 
                     xref='paper', 
                     yref='paper')
-      )
+      )%>% 
+      layout(yaxis =list(title='B.C. Annual Emission (tonnes/year)'))
   })
   observeEvent(input$sox, {
-    v$data <- apei$sox
+    v$data <- apei$sox%>% 
+      layout(yaxis =list(title='B.C. Annual Emission (tonnes/year)'))
   })
   observeEvent(input$voc, {
-    v$data <- apei$voc  
+    v$data <- apei$voc  %>% 
+      layout(yaxis =list(title='B.C. Annual Emission (tonnes/year)'))
   })
   
   
   output$plot1 <- renderPlotly(v$data %>% 
-                                 layout(yaxis =list(title='B.C. Annual Emission (tonnes/year)'),
-                                        xaxis = list(title =''),
+                                 layout(xaxis = list(title =''),
                                         showlegend = FALSE)
                                  )
 }
