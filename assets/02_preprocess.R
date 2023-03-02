@@ -22,6 +22,7 @@ library(dplyr)
 source('./assets/00_setup.R')
 saveDirectory <- './data/out'
 
+
 # Retrieve data
 list.files('./data/out')
 raw_data <- readRDS('./data/out/raw_data_caaqs.Rds')
@@ -101,3 +102,19 @@ excess_daily <- raw_data_PM25_excess %>%
   mutate(YEAR = year(DATE), MONTH = paste(month))
   group_by(DATE) %>%
   mutate()
+
+  #create list of aqhi stations
+  url_aqhi <- 'https://envistaweb.env.gov.bc.ca/aqo/setup/BC_AQHI_SITES_AQHIPlusSO2.csv'
+  aqhi_stations <- read_csv(url_aqhi) %>%
+    select(AQHI_AREA,LATITUDE,LONGITUDE) %>%
+    group_by(AQHI_AREA) %>%
+    slice(1) %>%
+    get_airzone_df() %>%
+    mutate(airzone = ifelse(grepl('Metro Vancouver',AQHI_AREA),'Lower Fraser Valley',airzone))
+ 
+  stations <- get_stationlist() %>%
+    select(Label, OWNER,AIRZONE) %>%
+    distinct()
+  
+  readr::write_csv(stations,'./data/out/liststations_aqhi.csv')
+  
