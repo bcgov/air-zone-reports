@@ -1,91 +1,28 @@
-Label,OWNER,AIRZONE
-Abbotsford-Airport,MVRD,Lower Fraser Valley
-Abbotsford-MillLake,MVRD,Lower Fraser Valley
-Agassiz,MVRD,Lower Fraser Valley
-Bessborough,INDUSTRY,Northeast
-Birchbank Golf Course,INDUSTRY,Southern Interior
-Burnaby-Kensington,MVRD,Lower Fraser Valley
-Burnaby-Mtn,MVRD,Lower Fraser Valley
-Burnaby-North Eton,MVRD,Lower Fraser Valley
-Burnaby-South,MVRD,Lower Fraser Valley
-Burns Lake,ENV,Central Interior
-Castlegar,ENV,Southern Interior
-Chilliwack,MVRD,Lower Fraser Valley
-Colwood,ENV,Georgia Strait
-Coquitlam,MVRD,Lower Fraser Valley
-Courtenay,ENV,Georgia Strait
-Cranbrook,ENV,Southern Interior
-Crofton-Elementary,INDUSTRY,Georgia Strait
-Crofton-Substation,INDUSTRY,Georgia Strait
-Duncan-Cairnsmore,ENV,Georgia Strait
-Duncan,ENV,Georgia Strait
-Duncan-Deykin,INDUSTRY,Georgia Strait
-Campbell River,INDUSTRY,Georgia Strait
-Elkford,INDUSTRY,Southern Interior
-Farmington,INDUSTRY,Northeast
-FortSt.John-85th Avenue,INDUSTRY-BCH,Northeast
-FortSt.John,ENV,Northeast
-Fort St.John-N.CampC,INDUSTRY-BCH,Northeast
-FortSt.John-OldFort,INDUSTRY-BCH,Northeast
-Golden,ENV,Southern Interior
-Grand Forks,ENV,Southern Interior
-Harmac-Cedar Woobank,INDUSTRY,Georgia Strait
-Hope,MVRD,Lower Fraser Valley
-Horseshoe Bay,MVRD,Lower Fraser Valley
-Houston,ENV,Central Interior
-Hudson's Hope,INDUSTRY-BCH,Northeast
-Kamloops,ENV,Southern Interior
-Kelowna,ENV,Southern Interior
-Kitimat-Haisla Village,INDUSTRY,Coastal
-Kitimat-Haul Rd,INDUSTRY,Coastal
-Kitimat-Industrial Ave,INDUSTRY,Coastal
-Kitimat-Riverlodge,INDUSTRY,Coastal
-Kitimat-Whitesail,INDUSTRY,Coastal
-Langdale,INDUSTRY,Georgia Strait
-Langley,MVRD,Lower Fraser Valley
-Maple Ridge,MVRD,Lower Fraser Valley
-Mission,MVRD,Lower Fraser Valley
-Nanaimo,ENV,Georgia Strait
-New Westminster,MVRD,Lower Fraser Valley
-North Burnaby-Capitol Hill,MVRD,Lower Fraser Valley
-North Delta,MVRD,Lower Fraser Valley
-N.Vancouver-Mahon Park,MVRD,Lower Fraser Valley
-N.Vancouver-2nd Narrows,MVRD,Lower Fraser Valley
-Peace Valley,INDUSTRY-BCH,Northeast
-Penticton Industrial Place,ENV,Southern Interior
-Pine River-Gas Plant,INDUSTRY,Northeast
-Pine River-Hasler,INDUSTRY,Northeast
-Pitt Meadows-Meadowlands School,MVRD,Lower Fraser Valley
-Port Alberni-Elem.School,INDUSTRY,Georgia Strait
-Port Moody,MVRD,Lower Fraser Valley
-Powell River-J Thomson,INDUSTRY,Georgia Strait
-Prince George-CBC Transmitter,INDUSTRY,Central Interior
-Prince George-Jail,INDUSTRY,Central Interior
-Prince George-Marsulex Acid Plant,INDUSTRY,Central Interior
-Prince George-Plaza 400,ENV,Central Interior
-Prince Rupert-Fairview,INDUSTRY-PRPA,Coastal
-Quesnel,ENV,Central Interior
-Richmond-South,MVRD,Lower Fraser Valley
-Smithers,ENV,Central Interior
-Sparwood Centennial Square,INDUSTRY,Southern Interior
-Squamish,ENV,Georgia Strait
-Surrey,MVRD,Lower Fraser Valley
-Taylor-Farm 247 Road,INDUSTRY,Northeast
-Taylor-SouthHill,INDUSTRY,Northeast
-Taylor-Townsite,INDUSTRY,Northeast
-Terrace,ENV,Coastal
-Trail-Butler Park,INDUSTRY,Southern Interior
-Trail-Airport,INDUSTRY,Southern Interior
-Tsawwassen,MVRD,Lower Fraser Valley
-Valemount,ENV,Central Interior
-Vancouver-ClarkDr,MVRD,Lower Fraser Valley
-Richmond-Airport,MVRD,Lower Fraser Valley
-Vancouver-Pandora Park,MVRD,Lower Fraser Valley
-Vancouver-Dwtn,MVRD,Lower Fraser Valley
-Vanderhoof,ENV,Central Interior
-Vernon,ENV,Southern Interior
-Victoria-James Bay The Reef,INDUSTRY,Georgia Strait
-Victoria,ENV,Georgia Strait
-Warfield Elementary,INDUSTRY,Southern Interior
-Whistler,ENV,Georgia Strait
-Williams Lake,ENV,Central Interior
+AQHI_AREA,LATITUDE,LONGITUDE,airzone
+Castlegar,49.317698,-117.661527,Southern Interior
+Central Fraser Valley,49.05833333,-122.25,Lower Fraser Valley
+Central Okanagan,49.862119,-119.467461,Southern Interior
+Comox Valley,49.682603,-124.996222,Georgia Strait
+Cranbrook,49.507103,-115.753682,Southern Interior
+Duncan,48.786114,-123.717307,Georgia Strait
+Eastern Fraser Valley,49.175,-121.9416667,Lower Fraser Valley
+Fort St John,56.244722,-120.856111,Northeast
+Kamloops,50.67477,-120.334016,Southern Interior
+Kitimat,54.066909,-128.639131,Coastal
+Metro Vancouver NE,49.23333333,-122.6833333,Lower Fraser Valley
+Metro Vancouver NW,49.261111,-123.113889,Lower Fraser Valley
+Metro Vancouver SE,49.11666667,-122.75,Lower Fraser Valley
+Metro Vancouver SW,49.163333,-123.163333,Lower Fraser Valley
+Nanaimo,49.20083,-123.99389,Georgia Strait
+North Okanagan,50.260617,-119.270723,Southern Interior
+Prince George,53.91472,-122.74194,Central Interior
+Quesnel,52.96936,-122.4934,Central Interior
+Smithers,54.7784861,-127.168542,Central Interior
+South Okanagan,49.47753,-119.59578,Southern Interior
+Sparwood,49.7327857,-114.88766,Southern Interior
+Squamish,49.70516,-123.15133,Georgia Strait
+Terrace,54.52167,-128.6075,Coastal
+Victoria,48.441942,-123.363165,Georgia Strait
+West Shore,48.42389,-123.49278,Georgia Strait
+Whistler,50.144285000000004,-122.960402,Georgia Strait
+Williams Lake,52.14428,-122.150391,Central Interior
