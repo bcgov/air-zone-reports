@@ -112,9 +112,7 @@ excess_daily <- raw_data_PM25_excess %>%
     get_airzone_df() %>%
     mutate(airzone = ifelse(grepl('Metro Vancouver',AQHI_AREA),'Lower Fraser Valley',airzone))
  
-  stations <- get_stationlist() %>%
-    select(Label, OWNER,AIRZONE) %>%
-    distinct()
   
-  readr::write_csv(stations,'./data/out/liststations_aqhi.csv')
+  
+  readr::write_csv(aqhi_stations,'./data/out/liststations_aqhi.csv')
   
