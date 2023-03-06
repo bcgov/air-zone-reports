@@ -46,7 +46,7 @@ txt <- to_comma_string(station_count$txt)
 
 ## Monitoring in the `r airzone` Air Zone
 
-There are `r nrow(stations_airzone)` air quality monitoring stations in the `r airzone` Air Zone that were active from `r year-2` to `r year`. These stations were operated by `r txt`. Data from ENV and industry monitoring stations that are regulated by the province are validated at regular intervals by the Ministry air data validation team. The monitoring stations and equipment are also audited twice a year by the Ministry audit team.
+There are `r nrow(stations_airzone)` air quality monitoring stations in the `r airzone` Air Zone that were active from `r year-2` to `r year`. These stations were operated by `r txt`. 
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 stations_airzone %>%

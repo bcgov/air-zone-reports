@@ -272,12 +272,12 @@ ui <- fluidPage(
   fluidRow(class = "toprow",
            fluidRow(class = 'filters',
                     h6("Select Pollutant to Display B.C. Emission Sources",style = "color:white"),
-                    actionButton(inputId = 'all',label = htmltools::HTML('<b>All</b>')),
-                    actionButton(inputId = 'pm25',label = htmltools::HTML('PM<sub>2.5</sub>')),
-                    actionButton(inputId = 'pm10',label = htmltools::HTML('PM<sub>10</sub>')),
-                    actionButton(inputId = 'nox',label = htmltools::HTML('NO<sub>x</sub>')),
-                    actionButton(inputId = 'sox',label = htmltools::HTML('SO<sub>x</sub>')),
-                    actionButton(inputId = 'voc',label = htmltools::HTML('VOC'))
+                    actionButton(inputId = 'all',label = htmltools::HTML('<b>All</b>'),title = 'Display summary for all pollutants'),
+                    actionButton(inputId = 'pm25',label = htmltools::HTML('PM<sub>2.5</sub>'),title = 'Fine Particulate Matter (PM2.5)'),
+                    actionButton(inputId = 'pm10',label = htmltools::HTML('PM<sub>10</sub>'),title = 'Particulate Matter 10 Microns'),
+                    actionButton(inputId = 'nox',label = htmltools::HTML('NO<sub>x</sub>'), title = 'Nitrogen Oxides'),
+                    actionButton(inputId = 'sox',label = htmltools::HTML('SO<sub>x</sub>'), title = 'Sulphur Oxides'),
+                    actionButton(inputId = 'voc',label = htmltools::HTML('VOC'),title = 'Volatile Organic Compounds')
                     
            )),
   fluidRow(div(style='height:400px;overflow-y: hidden;overflow-x: hidden;',plotlyOutput("plot1")))#,height = "600px",width = '600px')

@@ -191,6 +191,43 @@ get_airzone <- function(lat,long) {
 # Actual shiny part
 
 ui <- fluidPage(
+  tags$head(
+    tags$style(HTML("
+      body { background-color: #f2efe9; }
+      .container-fluid { background-color: #fff; width: auto; padding: 5px; }
+      .topimg { width: 0px; display: block; margin: 0px auto 0px auto; }
+      .title { text-align: center; }
+      .toprow { margin: 5px 5px; padding: 5px; background-color: #38598a; }
+      .filters { margin: 3px auto; }
+      .shiny-input-container { width:90% !important; }
+      .table { padding: 0px; margin-top: 0px; }
+      .leaflet-top { z-index:999 !important; }
+      "))),
+  
+  fluidRow(class = 'toprow',
+           
+           h6("Select an Air Zone or Click on Map",style = "color:white"),
+           column(12, align = "left",
+                  # actionButton(inputId = 'reset',label = 'Reset'),
+                  # tags$button(
+                  #   id = "centralinterior",
+                  #   class = "btn action-button",
+                  #   tags$img(src = df_buttons$buttons[df_buttons$AIRZONE == 'Central Interior'],height = '50px',width ='100px'),
+                  #   
+                  # ),
+                  # actionButton(inputId = 'centralinterior',class = "action-button",label = '',
+                  #              style = "background-image: url('https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos/btn_central.png');,
+                  #              height = 50, width = 50, style = border:none; padding:0; margin: 0"
+                  #              ),
+                  actionButton(inputId = 'reset',label = 'Reset',width = "7.5%",title = 'Reset map'),
+                  actionButton(inputId = 'centralinterior',label = 'Central',width = "12.5%",title = 'Central Interior Air Zone'),
+                  actionButton(inputId = 'coastal',label = 'Coastal',width = "12.5%",title = 'Coastal Air Zone'),
+                  actionButton(inputId = 'georgiastrait',label = 'Georgia',width = "12.5%",title = 'Georgia Strait Air Zone'),
+                  actionButton(inputId = 'lowerfraservalley',label = HTML('LFV'),width = "12.5%",title = 'Lower Fraser Valley Air Zone'),
+                  actionButton(inputId = 'northeast',label = 'Northeast',width = "12.5%",title = 'Northeast Air Zone'),
+                  actionButton(inputId = 'northwest',label = 'Northwest',width = "12.5%",title = 'Northwest Air Zone'),
+                  actionButton(inputId = 'southerninterior',label = 'Southern',width = "12.5%",title = 'Southern Interior Air Zone')
+           )),
   sidebarLayout(
     sidebarPanel(h6("Click on the map to select an air zone"),leafletOutput("map"),width=4),
       mainPanel (
@@ -220,7 +257,23 @@ server <- shinyServer(function(input, output) {
     includeHTML(file)
   })
   
-  airzone_select_previous <- ''
+  v <- reactiveValues(data = '')
+  
+  update <- function(airzone_selected = '') {
+    leafletProxy("map")%>%
+      graph_airzone(airzone=airzone_selected,size = c('200px','400px'))
+    #insert text here  
+    html_file <- paste(stringr::str_replace_all(string=airzone_selected, pattern=" ", repl=""),'.html',sep='')
+    html_file <- paste(www_git_url,html_file,sep='')
+    print(html_file)
+    
+    try({output$fileOutputs  <- renderUI({
+      file <- html_file
+      includeHTML(file)
+    })
+    })
+  }
+  
   # t0 <- Sys.time()
   # observe the marker click info and print to console when it is changed.
   observeEvent(input$map_shape_click, {
@@ -249,12 +302,69 @@ server <- shinyServer(function(input, output) {
           includeHTML(file)
         })
         })
-        airzone_select_previous <- airzone_select
+        
       } 
     })
   })
   
+  #observeevents for the shortcut buttons
   
+  observeEvent(input$reset, {
+    print('reset button clicked')
+    v$data <- ''
+    a <- graph_airzone(polygon_a=NULL,airzone=NULL,size = c('200px','400px'))
+    output$map <- renderLeaflet(a)
+    output$fileOutputs  <- renderUI({
+      file <- paste(www_git_url,'01_airzone_intro.html',sep='')
+      includeHTML(file)
+    })
+      
+  })
+  
+  observeEvent(input$centralinterior, {
+    v$data <- 'Central Interior'
+    update(v$data)  
+    
+  })
+  observeEvent(input$coastal, {
+    v$data <- 'Coastal'
+    
+    update(v$data)    
+    
+  })
+  
+  observeEvent(input$georgiastrait, {
+    v$data <- 'Georgia Strait'
+    
+    update(v$data)    
+    
+  })
+  
+  observeEvent(input$lowerfraservalley, {
+    v$data <- 'Lower Fraser Valley'
+    
+    update(v$data)    
+    
+  })
+  
+  observeEvent(input$northeast, {
+    v$data <- 'Northeast'
+    
+    update(v$data)    
+    
+  })
+  observeEvent(input$northwest, {
+    v$data <- 'Northwest'
+    
+    update(v$data)    
+    
+  })
+  observeEvent(input$southerninterior, {
+    v$data <- 'Southern Interior'
+    
+    update(v$data)    
+    
+  })
 })
 
 shinyApp(ui, server)

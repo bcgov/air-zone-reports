@@ -6,10 +6,38 @@ require(envreportutils)
 require(sf)
 require(bcmaps)
 require(stringr)
+require(png)
+library(base64enc)
 
 az_mgmt_gitURL <- 'https://github.com/bcgov/air-zone-reports/blob/master/data/out/az_mgmt.Rds?raw=true'
 liststations_URL <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/liststations.csv'
 results_URL <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/annual_results.csv'
+liststationsaqhi_URL <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/liststations_aqhi.csv'
+#define station icons
+icons_URL <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos'
+buttons_URL <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos'
+# print(list.files(buttons_URL))
+# Define icon and popup anchor points
+icon_anchor <- c(10, 40)
+popup_anchor <- c(0, -50)
+icon_wh <- c(20,40)
+
+#define graphic components (icons and buttons)
+df_icons <- tibble(
+  OWNER = c("MVRD","INDUSTRY","ENV","INDUSTRY-BCH","INDUSTRY-PRPA","AQHI"),
+  icons = c("station_mvrd_icon.png",'station_industry_icon.png',
+            'station_env_icon.png','station_bchydro_icon.png','station_prpa_icon.png','station_aqhi_icon.png')
+)
+
+df_buttons <- tibble(
+  AIRZONE = c("All",'Central Interior','Coastal','Georgia Strait',
+              'Lower Fraser Valley','Northeast','Northwest','Southern Interior'),
+  buttons = c('btn_all.png','btn_central.png','btn_coastal.png','btn_georgia.png','btn_lfv.png',
+              'btn_northeast.png','btn_northwest.png','btn_southern.png')
+)
+
+df_icons$icons <- paste(icons_URL,df_icons$icons,sep='/')
+df_buttons$buttons <- paste(buttons_URL,df_buttons$buttons,sep='/')
 
 az_mgmt0 <- readRDS(url(az_mgmt_gitURL)) 
 
@@ -19,8 +47,11 @@ station_data <-  readr::read_csv(results_URL) %>%
 
 # aqhi_stations <- readr::read_csv('https://envistaweb.env.gov.bc.ca/aqo/setup/BC_AQHI_SITES_AQHIPlusSO2.csv')
 
-
-liststations <- envair::listBC_stations(use_CAAQS = TRUE) %>%
+liststations_aqhi <- readr::read_csv(liststationsaqhi_URL) %>%
+  mutate(icons = df_icons$icons[df_icons$OWNER == 'AQHI']) %>%
+  rename(AIRZONE = airzone)
+liststations <- readr::read_csv(liststations_URL) %>%
+  # envair::listBC_stations(use_CAAQS = TRUE) %>%
   filter(site %in% station_data$site) %>%
   group_by(STATION_NAME) %>%
   slice(1) %>% ungroup() %>%
@@ -36,8 +67,25 @@ liststations <- envair::listBC_stations(use_CAAQS = TRUE) %>%
   
   # mutate(AQMS = ifelse(is.na(AQMS),'UNKNOWN',AQMS)) %>%
   select(Label,LAT,LONG,STATUS,AQMS,AIRZONE,OWNER,monitors) %>%
-  ungroup()
+  ungroup() %>%
+  mutate(index = 1:n()) %>%
+  left_join(df_icons,by='OWNER') %>%
+  mutate(display = paste(Label,'<br>','Monitors:<br>',monitors,'<br><img src="',
+                         icons,'" alt = "operator" style ="width:50px;height:50px">',sep=''))
 
+
+#define centroid and zoom for each airzone
+#when the airzone is selected, it will zoom into the air zone
+df_map_settings <- tribble(
+  ~AIRZONE,~lat,~long,~zoom,
+  'Central Interior',53.95,-123.58,5,
+  'Coastal',52.93,-128.08,5,
+  'Georgia Strait',49.54,-123.86,7,
+  'Lower Fraser Valley',49.51,-122.12,7.5,
+  'Northeast',58.240,-122.44,5,
+  'Northwest',58.699,-129.547,5,
+  'Southern Interior',50.596,-118.608,5
+)
 #----FUNCTIONS--------------
 #' Create a graph of the airzones
 #' This is for information only, to discuss the air zones
@@ -88,26 +136,6 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
   # df_colour$colour[tolower(df_colour$airzone) == airzone] <- '#F2300F'
   df_colour$colour_01[tolower(df_colour$airzone) != airzone] <- 'white'
   
-  
-  #shortcut to retrieve from github instead
-  # az_mgmt <- airzones() %>%
-  #   st_make_valid() %>%
-  #   st_transform(st_crs(bc_bound())) %>%
-  #   st_intersection(st_geometry(bc_bound())) %>%
-  #   group_by(airzone = Airzone) %>%
-  #   summarize() %>%
-  #   st_transform(4326)
-  #   saveRDS(az_mgmt,'./data/out/az_mgmt.Rds')
-  # 
-  
-  
-  
-  # left_join(df_colour,by='airzone')
-  
-  
-  
-  
-  
   az_mgmt <- az_mgmt0 %>%
     left_join(df_colour,by='airzone')
   
@@ -119,7 +147,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
     
     a <-
       leaflet(width = size[1],height = size[2],
-              options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
+              options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=15)) %>%
       set_bc_view(zoom=4) %>%
       setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
       addProviderTiles(providers$Esri.WorldStreetMap,
@@ -144,13 +172,29 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
       if (markerON) {
         try({
           a <- a %>%
-            addMarkers(lng=liststations_$LONG,
-                       lat=liststations_$LAT,
-                       # layerId = airzone_,
-                       # group = airzone_,
-                       popup = (liststations_$monitors),
-                       label = liststations_$Label,
-                       clusterOptions = markerClusterOptions())
+            addMarkers(data = liststations_,
+                       lng=~LONG,
+                       lat=~LAT,
+                       
+                       group = 'Stations',
+                       icon = ~leaflet::makeIcon(icons, iconWidth = icon_wh[1], iconHeight = icon_wh[2],
+                                                 iconAnchorX = icon_anchor[1], iconAnchorY = icon_anchor[2],
+                                                 popupAnchorX = popup_anchor[1], popupAnchorY = popup_anchor[2]),
+                       popup = (liststations_$monitors[1]),
+                       label = ~Label) %>%
+            addMarkers(data = liststations_aqhi_,
+                       lng=~LONGITUDE,
+                       lat=~LATITUDE,
+                       
+                       group = 'AQHI',
+                       icon = ~leaflet::makeIcon(icons, iconWidth = icon_wh[1], iconHeight = icon_wh[2],
+                                                 iconAnchorX = icon_anchor[1], iconAnchorY = icon_anchor[2],
+                                                 popupAnchorX = popup_anchor[1], popupAnchorY = popup_anchor[2]),
+                       
+                       label = ~AQHI_AREA) %>%
+            addLayersControl(baseGroups =  c('Stations','AQHI'),
+                             options = layersControlOptions(collapsed = FALSE))
+          # clusterOptions = markerClusterOptions())
         })
       }
     }
@@ -160,6 +204,9 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
     a <- polygon_a
     
     for (airzone_ in df_colour$airzone) {
+      
+      
+      
       a <- a %>%
         
         addPolygons(data = az_mgmt %>% filter(airzone == airzone_),
@@ -182,158 +229,57 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
         print(airzone)
         liststations_ <- liststations %>% 
           filter(tolower(AIRZONE) == tolower(airzone))
+        
+        liststations_aqhi_ <- liststations_aqhi %>%
+          filter(tolower(AIRZONE) == tolower(airzone))
+        df_map_settings_ <- df_map_settings %>%
+          filter(tolower(AIRZONE) == tolower(airzone))
+        
+        print(paste('zoom:', df_map_settings_$zoom))
+        print(df_map_settings_)
         print(nrow(liststations_))
-        try(a <- a %>%
-              removeMarker( layerId = 'stations')
-        )
-        try(a <- a %>%
-              addMarkers(lng=liststations_$LONG,
-                         lat=liststations_$LAT,
-                         # layerId = 'stations',
-                         popup = (liststations_$monitors),
-                         group = 'stations',
-                         label = liststations_$Label,
-                         clusterOptions = markerClusterOptions()))
+        print(nrow(liststations_aqhi))
+        a <- a %>%
+          setView(lng = df_map_settings_$long, lat = df_map_settings_$lat, zoom = df_map_settings_$zoom) %>%
+          clearGroup('Stations') %>%
+          clearGroup('AQHI')
+        
+        a <- a %>%
+          addMarkers(data = liststations_,
+                     lng=~LONG,
+                     lat=~LAT,
+                     icon = ~leaflet::makeIcon(icons, iconWidth = icon_wh[1], iconHeight = icon_wh[2],
+                                               iconAnchorX = icon_anchor[1], iconAnchorY = icon_anchor[2],
+                                               popupAnchorX = popup_anchor[1], popupAnchorY = popup_anchor[2]),
+                     # color = liststations_$OWNER,
+                     # layerId =liststations_$index,
+                     popup = ~display,
+                     group = 'Stations',
+                     label = ~Label) %>%
+          addMarkers(data = liststations_aqhi_,
+                     lng=~LONGITUDE,
+                     lat=~LATITUDE,
+                     
+                     group = 'AQHI',
+                     icon = ~leaflet::makeIcon(icons, iconWidth = icon_wh[1], iconHeight = icon_wh[2],
+                                               iconAnchorX = icon_anchor[1], iconAnchorY = icon_anchor[2],
+                                               popupAnchorX = popup_anchor[1], popupAnchorY = popup_anchor[2]),
+                     
+                     label = ~paste('AQHI Area:',AQHI_AREA)) %>%
+          addLayersControl(baseGroups = c('Stations','AQHI'),
+                           options = layersControlOptions(collapsed = FALSE)
+          )
+        # clusterOptions = markerClusterOptions())
       })
-    }
-    
-    
-    
-    
-  }
-  return(a)
-}
-
-map_exceedance <- function(exceedances,az_mgmt,year,size = c('200px','400px'),map_a = NULL) {
-  
-  if (0) {
-    source('./level4_page/03_setup.R')
-    source('./level4_page/02_setup.R')
-    dirs_location <- './data/out'
-    year = 2017
-    map_a <- NULL
-    exceedances <- get_PM_exceedancesummary()
-    
-    az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
-      left_join(df_colour)
-    
-    size <- c('200px','400px')
-    
-  }
-  df_colour <- tribble(
-    ~airzone,~colour_01,
-    "Northeast",'#CDC08C',
-    "Georgia Strait"  ,'#F4B5BD',
-    "Southern Interior",'#9C964A',
-    "Lower Fraser Valley",'#85D4E3',
-    "Central Interior" ,'#FAD77B',
-    "Coastal",'#CEAB07',
-    "Northwest","#24281A"
-  )
-  
-  lst_airzones <- az_mgmt %>%
-    pull(airzone)
-  
-  airzone_exceedance_season <- exceedances$season
-  airzone_exceedance <- exceedances$annual
-  station_exceedance <- exceedances$annual_stations
-  station_exceedance_season <- exceedances$season_stations
-  lst_stations <- exceedances$stations
-  year_select <- year
-  
-  
-  colfunc <- colorRampPalette(c("blue", "red"))
-  
-  
-  # station_exceedance$colorscaled <- color_scales[station_exceedance$days_exceed]
-  
-  if (is.null(map_a)) {
-    #create map for annual station
-    a <-  leaflet(width = size[1],height = size[2],
-                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
-      set_bc_view(zoom=3.5) %>%
-      # setView(zoom =5) %>%
-      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-      addProviderTiles(providers$Stamen.TonerLite,
-                       options = providerTileOptions(opacity = 1)
-      ) %>%
-      # addProviderTiles(providers$Stamen.TonerLabels) %>%
-      add_bc_home_button()
-  } else {
-    a <- map_a
-  }
-  
-  #add colour for the station circles
-  max_days <- station_exceedance %>%
-    filter(year == year_select) %>%
-    pull(days_exceed) %>%
-    max()
-  
-  color_scales <- colfunc(max_days)
-  for (airzone_ in lst_airzones) {
-    
-    if (0) {
-      airzone_ <- lst_airzones[1]
-    }
-    liststations_ <- lst_stations %>% 
-      filter(AIRZONE == airzone_, year == year_select)
-    station_exceedance_ <- station_exceedance %>% 
-      filter(AIRZONE == airzone_, year == year_select)
-    a <- a %>%
       
-      addPolygons(data = az_mgmt %>% filter(airzone == airzone_),
-                  layerId = airzone_,
-                  color = 'black',
-                  fillColor = ~colour_01,
-                  weight = 1, opacity = 1, fillOpacity = 0.6,
-                  label = paste(airzone_,'Air Zone'),
-                  labelOptions = labelOptions(textsize = "15px"),
-                  highlight = highlightOptions(weight = 3,
-                                               color = "blue",
-                                               bringToFront = FALSE))
-    #add stations
-    if (nrow(liststations_) >0) {
-      a <- a %>%
-        addCircleMarkers(lng=station_exceedance_$LONG,
-                         lat = station_exceedance_$LAT,
-                         layerId = station_exceedance_$site,
-                         label = station_exceedance_$site,
-                         color = color_scales[station_exceedance$days_exceed],
-                         radius=3
-                         
-        ) %>%
-        addMarkers(lng=liststations_$LONG,
-                   lat=liststations_$LAT,
-                   # layerId = liststations$AIRZONE,
-                   # group = airzone_,
-                   label = liststations_$site,
-                   options=markerOptions())
+      
       
     }
+    
+    
+    
+    
   }
-  plot_a <- a
-  
-  
-  if (is.null(map_a)) {
-    #create map for annual
-    b <-  leaflet(width = size[1],height = size[2],
-                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
-      set_bc_view(zoom=3.5) %>%
-      # setView(zoom =5) %>%
-      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-      addProviderTiles(providers$Esri.NatGeoWorldMap,
-                       options = providerTileOptions(opacity = 1)
-      ) %>%
-      # addProviderTiles(providers$Stamen.TonerLabels) %>%
-      add_bc_home_button()
-  } else {
-    b <- map_a
-  }
-  
-  
-  
-  
-  
   return(a)
 }
 
@@ -373,11 +319,21 @@ get_airzone <- function(lat,long) {
                           tt1_trans[which(col), ]$airzone
                         })
   
+  print(paste('lat=',lat,'long=',long))
   return(pnts$airzone)
   
 }
 
-
+iconImage <- function(filename, width=50, height=50) {
+  # Read the PNG file
+  img <- readPNG(filename)
+  # Convert the image to a base64-encoded string
+  img_str <- base64encode(rawToChar(as.raw(img)), "base64")
+  # Build the HTML code for the image tag
+  tag <- tags$img(src = paste0("data:image/png;base64,", img_str), width = width, height = height)
+  # Return the HTML code as an icon object
+  icon(tag)
+}
 
 #----END of FUNCTIONS----------------
 
@@ -386,8 +342,45 @@ get_airzone <- function(lat,long) {
 # Actual shiny part
 
 ui <- fluidPage(
+  tags$head(
+  tags$style(HTML("
+      body { background-color: #f2efe9; }
+      .container-fluid { background-color: #fff; width: auto; padding: 5px; }
+      .topimg { width: 0px; display: block; margin: 0px auto 0px auto; }
+      .title { text-align: center; }
+      .toprow { margin: 5px 5px; padding: 5px; background-color: #38598a; }
+      .filters { margin: 3px auto; }
+      .shiny-input-container { width:90% !important; }
+      .table { padding: 0px; margin-top: 0px; }
+      .leaflet-top { z-index:999 !important; }
+      "))),
+ 
+  fluidRow(class = 'toprow',
+       
+           h6("Select an Air Zone or Click on Map",style = "color:white"),
+           column(12, align = "left",
+           # actionButton(inputId = 'reset',label = 'Reset'),
+                      # tags$button(
+           #   id = "centralinterior",
+           #   class = "btn action-button",
+           #   tags$img(src = df_buttons$buttons[df_buttons$AIRZONE == 'Central Interior'],height = '50px',width ='100px'),
+           #   
+           # ),
+           # actionButton(inputId = 'centralinterior',class = "action-button",label = '',
+           #              style = "background-image: url('https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos/btn_central.png');,
+           #              height = 50, width = 50, style = border:none; padding:0; margin: 0"
+           #              ),
+           actionButton(inputId = 'reset',label = 'Reset',width = "7.5%",title = 'Reset map'),
+           actionButton(inputId = 'centralinterior',label = 'Central',width = "12.5%",title = 'Central Interior Air Zone'),
+           actionButton(inputId = 'coastal',label = 'Coastal',width = "12.5%",title = 'Coastal Air Zone'),
+           actionButton(inputId = 'georgiastrait',label = 'Georgia',width = "12.5%",title = 'Georgia Strait Air Zone'),
+           actionButton(inputId = 'lowerfraservalley',label = HTML('LFV'),width = "12.5%",title = 'Lower Fraser Valley Air Zone'),
+           actionButton(inputId = 'northeast',label = 'Northeast',width = "12.5%",title = 'Northeast Air Zone'),
+           actionButton(inputId = 'northwest',label = 'Northwest',width = "12.5%",title = 'Northwest Air Zone'),
+           actionButton(inputId = 'southerninterior',label = 'Southern',width = "12.5%",title = 'Southern Interior Air Zone')
+           )),
   sidebarLayout(
-    sidebarPanel(h6("Click on the map to select an air zone"),leafletOutput("map"),width=4),
+    sidebarPanel(h6("Click on the map to select an air zone"),leafletOutput("map"),width=6),
     mainPanel (
       uiOutput("md_file"),width=6
     ))
@@ -416,7 +409,27 @@ server <- shinyServer(function(input, output) {
     includeMarkdown(file)
   })
   
-  airzone_select_previous <- ''
+  v <- reactiveValues(data = '')
+  
+  update <- function(airzone_selected = ''){
+    if (airzone_selected != '') {
+      try({
+        
+        # map redrawn after click
+        leafletProxy("map")%>%
+          graph_airzone(airzone=airzone_selected ,size = c('200px','400px'))
+        #insert text here  
+        html_file <- paste(stringr::str_replace_all(string=airzone_selected , pattern=" ", repl=""),'.html',sep='')
+        html_file <- paste(www_git_url,'station_',html_file,sep='')
+        print(html_file)
+        
+        output$md_file <- renderUI({
+          file <- html_file
+          includeHTML(file)
+          
+        })
+        
+      })}}
   # t0 <- Sys.time()
   # observe the marker click info and print to console when it is changed.
   observeEvent(input$map_shape_click, {
@@ -425,31 +438,78 @@ server <- shinyServer(function(input, output) {
     p <- input$map_shape_click # map because that is the name of the output
     
     print(p$lat)
-    # text <- paste("lat ", p$lat," lon ", p$lng) # shows lat/lon in console
     try({
       airzone_select <- get_airzone(p$lat,p$lng)
       
+      v$data <- airzone_select
+    })
+    update(v$data)
+    
+    
+  })
+  
+  observeEvent(input$reset, {
+    print('reset button clicked')
+    v$data <- ''
+    a <- graph_airzone(polygon_a=NULL,airzone=NULL,size = c('200px','400px'))
+    output$map <- renderLeaflet(a)
+    output$md_file <- renderUI({
+      file <- paste(www_git_url,'station_intro.Rmd',sep='')
       
-      
-      # map redrawn after click
-      leafletProxy("map")%>%
-        graph_airzone(airzone=airzone_select,size = c('200px','400px'))
-      #insert text here  
-      html_file <- paste(stringr::str_replace_all(string=airzone_select, pattern=" ", repl=""),'.Rmd',sep='')
-      html_file <- paste(www_git_url,'station_',html_file,sep='')
-      print(html_file)
-      
-      try({output$md_file <- renderUI({
-        file <- html_file
-        includeMarkdown(file)
-      })
-      })
-      airzone_select_previous <- airzone_select
       
     })
   })
   
+  observeEvent(input$centralinterior, {
+    v$data <- 'Central Interior'
+    
+    
+    v$data <- 'Central Interior'
+    
+    update(v$data)  
+    
+  })
+  
+  observeEvent(input$coastal, {
+    v$data <- 'Coastal'
+    
+    update(v$data)    
+    
+  })
+  
+  observeEvent(input$georgiastrait, {
+    v$data <- 'Georgia Strait'
+    
+    update(v$data)    
+    
+  })
+  
+  observeEvent(input$lowerfraservalley, {
+    v$data <- 'Lower Fraser Valley'
+    
+    update(v$data)    
+    
+  })
+  
+  observeEvent(input$northeast, {
+    v$data <- 'Northeast'
+    
+    update(v$data)    
+    
+  })
+  
+  observeEvent(input$southerninterior, {
+    v$data <- 'Southern Interior'
+    
+    update(v$data)    
+    
+  })
+  
+  
+  
+  
+  
+  
   
 })
-
 shinyApp(ui, server)

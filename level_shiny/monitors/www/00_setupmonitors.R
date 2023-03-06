@@ -172,8 +172,20 @@ aqhi_stations <- read_csv(url_aqhi) %>%
   get_airzone_df() %>%
   mutate(airzone = ifelse(grepl('Metro Vancouver',AQHI_AREA),'Lower Fraser Valley',airzone))
 
-
+# define a function that takes in a text vector and outputs a comma-separated string
+to_comma_string <- function(vec) {
+  if (length(vec) == 1) {
+    return(vec)
+  } else if (length(vec) == 2) {
+    return(paste(vec, collapse = ", and "))
+  } else {
+    return(paste(vec[-length(vec)], collapse = ", ")  %>% 
+             paste(vec[length(vec)], sep = ", and ", collapse = ""))
+  }
+}
 library(dplyr)
+
+
 stations <- get_stationlist() %>%
-  select(Label, AQMS, OWNER,AIRZONE) %>%
+  # select(Label, AQMS, OWNER,AIRZONE) %>%
   distinct()
