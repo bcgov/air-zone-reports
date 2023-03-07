@@ -1,3 +1,72 @@
-## Lower Fraser Valley Air Zone
+```{r,echo=FALSE,message=FALSE,warning=FALSE,results='hide'}
+airzone <- 'Lower Fraser Valley'
+year <- 2021
 
-The LFV Air Zone is one of seven air zones across B.C. It is located in southwestern B.C., along the coast and along the border of Washington State. Within the LFV Air Zone are the Metro Vancouver Regional District (MVRD) and the Fraser Valley Regional District (FVRD). MVRD represents the largest and most densely populated metropolitan area of B.C. It has the delegated authority under the Environmental Management Act  to manage air pollution and air quality within its borders. It also has the highest number and density of air quality monitoring stations, with more than 20 stations equipped to monitor at least one CAAQS-defined pollutant.
+
+library(kableExtra)
+library(readr)
+
+source('00_setupmonitors.R')
+# setwd('../../../../')
+aqhi_stations   #retrieved from above
+stations <- stations %>%
+  mutate(Operator = recode(OWNER,
+                           'MVRD' ='Metro Vancouver',
+                           'ENV'='ENV',
+                           'INDUSTRY' = 'Industry'))
+
+  aqhi_stations_airzone <- aqhi_stations %>%
+    rename(AIRZONE = airzone) %>%
+    filter(AIRZONE %in% airzone)
+
+stations_airzone <- stations %>%
+  filter(AIRZONE %in% airzone) %>%
+  select(Label,Operator,monitors,OWNER) %>%
+  
+  distinct()
+
+station_env <- stations_airzone %>%
+  filter(OWNER == 'ENV') %>%
+  nrow()
+station_industry <- stations_airzone %>%
+  filter(OWNER == 'INDUSTRY') %>%
+  nrow()
+
+station_count <-
+stations_airzone %>%
+  mutate(txt_owner = recode(OWNER,
+                            'ENV'='the Ministry of Environment and Climate Change Strategy (ENV)',
+                            'INDUSTRY'='Industry'),
+         'INDUSTRY-PRPA'='Prince Rupert Port Authority') %>%
+  group_by(txt_owner) %>%
+  summarise(count=n()) %>%
+  mutate(txt = paste(txt_owner,' (',count,' stations)',sep=''))
+
+txt <- to_comma_string(station_count$txt)
+```
+
+## Monitoring in the `r airzone` Air Zone
+
+There are `r nrow(stations_airzone)` air quality monitoring stations in the `r airzone` Air Zone that were active from `r year-2` to `r year`. These stations were operated by `r txt`. 
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+stations_airzone %>%
+  select(Label,Operator,monitors) %>%
+  arrange(Label) %>% distinct() %>%
+  rename(Station = Label,
+         Monitors = monitors) %>%
+  kable("html",escape = FALSE) %>%
+  kable_styling() 
+```
+
+
+
+The `r airzone` has `r nrow(aqhi_stations_airzone)` locations where the Air Quality Health Index (AQHI) are reported. AQHI is a communication tool used to report the health impacts of poor air quality. It is calculated from the measured levels of fine particulate matter(PM<sub>2.5</sub>), ground-level ozone(O<sub>3</sub>), and nitrogen dioxide(NO<sub>2</sub>). 
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+aqhi_stations_airzone %>%
+  dplyr::rename(`AQHI Locations` = AQHI_AREA) %>%
+  select(`AQHI Locations`)%>%
+  kable("html") %>%
+  kable_styling() 
+```

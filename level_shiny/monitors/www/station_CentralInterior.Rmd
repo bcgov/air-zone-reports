@@ -15,9 +15,9 @@ stations <- stations %>%
                            'ENV'='ENV',
                            'INDUSTRY' = 'Industry'))
 
-  aqhi_stations_airzone <- aqhi_stations %>%
-    rename(AIRZONE = airzone) %>%
-    filter(AIRZONE %in% airzone)
+aqhi_stations_airzone <- aqhi_stations %>%
+  rename(AIRZONE = airzone) %>%
+  filter(AIRZONE %in% airzone)
 
 stations_airzone <- stations %>%
   filter(AIRZONE %in% airzone) %>%
@@ -33,7 +33,7 @@ station_industry <- stations_airzone %>%
   nrow()
 
 station_count <-
-stations_airzone %>%
+  stations_airzone %>%
   mutate(txt_owner = recode(OWNER,
                             'ENV'='the Ministry of Environment and Climate Change Strategy (ENV)',
                             'INDUSTRY'='Industry')) %>%
@@ -60,12 +60,12 @@ stations_airzone %>%
 
 
 
-The `r airzone` also have `r nrow(aqhi_stations_airzone)` Air Quality Health Index (AQHI) locations. AQHI is a communication tool used to report the health impacts of poor air quality. It is calculated from the measured levels of fine particulate matter(PM<sub>2.5</sub>), ground-level ozone(O<sub>3</sub>), and nitrogen dioxide(NO<sub>2</sub>). 
+The `r airzone` has `r nrow(aqhi_stations_airzone)` locations where the Air Quality Health Index (AQHI) are reported. AQHI is a communication tool used to report the health impacts of poor air quality. It is calculated from the measured levels of fine particulate matter(PM<sub>2.5</sub>), ground-level ozone(O<sub>3</sub>), and nitrogen dioxide(NO<sub>2</sub>). 
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 aqhi_stations_airzone %>%
-  dplyr::rename(Location = AQHI_AREA) %>%
-  select(Location)%>%
+  dplyr::rename(`AQHI Locations` = AQHI_AREA) %>%
+  select(`AQHI Locations`)%>%
   kable("html") %>%
   kable_styling() 
 ```

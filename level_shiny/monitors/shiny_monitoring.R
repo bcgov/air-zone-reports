@@ -425,7 +425,7 @@ server <- shinyServer(function(input, output) {
         
         output$md_file <- renderUI({
           file <- html_file
-          includeHTML(file)
+          tags$div(style = "height: 500px; overflow: auto;",includeHTML(file))
           
         })
         
@@ -455,6 +455,10 @@ server <- shinyServer(function(input, output) {
     output$map <- renderLeaflet(a)
     output$md_file <- renderUI({
       file <- paste(www_git_url,'station_intro.Rmd',sep='')
+      
+      # output$html <- renderUI({
+      #   tags$div(style = "height: 400px; overflow: auto;",
+      #            HTML(my_html))
       
       
     })
