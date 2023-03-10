@@ -398,7 +398,8 @@ server <- shinyServer(function(input, output) {
   output$map <- renderLeaflet(a)
   output$fileOutputs  <- renderUI({
     html_file <- paste(www_git_url,'station_intro.html',sep='')
-    includeHTML(html_file)
+    # includeHTML(html_file)
+    tags$div(style = "height: 500px; overflow: auto;",includeHTML(html_file))
   })
   
   v <- reactiveValues(data = '')
@@ -414,7 +415,8 @@ server <- shinyServer(function(input, output) {
     try({output$fileOutputs  <- renderUI({
       
       # html_file <- paste(www_git_url,'station_intro.html',sep='')
-      includeHTML(html_file)
+      # includeHTML(html_file)
+      tags$div(style = "height: 500px; overflow: auto;",includeHTML(html_file))
     })
     })
   }
@@ -445,7 +447,8 @@ server <- shinyServer(function(input, output) {
         try({output$fileOutputs  <- renderUI({
           
           # html_file <- paste(www_git_url,'station_intro.html',sep='')
-          includeHTML(html_file)
+          # includeHTML(html_file)
+          tags$div(style = "height: 500px; overflow: auto;",includeHTML(html_file))
         })
         })
         
@@ -462,7 +465,8 @@ server <- shinyServer(function(input, output) {
     output$map <- renderLeaflet(a)
     output$fileOutputs  <- renderUI({
       html_file <- paste(www_git_url,'01_airzone_intro.html',sep='')
-      includeHTML(html_file)
+      # includeHTML(html_file)
+      tags$div(style = "height: 500px; overflow: auto;",includeHTML(html_file))
     })
     
   })
