@@ -1149,3 +1149,39 @@ get_airzone_df <- function(df) {
   return(df_result)
   
 }
+
+#' Load csv or RDS Data
+#' 
+#' It loads data
+#' 
+#' @param datapath
+#' @param filename
+load_data <- function(datapath = './',filename) {
+  if (0) {
+    datapath <- './data/out/'
+    filename <- 'tfee.csv'
+  }
+  
+  filelist <- list.files(datapath)
+  file_path <- paste(datapath,filename,sep='/')
+  file_path <- gsub('//','/',file_path)
+  # get the file extension
+  file_ext <- tools::file_ext(file_path)
+  
+  # if the file is a CSV, use read.csv to load it
+  if (file_ext == "csv") {
+    data <- read.csv(file_path, header = TRUE)
+  }
+  
+  # if the file is an RDS, use readRDS to load it
+  else if (tolower(file_ext) == "rds") {
+    data <- readRDS(file_path)
+  }
+  
+  # if the file extension is not recognized, throw an error
+  else {
+    stop("File format not recognized.")
+  }
+  
+  return(data)
+}

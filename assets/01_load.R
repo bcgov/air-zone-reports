@@ -111,3 +111,4 @@ save_data(parameters = c('pm25','no2','o3','so2','pm10','trs'),
 save_data(parameters = c('pm25','no2','o3','so2','pm10','trs'),
           years = 1980:max(years),
           outputfile = paste(saveDirectory,'raw_data_caaqs.Rds',sep='/'),merge_Stations = TRUE)
+
