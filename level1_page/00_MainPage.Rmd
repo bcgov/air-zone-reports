@@ -73,7 +73,25 @@ output:
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script>
+        // Smooth scrolling animation when clicking on a breadcrumb link
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
 
+                    var target = document.querySelector(this.getAttribute('href'));
+                    var position = target.getBoundingClientRect().top + window.pageYOffset - 100;
+
+                    window.scrollTo({
+                        top: position,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+    
 </head>
 
 
@@ -121,9 +139,12 @@ output:
                         <a href="#Welcome">Welcome</a>
                         <a href="#AQManagement">Air Quality Management</a>
                         <a href="#Pollutants">Pollutants</a>
-                        <a href="#">Navigation Link 3</a>
-                        <a href="#">Navigation Link 4</a>
-                        
+                        <a href="#AQTrends">Air Quality Trends</a>
+                        <a href="#EmissionTrends">Emission Trends</a>
+                        <a href="#Monitoring">Monitoring</a>
+                        <a href="#ManagementLevels">Management Levels</a>
+                        <a href="#Wildfire">Wildfire</a>
+                        <a href="#Actions">Actions</a>
 
                     </div>
                 </div>
@@ -194,10 +215,16 @@ output:
 ```
 ```{r,message=FALSE,echo=FALSE,results='hide',warning=FALSE}
 #knitr::include_app("../test/etest_ppt.html")
+#setup
+validation_year <- 2021
 sourcefiles <- '../assets'
+datafiles <- '../data/out'
+
 for (files_ in list.files(sourcefiles)) {
-  try(source(files_))
+  
+  try(source(paste(sourcefiles,files_,sep='/')))
 }
+
 ```
 
 ![](../assets/photos/title_page_filled.jpg)
@@ -251,7 +278,7 @@ The national Air Quality Management System (AQMS) provides a collaborative and c
 ```{r, echo=FALSE,out.width="100%"}
 
 #located in air-zone-reports/level2_page/shiny_AirZoneExplained.R
- knitr::include_app('https://bcgov-env.shinyapps.io/airzoneexplained/',height = "600px")
+ knitr::include_app('https://bcgov-env.shinyapps.io/airzoneexplained/',height = "700px")
 ```
 
 ```{=html}
@@ -437,7 +464,7 @@ for (i = 0; i < acc.length; i++) {
 ```
 ```{=html}
 <!-- Jumping Points -->
-<a id="Pollutant Trends"></a>
+<a id="AQTrends"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Trends</h2></center></div></div>
 ```
 # On Average, Pollution in B.C. are Below CAAQS Levels
@@ -446,7 +473,8 @@ for (i = 0; i < acc.length; i++) {
 
 ```{r, echo = FALSE, results='hide',warning=FALSE,message=FALSE}
 source('../level4_page/00_setup.R')
-trends <- get_trends('../data/out',reporting_year = 2021)
+trends <- get_trends(datafiles,
+                     reporting_year = validation_year)
 trends_BC <- trends$table %>%
   filter(AIRZONE == 'BC') 
 # knitr::include_app('http://127.0.0.1:6539/?panel08')
@@ -508,7 +536,7 @@ In 2021:
 ```
 ```{=html}
 <!-- Jumping Points -->
-<a id="Sources of Pollutants"></a>
+<a id="EmissionTrends"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Emission Trends</h2></center></div></div>
 ```
 <!--Emission Trend Calculation/Preprocess-->
@@ -578,7 +606,7 @@ co_emission <- apei$all_nodust$data %>%
 
 <!--Emission trends Text-->
 
-Emissions of key air pollutants from industrial and mobile sources *(excluding dust, and smoke from woodstoves and open burns)* have been declining from 1990 levels. In `r max_year`:
+Emissions of key air pollutants from industrial and mobile sources *(excluding dust, and smoke from woodstoves and open burning)* have been declining from 1990 levels. In `r max_year`:
 
 -   Fine Particulate Matter (PM<sub>2.5</sub>) Direct Emission, `r pm25_emission`% (since 1990)
 -   Particulate Matter 10 micron (PM<sub>10</sub>) Direct Emission, `r pm10_emission`% (since 1990)
@@ -597,7 +625,7 @@ Emissions of key air pollutants from industrial and mobile sources *(excluding d
 ```{r, echo=FALSE,warning=FALSE,out.width="100%"}
 # p <- apei$all_nodust$plot%>%layout(xaxis = list(title = ""))
 # htmltools::tagList(list(p))
-knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', height = "600px")
+knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', height = "700px")
 ```
 
 ```{=html}
@@ -611,11 +639,13 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', he
 <a id="Monitoring"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">How we monitor</h2></center></div></div>
 ```
-Air quality monitoring stations are installed in areas where air pollution can be a significant concern, such as near industrial facilities, busy roads, or areas with high population density. These stations are operated by various agencies, including the Ministry of Environment and Climate Change Strategy, Metro Vancouver Regional District, community airshed groups and roundtables, industrial permit holders, and other agencies like BCHydro, Prince Rupert Port Authority, and the British Columbia Energy Regulator (formerly BC Oil and Gas Commission).
+Monitoring stations are strategically placed in areas of concern, such as near industrial facilities, busy roads, or densely populated areas, to monitor air quality. Various agencies operate these stations, including the Ministry of Environment and Climate Change Strategy, Metro Vancouver Regional District, community airshed groups and roundtables, industrial permit holders, and other agencies like BCHydro, Prince Rupert Port Authority, and the British Columbia Energy Regulator (formerly BC Oil and Gas Commission).
 
-It's worth noting that only stations designed to monitor community exposure, rather than fenceline stations, are included in AQMS reporting. Fenceline stations are typically located at the perimeter of industrial facilities and are designed to monitor the emissions from those facilities rather than the exposure of nearby communities.
+It is important to note that not all stations are used for reporting under the Air Quality Management System (AQMS). There are compliance and fenceline stations, that are typically located within the perimeter of industrial facilities. These stations are designed to monitor emissions from those facilities and measurements do not represent any population exposure.
 
-Approximately 27 of these stations are used for calculating the Air Quality Health Index (AQHI), which is an essential tool for near real-time communication of the health impacts of poor air quality. The AQHI provides important advice to vulnerable populations in impacted areas, allowing them to make informed decisions to reduce their exposure to pollutants.
+There are 27 areas in the province where the Air Quality Health Index (AQHI) is reported. AQHI is an essential tool for the near real-time communication of the health impacts of air quality. The AQHI provides important advice to vulnerable populations in impacted areas, allowing them to make informed decisions to reduce their exposure to pollutants.
+
+Use the map below to find the locations of air quality monitoring stations and AQHI areas.
 
 ```{r, echo = FALSE}
 # list.files('../assets/photos/')
@@ -628,14 +658,14 @@ The map below shows the location of air quality monitoring stations in B.C.
 
 ```{r, echo = FALSE,out.width="100%"}
 
-knitr::include_app('https://bcgov-env.shinyapps.io/airzonemonitors/',height = "600px")
+knitr::include_app('https://bcgov-env.shinyapps.io/airzonemonitors/',height = "700px")
 ```
 
 <!--Management Levels -->
 
 ```{=html}
 <!-- Jumping Points -->
-<a id="Air Quality Management Levels"></a>
+<a id="ManagementLevels"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Levels in B.C. Air Zones</h2></center></div></div>
 ```
 Each air zone (except the Northwest) is assigned a colour-based management level for each of the four pollutants (fine particulate matter, ozone, nitrogen dioxide, and sulfur dioxide). These management levels are based on the levels of pollution measured from communities inside the air zone.The management levels also correspond to air zone management actions that are recommended under the Air Quality Management System. Provinces and territories, in collaboration with communities, use the management levels as framework to develop action plans and policies to address the issue of the pollutant.
@@ -676,7 +706,7 @@ tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 
 tbl_mgmt
 ```
 
-```{r, echo = FALSE,out.width="100%"}
+```{r, echo = FALSE,out.width="100%",out.height="900px"}
 
 knitr::include_app('https://bcgov-env.shinyapps.io/airzonemanagementlevels/',height = "900px")
 ```
@@ -686,32 +716,100 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonemanagementlevels/',hei
 ```{=html}
 <!-- Jumping Points -->
 <a id="Wildfire"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Particulate Matter Pollution</h2></center></div></div>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Wildfire and Particulate Matter Pollution</h2></center></div></div>
 ```
-Pollution from fine particulate matter (PM<sub>2.5</sub>) remains a major air quality issue in British Columbia and many other parts of the world. The World Health Organization (WHO) considers PM\<2ub\>2.5</sub> the most dangerous because of its health effects and the number of people affected. WHO estimates around 4.2 million people die each year due to pollution from fine particulate matter.
+Pollution from fine particulate matter (PM<sub>2.5</sub>) remains a major air quality issue in British Columbia and many other parts of the world. The World Health Organization (WHO) considers PM<sub>2.5</sub> the most dangerous because of its health effects and the number of people affected. WHO estimates around 4.2 million people die each year due to pollution from fine particulate matter.
 
 The Western part of North America experiences severe air quality issues from PM<sub>2.5</sub> during late summer and early fall due to the prevalence of wildfires. Smoke from wildfires can travel vast distances and affect large areas.
 
 Wood burning for residential heating during the winter months can also cause local air pollution problems. This method of heating releases several pollutants, including PM<sub>2.5</sub>, which can have negative effects on air quality and public health.
 
-The interactive graphics below shows the number of days that B.C.'s air zones experience 24-hour PM<sub>2.5</sub> levels that are higher than the Canadian Ambient Air Quality Standards (CAAQS) of 27 µg/m<sup>3</sup>. In 2021, the Central and Southern Interior air zones observes more than 50 days of high PM<sub>2.5</sub> levels.
+The interactive graphics below shows the number of days that B.C.'s air zones experience 24-hour PM<sub>2.5</sub> levels that are higher than the Canadian Ambient Air Quality Standards (CAAQS) of 27 µg/m<sup>3</sup>. Use the graph below to examine the effects of wildfire smoke on the air quality of British Columbia.
 
-```{r, echo = FALSE,out.width="100%"}
+```{r, echo = FALSE,out.width="100%",out.height="800px"}
 
 knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "800px")
 ```
 
-The graph above shows that in 2021:
+<!--Added to calculate the summary for wildfire -->
 
--   In the Central Interior, there were 70 days where PM2.5 levels exceed CAAQS
+```{r,message=FALSE,echo=FALSE,results='hide',warning=FALSE}
+library(lubridate)
+# list.files(datafiles)
+pm_high <- load_data(datafiles,'pm25_excess_dates.Rds')
+liststations <- load_data(datafiles,'liststations.csv')
+tfee <- load_data(datafiles,'tfee.csv')
 
-    -   only 15 of these days were considered the result of seasonal wildfires,
+pm_high_dates <- pm_high %>% 
+  left_join(liststations, by='STATION_NAME') %>%
+  ungroup() %>%
+  select(site,DATE,AIRZONE) %>% distinct() %>%
+  mutate(year = year(DATE))
 
-    -   33 of these days were during winter time
+tfee_dates <- tfee %>%
+  filter(PARAMETER == 'PM25') %>%
+  left_join(liststations)%>%  
+  ungroup() %>%
+  select(site,DATE,AIRZONE) %>% distinct() %>%
+  mutate(year = year(DATE))
 
--   The Southern Interior observed 57 days where PM2.5 levels exceeded CAAQS.
 
-    -   50 of these days are from wildfires
+pm_exceedance_summary <- get_PM_exceedancesummary(datafiles)
+
+
+pm_days_summary <- 
+pm_exceedance_summary$season %>%
+  mutate(type = 'total') %>%
+  bind_rows(
+pm_exceedance_summary$season_tfee %>%
+  mutate(type = 'wildfire days')
+) %>%
+  tidyr::pivot_wider(names_from = type, 
+                     values_from = days_exceed) %>%
+  filter(year == validation_year) %>%
+  mutate(total = ifelse(is.na(total),0,total),
+         `wildfire days` = ifelse(is.na(`wildfire days`),0,`wildfire days`))
+
+pm_days_summary_totals <-
+pm_days_summary %>%
+  group_by(AIRZONE,year) %>%
+  summarize(total = sum(total,na.rm = TRUE),
+            `wildfire days` = sum(`wildfire days`,na.rm = TRUE))
+
+order_pm25 <- pm_days_summary_totals %>%
+  arrange(desc(total)) %>%
+  filter(AIRZONE != 'BC') %>%
+  pull(AIRZONE) %>% unique()
+
+BC_days_with_highpm <- pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == 'BC'][1]
+
+BC_days_with_highpm_wildfire <- pm_days_summary_totals$`wildfire days`[pm_days_summary_totals$AIRZONE == 'BC'][1]
+
+high_airzone <- pm_days_summary_totals %>%
+  filter(AIRZONE != 'BC')
+high_airzone_pm <- pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == order_pm25[1]][1]
+
+high_airzone_pm_wildfire <- pm_days_summary_totals$`wildfire days`[pm_days_summary_totals$AIRZONE == order_pm25[1]][1]
+
+high_airzone_season <- pm_days_summary %>%
+  filter(AIRZONE == order_pm25[1]) %>%
+  arrange(desc(total))
+```
+
+According to the graph above, in `r validation_year`, British Columbia experienced `r BC_days_with_highpm` days where 24-hour levels of PM<sub>2.5</sub> exceeded the CAAQS threshold of 27µg/m<sup>3</sup>. Out of these, `r BC_days_with_highpm_wildfire` days were from wildfire smoke that commonly occur during the summer and early fall seasons.
+
+-   In the `r order_pm25[1]` airzone, there were `r high_airzone_pm` days where the 24-hour PM<sub>2.5</sub> levels exceeded CAAQS
+
+    -   `r high_airzone_pm_wildfire` of these days were due to the seasonal wildfires, the other `r (high_airzone_pm-high_airzone_pm_wildfire)` were most likely from local emission sources.
+
+    -   `r high_airzone_season$total[high_airzone_season$seasons == 'Winter']` of these days occured during the winter season. High PM<sub>2.5</sub> levels during the winter are mostly due to smoke from residential heating.
+
+```{=html}
+<!-- Jumping Points -->
+<a id="Actions"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Actions</h2></center></div></div>
+```
+In British Columbia, managing air quality is primarily done through provincial acts and regulations, as well as involvement from the federal, regional, and municipal governments. The key legislation governing air quality and environmental issues in the province is the [Environmental Management Act](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03053_00_multi) and the [Waste Discharge Regulation](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/45_320_2004). These regulations impose specific conditions on certain types of activities, such as businesses and industries, to ensure that they are conducted in a way that minimizes their impact on the environment.
 
 <!--Do not modify below. These are part of footer-->
 
