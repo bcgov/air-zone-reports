@@ -595,6 +595,7 @@ get_management <- function(datafile = NULL) {
   
   #retrieve most recent CAAQS
   #these are in the rcaaqs package
+
   df_levels_current <- rcaaqs::management_levels %>%
     dplyr::rename(metric = parameter) %>%
     mutate(metric = recode(metric,
@@ -1527,3 +1528,88 @@ get_PM_exceedancesummary <- function(dirs_location = './data/out') {
   
   return(df_exceedance)
 }
+
+#' Get table of the management levels
+#' This will be useful for creating management level table
+#' 
+#' @param parameter is the parameter of either 'pm25','o3','no2','so2'
+get_tbl_management <- function(parameter) {
+  
+  if (0) {
+    parameter <- 'pm25'
+  }
+  
+  library(tidyr)
+  library(kableExtra)
+  
+  param_filter <- parameter
+  df_params <- tibble(
+    metric_old = c('no2_1yr','no2_3yr','o3','pm2.5_24h','pm2.5_annual','so2_1yr','so2_3yr'),
+    metric = c('Annual Metric','1-Hour Metric',
+               '8-Hour Metric',
+               '24-Hour Metric','Annual Metric',
+               'Annual Metric','1-Hour Metric'),
+    parameter = c('no2','no2','o3','pm25','pm25','so2','so2')
+  )
+  
+  tbl_colour <- tbl_mgmt %>%
+    select(colour,colour_text) %>% unique()
+  df_actions <- tibble(
+    colour_text = c('red','orange','yellow','green'),
+    
+    actions = c('Achieve CAAQS','Prevent CAAQS Exceedance','Prevent Air Quality Deterioration','Keep Clean Areas Clean')
+  ) %>%
+    left_join(tbl_colour)
+  
+  tbl_mgmt <- rcaaqs::management_levels %>%
+    select(parameter,lower_breaks,upper_breaks,val_labels,colour,colour_text) %>%
+    rename(metric_old = parameter) %>%
+    left_join(df_params,by='metric_old') %>% select(-metric_old) %>%
+    filter(colour_text != 'grey') %>%
+    mutate(val_labels = gsub('\\^3','<sup>3</sup>',val_labels)) %>%
+    mutate(val_labels = gsub('ug','µg',val_labels)) %>%
+    mutate(val_labels = gsub('<=','≤',val_labels)) 
+  
+  
+  
+  
+  tbl_mgmt_colour <- 
+    tbl_mgmt %>%ungroup() %>%
+    filter(parameter == param_filter) %>%
+    select(parameter,metric,colour,colour_text) %>%
+    # View()
+    
+    pivot_wider(names_from = metric, values_from = colour) %>%
+    mutate(index=1:n()) %>%
+    arrange(desc(index)) %>% select(-index) 
+  
+  tbl_mgmt_value <- 
+    tbl_mgmt %>%ungroup() %>%
+    filter(parameter == param_filter) %>%
+    select(parameter,metric,val_labels,colour_text) %>%
+    # View()
+    
+    pivot_wider(names_from = metric, values_from = val_labels) %>%
+    mutate(index=1:n()) %>%
+    arrange(desc(index)) %>% select(-index) %>%
+    select(-parameter) %>%
+    left_join(df_actions) %>%
+    mutate(colour_text = toupper(colour_text)) %>%
+    select(-colour) %>%
+    rename('Management Level' = colour_text,
+           'Management <br>Actions' = actions)
+  
+  
+  t <- kable(tbl_mgmt_value, escape = F, format = 'html') %>%
+    
+    kable_styling(full_width = T) %>%
+    
+    # cell_spec(0:3,background = '#A50026' )
+    row_spec(1, background = '#A50026') %>%
+    row_spec(2, background = '#F46D43') %>%
+    row_spec(3, background = '#FEE08B') %>%
+    row_spec(4, background = '#A6D96A') 
+  
+  return(t)
+}
+
