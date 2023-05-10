@@ -191,12 +191,15 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
   }
   
   #debug for ozone 2019 issue
+  
+  if (0) {
   View(df)
   print(paste('Rows of data',nrow(df)))
   print(paste('year',unique(df$year)))
   print(paste('tfee',unique(df$tfee)))
   df_debug <- unique(df$colour_text[df$colour_order == max(df$colour_order)])
-  print(paste('Maanagement level, highest',df_debug))
+  print(paste('Management level, highest',df_debug))
+  }
   
   return(a)
 }

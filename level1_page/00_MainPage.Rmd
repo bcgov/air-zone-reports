@@ -253,7 +253,7 @@ for (files_ in list.files(sourcefiles)) {
 ```
 Air zone reports are prepared each year by the B.C. Ministry of Environment and Climate Change Strategy to summarize the levels of air pollution in reporting areas called "air zones". The reports are part of our commitment under the national [Air Quality Management System (AQMS)](https://ccme.ca/en/air-quality-report#slide-2) to better protect human health and the environment.
 
-This annual report, titled "Air Zone Report (2019-2021)", summarizes B.C.'s air quality status, achievement of the [Canadian Ambient Air Quality Standards (CAAQS](https://ccme.ca/en/air-quality-report#slide-7)), and assignment of management levels for the four major pollutants: fine particulate matter (PM~2.5~), ozone, nitrogen dioxide (NO~2~), and sulphur dioxide (SO~2~). Management levels are assessed based on three years (2019-2021) of monitoring data. Under the principles of the AQMS, management levels define the recommended level of actions for communities in order to keep clean areas clean and continuously improve air quality.
+This annual report, titled "Air Zone Report (`r validation_year-2`-`r validation_year`)", summarizes B.C.'s air quality status, achievement of the [Canadian Ambient Air Quality Standards (CAAQS](https://ccme.ca/en/air-quality-report#slide-7)), and assignment of management levels for the four major pollutants: fine particulate matter (PM~2.5~), ozone, nitrogen dioxide (NO~2~), and sulphur dioxide (SO~2~). Management levels are assessed based on three years (`r validation_year-2`-`r validation_year`) of monitoring data. Under the principles of the AQMS, management levels define the recommended level of actions for communities in order to keep clean areas clean and continuously improve air quality.
 
 <center>![](../assets/photos/BC_ENV_H_RGB_pos.png){width="50%"}</center>
 
@@ -266,7 +266,9 @@ This annual report, titled "Air Zone Report (2019-2021)", summarizes B.C.'s air 
 ```
 Air pollution is recognized as one of the greatest environmental threat to human health ([WHO 2022](https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health)). Based on Health Canada estimates, approximately 15,300 Canadians--1,900 in British Columbia--prematurely die every year due to exposure to air pollution ([Health Canada 2021](https://www.canada.ca/en/health-canada/services/publications/healthy-living/2021-health-effects-indoor-air-pollution.html#a2)). In order to protect human health, ministers of the environment agreed to implement the Air Quality Management System.
 
-The national Air Quality Management System (AQMS) provides a collaborative and comprehensive approach of managing ambient (outdoor) air quality. AQMS is implemented across Canada to reduce emissions and levels of major air pollutants. </br> B.C. is divided into seven air zones to help manage air quality across the province.
+The national Air Quality Management System (AQMS) provides a collaborative and comprehensive approach of managing ambient (outdoor) air quality. AQMS is implemented across Canada to reduce emissions and levels of major air pollutants.
+
+B.C. is divided into seven air zones to help manage air quality throughout the province.
 
 ```{=html}
 <style>
@@ -358,9 +360,7 @@ By utilizing these metrics, the report is able to apply CAAQS as reference to a 
 ```
 <!---PM2.5 Text-->
 
-Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplets that are suspended in air with sizes smaller than or equal to 2.5 micrometres (µm) in diameter. PM<sub>2.5</sub> are typically found in smoke, soot, dust, dirt, dispersed aerosol, and biological sources like mould, bacteria, pollen, and animal dander. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM2.5 is considered a non-threshold pollutant, that is there are associated health effects at any level of exposure.
-
-In this report, PM<sub>2.5</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure - a 24-hour metric to estimate short term or acute exposure.
+Fine particulate matter (PM<sub>2.5</sub>) are solid particles or liquid droplets that are suspended in air with sizes smaller than or equal to 2.5 micrometres (µm) in diameter. PM<sub>2.5</sub> are typically found in smoke, soot, dust, dirt, dispersed aerosol, and biological sources like mould, bacteria, pollen, and animal dander. When inhaled, these particles travel deep into the lungs and the bloodstream and can cause adverse health effects, such as cardiovascular and respiratory diseases. PM<sub>2.5</sub> is considered a non-threshold pollutant, that is there are associated health effects at any level of exposure.
 
 **Health Effects:**
 
@@ -371,6 +371,20 @@ In this report, PM<sub>2.5</sub> is presented using any of the two metrics. - an
 -   chronic bronchitis
 
 -   asthma
+
+**Measurement and Reporting**
+
+PM<sub>2.5</sub> levels are presented using these metrics:
+
+-   an annual metric to estimate chronic or long term exposure
+
+-   a 24-hour metric to estimate short term or acute exposure
+
+**Standards and Management Levels for PM<sub>2.5</sub>**
+
+The table below shows the colour-based management levels for PM<sub>2.5</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for PM<sub>2.5</sub>. 
+
+`r get_tbl_management('pm25')`
 
 ```{=html}
   </p>
@@ -383,9 +397,7 @@ In this report, PM<sub>2.5</sub> is presented using any of the two metrics. - an
 </div>
  <p>
 ```
-Ground-level ozone (O<sub>3</sub>), is a colourless, odourless and highly irritating gas that forms close to the Earth's surface. O<sub>3</sub> is a major component of smog. In contrast to "primary" pollutants which are emitted directly into the atmosphere from a source, O3 is considered a "secondary" pollutant because it is formed through complex chemical reactions between nitrogen oxides (NOx) and volatile organic compounds (VOCs) in the presence of sunlight. While O<sub>3</sub> at ground-level is a significant environmental and health concern, approximately 10 to 40 kilometres above the Earth's surface, there is a beneficial layer of stratospheric ozone which shields the earth from harmful ultraviolet radiation. Ozone is also a short-lived climate pollutant and also contributes to climate change.
-
-In this report, O<sub>3</sub> is presented using the 8-hour metric.
+Ground-level ozone (O<sub>3</sub>), is a colourless, odourless and highly irritating gas that forms close to the Earth's surface. O<sub>3</sub> is a major component of smog. In contrast to "primary" pollutants which are emitted directly into the atmosphere from a source, O<sub>3</sub> is considered a "secondary" pollutant because it is formed through complex chemical reactions between nitrogen oxides (NOx) and volatile organic compounds (VOCs) in the presence of sunlight. While O<sub>3</sub> at ground-level is a significant environmental and health concern, approximately 10 to 40 kilometres above the Earth's surface, there is a beneficial layer of stratospheric ozone which shields the earth from harmful ultraviolet radiation. Ozone is also a short-lived climate pollutant and also contributes to climate change.
 
 **Health Effects:**
 
@@ -396,6 +408,16 @@ In this report, O<sub>3</sub> is presented using the 8-hour metric.
 -   shortness of breath
 
 -   reduced lung function
+
+**Measurement and Reporting**
+
+In this report, O<sub>3</sub> levels are presented using the 8-hour metric.
+
+**Standards and Management Levels for O<sub>3</sub>**
+
+The table below shows the colour-based management levels for O<sub>3</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for O<sub>3</sub>. 
+
+`r get_tbl_management('o3')`
 
 ```{=html}
   </p>
@@ -410,8 +432,6 @@ In this report, O<sub>3</sub> is presented using the 8-hour metric.
 ```
 Nitrogen dioxide (NO<sub>2</sub>) belongs to the oxides of nitrogen group of compounds (NOx) that are formed primarily through the burning of fossil fuels. While transportation sources represent more than half of all emissions, energy extraction and industrial processes also emit significant amounts of NOx, mainly as Nitrogen Oxide (NO) and Nitrogen Dioxide (NO<sub>2</sub>). NO2 at higher concentrations has a strong, harsh odour and can typically be seen over large cities as a brownish haze. Once formed, NO<sub>2</sub> can combine with water molecules in the air to form compounds like nitric acid and nitrous acid. Ultimately, these compounds fall to earth through precipitation (such as rain, snow and fog) where they contribute to the acidification and eutrophication of ecosystems.
 
-In this report, NO<sub>2</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure, and 1-hour metric to estimate short term or acute exposure.
-
 **Health Effects:**
 
 -   reduced lung function
@@ -419,6 +439,18 @@ In this report, NO<sub>2</sub> is presented using any of the two metrics. - an a
 -   breathing problems such as coughing and wheezing
 
 -   aggravate asthma
+
+**Measurement and Reporting**
+
+In this report, NO<sub>2</sub> levels are presented using these two metrics: 
+    - annual metric to estimate long term exposure, and 
+    - 1-hour metric to estimate short term or acute exposure.
+
+**Standards and Management Levels for NO<sub>2</sub>**
+
+The table below shows the colour-based management levels for NO<sub>2</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for NO<sub>2</sub>. 
+
+`r get_tbl_management('no2')`
 
 ```{=html}
   </p>
@@ -433,12 +465,23 @@ In this report, NO<sub>2</sub> is presented using any of the two metrics. - an a
 ```
 Sulphur dioxide (SO<sub>2</sub>) is a colourless gas that belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO<sub>2</sub> is emitted when fossil fuels or raw materials containing sulphur are burned in industrial processes (ore processing, smelting), electric power generation, or marine transportation. Large quantities are also during the extraction and processing of fossil fuels. SO<sub>2</sub> contributes to the formation of PM<sub>2.5</sub> and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain.
 
-In this report, SO<sub>2</sub> is presented using any of the two metrics. - an annual metric to estimate long term exposure, and 1-hour metric as estimate of acute (short term) exposure.
 
 **Health Effects:**
 
 -   harms the respiratory system of high risk individuals
 
+**Measurement and Reporting**
+
+In this report, SO<sub>2</sub> levels are presented using these two metric: 
+    - annual metric to estimate long term exposure, and 
+    - 1-hour metric as estimate of acute (short term) exposure.
+
+**Standards and Management Levels for SO<sub>2</sub>**
+
+
+The table below shows the colour-based management levels for SO<sub>2</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for SO<sub>2</sub>.
+
+`r get_tbl_management('so2')`
 ```{=html}
   
   </p>
@@ -610,7 +653,7 @@ Emissions of key air pollutants from industrial and mobile sources *(excluding d
 
 -   Fine Particulate Matter (PM<sub>2.5</sub>) Direct Emission, `r pm25_emission`% (since 1990)
 -   Particulate Matter 10 micron (PM<sub>10</sub>) Direct Emission, `r pm10_emission`% (since 1990)
--   Nitrogen Oxides (NO<sub>x</sub>) Emission, `r nox_emission`% (since 1990). NO<sub>x</sub> are group of compounds that include NO<sub>2</sub>. It can react with VOC to form ground-level ozone (O<sub>3</sub>.
+-   Nitrogen Oxides (NO<sub>x</sub>) Emission, `r nox_emission`% (since 1990). NO<sub>x</sub> are group of compounds that include NO<sub>2</sub>. It can react with VOC to form ground-level ozone (O<sub>3</sub>).
 -   Sulfur Oxides (SO<sub>x</sub>) Emission, `r sox_emission`% (since 1990). SO<sub>x</sub> are a group of compounds that include SO<sub>2</sub>.
 -   Volatile Organic Compounds (VOC), `r voc_emission`% (since 1990). Ground-level ozone (O<sub>3</sub>) are formed from the complex reactions between VOC and NO<sub>x</sub>.
 -   Carbon Monoxide (CO), `r co_emission`% (since 1990)
@@ -798,7 +841,7 @@ high_airzone_season <- pm_days_summary %>%
 
 According to the graph above, in `r validation_year`, British Columbia experienced `r BC_days_with_highpm` days where 24-hour levels of PM<sub>2.5</sub> exceeded the CAAQS threshold of 27µg/m<sup>3</sup>. Out of these, `r BC_days_with_highpm_wildfire` days were from wildfire smoke that commonly occur during the summer and early fall seasons.
 
--   In the `r order_pm25[1]` airzone, there were `r high_airzone_pm` days where the 24-hour PM<sub>2.5</sub> levels exceeded CAAQS
+-   In the `r order_pm25[1]` air zone, there were `r high_airzone_pm` days where the 24-hour PM<sub>2.5</sub> levels exceeded CAAQS
 
     -   `r high_airzone_pm_wildfire` of these days were due to the seasonal wildfires, the other `r (high_airzone_pm-high_airzone_pm_wildfire)` were most likely from local emission sources.
 
@@ -809,7 +852,7 @@ According to the graph above, in `r validation_year`, British Columbia experienc
 <a id="Actions"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Actions</h2></center></div></div>
 ```
-In British Columbia, managing air quality is primarily done through provincial acts and regulations, as well as involvement from the federal, regional, and municipal governments. The key legislation governing air quality and environmental issues in the province is the [Environmental Management Act](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03053_00_multi) and the [Waste Discharge Regulation](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/45_320_2004). These regulations impose specific conditions on certain types of activities, such as businesses and industries, to ensure that they are conducted in a way that minimizes their impact on the environment.
+In British Columbia, managing air quality is primarily done through provincial acts and regulations, as well as involvement from the federal, regional, and municipal governments. The key legislations governing air quality and environmental issues in the province are the [Environmental Management Act](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03053_00_multi) and the [Waste Discharge Regulation](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/45_320_2004). These regulations impose specific conditions on certain types of activities, such as businesses and industries, to ensure that they are conducted in a way that minimizes their impact on the environment.
 
 <!--Do not modify below. These are part of footer-->
 
