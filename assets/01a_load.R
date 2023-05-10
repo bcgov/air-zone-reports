@@ -30,9 +30,14 @@ df_metric_list <- function() {
   return(df_result)
 }
 
+
+#The following are stepwise process
+#to generate data
+#once created, please put into github
+
 dirs_location <- './data/out'
 df_management <- readr::read_csv(paste(dirs_location,'management.csv',sep='/'))
-
+validation_year <- 2021
 
 labels_mgmt <- rcaaqs::management_levels %>%
   filter(stringr::str_detect(parameter, "pm2.5")) %>%
@@ -56,6 +61,8 @@ df_current_list <-  df_management %>%
   mutate(popup = paste(site,'<br>',pollutant,'Management Action:',colour_text,
                        '<br>',labels))
 
+#Create a summary for the airzone
+#grabs the highest TFEE values
 df_current_list_airzone <- df_management %>%
   left_join(df_metric_list() %>%select(-parameter)) %>%
   select(site,tfee,instrument,year,
@@ -73,7 +80,7 @@ df_current_list_airzone <- df_management %>%
   distinct() %>%
   dplyr::mutate(labels = list(label)) %>%
   select(-label,-metric) %>% distinct() %>%
-  ungroup() %>%
+  ungroup() %>% 
   mutate(index = 1:n()) %>% group_by(index) %>%
   dplyr::mutate(labels_txt = paste(unlist(labels),collapse = ',')) %>%
   ungroup() %>%select(-labels,-index,-mgmt) %>%
@@ -83,8 +90,10 @@ df_current_list_airzone <- df_management %>%
 
 #save to file
 df_current_list %>%
+  filter(year <= validation_year) %>%
   readr::write_csv(paste(dirs_location,'management_sites.csv',sep='/'))
 
 df_current_list_airzone %>%
+  filter(year <= validation_year) %>%
   readr::write_csv(paste(dirs_location,'management_airzones.csv',sep='/'))
 

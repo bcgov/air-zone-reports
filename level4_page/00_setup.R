@@ -1,7 +1,7 @@
 #' CREATE TRENDS of air quality in BC
 #' 
 #' @param dirs_location is the location of the data files
-get_trends <- function(dirs_location = './data/out',reporting_year=NULL) {
+get_trends <- function(dirs_location = './data/out',reporting_year=NULL,airzone_filter = 'BC') {
 library(dplyr)
 library(readr)
 library(ggplot2)
@@ -11,6 +11,7 @@ library(plotly)
 if (0) {
   dirs_location <- './data/out'
   reporting_year <- 2021
+  airzone_filter <- 'Central Interior'
 }
 
 
@@ -89,7 +90,7 @@ df_data_trends_annual_overall <- df_data_trends_annual_3yr %>%
   dplyr::summarise(value_avg = mean(value,na.rm = TRUE),
                    value_min = min(value,na.rm = TRUE),
                    value_max = max(value,na.rm = TRUE)) %>%
-  mutate(AIRZONE = 'BC')
+  mutate(AIRZONE = "BC")
 
 df_data_trends_annual_airzone <- df_data_trends_annual_airzone %>%
   bind_rows(df_data_trends_annual_overall) %>%
@@ -109,7 +110,7 @@ df_BC_summary_ref<- df_data_trends_annual_airzone %>%
 #plot
 lst_parameters <- df_data_trends_annual_airzone %>%
   filter(!tfee) %>%
-  filter(AIRZONE == 'BC') %>%
+  filter(AIRZONE == airzone_filter) %>%
   filter(year >=1990) %>%
   mutate(parameter_label = paste(parameter,metric)) %>%
   pull(parameter_label) %>%
@@ -129,7 +130,7 @@ df_parameters <- tribble(
 
 a <- df_data_trends_annual_airzone %>%
   filter(!tfee) %>%
-  filter(AIRZONE == 'BC') %>%
+  filter(AIRZONE == airzone_filter) %>%
   filter(year >=1990) %>%
   mutate(parameter_label = paste(parameter,metric)) %>%
   left_join(df_parameters) %>%

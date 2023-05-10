@@ -698,6 +698,9 @@ graph_exceedance <- function(exceedances,AIRZONE = NULL,year = NULL) {
                        barmode = 'stack',legend = list(x = 0.01, y = 0.9))%>%
         layout(shapes = list(vline(year_select)))
       
+      
+        # layout(annotations = list(x=2014,y=-1,yref='paper',xref='paper',text = 'wildfire counts only from 2014 onwards'))
+      
       p_list[[i]] <- p_seasonal
       i_list <- c(i_list,AIRZONE_)
       
@@ -739,13 +742,13 @@ print('Load Complete')
 #---SHINY SECTION----------------
 # Actual shiny part
 ##ui section----
-ui <- {fluidPage(
+ui <- {
   fluidPage(
-    # CSS
+    h4(HTML('Fine Particulate Matter (PM<sub>2.5</sub>) Pollution')),
     tags$head(
       tags$style(HTML("
       body { background-color: #f2efe9; }
-      .container-fluid { background-color: #fff; width: 900px; padding: 5px; }
+      .container-fluid { background-color: #fff; width: 1200px; padding: 5px; }
       .topimg { width: 0px; display: block; margin: 0px auto 0px auto; }
       .title { text-align: center; }
       .toprow { margin: 5px 0px; padding: 5px; background-color: #38598a; }
@@ -755,7 +758,7 @@ ui <- {fluidPage(
       .leaflet-top { z-index:999 !important; }
       "))
     ),
-    h1("Fine Particulate Pollution", class = "title"),
+    # h1("Fine Particulate Pollution", class = "title"),
     fluidRow(class = "toprow",
              fluidRow(class = 'filters',
                       column(6,
@@ -779,31 +782,14 @@ ui <- {fluidPage(
       
       column(4,h6("Click the map to select an air zone"),
              # fluidRow(
-             leaflet::leafletOutput("map",height = '400px')),
-      # fluidRow(
-      # DT::dataTableOutput("table1"))
-      # ),
-      # this option add vertical scrollbar
-      # column(8,h6("Use vertical scrollbar (right side of graph) to reveal more bar graphs."),(div(style='height:400px;overflow-y: scroll;',
-      #                                                                                             plotOutput("plot1",height = "1200px"))))
-      
-      
+             leaflet::leafletOutput("map",height = '400px',width = '400px')),
       column(8,h6("Scroll through the graph to view the values for each year"),
-             #(div(style='height:400px;overflow-y: scroll;',
-             plotlyOutput("plot1",height = "400px"))
+             # div(style='height:400px;overflow-y: scroll;'),
+             plotlyOutput("plot1",height = '400px',width = '100%')
+             )
     )
     
-    #        sidebarLayout(
-    # sidebarPanel(radioButtons("no Wildfire","wildfire-adjusted"),
-    # c('tfee' = 'tfee','notfee'='notfee')
-    # ))
-    # sidebarLayout(
-    #   sidebarPanel(leafletOutput("map"),width=5),
-    #   mainPanel (
-    #     uiOutput("md_file"),width=7
-    #   ))
-    
-  ))
+  )
 }
 
 ##server section----
@@ -841,9 +827,14 @@ server <- {shinyServer(function(input, output) {
                  plots_list <- graph_exceedance(exceedances = exceedances,year = input$year_slider)
                  reactive_plot1(plots_list)   #pass on value to reactive_plot1
                  # output$plot1 <- renderPlotly(plots_list$plot_annual)
-                 output$plot1 <- renderPlotly({plot_out <- plots_list$plot_annual
-                 plot_out %>% ggplotly(source = 'plot1') %>% event_register("plotly_click")}
-                 )
+                 
+                 output$plot1 <- renderPlotly({
+                   plot_out <- plots_list$plot_annual
+                 p <- plot_out %>% ggplotly(source = 'plot1') 
+                 
+                 p
+                 
+                 })
                })
   
   #clicking the map, an airzone is selected
@@ -859,7 +850,25 @@ server <- {shinyServer(function(input, output) {
       print(airzone_select)
       plots_list <- reactive_plot1()
       if (airzone_select != 'Northwest') {
-        output$plot1 <- renderPlotly(plots_list$plot_seasonal[[which(plots_list$plot_definition == airzone_select)]])
+        output$plot1 <- renderPlotly({
+          
+          p <- plots_list$plot_seasonal[[which(plots_list$plot_definition == airzone_select)]]
+          # Add a footnote
+          footnote <- list(
+            font = list(size = 10),
+            x = 2014, y = 1,
+            # xref = "paper",
+            # yref = "paper",
+            text = "Wildfire counts only from 2014 onwards",
+            showarrow = FALSE
+          )
+          
+          p <- layout(p, annotations = list(footnote))
+          print(p) # Check if the footnote is included in the annotations list
+          print('annotations inserted')
+          # Return the plotly graph
+          p
+          })
         print('Plot Refreshed')
       }
       

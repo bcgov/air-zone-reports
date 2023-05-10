@@ -251,6 +251,7 @@ apei <- plot_apei_complete()
 
 #ui shiny-----------
 ui <- fluidPage(
+  h4(HTML('Emissions Sources')),
   tags$head(
     tags$style(HTML("
       body { background-color: #f2efe9; }

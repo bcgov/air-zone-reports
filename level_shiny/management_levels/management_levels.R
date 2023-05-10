@@ -77,15 +77,15 @@ add_mgmt_legend <- function() {
 #' @param tfee is boolean if wildfire or TFEE are included or not
 #' @param polygon_a is the polygon. Prevents redrawing
 map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
-                        tfee,size = c('200px','400px'),
+                        tfee = NULL,size = c('200px','400px'),
                         airzone = NULL) {
   
   
   
   if (0) {
     data_path =NULL
-    parameter <- 'PM25'
-    year <- 2021
+    parameter <- 'O3'
+    year <- 2019
     tfee <- TRUE
     size <- c('200px','400px')
     polygon_a = NULL
@@ -98,14 +98,21 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
   airzone_select <- airzone
   print(paste('map_airzone function',is.null(polygon_a)))
   
+  if (is.null(tfee)) {
+    tfee <- TRUE
+    }
+  
   year_select <- year
   tfee_select <- tfee
+  
   
   #include all tfee options for NO2, SO2,
   #there is no TFEE adjustment
   if (parameter %in% c('NO2','SO2')) {
     tfee_select <- FALSE
   }
+  
+
   
   df <- az_mgmt %>%
     left_join(
@@ -115,6 +122,9 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
                tfee == tfee_select),
       by='airzone'
     )
+  
+ 
+  
   
   df$colour[is.na(df$colour)] <- '#666565'  #grey colour for air zones with no value
   
@@ -153,10 +163,6 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
                    layerId = paste(df$airzone,'01'),
                    color = 'black',weight = 1) 
     
-    
-    
-    
-    
   } 
   
   
@@ -183,6 +189,15 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
                    layerId = 'selectedairzone',
                    color = 'blue',weight = 0)
   }
+  
+  #debug for ozone 2019 issue
+  View(df)
+  print(paste('Rows of data',nrow(df)))
+  print(paste('year',unique(df$year)))
+  print(paste('tfee',unique(df$tfee)))
+  df_debug <- unique(df$colour_text[df$colour_order == max(df$colour_order)])
+  print(paste('Maanagement level, highest',df_debug))
+  
   return(a)
 }
 
@@ -539,61 +554,62 @@ tfee_initial <- TRUE
 #---SHINY SECTION----------------
 # Actual shiny part
 
-ui <- fluidPage(
-  (#tabPanel("Station Summary",value = 'panel01',
-    fluidPage(
-      # CSS
+ui <-
+  
+  (fluidPage(
+    h4(HTML('Air Quality Management Levels')),
       tags$head(
         tags$style(HTML("
       body { background-color: #f2efe9; }
-      .container-fluid { background-color: #fff; width: 900px; padding: 5px; }
+      .container-fluid { background-color: #fff; width: auto; padding: 5px; }
       .topimg { width: 0px; display: block; margin: 0px auto 0px auto; }
-      .title { text-align: center; font-size: 18px;}
-      .toprow { margin: 5px 0px; padding: 5px; background-color: #38598a; }
-      .filters { margin: 0px auto; }
+      .title { text-align: center; }
+      .toprow { margin: 5px 5px; padding: 5px; background-color: #38598a; }
+      .filters { margin: 3px auto; }
       .shiny-input-container { width:100% !important; }
       .table { padding: 0px; margin-top: 0px; }
       .leaflet-top { z-index:999 !important; }
-      "))
-      ),
-      h1("Air Zone Management Levels", class = "title"),
+      "))),
+      
+      
       fluidRow(class = "toprow",
                fluidRow(class = 'filters',
                         column(2,
                                tags$style(type='text/css', 
                                           '.selectize-input { font-size: 15px; line-height: 10px;} 
-                          .selectize-dropdown { font-size: 16px; line-height: 20px; }
-                          .control-label {font-size: 18px; color: white !important;}
+                          .selectize-dropdown { font-size: 12px; line-height: 15px; }
+                          .control-label {font-size: 12px; color: white !important;}
                           .irs-min {font-size: 0px; color: white; !important}
                           .irs-max {font-size: 0px; color: white;}
-                          .irs-single {font-size: 20px; color: white;}
+                          .irs-single {font-size: 14px; color: white;}
                           .irs-grid-text {font-size: 10px; color: white;}'
                                ),
                                selectizeInput('pollutant',label = 'Pollutant:',
-                                              choices = df_parameter$display           )
-                               
-                               
+                                              choices = df_parameter$display,width = "5%")
                         ),
                         column(6,
                                sliderInput('year_slider',label ='Year',
                                            min = min(df_management_airzones$year),
                                            max = year_max,
-                                           value = year_initial,
+                                           value = year_initial,width = "50%",
                                            sep='')
                         ))),
       
       fluidRow(
         
-        column(4,h6("Click the map to select an air zone"),
-               # fluidRow(
+        column(3,h6("Click the map to select an air zone"),
+              
                leaflet::leafletOutput("map",height = '400px')),
-        # fluidRow(
-        # DT::dataTableOutput("table1"))
-        # ),
-        column(8,h6("Use vertical scrollbar (right side of graph) to reveal more bar graphs."),(div(style='height:400px;overflow-y: scroll;',
-                                                                                                    plotOutput("plot1",height = "1200px"))))),
-      fluidRow(DT::dataTableOutput("table1")),
-      downloadLink('downloadData', 'Download')
+             column(9,h6("Use vertical scrollbar (right side of graph) to reveal more bar graphs."),
+                    (div(style='height:400px;overflow-y: scroll;',
+                      plotOutput("plot1",height = "1200px"))))),
+      fluidRow(tags$head(
+        tags$style(HTML("
+      #table1_wrapper {
+        width: 100% !important;
+      }
+    "))),DT::dataTableOutput("table1"),
+      downloadLink('downloadData', 'Download'))
       
       
       #        sidebarLayout(
@@ -606,7 +622,7 @@ ui <- fluidPage(
       #     uiOutput("md_file"),width=7
       #   ))
       
-    )))
+    ))
 
 
 
@@ -623,7 +639,7 @@ server <- shinyServer(function(input, output) {
     # }
   })
   a <-    map_airzone(polygon_a=NULL,df=df_management_airzones,az_mgmt = az_mgmt,parameter = pollutant_initial,
-                      year = year_initial,tfee = tfee_initial)
+                      year = year_initial)
   
   output$map <- renderLeaflet(a)
   
@@ -665,7 +681,7 @@ server <- shinyServer(function(input, output) {
         map_airzone(df=df_management_airzones,az_mgmt = az_mgmt,
                     parameter = input$pollutant,
                     year = input$year_slider,
-                    tfee = tfee_initial,
+                    
                     airzone = airzone_select)
       
       output$plot1 <- renderPlot(
@@ -685,7 +701,7 @@ server <- shinyServer(function(input, output) {
                    map_airzone(df=df_management_airzones,az_mgmt = az_mgmt,
                                parameter = input$pollutant,
                                year = input$year_slider,
-                               tfee = tfee_initial,
+                               
                                airzone = NULL)
                  
                  output$plot1 <- renderPlot(
@@ -703,7 +719,7 @@ server <- shinyServer(function(input, output) {
                    map_airzone(df=df_management_airzones,az_mgmt = az_mgmt,
                                parameter = input$pollutant,
                                year = input$year_slider,
-                               tfee = tfee_initial,
+                               
                                airzone = NULL)
                  
                  output$plot1 <- renderPlot(

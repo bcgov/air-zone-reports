@@ -1552,14 +1552,7 @@ get_tbl_management <- function(parameter) {
     parameter = c('no2','no2','o3','pm25','pm25','so2','so2')
   )
   
-  tbl_colour <- tbl_mgmt %>%
-    select(colour,colour_text) %>% unique()
-  df_actions <- tibble(
-    colour_text = c('red','orange','yellow','green'),
-    
-    actions = c('Achieve CAAQS','Prevent CAAQS Exceedance','Prevent Air Quality Deterioration','Keep Clean Areas Clean')
-  ) %>%
-    left_join(tbl_colour)
+ 
   
   tbl_mgmt <- rcaaqs::management_levels %>%
     select(parameter,lower_breaks,upper_breaks,val_labels,colour,colour_text) %>%
@@ -1570,6 +1563,14 @@ get_tbl_management <- function(parameter) {
     mutate(val_labels = gsub('ug','µg',val_labels)) %>%
     mutate(val_labels = gsub('<=','≤',val_labels)) 
   
+  tbl_colour <- tbl_mgmt %>%
+    select(colour,colour_text) %>% unique()
+  df_actions <- tibble(
+    colour_text = c('red','orange','yellow','green'),
+    
+    actions = c('Achieve CAAQS','Prevent CAAQS Exceedance','Prevent Air Quality Deterioration','Keep Clean Areas Clean')
+  ) %>%
+    left_join(tbl_colour)
   
   
   
