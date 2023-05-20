@@ -335,6 +335,7 @@ get_airzone <- function(lat,long) {
 # Actual shiny part
 
 ui <- fluidPage(
+  h4('Air Quality Monitoring Stations in B.C.'),
   tags$head(
     tags$style(HTML("
       body { background-color: #f2efe9; }

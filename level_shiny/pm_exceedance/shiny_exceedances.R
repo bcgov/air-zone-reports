@@ -98,7 +98,11 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
     pull(days_exceed) %>%
     max()
   
+  #develop levels for the exceedance legends
   color_scales <- colfunc(max_days)
+  
+  
+  
   for (airzone_ in lst_airzones) {
     
     if (0) {
@@ -135,6 +139,9 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
       # print(nrow(liststations_))
       # print(year_select)
       
+      
+      
+      
       a <- a %>%
         #remove all stations from that airzone
         removeMarker( layerId = lst_sites) %>%
@@ -156,6 +163,14 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
     }
   }
   
+  if (is.null(map_a)) {
+  #add legend based on color_scales
+  tot_ <- length(color_scales)
+  scl <- c(color_scales[5],color_scales[tot_/2],color_scales[tot_])
+  lbl <- c('<5 days',paste(round(tot_/2),'days'),paste('>',round(tot_*0.8),' days',sep=''))
+  a <- a %>%
+    addLegend(position ="bottomleft", colors = scl,label = lbl)
+  }
   #add for selected airzone
   if (!is.null(airzone_select)) {
     print(paste('updating,highlighting area',airzone_select))
@@ -644,7 +659,7 @@ graph_exceedance <- function(exceedances,AIRZONE = NULL,year = NULL) {
                     
     ) %>%
     layout(title = 'High PM<sub>2.5</sub> Levels in Air Zones',
-           legend = list(orientation = 'v'),
+           legend = list(orientation = 'h'),
            yaxis = list(title = 'Number of Days with High PM<sub>2.5</sub> Levels'),
            xaxis = list(title = 'Year')
     ) %>%
@@ -780,12 +795,12 @@ ui <- {
     
     fluidRow(
       
-      column(4,h6("Click the map to select an air zone"),
+      column(4,h6(HTML("Number of Days with High PM<sub>2.5</sub> Levels</br>Click the map to select an air zone")),
              # fluidRow(
              leaflet::leafletOutput("map",height = '400px',width = '400px')),
       column(8,h6("Scroll through the graph to view the values for each year"),
              # div(style='height:400px;overflow-y: scroll;'),
-             plotlyOutput("plot1",height = '400px',width = '100%')
+             plotlyOutput("plot1",height = '400px',width = '800px')
              )
     )
     
