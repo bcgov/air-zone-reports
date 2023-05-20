@@ -1160,18 +1160,24 @@ get_airzone_df <- function(df) {
 load_data <- function(datapath = './',filename) {
   if (0) {
     datapath <- './data/out/'
-    filename <- 'tfee.csv'
+    filename <- 'management_airzones.csv'
+    datapath <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out'  #local location, two dots for final, one dot for debug
+
   }
   
   filelist <- list.files(datapath)
   file_path <- paste(datapath,filename,sep='/')
-  file_path <- gsub('//','/',file_path)
+  # file_path <- gsub('//','/',file_path)
   # get the file extension
   file_ext <- tools::file_ext(file_path)
   
   # if the file is a CSV, use read.csv to load it
-  if (file_ext == "csv") {
+  if (file_ext == "csv" ) {
+    if (!grepl('http',datapath,ignore.case = TRUE)) {
     data <- read.csv(file_path, header = TRUE)
+    } else {
+      data <- readr::read_csv(file_path)
+    }
   }
   
   # if the file is an RDS, use readRDS to load it
@@ -1614,24 +1620,29 @@ get_tbl_management <- function(parameter) {
   return(t)
 }
 
-#' Create a table that summarize the management level
+#' BACKEND Create a table that summarize the management level
 #' 
 #' @param dataDirectory is the location of the management.csv file
 #' @param current_year is the year to be displayed
 
-get_tbl_management_summary <- function(dataDirectory = '../data/out',current_year) {
+get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_year = NULL) {
   
   if (0) {
     dataDirectory = './data/out'
-    current_year <- 2021
+    current_year <- 2013
   }
   require(dplyr)
   require(ggplot2)
   require(patchwork)
   require(kableExtra)
   #input options
+  df_mgmt_results <- NULL
+  try(df_mgmt_results <- load_data(datapath = dataDirectory,filename = 'management.csv') %>%
+    select(site,instrument,year,tfee,parameter,metric,metric_value,colour,colour_text) %>%
+    distinct() )
   
-  if (!file.exists(paste(dataDirectory,'management.csv',sep='/'))) {
+  
+  if (is.null(df_mgmt_results)) {
     print(paste('Missing File:"',dataDirectory,'/management.csv"',sep=''))
     return(NULL)
   }
@@ -1660,9 +1671,7 @@ get_tbl_management_summary <- function(dataDirectory = '../data/out',current_yea
     select(airzone) 
   
   
-  df_mgmt_results <- readr::read_csv(paste(dataDirectory,'management.csv',sep='/')) %>%
-    select(site,instrument,year,tfee,parameter,metric,metric_value,colour,colour_text) %>%
-    distinct() 
+ 
   
   
   #identify parameters with no TFEE adjustment
@@ -1757,6 +1766,31 @@ get_tbl_management_summary <- function(dataDirectory = '../data/out',current_yea
     ungroup() %>%
     filter(year == current_year) 
   
+  #add fillers to table_mgmt
+  colnames(table_mgmt)
+  df_filler <- table_mgmt %>%
+    select(airzone) %>% distinct() %>%
+    merge(
+      table_mgmt %>%
+        select(parameter,tfee) %>% unique(),
+      all =  TRUE
+    ) %>%
+    merge(
+      table_mgmt %>%
+        select(year) %>%
+        distinct()
+    )
+  
+  
+  table_mgmt_ <- df_filler %>%
+    left_join(table_mgmt)
+  
+  table_mgmt_$special_txt[is.na(table_mgmt_$colour)] <- 'Data Not Available'
+  table_mgmt_$colour_text[is.na(table_mgmt_$colour_text)] <- 'grey'
+  table_mgmt_$colour_order[is.na(table_mgmt_$colour_order)] <- 0
+  table_mgmt_$colour[is.na(table_mgmt_$colour)] <- '#dbdbdb'
+  
+  table_mgmt <- table_mgmt_
   #rename the parameter
   df_parameter <- tribble(
     ~display, ~parameter,
@@ -1812,6 +1846,7 @@ get_tbl_management_summary <- function(dataDirectory = '../data/out',current_yea
   
   for (param in unique(table_mgmt$parameter)) {
     
+    print(paste('creating table:',param))
     colour_assign <- table_mgmt %>%
       filter(parameter == param,tfee) %>%
       arrange(airzone) %>%
@@ -1828,8 +1863,657 @@ get_tbl_management_summary <- function(dataDirectory = '../data/out',current_yea
                                                      position = 'auto'))
   }
   
+ result <- list(graph = tbl_output, data = table_mgmt_display,raw_data = df_mgmt_airzone_table)
+  return(result)
   
-  return(tbl_output)
+}
+
+#' Create a table that summarize the management level
+#' 
+#' @param dataDirectory is the location of the management.csv file
+#' @param current_year is the year to be displayed
+#' 
+#' @output is a list of graph_<year>, data_<year>, and raw_data
+get_tbl_management_summary <-  function(dataDirectory = '../data/out',current_year = NULL) {
+  if (0) {
+    dataDirectory = './data/out'
+    current_year <- NULL
+  }
+  dataDirectory_ <- dataDirectory
+  current_year_ <- current_year
+  if (!is.null(current_year)) {
+    result <- get_tbl_management_summary_(dataDirectory = dataDirectory_, current_year = current_year_)
+    return(result)
+  } else {
+    #means current_year not defined, so user wants ALL years 2013 to present
+    #first determine the latest data year, start with 2013
+    result_2013 <- get_tbl_management_summary_(dataDirectory = dataDirectory_, current_year = 2013)
+    years <- (2013+1):max(result_2013$raw_data$year,na.rm = TRUE)
+    result <- list()
+    result[['graph_2013']] <-  result_2013$graph
+    result[['data_2013']] <-  result_2013$data
+    result[['raw_data']] <- result_2013$raw_data
+    for (yr in years) {
+      df <- get_tbl_management_summary_(dataDirectory = dataDirectory_, current_year = yr)
+      result[[paste('graph_',yr,sep='')]] <-  df$graph
+      result[[paste('data_',yr,sep='')]] <-  df$data
+      
+    }
+    
+    return(result)
+  }
+}
+
+
+#' Add TFEE = TRUE for parameter without it
+#' 
+#' @param df is the dataframe
+#' @param category is the column that data is categorized
+#' 
+#' 
+add_tfee_filler <- function(df, category = 'parameter') {
   
+  if (0) {
+    df <- df_sites
+    category = 'metric'
+  }
+  
+  df <- ungroup(df)
+  cols <- colnames(df)
+  
+  cols_tfee <- cols[grepl('tfee',cols,ignore.case = TRUE)][[1]]
+  cols_cat <- category
+  
+  cols <- cols[!(cols %in% cols_tfee)]
+  
+  #rename columns 
+  df <- df %>%
+      rename('tfee_column' = cols_tfee,
+           'category_column' = cols_cat)
+  
+  #identify cateofry with missing tfee value
+  all_cat <- df %>%
+    select(tfee_column, category_column) %>%
+    distinct()
+  
+  lst_cat <- all_cat %>% pull(category_column) %>% unique()
+  
+  lst_cat_true <- all_cat %>%
+    filter(tfee_column == TRUE) %>%
+    pull(category_column) %>% unique()
+  lst_cat_true <-   lst_cat[!lst_cat %in% lst_cat_true]
+  
+  lst_cat_false <- all_cat %>%
+    filter(tfee_column == FALSE) %>%
+    pull(category_column) %>% unique()
+  lst_cat_false <-   lst_cat[!lst_cat %in% lst_cat_false]
+  
+  #add tfee = TRUE value
+  if (length(lst_cat_true)>0) {
+    df_ <- df %>%
+      filter(category_column %in% lst_cat_true) %>%
+      mutate(tfee_column = TRUE)
+    
+    df <- df %>%
+      bind_rows(df_)
+  }
+  
+  #add tfee = FALSE value
+  if (length(lst_cat_false)>0) {
+    df_ <- df %>%
+      filter(category_column %in% lst_cat_false) %>%
+      mutate(tfee_column = FALSE)
+    
+    df <- df %>%
+      bind_rows(df_)
+  }
+  
+  #rename columns back to original
+  
+
+  colnames(df)[colnames(df) == 'tfee_column'][[1]] <- cols_tfee
+  colnames(df)[colnames(df) == 'category_column'][[1]] <- cols_cat
+  
+  return(df)
+}
+
+
+#' Create management level legend table
+#' This is generalized
+add_mgmt_legend <- function() {
+  df_colour_levels <- tribble(
+    ~colour_text,~colour_order,~colour,~actions,~txt_colour,
+    'N/A',0,'#dbdbdb','No Data','black',
+    'Green',1,'#A6D96A','Keep Clean Areas Clean','black',
+    'Yellow',2,'#FEE08B','Prevent Air Quality Deterioration','black',
+    'Orange',3,'#F46D43','Prevent CAAQS Exceedance','black',
+    'Red',4,'#A50026','Achieve CAAQS','white'
+  ) %>%
+    arrange(desc(colour_order))
+  
+  a <- DT::datatable(df_colour_levels %>%
+                       select(colour_text,actions) %>%
+                       rename(`Management Level` = colour_text,
+                              `Recommended Management Actions` = actions),
+                     rownames = FALSE,
+                     options = list(
+                       autoWidth = TRUE,
+                       borders = TRUE,
+                       scrollX = FALSE,
+                       paging = FALSE,
+                       ordering = FALSE,
+                       info =FALSE,
+                       searching = FALSE
+                     )
+  ) %>%
+    
+    formatStyle('Management Level',target = 'row',backgroundColor = styleEqual(df_colour_levels$colour_text,df_colour_levels$colour),
+                Color = styleEqual(df_colour_levels$colour_text,df_colour_levels$txt_colour)) 
+  
+  return(a)
+}
+
+
+#' Pad dataframe
+#' 
+#' @description This data frame does not have to be a date-time dataframe
+pad_df <- function(df,static_columns,filled_columns) {
+  if (0) {
+    df <- df_data
+    static_columns <- c('site')
+    filled_columns <- c('parameter', 'metric')
+    colnames(df)
+  }
+  
+  df <- ungroup(df)
+  cols_df <- colnames(df)
+  
+  static_columns <- static_columns[static_columns %in% cols_df]
+  filled_columns <- filled_columns[filled_columns %in% cols_df]
+  
+  df_ <- df %>%
+    select_at(static_columns) %>%
+    distinct()
+  
+  df_filled <- df %>%
+    select_at(filled_columns) %>%
+    distinct()
+  
+  df_ <- df_ %>%
+    merge(
+      df_filled
+    ) 
+
+  df_ %>%
+    left_join(df) %>% 
+    return()
+}
+
+
+#create management level tables
+
+#' List of metric and parameters
+#'
+#' @description This contains a list of metrics and the parameters these are related to.
+#' Note that there are two types of parameters listed, these are created to ensure coverage for all
+#' envair and rcaaqs have different list of metrics
+#' parameter is from rcaaqs
+#' metric is from envair
+#'
+#' @export
+#'
+df_metric_list <- function() {
+  #define levels to put metrics and parameters in order
+  levels_parameter <- c('pm2.5_annual','pm2.5_24h','o3','no2_1yr','no2_3yr','so2_1yr','so2_3yr')
+  levels_metric <- c('pm25_annual','pm25_24h','o3_8h','no2_ann','no2_1hr','so2_ann','so2_1hr')
+  df_result <- tribble(
+    ~pollutant,~parameter,~metric,
+    'PM25','pm2.5_annual','pm25_annual',
+    'O3','o3','o3_8h',
+    'PM25','pm2.5_24h','pm25_24h',
+    'NO2','no2_1yr','no2_ann',
+    'NO2','no2_3yr','no2_1hr',
+    'SO2','so2_1yr','so2_ann',
+    'SO2','so2_3yr','so2_1hr'
+  )
+  
+  df_result$parameter <- factor(df_result$parameter, levels = levels_parameter)
+  df_result$metric <- factor(df_result$metric, levels = levels_metric)
+  
+  return(df_result)
+}
+
+#' Create a Comprehensive Result of Management Levels
+#' 
+#' @description outputs a list of manamgenet summary tables
+#' 
+#' @param data_directory is the source of data, default uses github data
+#' @param data_years is a vector list of years to include here
+get_management_summary_complete <- function(data_directory = NULL,data_years = NULL){
+  
+  df_param_list <- tibble(
+    parameter = c('PM25','O3','NO2','SO2'),
+    label = c('PM<sub>2.5</sub>','O<sub>3</sub>','NO<sub>2</sub>','SO<sub>2</sub>')
+  )
+  
+  #' 
+  library(dplyr)
+  library(tidyr)
+  library(kableExtra)
+  try(source('./assets/00_setup.R'))
+  
+  dirs_location <- data_directory
+  years <- data_years
+  if (is.null(dirs_location)) {
+    # dirs_location <- './data/out'
+    dirs_location <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/'
+  }
+  
+  if (is.null(data_years)) {
+    # dirs_location <- './data/out'
+    df_data <- load_data(datapath = dirs_location,filename = 'caaqs_results.csv')
+    years <- unique(df_data$year)
+    years <- sort(years)
+    current_year <- max(years)
+  }
+  
+  
+  
+  
+  
+  result <- list() #initialize
+  #retrieves managemenet levels
+  #through several years (2013-present)
+  tbl_mgmt_airzone <- get_tbl_management_summary(dataDirectory = dirs_location)
+  result <- tbl_mgmt_airzone
+  # saveRDS(tbl_mgmt_airzone,'./data/out/management_summary.Rds')
+  
+  
+  df_sites <- load_data(datapath = dirs_location,filename = 'management_sites.csv')
+  df_data <- load_data(datapath = dirs_location,filename = 'caaqs_results.csv')
+  
+  df_data <- df_data %>%
+    filter(year %in% df_sites$year)
+  
+  df_stations <- df_sites %>%
+    arrange(airzone) %>%
+    select(site,latitude,longitude,airzone) %>%
+    group_by(site) %>%
+    slice(1) %>% ungroup()
+  #some metrics do no have value for when TFEE is true
+  #this means there are no tfee adustments made on these
+  #so the lines below would duplicate these parameters for tfee = TRUE version of data
+  
+  df_data <- add_tfee_filler(df_data,category = 'metric')
+  df_sites <- add_tfee_filler(df_sites,category = 'metric')
+  
+  
+  #make sure only one data for each site
+  df_data <- df_data %>%
+    ungroup() %>%
+    filter(!is.na(metric_value)) %>%
+    group_by(year,parameter,site,metric,tfee) %>%
+    slice(1) %>% ungroup()
+  
+  
+  #combine data and management result
+  colnames(df_sites)
+  colnames(df_data)
+  
+  #rename columns so the two can merge properly
+  df_sites <- df_sites %>%
+    rename(parameter = pollutant,
+           basis = metric,
+           basis_value = metric_value) 
+  
+  
+  
+  df_sites <- df_sites %>%
+    left_join(df_data) 
+  
+  #check for discrepancy
+  
+  #this should be zero if all else are correct
+  colnames(df_sites)
+  df_sites %>%
+    filter(basis == metric) %>%
+    filter(basis_value != metric_value)
+  
+  lst_stations <- load_data(datapath = dirs_location, filename = 'liststations.csv')
+  lst_stations <- envair::listBC_stations(use_CAAQS = TRUE)
+  
+  
+  lst_exclude <- lst_stations %>%
+    filter(AQMS == 'N') %>%
+    pull(site) %>%
+    unique()
+  
+  #fix for those with multiple PM instrument
+  df_sites <-
+    df_sites %>%
+    group_by(site,year,tfee,parameter,basis) %>%
+    mutate(count = n(), index = 1:n()) %>%
+    # filter(count>1) 
+    filter(index == 1) %>% select(-index, -count)
+  
+  df_sites <- df_sites %>%
+    filter(!site %in% lst_exclude)
+  
+  # readr::write_csv(df_sites,'./data/out/management_sites.csv')
+  # readr::write_csv(lst_stations,'./data/out/liststations.csv')
+  
+  
+  
+  lst_sites <- unique(df_sites$site[df_sites$year == current_year])
+  lst_sites <- sort(lst_sites)
+  
+  #generate table by simplifying, make multiple subtables
+  colnames(df_sites)
+  colnames(df_data)
+  #start by padding empty year and data 
+  df_sites <- pad_df(df_sites,static_columns = c('site'),
+                     filled_columns = c('parameter','tfee','year'))
+  df_data <- pad_df(df_data,static_columns = c('site'),
+                    filled_columns = c('parameter','metric','tfee','year'))
+  
+  #site colour table
+  df_site_colour <- df_sites %>%
+    ungroup() %>%
+    select(parameter,site,tfee,year, colour,colour_text) %>%
+    distinct()
+  
+  colnames(df_sites)
+  
+  #set parameter order
+  order_param <- c('pm25_annual','pm25_24h','o3_8h',
+                   'no2_ann','no2_1hr','so2_ann','so2_1hr')
+  
+  
+  
+  #this creates heading label for the metric
+  df_metric_label <-
+    df_data %>% ungroup() %>%
+    arrange((metric_value)) %>%
+    select(metric,parameter) %>%
+    filter(!grepl('(1yr)',metric)) %>%
+    mutate(metric = factor(metric,levels = order_param)) %>%
+    distinct() %>%
+    mutate(metric_ = recode(metric,
+                            "pm25_24h" = '24-hour',
+                            'pm25_annual'='annual',
+                            'o3_8h'='8-hour',
+                            'no2_1hr'='1-hour',
+                            'no2_ann'='annual',
+                            'so2_ann'='annual',
+                            'so2_1hr'='1-hour')
+    ) %>%
+    group_by(parameter) %>%
+    mutate(metric_label = paste(metric_,collapse = '/')) %>%
+    select(parameter,metric_label) %>% distinct()
+  
+  # Create management level table  for each station 
+  {
+    #the metrics to display
+    df_site_metric <-
+      df_data %>%
+      ungroup() %>%
+      
+      select(parameter,site,tfee,year,metric,metric_value) %>%
+      filter(!grepl('(1yr)',metric)) %>%
+      mutate(metric = factor(metric,levels = order_param)) %>%
+      arrange(metric) %>%
+      mutate(metric_value = ifelse(is.na(metric_value),'-',as.character(metric_value))) %>%
+      group_by(parameter,site,tfee,year) %>%
+      summarise(metric_display = paste(metric_value,collapse = '/'))
+    
+    
+    
+    
+    tbl_mgmt_display <-  df_site_metric %>%
+      #mutate(parameter = factor(parameter,levels = df_param_list$parameter)) %>%
+      # filter(site == site_) %>% 
+      filter(tfee == TRUE) %>%
+      group_by(site,year,parameter) %>%
+      slice(1) %>%
+      ungroup() %>%
+      select(site,year,metric_display,parameter) %>% 
+      # View()
+      pivot_wider(names_from = parameter, values_from = metric_display) %>%
+      arrange((year)) %>%
+      envair::COLUMN_REORDER(c('site','year','PM25','O3','NO2','SO2'))
+    
+    tbl_mgmt_colour <-
+      df_site_colour %>%
+      # filter(site == site_) %>% View()
+      filter(tfee == TRUE) %>%
+      mutate(colour = ifelse(is.na(colour),'#DBDBDB',colour)) %>%
+      arrange(desc(colour)) %>%
+      group_by(site,year,parameter,tfee) %>%
+      
+      slice(1) %>%
+      ungroup() %>%
+      select(site,year,colour,parameter) %>% 
+      
+      pivot_wider(names_from = parameter, values_from = colour,values_fill = '#DBDBDB')%>%
+      envair::COLUMN_REORDER(c('site','year','PM25','O3','NO2','SO2'))
+    
+    
+    # View(tbl_mgmt_colour)
+    list_management <- list(header = df_metric_label,
+                            colour = tbl_mgmt_colour,
+                            display = tbl_mgmt_display)
+    
+    
+    for (site_ in lst_sites) {
+      if (0) {
+        site_ <- 'Victoria Topaz'
+      }
+      print(paste('Generating summary for:',site_))
+      colnames(df_sites)
+      
+      
+      tbl_display<-  list_management$display %>%
+        filter(site == site_) %>%
+        select(-site)
+      tbl_colour <- list_management$colour %>%
+        filter(site == site_)  %>%
+        select(-site)
+      
+      a <- tbl_display %>%
+        rename(Year = year) %>%
+        mutate(Year = paste((Year-2),Year,sep='-')) 
+      
+      #rename columns to change the header
+      colnames(a) <- c('Reporting<br>Period',
+                       'PM<sub>2.5</sub>, µg/m<sup>3</sup><br>(annual/24-hr)',
+                       'O<sub>3</sub>, ppb<br>(8-hour)',
+                       'NO<sub>2</sub>, ppb<br>(annual/1-hour)',
+                       'SO<sub>2</sub>, ppb<br>(annual/1-hour)')
+      
+      p <- a %>%
+        kbl('html', escape = F,caption = site_) %>%
+        kable_styling("bordered",position = 'center') %>%
+        kableExtra::column_spec(column=1,width="15em",color = 'black') %>%
+        kableExtra::column_spec(column=2:ncol(tbl_display),width="30em",color = 'black') %>%
+        kableExtra::row_spec(row=0,color = 'white',background = 'black',align = 'c') %>%
+        kableExtra::row_spec(row=1:nrow(tbl_display),color = 'black',align = 'c') %>%
+        kableExtra::column_spec(column = 2,
+                                background = tbl_colour$PM25,
+                                color = 'black') %>%
+        kableExtra::column_spec(column = 3,
+                                background = tbl_colour$O3,
+                                color = 'black') %>%
+        kableExtra::column_spec(column = 4,
+                                background = tbl_colour$NO2,
+                                color = 'black') %>%
+        kableExtra::column_spec(column = 5,
+                                background = tbl_colour$SO2,
+                                color = 'black') %>%
+        kableExtra::row_spec(row = nrow(tbl_display),
+                             extra_css = "border-top: 2px solid black; 
+                           border-bottom: 2px solid black;")
+      result[[site_]] <- p
+      
+    }
+    
+    result[["legend"]] <- add_mgmt_legend()
+    }
+  
+  #end of station entries
+  
+  #create management levels for all for each year
+  {
+    #combine air zone and station results
+    df_airzone <- tbl_mgmt_airzone$raw_data %>%
+      ungroup() %>%
+      select(parameter,year,tfee,colour,colour_text,airzone) %>%
+      mutate(site = paste('!',airzone,'<br>Air Zone'),
+             parameter = toupper(parameter))
+    
+    
+    #for data before 2020, remove NO2 and SO2 management levels
+    df_airzone$colour[df_airzone$year<2020 & 
+                        df_airzone$parameter %in% c('NO2','SO2')] <- '#BFBFBF'
+    df_airzone$colour_text[df_airzone$year<2020 & 
+                             df_airzone$parameter %in% c('NO2','SO2')] <- 
+      'NO<sub>2</sub>,SO<sub>2</sub> CAAQS<br>Not applied before 2020'
+    
+    #value for Northwest air zone
+    df_airzone$colour[grepl('northwest',df_airzone$site,ignore.case = TRUE)] <- '#BFBFBF'
+    df_airzone$colour_text[grepl('northwest',df_airzone$site,ignore.case = TRUE)] <- 'No Data Available'
+    
+    df_ <- df_site_colour %>%
+      left_join(df_stations)%>%
+      left_join(df_site_metric) 
+    
+    
+    
+    
+    df_ %>%
+      
+      filter(is.na(airzone))
+    
+    colnames(df_airzone)
+    colnames(df_site_colour)
+    
+    # View(df_tbl_complete)
+    
+    
+    #prepare colour and text tables
+    
+    df_tbl_complete_colourtxt <- df_ %>%
+      
+      bind_rows(df_airzone) %>% ungroup() %>%
+      # filter(year == yr_) %>%
+      filter(!is.na(colour_text)) %>%
+      mutate(parameter = factor(parameter, levels = df_param_list$parameter)) %>%
+      arrange(parameter,year,airzone,site) %>%
+      filter(tfee == TRUE) %>%
+      select(parameter,year,site,colour_text,airzone,metric_display) %>%
+      pad_df(static_columns = c('site','year','airzone'),filled_columns = c('parameter')) %>%
+      mutate(colour_text = ifelse(is.na(colour_text),'-',colour_text)) %>%
+      mutate(display = ifelse(grepl('!',site),toupper(colour_text),metric_display)) %>% 
+      select(site,year,parameter,airzone,display) %>%
+      pivot_wider(names_from = parameter, values_from = display) %>%
+      mutate(PM25 = ifelse(is.na(PM25),'-/-',PM25),
+             O3 = ifelse(is.na(O3),'-',O3),
+             NO2 = ifelse(is.na(NO2),'-/-',NO2),
+             SO2 = ifelse(is.na(SO2),'-/-',SO2))
+    
+    
+    df_tbl_complete_colour <- df_ %>%
+      bind_rows(df_airzone) %>% ungroup() %>%
+      # filter(year == yr_) %>%
+      filter(!is.na(colour_text)) %>%
+      mutate(parameter = factor(parameter, levels = df_param_list$parameter)) %>%
+      arrange(parameter,year,airzone,site) %>%
+      filter(tfee == TRUE) %>%
+      select(parameter,year,site,colour,airzone) %>%
+      pad_df(static_columns = c('site','year','airzone'),filled_columns = c('parameter')) %>%
+      mutate(colour = ifelse(is.na(colour),'#DBDBDB',colour)) %>%
+      pivot_wider(names_from = parameter, values_from = colour)
+    
+    df_tbl_complete_export <- df_ %>%
+      bind_rows(df_airzone) %>% ungroup() %>%
+      # filter(year == yr_) %>%
+      filter(!is.na(colour_text)) %>%
+      mutate(parameter = factor(parameter, levels = df_param_list$parameter)) %>%
+      arrange(parameter,year,airzone,site) %>%
+      filter(tfee == TRUE) %>%
+      select(parameter,year,site,colour,airzone,colour_text,metric_display) %>%
+      pad_df(static_columns = c('site','year','airzone'),filled_columns = c('parameter')) %>%
+      mutate(colour = ifelse(is.na(colour),'#DBDBDB',colour)) %>%
+      pivot_wider(names_from = parameter, values_from = c('colour_text','metric_display')) %>%
+      mutate(site = gsub('! ','',site)) %>%
+      mutate(site = gsub('<br>','',site))
+    
+    
+    
+    for (yr_ in min(df_site_colour$year): max(df_site_colour$year)) {
+      if (0) {
+        yr_ <- 2017
+      }
+      
+      print(paste('Creating management levels for year:',yr_))
+      df_tbl_complete_colour_ <- df_tbl_complete_colour %>%
+        filter(year == yr_)%>%
+        select(-year) %>%
+        arrange(airzone,site)
+      
+      lst_airzonesite <- which(grepl('!',df_tbl_complete_colour_$site))
+      #find locations of airzone within the table
+      #thisis to make it clear where those are located
+      
+      
+      
+      a <- df_tbl_complete_colourtxt %>%
+        filter(year == yr_) %>%
+        select(-year) %>%
+        arrange(airzone,site) %>%
+        mutate(site = gsub("!",'<b><i>',site)) %>%
+        select(-airzone) 
+      
+      colnames(a) <- c('Site or<br>Air Zone',
+                       'PM<sub>2.5</sub>, µg/m<sup>3</sup><br>(annual/24-hr)',
+                       'O<sub>3</sub>, ppb<br>(8-hour)',
+                       'NO<sub>2</sub>, ppb<br>(annual/1-hour)',
+                       'SO<sub>2</sub>, ppb<br>(annual/1-hour)')
+      p <- a %>%
+        kbl('html', escape = F,
+            caption = paste('Reporting Period: ',(yr_-2),'-',yr_,sep='')) %>%
+        kable_styling("bordered",position = 'center') %>%
+        kableExtra::column_spec(column=1,width="15em",color = 'black') %>%
+        kableExtra::column_spec(column=2:ncol(tbl_display),width="30em",color = 'black') %>%
+        kableExtra::row_spec(row=0,color = 'white',background = 'black',align = 'c') %>% 
+        kableExtra::row_spec(row=1:nrow(df_tbl_complete_colour_),align = 'r') %>% 
+        kableExtra::row_spec(row=c(lst_airzonesite),align='l',
+                             background = 'lightblue') %>%
+        # kableExtra::row_spec(row=1:nrow(df_tbl_complete_colourtxt),color = 'black',align = 'c') 
+        kableExtra::column_spec(column = 2,
+                                background = df_tbl_complete_colour_$PM25,
+                                
+                                color = 'black') %>%
+        kableExtra::column_spec(column = 3,
+                                background = df_tbl_complete_colour_$O3,
+                                
+                                color = 'black') %>%
+        kableExtra::column_spec(column = 4,
+                                background = df_tbl_complete_colour_$NO2,
+                                
+                                color = 'black') %>%
+        kableExtra::column_spec(column = 5,
+                                background = df_tbl_complete_colour_$SO2,
+                                
+                                color = 'black') %>%
+        kableExtra::row_spec(row=c(lst_airzonesite),
+                             extra_css = "border-top: 3px solid black") 
+      # kableExtra::row_spec(row = nrow(tbl_display),extra_css = "border: 2px solid black")
+      result[[paste('management_',yr_,sep='')]] <- p
+    }
+  }
+  
+  result[['all stations']] <- df_tbl_complete_export
+  
+  return(result)
 }
 

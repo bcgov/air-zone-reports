@@ -221,8 +221,9 @@ sourcefiles <- '../assets'
 datafiles <- '../data/out'
 
 for (files_ in list.files(sourcefiles)) {
-  
+  print(files_)
   try(source(paste(sourcefiles,files_,sep='/')))
+  
 }
 
 ```
@@ -734,19 +735,22 @@ Pollutants that traveled across boundaries (trans-boundary) or are formed from e
 
 ### Summary of Management Levels
 
--   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards.
--   The highest levels of ozone are observed in the Lower Fraser Valley air zone, resulting in an orange management level. These are due to the levels observed at Hope, Maple Ridge, and Mission.
--   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior are under orange management level for nitrogen dioxide (NO~2~).
+-   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels of PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards.
+-   The Lower Fraser Valley air zone is assigned orange management level for ozone. These are due to the levels observed at Hope, Maple Ridge, and Mission.
+-   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior air zones are under orange management level for nitrogen dioxide (NO~2~). These are due to levels at urban and industrial locations in the area. 
 -   The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under yellow or green management levels.
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
-source('../assets/dev_airzone_exec_summary.R')
-tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2021)
+# source('../assets/dev_airzone_exec_summary.R')
+# tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2021)
+
+source('../assets/00_setup.R')
+tbl_mgmt <- get_tbl_management_summary(dataDirectory = '../data/out',current_year = 2021)
 
 ```
 
 ```{r,echo=FALSE}
-tbl_mgmt
+tbl_mgmt$graph
 ```
 
 ```{r, echo = FALSE,out.width="100%",out.height="900px"}
@@ -770,7 +774,7 @@ Wood burning for residential heating during the winter months can also cause loc
 The interactive graphics below shows the number of days that B.C.'s air zones experience 24-hour PM<sub>2.5</sub> levels that are higher than the Canadian Ambient Air Quality Standards (CAAQS) of 27 µg/m<sup>3</sup>. Use the graph below to examine the effects of wildfire smoke on the air quality of British Columbia.
 
 ```{r, echo = FALSE,out.width="100%",out.height="800px"}
-
+#located in \level_shiny\pm_exceedance
 knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "800px")
 ```
 
@@ -839,7 +843,7 @@ high_airzone_season <- pm_days_summary %>%
   arrange(desc(total))
 ```
 
-According to the graph above, in `r validation_year`, British Columbia experienced `r BC_days_with_highpm` days where 24-hour levels of PM<sub>2.5</sub> exceeded the CAAQS threshold of 27µg/m<sup>3</sup>. Out of these, `r BC_days_with_highpm_wildfire` days were from wildfire smoke that commonly occur during the summer and early fall seasons.
+Based on the graph above, in `r validation_year`, British Columbia experienced `r BC_days_with_highpm` days where 24-hour levels of PM<sub>2.5</sub> exceeded the CAAQS threshold of 27µg/m<sup>3</sup>. Out of these, `r BC_days_with_highpm_wildfire` days were from wildfire smoke that commonly occur during the summer and early fall seasons.
 
 -   In the `r order_pm25[1]` air zone, there were `r high_airzone_pm` days where the 24-hour PM<sub>2.5</sub> levels exceeded CAAQS
 
@@ -847,12 +851,17 @@ According to the graph above, in `r validation_year`, British Columbia experienc
 
     -   `r high_airzone_season$total[high_airzone_season$seasons == 'Winter']` of these days occured during the winter season. High PM<sub>2.5</sub> levels during the winter are mostly due to smoke from residential heating.
 
+
 ```{=html}
 <!-- Jumping Points -->
 <a id="Actions"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Actions</h2></center></div></div>
 ```
 In British Columbia, managing air quality is primarily done through provincial acts and regulations, as well as involvement from the federal, regional, and municipal governments. The key legislations governing air quality and environmental issues in the province are the [Environmental Management Act](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03053_00_multi) and the [Waste Discharge Regulation](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/45_320_2004). These regulations impose specific conditions on certain types of activities, such as businesses and industries, to ensure that they are conducted in a way that minimizes their impact on the environment.
+
+
+
+
 
 <!--Do not modify below. These are part of footer-->
 
