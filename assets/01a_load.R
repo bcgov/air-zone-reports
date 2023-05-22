@@ -39,6 +39,10 @@ dirs_location <- './data/out'
 df_management <- readr::read_csv(paste(dirs_location,'management.csv',sep='/'))
 validation_year <- 2021
 
+#fix for Port Alice Rumble Hospital
+unique(df_management$site)
+df_management <- df_management[df_management$site != 'Rumble Beach Hospital',]
+
 labels_mgmt <- rcaaqs::management_levels %>%
   filter(stringr::str_detect(parameter, "pm2.5")) %>%
   select(labels, colour, colour_text, units_html) %>%

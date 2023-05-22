@@ -21,7 +21,7 @@
 # multiple attempts to ensuer it will be at './R'
 saveDirectory <- './data/out'
 dir.create(saveDirectory,recursive = TRUE)
-years <- 2013:2022
+years <- 2013:2021
 
 
 print(getwd())

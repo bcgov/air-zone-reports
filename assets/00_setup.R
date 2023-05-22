@@ -695,7 +695,8 @@ get_management_summary <- function(outputtype = 'complete',df_preload = NULL,
     df <- get_management(datafile = datafile)
     
     df <- df %>%
-      select(site,instrument,year,metric,metric_value,colour,colour_text,colour_order,tfee) %>%
+      select(site,instrument,year,metric,metric_value,
+             colour,colour_text,colour_order,tfee,flag_two_of_three_years) %>%
       left_join(lst_stations) %>%
       left_join(df_metric)
   }

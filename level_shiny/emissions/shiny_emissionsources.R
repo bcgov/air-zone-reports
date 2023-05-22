@@ -281,7 +281,9 @@ ui <- fluidPage(
                     actionButton(inputId = 'voc',label = htmltools::HTML('VOC'),title = 'Volatile Organic Compounds')
                     
            )),
-  fluidRow(div(style='height:400px;overflow-y: hidden;overflow-x: hidden;',plotlyOutput("plot1")))#,height = "600px",width = '600px')
+  fluidRow(div(style='height:400px;overflow-y: hidden;overflow-x: hidden;',plotlyOutput("plot1"))),
+  downloadLink('downloadData', 'Download Data')
+  #,height = "600px",width = '600px')
   
   #(div(style='height:400px;overflow-y: scroll;',
   # plotOutput("plot1",height = "1200px")))))
@@ -361,6 +363,18 @@ server <- function(input, output) {
                                  layout(xaxis = list(title =''),
                                         showlegend = FALSE)
                                  )
+  
+  
+  
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste('emissionsdata-', Sys.Date(), '.csv', sep='')
+    },
+    content = function(con) {
+      write.csv(apei$all_nodust$data, con)
+    }
+  )
+  
 }
 
 # Run the application 

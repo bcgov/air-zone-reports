@@ -144,7 +144,7 @@ output:
                         <a href="#Monitoring">Monitoring</a>
                         <a href="#ManagementLevels">Management Levels</a>
                         <a href="#Wildfire">Wildfire</a>
-                        <a href="#Actions">Actions</a>
+                        <a href="#Summary">Summary</a>
 
                     </div>
                 </div>
@@ -228,7 +228,7 @@ for (files_ in list.files(sourcefiles)) {
 
 ```
 
-![](../assets/photos/title_page_filled.jpg)
+![](../assets/photos/title_page_filled.jpg) <!-- Welcome Page -->
 
 ```{=html}
 <!-- Jumping Points -->
@@ -256,9 +256,11 @@ Air zone reports are prepared each year by the B.C. Ministry of Environment and 
 
 This annual report, titled "Air Zone Report (`r validation_year-2`-`r validation_year`)", summarizes B.C.'s air quality status, achievement of the [Canadian Ambient Air Quality Standards (CAAQS](https://ccme.ca/en/air-quality-report#slide-7)), and assignment of management levels for the four major pollutants: fine particulate matter (PM~2.5~), ozone, nitrogen dioxide (NO~2~), and sulphur dioxide (SO~2~). Management levels are assessed based on three years (`r validation_year-2`-`r validation_year`) of monitoring data. Under the principles of the AQMS, management levels define the recommended level of actions for communities in order to keep clean areas clean and continuously improve air quality.
 
+Please read and enjoy the full air zone report below. You can also download one page summaries of this report, or access air quality data.
+
 <center>![](../assets/photos/BC_ENV_H_RGB_pos.png){width="50%"}</center>
 
-</br> </br> </br> </br>
+</br> </br> </br> </br> <!-- Air Quality Management Page -->
 
 ```{=html}
 <!-- Jumping Points -->
@@ -381,9 +383,9 @@ PM<sub>2.5</sub> levels are presented using these metrics:
 
 -   a 24-hour metric to estimate short term or acute exposure
 
-**Standards and Management Levels for PM<sub>2.5</sub>**
+**Standards and Management Levels for PM**<sub>2.5</sub>
 
-The table below shows the colour-based management levels for PM<sub>2.5</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for PM<sub>2.5</sub>. 
+The table below shows the colour-based management levels for PM<sub>2.5</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for PM<sub>2.5</sub>.
 
 `r get_tbl_management('pm25')`
 
@@ -414,9 +416,9 @@ Ground-level ozone (O<sub>3</sub>), is a colourless, odourless and highly irrita
 
 In this report, O<sub>3</sub> levels are presented using the 8-hour metric.
 
-**Standards and Management Levels for O<sub>3</sub>**
+**Standards and Management Levels for O**<sub>3</sub>
 
-The table below shows the colour-based management levels for O<sub>3</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for O<sub>3</sub>. 
+The table below shows the colour-based management levels for O<sub>3</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for O<sub>3</sub>.
 
 `r get_tbl_management('o3')`
 
@@ -443,13 +445,11 @@ Nitrogen dioxide (NO<sub>2</sub>) belongs to the oxides of nitrogen group of com
 
 **Measurement and Reporting**
 
-In this report, NO<sub>2</sub> levels are presented using these two metrics: 
-    - annual metric to estimate long term exposure, and 
-    - 1-hour metric to estimate short term or acute exposure.
+In this report, NO<sub>2</sub> levels are presented using these two metrics: - annual metric to estimate long term exposure, and - 1-hour metric to estimate short term or acute exposure.
 
-**Standards and Management Levels for NO<sub>2</sub>**
+**Standards and Management Levels for NO**<sub>2</sub>
 
-The table below shows the colour-based management levels for NO<sub>2</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for NO<sub>2</sub>. 
+The table below shows the colour-based management levels for NO<sub>2</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for NO<sub>2</sub>.
 
 `r get_tbl_management('no2')`
 
@@ -466,23 +466,20 @@ The table below shows the colour-based management levels for NO<sub>2</sub>. The
 ```
 Sulphur dioxide (SO<sub>2</sub>) is a colourless gas that belongs to a group of sulphur-containing gases called sulphur oxides (SOx). SO<sub>2</sub> is emitted when fossil fuels or raw materials containing sulphur are burned in industrial processes (ore processing, smelting), electric power generation, or marine transportation. Large quantities are also during the extraction and processing of fossil fuels. SO<sub>2</sub> contributes to the formation of PM<sub>2.5</sub> and smog, and when combined with water molecules in the air, it can form compounds like sulfuric acid, which eventually falls to earth as acid rain.
 
-
 **Health Effects:**
 
 -   harms the respiratory system of high risk individuals
 
 **Measurement and Reporting**
 
-In this report, SO<sub>2</sub> levels are presented using these two metric: 
-    - annual metric to estimate long term exposure, and 
-    - 1-hour metric as estimate of acute (short term) exposure.
+In this report, SO<sub>2</sub> levels are presented using these two metric: - annual metric to estimate long term exposure, and - 1-hour metric as estimate of acute (short term) exposure.
 
-**Standards and Management Levels for SO<sub>2</sub>**
-
+**Standards and Management Levels for SO**<sub>2</sub>
 
 The table below shows the colour-based management levels for SO<sub>2</sub>. The levels were defined as part of the Air Quality Management System and are based on the Canadian Ambient Air Quality Standards (shown as red management level). Each colour corresponds to the recommended levels of management action based on the metrics for SO<sub>2</sub>.
 
 `r get_tbl_management('so2')`
+
 ```{=html}
   
   </p>
@@ -737,7 +734,7 @@ Pollutants that traveled across boundaries (trans-boundary) or are formed from e
 
 -   The Central Interior and Southern Interior air zones are assigned red management level for fine particulate matter (PM~2.5~) due to high levels of PM~2.5~ at Houston, Vanderhoof, and Grand Forks. Under a red management level, the Air Quality Management System recommends taking actions in order to achieve the Canadian Ambient Air Quality Standards.
 -   The Lower Fraser Valley air zone is assigned orange management level for ozone. These are due to the levels observed at Hope, Maple Ridge, and Mission.
--   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior air zones are under orange management level for nitrogen dioxide (NO~2~). These are due to levels at urban and industrial locations in the area. 
+-   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior air zones are under orange management level for nitrogen dioxide (NO~2~). These are due to levels at urban and industrial locations in the area.
 -   The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under yellow or green management levels.
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
@@ -851,18 +848,35 @@ Based on the graph above, in `r validation_year`, British Columbia experienced `
 
     -   `r high_airzone_season$total[high_airzone_season$seasons == 'Winter']` of these days occured during the winter season. High PM<sub>2.5</sub> levels during the winter are mostly due to smoke from residential heating.
 
-
 ```{=html}
 <!-- Jumping Points -->
-<a id="Actions"></a>
-<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management Actions</h2></center></div></div>
+<a id="Summary"></a>
+<div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Summary</h2></center></div></div>
 ```
+One page summaries of the air zone reports are also available. Please find the links below to download and share.
+
+-   [Overall summary for British Columbia](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021_All.pdf)
+
+-   Summary for the air zones
+
+    -   [Central Interior Air Zone](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021_Central.pdf)
+
+    -   [Coastal Air Zone](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021_Coastal.pdf)
+
+    -   [Georgia Strait Air Zone](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021_Georgia.pdf)
+
+    -   [Lower Fraser Valley Air Zone](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021_LFV.pdf)
+
+    -   [Northeast Air Zone](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021_.Northeastpdf)
+
+    -   [Southern Interior Air Zone](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021_Southern.pdf)
+
+```{=html}
+<!--
 In British Columbia, managing air quality is primarily done through provincial acts and regulations, as well as involvement from the federal, regional, and municipal governments. The key legislations governing air quality and environmental issues in the province are the [Environmental Management Act](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03053_00_multi) and the [Waste Discharge Regulation](https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/45_320_2004). These regulations impose specific conditions on certain types of activities, such as businesses and industries, to ensure that they are conducted in a way that minimizes their impact on the environment.
 
-
-
-
-
+-->
+```
 <!--Do not modify below. These are part of footer-->
 
 ```{=html}

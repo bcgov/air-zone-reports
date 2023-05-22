@@ -18,7 +18,7 @@ dirs_location <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/maste
 if (0) {
   dirs_location <- './data/out'
 }
-list.files(dirs_location)
+# list.files(dirs_location)
 
 df_management_airzones <- readr::read_csv(paste(dirs_location,'management_airzones.csv',sep='/'))
 az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/'))
@@ -100,7 +100,7 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
   
   if (is.null(tfee)) {
     tfee <- TRUE
-    }
+  }
   
   year_select <- year
   tfee_select <- tfee
@@ -112,7 +112,7 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
     tfee_select <- FALSE
   }
   
-
+  
   
   df <- az_mgmt %>%
     left_join(
@@ -123,7 +123,7 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
       by='airzone'
     )
   
- 
+  
   
   
   df$colour[is.na(df$colour)] <- '#666565'  #grey colour for air zones with no value
@@ -193,12 +193,12 @@ map_airzone <- function(polygon_a = NULL,df,az_mgmt,parameter,year,
   #debug for ozone 2019 issue
   
   if (0) {
-  View(df)
-  print(paste('Rows of data',nrow(df)))
-  print(paste('year',unique(df$year)))
-  print(paste('tfee',unique(df$tfee)))
-  df_debug <- unique(df$colour_text[df$colour_order == max(df$colour_order)])
-  print(paste('Management level, highest',df_debug))
+    View(df)
+    print(paste('Rows of data',nrow(df)))
+    print(paste('year',unique(df$year)))
+    print(paste('tfee',unique(df$tfee)))
+    df_debug <- unique(df$colour_text[df$colour_order == max(df$colour_order)])
+    print(paste('Management level, highest',df_debug))
   }
   
   return(a)
@@ -290,20 +290,20 @@ plot_bar_ranked <- function(df_caaqs_results,pollutant,year,airzone = NULL,df_st
   #escape for Northwest air zone
   #create a blank plot
   try(
-if (airzone == 'Northwest') {
-
-  a <- ggplot() +
-    scale_x_continuous(limits = c(0,1)) +
-    scale_y_continuous(limits = c(0,1)) +
-    theme(legend.position = 'none',axis.text = element_blank(),
-          panel.background = element_blank(),
-          panel.border = element_rect(fill=NA, colour='black'),
-          axis.title.x = element_blank(),axis.title.y = element_blank()) +
-    annotate('text',x=0,y=1,label = 'Northwest air zone does \nnot have enough data',
-             hjust = 0)
-  return(a)
-  
-})
+    if (airzone == 'Northwest') {
+      
+      a <- ggplot() +
+        scale_x_continuous(limits = c(0,1)) +
+        scale_y_continuous(limits = c(0,1)) +
+        theme(legend.position = 'none',axis.text = element_blank(),
+              panel.background = element_blank(),
+              panel.border = element_rect(fill=NA, colour='black'),
+              axis.title.x = element_blank(),axis.title.y = element_blank()) +
+        annotate('text',x=0,y=1,label = 'Northwest air zone does \nnot have enough data',
+                 hjust = 0)
+      return(a)
+      
+    })
   
   df_caaqs_results_ <- df_caaqs_results
   year_ <- year
@@ -561,71 +561,71 @@ ui <-
   
   (fluidPage(
     h4(HTML('Air Quality Management Levels')),
-      tags$head(
-        tags$style(HTML("
+    tags$head(
+      tags$style(HTML("
       body { background-color: #f2efe9; }
       .container-fluid { background-color: #fff; width: auto; padding: 5px; }
       .topimg { width: 0px; display: block; margin: 0px auto 0px auto; }
       .title { text-align: center; }
       .toprow { margin: 5px 5px; padding: 5px; background-color: #38598a; }
       .filters { margin: 3px auto; }
-      .shiny-input-container { width:100% !important; }
+      .shiny-input-container { width:90% !important; }
       .table { padding: 0px; margin-top: 0px; }
       .leaflet-top { z-index:999 !important; }
       "))),
-      
-      
-      fluidRow(class = "toprow",
-               fluidRow(class = 'filters',
-                        column(2,
-                               tags$style(type='text/css', 
-                                          '.selectize-input { font-size: 15px; line-height: 10px;} 
+    
+    
+    fluidRow(class = "toprow",
+             fluidRow(class = 'filters',
+                      column(2,
+                             tags$style(type='text/css', 
+                                        '.selectize-input { font-size: 15px; line-height: 10px;} 
                           .selectize-dropdown { font-size: 12px; line-height: 15px; }
                           .control-label {font-size: 12px; color: white !important;}
                           .irs-min {font-size: 0px; color: white; !important}
                           .irs-max {font-size: 0px; color: white;}
                           .irs-single {font-size: 14px; color: white;}
                           .irs-grid-text {font-size: 10px; color: white;}'
-                               ),
-                               selectizeInput('pollutant',label = 'Pollutant:',
-                                              choices = df_parameter$display,width = "5%")
-                        ),
-                        column(6,
-                               sliderInput('year_slider',label ='Year',
-                                           min = min(df_management_airzones$year),
-                                           max = year_max,
-                                           value = year_initial,width = "50%",
-                                           sep='')
-                        ))),
+                             ),
+                             selectizeInput('pollutant',label = 'Pollutant:',
+                                            choices = df_parameter$display,width = "5%")
+                      ),
+                      column(6,
+                             sliderInput('year_slider',label ='Year',
+                                         min = min(df_management_airzones$year),
+                                         max = year_max,
+                                         value = year_initial,width = "50%",
+                                         sep='')
+                      ))),
+    
+    fluidRow(
       
-      fluidRow(
-        
-        column(3,h6("Click the map to select an air zone"),
-              
-               leaflet::leafletOutput("map",height = '400px')),
-             column(9,h6("Use vertical scrollbar (right side of graph) to reveal more bar graphs."),
-                    (div(style='height:400px;overflow-y: scroll;',
-                      plotOutput("plot1",height = "1200px"))))),
-      fluidRow(tags$head(
-        tags$style(HTML("
+      column(3,h6("Click the map to select an air zone"),
+             
+             leaflet::leafletOutput("map",height = '400px')),
+      column(9,h6("Use vertical scrollbar (right side of graph) to reveal more bar graphs."),
+             (div(style='height:400px;overflow-y: scroll;',
+                  plotOutput("plot1",height = "1200px"))))),
+    fluidRow(tags$head(
+      tags$style(HTML("
       #table1_wrapper {
-        width: 100% !important;
+        width: 90% !important;
       }
-    "))),DT::dataTableOutput("table1"),
-      downloadLink('downloadData', 'Download'))
-      
-      
-      #        sidebarLayout(
-      # sidebarPanel(radioButtons("no Wildfire","wildfire-adjusted"),
-      # c('tfee' = 'tfee','notfee'='notfee')
-      # ))
-      # sidebarLayout(
-      #   sidebarPanel(leafletOutput("map"),width=5),
-      #   mainPanel (
-      #     uiOutput("md_file"),width=7
-      #   ))
-      
-    ))
+    "))),DT::dataTableOutput("table1")),
+    downloadLink('downloadData', 'Download Data')
+    
+    
+    #        sidebarLayout(
+    # sidebarPanel(radioButtons("no Wildfire","wildfire-adjusted"),
+    # c('tfee' = 'tfee','notfee'='notfee')
+    # ))
+    # sidebarLayout(
+    #   sidebarPanel(leafletOutput("map"),width=5),
+    #   mainPanel (
+    #     uiOutput("md_file"),width=7
+    #   ))
+    
+  ))
 
 
 
