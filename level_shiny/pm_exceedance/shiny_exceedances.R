@@ -798,7 +798,7 @@ ui <- {
       column(4,h6(HTML("Number of Days with High PM<sub>2.5</sub> Levels</br>Click the map to select an air zone")),
              # fluidRow(
              leaflet::leafletOutput("map",height = '400px',width = '400px')),
-      column(8,h6("Scroll through the graph to view the values for each year"),
+      column(8,h6(HTML("Scroll through the graph to view the number of days with high PM<sub>2.5</sub> Levels.")),
              # div(style='height:400px;overflow-y: scroll;'),
              plotlyOutput("plot1",height = '400px',width = '800px')
              )
@@ -871,10 +871,10 @@ server <- {shinyServer(function(input, output) {
           # Add a footnote
           footnote <- list(
             font = list(size = 10),
-            x = 2014, y = 1,
+            x = 2000, y = 8,
             # xref = "paper",
             # yref = "paper",
-            text = "Wildfire counts only from 2014 onwards",
+            text = "*Counts for wildfire days before 2014 are not included",
             showarrow = FALSE
           )
           
