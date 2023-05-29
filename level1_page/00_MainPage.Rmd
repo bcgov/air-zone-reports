@@ -737,6 +737,10 @@ Pollutants that traveled across boundaries (trans-boundary) or are formed from e
 -   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior air zones are under orange management level for nitrogen dioxide (NO~2~). These are due to levels at urban and industrial locations in the area.
 -   The Southern Interior air zone is assigned red management level for sulphur dioxide (SO~2~) due to the high SO~2~ levels at Trail. All other air zones are under yellow or green management levels.
 
+[Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_sites/) for air quality management levels of various locations in B.C. over the years
+
+[Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_airzone/) to view the management levels of the air zones over the years.
+
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,results='hide'}
 # source('../assets/dev_airzone_exec_summary.R')
 # tbl_mgmt <- table_management_level(dataDirectory = '../data/out',current_year = 2021)

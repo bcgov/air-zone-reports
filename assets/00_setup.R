@@ -482,7 +482,7 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
   }
   
   #transfer to final savefile
- 
+  
   file.copy(from = savefile, to=savefile_final,overwrite = TRUE)
   df_result <- readr::read_csv(savefile)
   return(df_result)
@@ -549,9 +549,9 @@ get_management <- function(datafile = NULL) {
     df_levels <- df_levels%>%
       dplyr::mutate(idx1 = 1:n()) %>%
       ungroup()
-      
+    
     df_levels_ <- df_levels %>%
-    select(metric,lower_breaks,upper_breaks,idx1) %>%
+      select(metric,lower_breaks,upper_breaks,idx1) %>%
       
       dplyr::mutate(lower_breaks = ifelse(is.na(lower_breaks),-9999,lower_breaks)) %>%
       dplyr::mutate(upper_breaks = ifelse(is.na(upper_breaks),0,upper_breaks)) %>%
@@ -595,7 +595,7 @@ get_management <- function(datafile = NULL) {
   
   #retrieve most recent CAAQS
   #these are in the rcaaqs package
-
+  
   df_levels_current <- rcaaqs::management_levels %>%
     dplyr::rename(metric = parameter) %>%
     mutate(metric = recode(metric,
@@ -613,8 +613,8 @@ get_management <- function(datafile = NULL) {
   #fill up missing information from the old CAAQS
   df_levels_old <- df_levels_old %>%
     left_join(df_levels_current %>%
-    select(-CAAQS_name,-lower_breaks,-upper_breaks),
-    by = c('metric','colour_text')
+                select(-CAAQS_name,-lower_breaks,-upper_breaks),
+              by = c('metric','colour_text')
     )
   #add the other colors
   df_levels_old <- df_levels_old %>%
@@ -623,10 +623,10 @@ get_management <- function(datafile = NULL) {
   
   print(paste('Reading data from:',datafile))
   df <- readr::read_csv(datafile)
-    
   
   
-
+  
+  
   #Calculate 2020 CAAQS and onwards
   df_2015 <- df %>%
     filter(metric %in% df_levels_current$metric,
@@ -634,7 +634,7 @@ get_management <- function(datafile = NULL) {
   
   df_2020 <- df %>%
     filter(!(metric %in% df_levels_current$metric &
-           year <2020))
+               year <2020))
   
   df_result_old <- assess_levels(df=df_2015,df_levels = df_levels_old)
   df_result_new <- assess_levels(df_2020,df_levels = df_levels_current) 
@@ -1163,7 +1163,7 @@ load_data <- function(datapath = './',filename) {
     datapath <- './data/out/'
     filename <- 'management_airzones.csv'
     datapath <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out'  #local location, two dots for final, one dot for debug
-
+    
   }
   
   filelist <- list.files(datapath)
@@ -1175,7 +1175,7 @@ load_data <- function(datapath = './',filename) {
   # if the file is a CSV, use read.csv to load it
   if (file_ext == "csv" ) {
     if (!grepl('http',datapath,ignore.case = TRUE)) {
-    data <- read.csv(file_path, header = TRUE)
+      data <- read.csv(file_path, header = TRUE)
     } else {
       data <- readr::read_csv(file_path)
     }
@@ -1559,7 +1559,7 @@ get_tbl_management <- function(parameter) {
     parameter = c('no2','no2','o3','pm25','pm25','so2','so2')
   )
   
- 
+  
   
   tbl_mgmt <- rcaaqs::management_levels %>%
     select(parameter,lower_breaks,upper_breaks,val_labels,colour,colour_text) %>%
@@ -1639,8 +1639,8 @@ get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_ye
   #input options
   df_mgmt_results <- NULL
   try(df_mgmt_results <- load_data(datapath = dataDirectory,filename = 'management.csv') %>%
-    select(site,instrument,year,tfee,parameter,metric,metric_value,colour,colour_text) %>%
-    distinct() )
+        select(site,instrument,year,tfee,parameter,metric,metric_value,colour,colour_text) %>%
+        distinct() )
   
   
   if (is.null(df_mgmt_results)) {
@@ -1672,7 +1672,7 @@ get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_ye
     select(airzone) 
   
   
- 
+  
   
   
   #identify parameters with no TFEE adjustment
@@ -1864,7 +1864,7 @@ get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_ye
                                                      position = 'auto'))
   }
   
- result <- list(graph = tbl_output, data = table_mgmt_display,raw_data = df_mgmt_airzone_table)
+  result <- list(graph = tbl_output, data = table_mgmt_display,raw_data = df_mgmt_airzone_table)
   return(result)
   
 }
@@ -1929,7 +1929,7 @@ add_tfee_filler <- function(df, category = 'parameter') {
   
   #rename columns 
   df <- df %>%
-      rename('tfee_column' = cols_tfee,
+    rename('tfee_column' = cols_tfee,
            'category_column' = cols_cat)
   
   #identify cateofry with missing tfee value
@@ -1971,7 +1971,7 @@ add_tfee_filler <- function(df, category = 'parameter') {
   
   #rename columns back to original
   
-
+  
   colnames(df)[colnames(df) == 'tfee_column'][[1]] <- cols_tfee
   colnames(df)[colnames(df) == 'category_column'][[1]] <- cols_cat
   
@@ -2044,7 +2044,7 @@ pad_df <- function(df,static_columns,filled_columns) {
     merge(
       df_filled
     ) 
-
+  
   df_ %>%
     left_join(df) %>% 
     return()
@@ -2092,6 +2092,11 @@ df_metric_list <- function() {
 #' @param data_years is a vector list of years to include here
 get_management_summary_complete <- function(data_directory = NULL,data_years = NULL){
   
+  
+  if (0) {
+    data_directory <- NULL
+    data_years = NULL
+  }
   df_param_list <- tibble(
     parameter = c('PM25','O3','NO2','SO2'),
     label = c('PM<sub>2.5</sub>','O<sub>3</sub>','NO<sub>2</sub>','SO<sub>2</sub>')
@@ -2484,7 +2489,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
             caption = paste('Reporting Period: ',(yr_-2),'-',yr_,sep='')) %>%
         kable_styling("bordered",position = 'center') %>%
         kableExtra::column_spec(column=1,width="15em",color = 'black') %>%
-        kableExtra::column_spec(column=2:ncol(tbl_display),width="30em",color = 'black') %>%
+        kableExtra::column_spec(column=2:ncol(a),width="30em",color = 'black') %>%
         kableExtra::row_spec(row=0,color = 'white',background = 'black',align = 'c') %>% 
         kableExtra::row_spec(row=1:nrow(df_tbl_complete_colour_),align = 'r') %>% 
         kableExtra::row_spec(row=c(lst_airzonesite),align='l',
@@ -2510,6 +2515,69 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
                              extra_css = "border-top: 3px solid black") 
       # kableExtra::row_spec(row = nrow(tbl_display),extra_css = "border: 2px solid black")
       result[[paste('management_',yr_,sep='')]] <- p
+      
+      
+      #repeat for each airzone
+      lst_airzones <- unique(df_tbl_complete_colourtxt$airzone)
+      for (airzone_ in lst_airzones) {
+        if (0) {
+          airzone_ <- lst_airzones[1]
+        }
+        
+        df_tbl_complete_colour_ <- df_tbl_complete_colour %>%
+          filter(year == yr_)%>%
+          filter(airzone == airzone_) %>%
+          select(-year) %>%
+          arrange(airzone,site)
+        
+        
+        a <- df_tbl_complete_colourtxt %>%
+          filter(airzone == airzone_) %>%
+          filter(year == yr_) %>%
+          select(-year) %>%
+          arrange(airzone,site) %>%
+          mutate(site = gsub("!",'<b><i>',site)) %>%
+          select(-airzone) 
+        
+        colnames(a) <- c('Site or<br>Air Zone',
+                         'PM<sub>2.5</sub>, µg/m<sup>3</sup><br>(annual/24-hr)',
+                         'O<sub>3</sub>, ppb<br>(8-hour)',
+                         'NO<sub>2</sub>, ppb<br>(annual/1-hour)',
+                         'SO<sub>2</sub>, ppb<br>(annual/1-hour)')
+        p <-
+          a %>%
+          kbl('html', escape = F,
+              caption = paste('Reporting Period: ',(yr_-2),'-',yr_,sep='')) %>%
+          kable_styling("bordered",position = 'center') %>%
+          
+          kableExtra::column_spec(column=1,width="15em",color = 'black') %>%
+          kableExtra::column_spec(column=2:ncol(a),width="30em",color = 'black') %>%
+          kableExtra::row_spec(row=0,color = 'white',background = 'black',align = 'c') %>%
+          kableExtra::row_spec(row=1:nrow(df_tbl_complete_colour_),align = 'r') %>%
+          kableExtra::row_spec(row=1,align='l',
+                               background = 'lightblue') %>%
+          # kableExtra::row_spec(row=1:nrow(df_tbl_complete_colourtxt),color = 'black',align = 'c') 
+          kableExtra::column_spec(column = 2,
+                                  background = df_tbl_complete_colour_$PM25,
+                                  
+                                  color = 'black') %>%
+          kableExtra::column_spec(column = 3,
+                                  background = df_tbl_complete_colour_$O3,
+                                  
+                                  color = 'black') %>%
+          kableExtra::column_spec(column = 4,
+                                  background = df_tbl_complete_colour_$NO2,
+                                  
+                                  color = 'black') %>%
+          kableExtra::column_spec(column = 5,
+                                  background = df_tbl_complete_colour_$SO2,
+                                  
+                                  color = 'black') %>%
+          kableExtra::row_spec(row=c(1),
+                               extra_css = "border-top: 3px solid black") 
+        # kableExtra::row_spec(row = nrow(tbl_display),extra_css = "border: 2px solid black")
+        result[[paste('management_',airzone_,'_',yr_,sep='')]] <- p
+      }
     }
   }
   

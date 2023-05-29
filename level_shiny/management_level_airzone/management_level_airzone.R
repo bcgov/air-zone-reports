@@ -15,7 +15,10 @@ library(sf)
 library(bcmaps)
 
 dirs_location <- '././data/out/'
-dirs_location <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/'
+dirs_location <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out'
+
+#this data was created using get_management_summary_complete()
+# it is located in /assets/00_setup.R
 mgmt_data <- readRDS(url(paste(dirs_location,'managementsummary_tables.Rds',sep='')))
 
 
