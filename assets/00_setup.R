@@ -2462,6 +2462,24 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
         yr_ <- 2017
       }
       
+      #switch site to label, to form friend name
+      df_sites_name <- df_sites %>%
+        arrange(desc(label)) %>%
+        select(site,label) %>% distinct() %>%
+        mutate(sitenew = ifelse(is.na(label),site,label)) %>%
+        group_by(site) %>%
+        slice(1) %>%
+        ungroup() %>%
+        select(site,sitenew)
+      
+      df_tbl_complete_colour <- df_tbl_complete_colour %>%
+        left_join(df_sites_name) %>%
+        mutate(site = ifelse(is.na(sitenew),site,sitenew)) 
+      
+      df_tbl_complete_colourtxt <-  df_tbl_complete_colourtxt %>%
+        left_join(df_sites_name) %>%
+        mutate(site = ifelse(is.na(sitenew),site,sitenew)) 
+      
       print(paste('Creating management levels for year:',yr_))
       df_tbl_complete_colour_ <- df_tbl_complete_colour %>%
         filter(year == yr_)%>%
@@ -2481,7 +2499,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
         mutate(site = gsub("!",'<b><i>',site)) %>%
         select(-airzone) 
       
-      colnames(a) <- c('Site or<br>Air Zone',
+      colnames(a) <- c('Site',
                        'PM<sub>2.5</sub>, µg/m<sup>3</sup><br>(annual/24-hr)',
                        'O<sub>3</sub>, ppb<br>(8-hour)',
                        'NO<sub>2</sub>, ppb<br>(annual/1-hour)',
@@ -2526,6 +2544,10 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
           airzone_ <- lst_airzones[1]
         }
         
+        
+        
+        
+        
         df_tbl_complete_colour_ <- df_tbl_complete_colour %>%
           filter(year == yr_)%>%
           filter(airzone == airzone_) %>%
@@ -2540,6 +2562,9 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
           arrange(airzone,site) %>%
           mutate(site = gsub("!",'<b><i>',site)) %>%
           select(-airzone) 
+        
+       
+        
         
         colnames(a) <- c('Site or<br>Air Zone',
                          'PM<sub>2.5</sub>, µg/m<sup>3</sup><br>(annual/24-hr)',
