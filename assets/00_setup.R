@@ -1162,6 +1162,7 @@ load_data <- function(datapath = './',filename) {
   if (0) {
     datapath <- './data/out/'
     filename <- 'management_airzones.csv'
+    filename <- 'managementsummary_tables.Rds'
     datapath <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out'  #local location, two dots for final, one dot for debug
     
   }
@@ -1174,6 +1175,7 @@ load_data <- function(datapath = './',filename) {
   
   # if the file is a CSV, use read.csv to load it
   if (file_ext == "csv" ) {
+    
     if (!grepl('http',datapath,ignore.case = TRUE)) {
       data <- read.csv(file_path, header = TRUE)
     } else {
@@ -1183,7 +1185,7 @@ load_data <- function(datapath = './',filename) {
   
   # if the file is an RDS, use readRDS to load it
   else if (tolower(file_ext) == "rds") {
-    data <- readRDS(file_path)
+    data <- readRDS(url(file_path))
   }
   
   # if the file extension is not recognized, throw an error
