@@ -2498,7 +2498,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
         filter(year == yr_) %>%
         select(-year) %>%
         arrange(airzone,site) %>%
-        mutate(site = gsub("!",'<b><i>',site)) %>%
+        mutate(site = gsub("!",'<b>',site)) %>%
         select(-airzone) 
       
       colnames(a) <- c('Site',
@@ -2562,7 +2562,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
           filter(year == yr_) %>%
           select(-year) %>%
           arrange(airzone,site) %>%
-          mutate(site = gsub("!",'<b><i>',site)) %>%
+          mutate(site = gsub("!",'<b>',site)) %>%
           select(-airzone) 
         
        
