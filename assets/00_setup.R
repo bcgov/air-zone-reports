@@ -2474,11 +2474,13 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
       
       df_tbl_complete_colour <- df_tbl_complete_colour %>%
         left_join(df_sites_name) %>%
-        mutate(site = ifelse(is.na(sitenew),site,sitenew)) 
+        mutate(site = ifelse(is.na(sitenew),site,sitenew)) %>%
+        select(-sitenew)
       
       df_tbl_complete_colourtxt <-  df_tbl_complete_colourtxt %>%
         left_join(df_sites_name) %>%
-        mutate(site = ifelse(is.na(sitenew),site,sitenew)) 
+        mutate(site = ifelse(is.na(sitenew),site,sitenew)) %>%
+        select(-sitenew)
       
       print(paste('Creating management levels for year:',yr_))
       df_tbl_complete_colour_ <- df_tbl_complete_colour %>%
