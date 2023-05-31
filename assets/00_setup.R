@@ -2423,10 +2423,10 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
       mutate(display = ifelse(grepl('!',site),toupper(colour_text),metric_display)) %>% 
       select(site,year,parameter,airzone,display) %>%
       pivot_wider(names_from = parameter, values_from = display) %>%
-      mutate(PM25 = ifelse(is.na(PM25),'-/-',PM25),
-             O3 = ifelse(is.na(O3),'-',O3),
-             NO2 = ifelse(is.na(NO2),'-/-',NO2),
-             SO2 = ifelse(is.na(SO2),'-/-',SO2))
+      mutate(PM25 = ifelse(is.na(PM25),'No Valid Data',PM25),
+             O3 = ifelse(is.na(O3),'No Valid Data',O3),
+             NO2 = ifelse(is.na(NO2),'No Valid Data',NO2),
+             SO2 = ifelse(is.na(SO2),'No Valid Data',SO2))
     
     
     df_tbl_complete_colour <- df_ %>%
@@ -2565,10 +2565,10 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
           mutate(site = gsub("!",'<b>',site)) %>%
           select(-airzone) 
         
-       
         
         
-        colnames(a) <- c('Site or<br>Air Zone',
+        
+        colnames(a) <- c('Site',
                          'PM<sub>2.5</sub>, µg/m<sup>3</sup><br>(annual/24-hr)',
                          'O<sub>3</sub>, ppb<br>(8-hour)',
                          'NO<sub>2</sub>, ppb<br>(annual/1-hour)',
@@ -2614,4 +2614,382 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
   
   return(result)
 }
+
+
+#these scripts generate the bar plots
+
+#' Create a ranked bar graph (backend version)
+#'
+#' This is the back end of the plot_bar_ranked function
+plot_bar_ranked0 <- function(df,metric,year,airzone = NULL,df_stations = NULL) {
+  
+  if (0) {
+    df_caaqs_results <- readr::read_csv('./data/out/caaqs_results.csv')
+    unique(df_caaqs_results$metric)
+    metric <- c('pm25_annual')
+    
+    metric<- c('no2_ann')
+    airzone <- 'Central Interior'
+    airzone <- NULL
+    df_stations = NULL
+    year <- 2015
+    
+    df_caaqs_results <- df_caaqs_results
+    metric <- 'pm25_annual'
+    year <- 2021
+    airzone <- NULL
+    
+    plot_bar_ranked0(df_caaqs_results = df_caaqs_results, metric = 'pm25_annual', year = 2021)
+  }
+  
+  df_caaqs_results <- df
+  
+  #plotly version
+  df_unit_plotly <- tribble(
+    ~metric,~units,
+    'pm25_annual',"Annual PM<sub>2.5</sub> Metric(&mu;g/m<sup>3</sup>)",
+    'pm25_24h',"24-Hour PM<sub>2.5</sub> Metric(&mu;g/m<sup>3</sup>)",
+    'o3_8h',"8-Hour O<sub>3</sub> Metric (ppb)",
+    'no2_1hr',"1-Hour NO<sub>2</sub> Metric (ppb)",
+    'no2_ann',"Annual NO<sub>2</sub> Metric (ppb)",
+    'so2_1hr',"1-Hour SO<sub>2</sub> Metric (ppb)",
+    'so2_ann',"Annual SO<sub>2</sub> Metric (ppb)"
+  )
+  
+  #ggplot version
+  df_unit <- tribble(
+    ~metric,~units,
+    'pm25_annual',bquote(~"Average "~PM[2.5]~","~mu~g/m^3),
+    'pm25_24h',bquote(~"98th Percentile "~PM[2.5]~","~mu~g/m^3),
+    'pm25_ann(1yr)',bquote("Annual "~PM[2.5]~","~mu~g/m^3),
+    'pm25_24hr(1yr)',bquote(~"98th Percentile "~PM[2.5]~","~mu~g/m^3),
+    'o3_8h',bquote("4th Highest"~O[3]~",ppb"),
+    'o3_8h(1yr)',bquote("4th Highest"~O[3]~",ppb"),
+    'no2_1hr',bquote("98th Percentile "~NO[2]~",ppb"),
+    'no2_ann',bquote("Average "~NO[2]~",ppb"),
+    'no2_1hr(1yr)',bquote("98th Percentile "~NO[2]~",ppb"),
+    'no2_ann(1yr)',bquote("Average "~NO[2]~",ppb"),
+    'so2_1hr',bquote("99th Percentile "~SO[2]~",ppb"),
+    'so2_ann',bquote("Average "~SO[2]~",ppb"),
+    'so2_1hr(1yr)',bquote("99th Percentile "~SO[2]~",ppb"),
+    'so2_ann(1yr)',bquote("Average "~SO[2]~",ppb")
+  )
+  
+  #define the CAAQS and the axis scale limits for display purposes
+  #includes 2015 and 2020 CAAQS, based on the year
+  if (year>=2020) {
+    df_axis <- tribble(
+      ~metric,~caaqs,~lbl_caaqs,~xmin,~xlab,
+      'pm25_annual',8.8,'2020 CAAQS',10,9.5,
+      'pm25_24h',27,'2020 CAAQS',30,29,
+      'o3_8h',62,'2020 CAAQS',70,64,
+      'no2_1hr',60,'2020 CAAQS',70,62,
+      'no2_ann',17,'2020 CAAQS',20,19,
+      'so2_1hr',70,'2020 CAAQS',80,72,
+      'so2_ann',5,'2020 CAAQS',10,6
+    )
+  } else {
+    df_axis <- tribble(
+      ~metric,~caaqs,~lbl_caaqs,~xmin,~xlab,
+      'pm25_annual',10,'2015 CAAQS',10,9.5,
+      'pm25_24h',28,'2015 CAAQS',30,29,
+      'o3_8h',63,'2015 CAAQS',70,64,
+      'no2_1hr',60,'2020 CAAQS',70,62,
+      'no2_ann',17,'2020 CAAQS',20,19,
+      'so2_1hr',70,'2020 CAAQS',80,72,
+      'so2_ann',5,'2020 CAAQS',10,6
+    )
+  }
+  
+  
+  
+  
+  
+  
+  
+  #rename instruments to simplified versions
+  #this helps simplify display
+  
+  
+  
+  #redefined filtering variables to avoid confusion with column names
+  airzone_filter <- airzone
+  metric_filter <- metric
+  year_filter <- year
+  
+  if (is.null(df_stations)) {
+    df_stations <- envair::listBC_stations(use_CAAQS = TRUE, merge_Stations = TRUE)%>%
+      dplyr::rename(label = Label,
+                    latitude  = LAT,
+                    longitude = LONG,
+                    airzone = AIRZONE) %>%
+      select(site,label,airzone,latitude,longitude) %>%
+      group_by(site) %>%
+      slice(1) %>% ungroup() %>%
+      filter(!is.na(airzone))
+  } else {
+    df_stations <- df_stations%>%
+      dplyr::rename(label = Label,
+                    latitude  = LAT,
+                    longitude = LONG,
+                    airzone = AIRZONE) %>%
+      select(site,label,airzone,latitude,longitude) %>%
+      group_by(site) %>%
+      slice(1) %>% ungroup() %>%
+      filter(!is.na(airzone))
+  }
+  
+  
+  
+  if (is.null(airzone_filter)) {
+    airzone_filter <- unique(df_stations$airzone)
+  }
+  
+  #these are to define FEM and non-FEM analyzers
+  #will only display them when there are multiple PM instruments
+  df_instrument_rename <- tibble(
+    instrument = c('PM25 SHARP5030','PM25_SHARP5030i','SHARP','BAM1020/SHARP',
+                   'PM25_T640','TEOM/SHARP','BAM1020/TEOM','PM25_R&P_TEOM'),
+    instrument_new = c('FEM','FEM','FEM','FEM','FEM','FEM/non-FEM','FEM/non-FEM','non-FEM')
+  )
+  #prepare data for plotting
+  #add meta-data from station list and the labels
+  #note that it is possible that there are stations without "Labels" value
+  df <- df_caaqs_results %>%
+    left_join(df_stations,by='site') %>%
+    left_join(df_unit_plotly,by='metric') %>%
+    left_join(df_axis,by='metric') %>%
+    mutate(label = ifelse(is.na(label),site,label)) %>%
+    left_join(df_instrument_rename) %>%
+    mutate(instrument = ifelse(is.na(instrument_new),
+                               instrument,instrument_new))
+  
+  #fix for stations with multiple instruments
+  #add the instrument name to the site name and call it label
+  df <-
+    ungroup(df) %>% 
+    filter(!is.na(metric_value)) %>%
+    group_by(parameter,metric,label,year,tfee) %>%
+    dplyr::mutate(count =n()) %>%
+    ungroup() %>%
+    
+    dplyr::mutate(label = ifelse((count >1 & parameter == 'PM25'),
+                                 paste(label,'<br>On ',instrument,' Analyzer',sep=''),
+                                 label)) %>%
+    # View()
+    select(-count)
+  
+  
+  
+  
+  df <- df %>%
+    filter(year %in% year_filter) %>%
+    filter(metric %in% metric_filter) %>%
+    filter(tolower(airzone) %in% tolower(airzone_filter))
+  
+  units <- unique(df$units)[[1]]
+  
+  units_suffix <-  gsub("[\\(\\)]", "", regmatches(units, gregexpr("\\(.*?\\)", units))[[1]])
+  units_prefix <- gsub("\\(.*?\\)", "", units)
+  xmax <- round(max(df$metric_value*1.1,df$xmin,na.rm = TRUE))
+  caaqs <- unique(df$caaqs)[1]
+  caaqs_label <- unique(df$lbl_caaqs)[1]
+  xlab <- unique(df$xlab)[1]
+  
+  
+  #identify scale limits
+  
+  
+  #set order of site
+  lvls_site <- df %>%
+    filter(!tfee) %>%
+    arrange(metric_value) %>%
+    filter(!is.na(metric_value)) %>%
+    pull(label) %>%
+    unique()
+  
+  
+  
+  if (any(df$tfee)) {
+    
+    #there is TFEE to plot
+    
+    df <-
+      
+      ungroup(df) %>%
+      mutate(label=factor(label,levels=lvls_site)) %>%
+      filter(!is.na(metric_value)) %>%
+      mutate(`Data Adjustment (TFEE)` = ifelse(tfee,
+                                               'Wildfire-adjusted\n(wildfire data removed)',
+                                               'No Adjustment\n(wildfire data included)')) %>%
+      mutate(`Data Adjustment (TFEE)` = factor(`Data Adjustment (TFEE)`,levels = c(
+        'No Adjustment\n(wildfire data included)',
+        'Wildfire-adjusted\n(wildfire data removed)'
+      ))) %>%
+      group_by(parameter,site,instrument,year,metric) %>%
+      arrange(desc(metric_value)) %>%
+      mutate(metric_tfee = min(metric_value,na.rm = TRUE),
+             metric_notfee = max(metric_value,na.rm = TRUE),
+             count = n()) %>%
+      ungroup() %>% 
+      mutate(tooltip_ = ifelse((metric_tfee == metric_notfee | count ==1),
+                               paste('<i>',units_prefix,'</i><br>   ',
+                                     metric_value,' ',units_suffix,sep=''),  #no wildfire adjustment 
+                               
+                               
+                               paste('<i>',units_prefix,'</i><br>',
+                                     '   Including wildfire:    ',metric_notfee,' ',units_suffix,'<br>',
+                                     '   Wildfire data removed: ',metric_tfee,' ',units_suffix,
+                                     
+                                     sep='')  #there is wildfireand non-wildfire adjusted data
+      )) %>%
+      mutate(tooltiptext = paste('<b>',toupper(label),' (',year,')','</b><br>',tooltip_,'<br><br><i>',
+                                 caaqs_label,'</i><br>       ',
+                                 caaqs,' ',units_suffix,
+                                 
+                                 sep='')) %>% select(-tooltip_)
+    
+    
+    
+    p <- 
+      ggplotly(
+        df %>% 
+          ungroup() %>%
+          
+          # View()
+          ggplot2::ggplot(aes(x=label, y=metric_value,fill = 
+                                `Data Adjustment (TFEE)`,
+                              text = tooltiptext)) +#fill = `Data Adjustment (TFEE)`)) +
+          geom_col(position='identity',colour = 'black',width = 0.8) +
+          coord_flip() +
+          ylab(units) +
+          scale_y_continuous(expand = c(0,0),limits = c(0,xmax)) +
+          #add CAAQS line and text
+          geom_hline(yintercept = caaqs, colour = 'red', linetype = 'dashed')+
+          
+          theme(panel.background = element_blank(),
+                panel.border = element_rect(fill=NA, colour='black'),
+                axis.title.y = element_blank(),
+                legend.position = c(0.9,0.1)) +
+          annotate("text",x=nrow(df%>%select(site)%>%distinct())/4, y=xlab,
+                   label = caaqs_label, angle = '90', colour = 'red') +
+          scale_fill_manual(values = c('slategray3','cornflowerblue')),
+        tooltip = c('text')
+      )%>%
+      layout(legend = list(
+        orientation = "h",
+        title = ''
+      ),
+      hoverlabel = list(align = 'left',bgcolor = 'yellow')
+      )
+    
+    
+    
+    
+  } else {
+    #no TFEE to plot
+    if (0) {
+      df_ <- df
+      df <- df_
+    }
+    
+    df <-  ungroup(df) %>%
+      mutate(label=factor(label,levels=lvls_site)) %>%
+      filter(!is.na(metric_value)) %>%
+      mutate(tooltiptext = paste('<b>',toupper(label),' (',year,')','</b><br>',
+                                 '<i>',units_prefix,'</i><br>      ',
+                                 metric_value,' ',units_suffix,'<br><br>',
+                                 caaqs_label,'<br>       ',
+                                 caaqs,' ',units_suffix,
+                                 
+                                 sep='' ))
+    
+    
+    p <- ggplotly( 
+      df %>% 
+        ungroup() %>%
+        ggplot2::ggplot(aes(x=label, y=metric_value, text = tooltiptext)) +
+        geom_col(position='dodge',colour = 'black',fill='cornflowerblue',width = 0.8) +
+        coord_flip() +
+        ylab(units) +
+        scale_y_continuous(expand = c(0,0),limits = c(0,xmax)) +
+        #add CAAQS line and text
+        geom_hline(yintercept = caaqs, colour = 'red', linetype = 'dashed') +
+        annotate("text",x=nrow(df%>%select(site)%>%distinct())/4, y=xlab,
+                 label = caaqs_label, angle = 90, colour = 'red') +
+        # ylab(expression(PM[2.5])) +
+        theme(panel.background = element_blank(),
+              panel.border = element_rect(fill=NA, colour='black'),
+              axis.title.y = element_blank(),
+              legend.position = 'none') +
+        scale_fill_manual(values = c('cornflowerblue')),
+      tooltip = c('text')) %>%
+      layout(legend = list(
+        orientation = "h",
+        title = ''
+      ),
+      hoverlabel = list(align = 'left',bgcolor = 'yellow')
+      )
+    
+  }
+  
+  return(p)
+  
+}
+
+
+#' Create bar graph of the metrics
+#' 
+#' @param pollutant is the pollutant
+#' @param metric is the pollutant metric. use definition in caaqs_results.csv
+#' @param year is the datayear
+#' @param df is the dataframe containing summary data. If NULL, it retrieved from github
+#' @param airzone is the airzzone. If null, it displays all sites
+plot_bar_caaqs <- function(metric, year, df = NULL,airzone = NULL) {
+  
+  if (0) {
+    metric <- 'test'
+    metric <- 'pm25_annual'
+    airzone <- NULL
+  }
+  
+  library(readr)
+  library(dplyr)
+  library(envair)
+  
+  
+  url_data <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/caaqs_results.csv'
+  url_stations <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/liststations.csv'
+  
+  
+  lst_stations <- read_csv(url(url_stations))
+  if (is.null(df)) {
+    df <- read_csv(url(url_data))
+    
+  } 
+  
+  
+  
+  metric <- tolower(metric)
+  df$metric <- tolower(df$metric)
+  
+  if (!metric %in% df$metric) {
+    stop('metric is not registered. Please check in caaqs_results.csv')
+  }
+  if (!year %in% df$year) {
+    stop('"year" is not registered. Please check in caaqs_results.csv')
+  }
+  
+  #pre-assign
+  df_ <- df
+  metric_ <- metric
+  airzone_ <- airzone
+  year_ <- year
+  p <- plot_bar_ranked0(df =  df_,year = year_,
+                        metric = metric_, airzone = airzone_,df_stations = lst_stations)
+  
+  return(p)
+}
+#end of functions----------
+
 
