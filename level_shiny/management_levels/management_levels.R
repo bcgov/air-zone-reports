@@ -13,17 +13,16 @@ library(sf)
 library(bcmaps)
 
 
-year_max <- 2021
 dirs_location <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out'  #local location, two dots for final, one dot for debug
 if (0) {
   dirs_location <- './data/out'
 }
-# list.files(dirs_location)
-
 df_management_airzones <- readr::read_csv(paste(dirs_location,'management_airzones.csv',sep='/'))
 az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/'))
 df_stations <- readr::read_rds(paste(dirs_location,'liststations_merged.Rds',sep='/'))
 df_caaqs_results <- readr::read_csv(paste(dirs_location,'caaqs_results.csv',sep='/'))
+
+year_max <- max(df_caaqs_results$year)
 #define functions---------------
 
 df_parameter <- tribble(
@@ -334,7 +333,7 @@ plot_bar_ranked <- function(df_caaqs_results,pollutant,year,airzone = NULL,df_st
 plot_bar_ranked0 <- function(df_caaqs_results,metric,year,airzone = NULL,df_stations = NULL) {
   
   if (0) {
-    df_caaqs_results <- readr::read_csv('../test_data/caaqs_results.csv')
+    df_caaqs_results <- readr::read_csv('./data/out/caaqs_results.csv')
     metric <- c('pm25_annual')
     airzone <- 'Central Interior'
     df_stations = NULL

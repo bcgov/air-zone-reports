@@ -2980,6 +2980,9 @@ plot_bar_caaqs <- function(metric, year, df = NULL,airzone = NULL) {
     stop('"year" is not registered. Please check in caaqs_results.csv')
   }
   
+  if (tolower(airzone) == 'all') {
+    airzone <- NULL
+  }
   #pre-assign
   df_ <- df
   metric_ <- metric
@@ -2992,4 +2995,52 @@ plot_bar_caaqs <- function(metric, year, df = NULL,airzone = NULL) {
 }
 #end of functions----------
 
-
+#' This creates a list containing all the bar graphs for all years and air zones
+#' 
+#' This is pre-requisite for shiny
+#' 
+#' Should save output to ./data/out/bargraph.Rds
+plot_bar_caaqs_complete <- function() {
+  
+  url_data <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/caaqs_results.csv'
+  url_stations <- 'https://github.com/bcgov/air-zone-reports/raw/master/data/out/liststations.csv'
+  
+  
+  lst_stations <- read_csv(url(url_stations))
+  if (is.null(df)) {
+    df <- read_csv(url(url_data))
+    
+  } 
+  
+  lst_metric <- df %>%
+    select(metric) %>%
+    distinct() %>%
+    filter(!grepl('(1yr)',metric)) %>%
+    pull(metric)
+  
+  lst_airzone <- unique(lst_stations$AIRZONE)
+  lst_airzone <- lst_airzone[!is.na(lst_airzone)]
+  lst_airzone <- c('ALL',lst_airzone)
+  
+  lst_yrs <- unique(df$year)
+  
+  
+  result <- list()
+  
+  
+  for (metric_ in lst_metric) {
+    
+    for (airzone_ in lst_airzone) {
+      for (yr_ in lst_yrs) {
+        listname <- paste(metric_,airzone_,yr_,sep='_')
+        print(listname)
+        try(
+          result[[listname]] <- plot_bar_caaqs(metric = metric_,year = yr_,df,airzone = airzone_)
+        )
+      }
+    }
+  }
+  
+  result[['data']] <- df
+  return(result)
+}
