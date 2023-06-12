@@ -7994,11 +7994,11 @@ PM25,Vanderhoof Courthouse,BAM1020,2020,FALSE,88,pm25_24h,TRUE
 PM25,Vanderhoof Courthouse,BAM1020,2020,TRUE,NA,pm25_annual,FALSE
 PM25,Vanderhoof Courthouse,BAM1020,2020,TRUE,33,pm25_24h,TRUE
 PM25,Vanderhoof Courthouse,BAM1020,2021,FALSE,NA,pm25_annual,FALSE
-PM25,Vanderhoof Courthouse,BAM1020,2021,FALSE,29,pm25_24h,TRUE
+PM25,Vanderhoof Courthouse,BAM1020,2021,FALSE,NA,pm25_24h,TRUE
 PM25,Vanderhoof Courthouse,BAM1020,2021,FALSE,9.9,pm25_ann(1yr),NA
 PM25,Vanderhoof Courthouse,BAM1020,2021,FALSE,27.2,pm25_24hr(1yr),NA
 PM25,Vanderhoof Courthouse,BAM1020,2021,TRUE,NA,pm25_annual,FALSE
-PM25,Vanderhoof Courthouse,BAM1020,2021,TRUE,27,pm25_24h,TRUE
+PM25,Vanderhoof Courthouse,BAM1020,2021,TRUE,NA,pm25_24h,TRUE
 PM25,Vanderhoof Courthouse,BAM1020,2021,TRUE,9.4,pm25_ann(1yr),NA
 PM25,Vanderhoof Courthouse,BAM1020,2021,TRUE,22.8,pm25_24hr(1yr),NA
 PM25,Vernon Science Centre,PM25 SHARP5030,2014,FALSE,NA,pm25_annual,FALSE
@@ -8702,10 +8702,10 @@ NO2,Williams Lake Columneetza School,NA,2020,FALSE,35.4,no2_1hr,FALSE
 NO2,Williams Lake Columneetza School,NA,2020,FALSE,6.1,no2_ann,NA
 NO2,Williams Lake Columneetza School,NA,2020,FALSE,30.3,no2_1hr(1yr),NA
 NO2,Williams Lake Columneetza School,NA,2020,FALSE,6.1,no2_ann(1yr),NA
-NO2,Williams Lake Columneetza School,NA,2021,FALSE,32.3,no2_1hr,FALSE
-NO2,Williams Lake Columneetza School,NA,2021,FALSE,9.7,no2_ann,NA
-NO2,Williams Lake Columneetza School,NA,2021,FALSE,27.6,no2_1hr(1yr),NA
-NO2,Williams Lake Columneetza School,NA,2021,FALSE,9.7,no2_ann(1yr),NA
+NO2,Williams Lake Columneetza School,NA,2021,FALSE,NA,no2_1hr,FALSE
+NO2,Williams Lake Columneetza School,NA,2021,FALSE,NA,no2_ann,NA
+NO2,Williams Lake Columneetza School,NA,2021,FALSE,NA,no2_1hr(1yr),NA
+NO2,Williams Lake Columneetza School,NA,2021,FALSE,NA,no2_ann(1yr),NA
 SO2,Williams Lake Columneetza School,NA,2016,FALSE,NA,so2_1hr,FALSE
 SO2,Williams Lake Columneetza School,NA,2016,FALSE,NA,so2_ann,NA
 SO2,Williams Lake Columneetza School,NA,2017,FALSE,NA,so2_1hr,FALSE

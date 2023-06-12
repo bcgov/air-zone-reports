@@ -16,6 +16,7 @@
 
 library(envair)
 library(rcaaqs)
+
 # CAAQS-related Calculatons-----
 
 #' Calculate annual metrics
@@ -2680,7 +2681,7 @@ plot_bar_ranked0 <- function(df,metric,year,airzone = NULL,df_stations = NULL) {
   if (year>=2020) {
     df_axis <- tribble(
       ~metric,~caaqs,~lbl_caaqs,~xmin,~xlab,
-      'pm25_annual',8.8,'2020 CAAQS',10,9.5,
+      'pm25_annual',8.8,'2020 CAAQS',12,9.5,
       'pm25_24h',27,'2020 CAAQS',30,29,
       'o3_8h',62,'2020 CAAQS',70,64,
       'no2_1hr',60,'2020 CAAQS',70,62,
@@ -2691,7 +2692,7 @@ plot_bar_ranked0 <- function(df,metric,year,airzone = NULL,df_stations = NULL) {
   } else {
     df_axis <- tribble(
       ~metric,~caaqs,~lbl_caaqs,~xmin,~xlab,
-      'pm25_annual',10,'2015 CAAQS',10,9.5,
+      'pm25_annual',10,'2015 CAAQS',12,9.5,
       'pm25_24h',28,'2015 CAAQS',30,29,
       'o3_8h',63,'2015 CAAQS',70,64,
       'no2_1hr',60,'2020 CAAQS',70,62,
@@ -2749,8 +2750,8 @@ plot_bar_ranked0 <- function(df,metric,year,airzone = NULL,df_stations = NULL) {
   #will only display them when there are multiple PM instruments
   df_instrument_rename <- tibble(
     instrument = c('PM25 SHARP5030','PM25_SHARP5030i','SHARP','BAM1020/SHARP',
-                   'PM25_T640','TEOM/SHARP','BAM1020/TEOM','PM25_R&P_TEOM'),
-    instrument_new = c('FEM','FEM','FEM','FEM','FEM','FEM/non-FEM','FEM/non-FEM','non-FEM')
+                   'PM25_T640','TEOM/SHARP','BAM1020/TEOM','PM25_R&P_TEOM','BAM1020'),
+    instrument_new = c('FEM','FEM','FEM','FEM','FEM','FEM/non-FEM','FEM/non-FEM','non-FEM','FEM')
   )
   #prepare data for plotting
   #add meta-data from station list and the labels
@@ -2871,8 +2872,8 @@ plot_bar_ranked0 <- function(df,metric,year,airzone = NULL,df_stations = NULL) {
                 panel.border = element_rect(fill=NA, colour='black'),
                 axis.title.y = element_blank(),
                 legend.position = c(0.9,0.1)) +
-          annotate("text",x=nrow(df%>%select(site)%>%distinct())/4, y=xlab,
-                   label = caaqs_label, angle = '90', colour = 'red') +
+          # annotate("text",x=nrow(df%>%select(site)%>%distinct())/4, y=xlab,
+          #          label = caaqs_label, angle = '90', colour = 'red') +
           scale_fill_manual(values = c('slategray3','cornflowerblue')),
         tooltip = c('text')
       )%>%
@@ -2915,8 +2916,8 @@ plot_bar_ranked0 <- function(df,metric,year,airzone = NULL,df_stations = NULL) {
         scale_y_continuous(expand = c(0,0),limits = c(0,xmax)) +
         #add CAAQS line and text
         geom_hline(yintercept = caaqs, colour = 'red', linetype = 'dashed') +
-        annotate("text",x=nrow(df%>%select(site)%>%distinct())/4, y=xlab,
-                 label = caaqs_label, angle = 90, colour = 'red') +
+        # annotate("text",x=nrow(df%>%select(site)%>%distinct())/4, y=xlab,
+        #          label = caaqs_label, angle = 90, colour = 'red') +
         # ylab(expression(PM[2.5])) +
         theme(panel.background = element_blank(),
               panel.border = element_rect(fill=NA, colour='black'),
@@ -2951,6 +2952,8 @@ plot_bar_caaqs <- function(metric, year, df = NULL,airzone = NULL) {
     metric <- 'test'
     metric <- 'pm25_annual'
     airzone <- NULL
+    df <- NULL
+    year <- 2021
   }
   
   library(readr)
@@ -3031,6 +3034,7 @@ plot_bar_caaqs_complete <- function() {
   for (metric_ in lst_metric) {
     
     for (airzone_ in lst_airzone) {
+      print(airzone_)
       for (yr_ in lst_yrs) {
         listname <- paste(metric_,airzone_,yr_,sep='_')
         print(listname)
