@@ -1985,6 +1985,8 @@ add_tfee_filler <- function(df, category = 'parameter') {
 #' Create management level legend table
 #' This is generalized
 add_mgmt_legend <- function() {
+  
+  library(DT)
   df_colour_levels <- tribble(
     ~colour_text,~colour_order,~colour,~actions,~txt_colour,
     'N/A',0,'#dbdbdb','No Data','black',
@@ -2011,7 +2013,7 @@ add_mgmt_legend <- function() {
                      )
   ) %>%
     
-    formatStyle('Management Level',target = 'row',backgroundColor = styleEqual(df_colour_levels$colour_text,df_colour_levels$colour),
+    DT::formatStyle('Management Level',target = 'row',backgroundColor = styleEqual(df_colour_levels$colour_text,df_colour_levels$colour),
                 Color = styleEqual(df_colour_levels$colour_text,df_colour_levels$txt_colour)) 
   
   return(a)
@@ -2458,7 +2460,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
     
     
     
-    for (yr_ in min(df_site_colour$year): max(df_site_colour$year)) {
+    for (yr_ in min(df_site_colour$year,na.rm = TRUE): max(df_site_colour$year,na.rm = TRUE)) {
       if (0) {
         yr_ <- 2017
       }
@@ -3010,10 +3012,10 @@ plot_bar_caaqs_complete <- function() {
   
   
   lst_stations <- read_csv(url(url_stations))
-  if (is.null(df)) {
+  # if (is.null(df)) {
     df <- read_csv(url(url_data))
     
-  } 
+  # } 
   
   lst_metric <- df %>%
     select(metric) %>%
