@@ -2400,8 +2400,8 @@ PM25,Fort St John Key Learning Centre,PM25 SHARP5030,2021,FALSE,5.4,pm25_ann(1yr
 PM25,Fort St John Key Learning Centre,PM25 SHARP5030,2021,FALSE,27.9,pm25_24hr(1yr),NA
 PM25,Fort St John Key Learning Centre,PM25 SHARP5030,2021,TRUE,4.9,pm25_annual,TRUE
 PM25,Fort St John Key Learning Centre,PM25 SHARP5030,2021,TRUE,16,pm25_24h,TRUE
-PM25,Fort St John Key Learning Centre,PM25 SHARP5030,2021,TRUE,5.4,pm25_ann(1yr),NA
-PM25,Fort St John Key Learning Centre,PM25 SHARP5030,2021,TRUE,27.9,pm25_24hr(1yr),NA
+PM25,Fort St John Key Learning Centre,PM25 SHARP5030,2021,TRUE,4.9,pm25_ann(1yr),NA
+PM25,Fort St John Key Learning Centre,PM25 SHARP5030,2021,TRUE,16,pm25_24hr(1yr),NA
 O3,Fort St John Key Learning Centre,NA,2015,FALSE,NA,o3_8h,FALSE
 O3,Fort St John Key Learning Centre,NA,2015,FALSE,58.3,o3_8h(1yr),NA
 O3,Fort St John Key Learning Centre,NA,2015,TRUE,NA,o3_8h,FALSE
