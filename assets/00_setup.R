@@ -16,6 +16,10 @@
 
 library(envair)
 library(rcaaqs)
+library(tibble)
+library(readr)
+library(ggplot2)
+library(plotly)
 
 # CAAQS-related Calculatons-----
 
@@ -664,7 +668,7 @@ get_management_summary <- function(outputtype = 'complete',df_preload = NULL,
   if (0) {
     outputtype = 'complete'
     df_preload = NULL
-    datafile = paste(saveDirectory,'caaqs_results.csv',sep='/')
+    datafile = paste('./data/out/caaqs_results.csv',sep='/')
   }
   #define the parameter for each metric
   #arrange in terms of an order
@@ -2142,6 +2146,10 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
   
   df_sites <- load_data(datapath = dirs_location,filename = 'management_sites.csv')
   df_data <- load_data(datapath = dirs_location,filename = 'caaqs_results.csv')
+  
+  #change the site name
+  df_sites$site <- gsub('[^[:alnum:]]',' ',df_sites$site)
+  df_data$site <- gsub('[^[:alnum:]]',' ',df_data$site)
   
   df_data <- df_data %>%
     filter(year %in% df_sites$year)
