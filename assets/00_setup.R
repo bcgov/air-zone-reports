@@ -240,19 +240,33 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
   cols_final <- c('parameter','site','instrument','year',
                   'tfee','metric_value','metric','flag_two_of_three_years')
   
+  df_data <- importBC_data(c('pm25','o3','no2','so2'),
+                           years = (min(years)-3):max(years),
+                           flag_TFEE = TRUE,merge_Stations = TRUE)
+  
   for (param in c('pm25','o3','no2','so2')) {
+  # for (param in c('o3')) {
     df <- NULL
     
     #Retrieve data, different retrieval for ozone
     if(param != 'o3') {
       try(
-        df <- importBC_data(param,years = (min(years)-2):max(years),
-                            flag_TFEE = TRUE,merge_Stations = TRUE)
+        df <- df_data %>%
+          filter(tolower(PARAMETER) %in% tolower(param)) %>%
+          mutate(year = year(DATE)) %>%
+          filter(lubridate::year(DATE) %in% (min(years)-2):max(years))
+        
       )
     } else {
       try(
-        df <- importBC_data(param,years = (min(years)-3):max(years),
-                            flag_TFEE = TRUE,merge_Stations = TRUE)
+        
+        df <- df_data %>%
+          filter(tolower(PARAMETER) %in% tolower(param)) %>%
+          mutate(year = year(DATE)) %>%
+          filter(lubridate::year(DATE) %in% (min(years)-3):max(years))
+        
+        # df <- importBC_data(param,years = (min(years)-3):max(years),
+        #                     flag_TFEE = TRUE,merge_Stations = TRUE)
       )
     }
     
@@ -268,11 +282,12 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
     #remove duplicate entries
     #note for pm, instrument is included in grouping
     if (param == 'pm25') {
+      
       df <- df %>%
         ungroup() %>%
         dplyr::mutate(date_time = DATE_PST - lubridate::hours(1)) %>%
         dplyr::rename(value = RAW_VALUE, site = STATION_NAME, instrument = INSTRUMENT) %>%
-        filter(!is.na(value)) %>%
+        # filter(!is.na(value)) %>%
         group_by(date_time,site,instrument) %>%
         dplyr::mutate(index = 1:n()) %>%
         filter(index == 1) %>% select(-index) %>%
@@ -282,11 +297,11 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
         ungroup() %>%
         dplyr::mutate(date_time = DATE_PST - lubridate::hours(1)) %>%
         dplyr::rename(value = RAW_VALUE, site = STATION_NAME, instrument = INSTRUMENT) %>%
-        filter(!is.na(value)) %>%
+        # filter(!is.na(value)) %>%  #this cause a bug, removes entire year
         group_by(date_time,site) %>%
         dplyr::mutate(index = 1:n()) %>%
         filter(index == 1) %>% select(-index) %>%
-        ungroup() 
+        ungroup()
     }
     
     
@@ -711,6 +726,33 @@ get_management_summary <- function(outputtype = 'complete',df_preload = NULL,
   #add order to the metric
   df$metric <- factor(df$metric,levels = df_metric$metric)
   #calculate and return result based on the type specified
+  
+  #if previously red, and then current does not haveenough data, make it insufficient
+  
+
+ # df_select <- 
+  #list of years and sites with just one value of PM avaiable
+  df <- df %>%
+    mutate(index = paste(site,instrument,year,tfee))
+  
+  lst_ <- df %>%
+   filter(tolower(parameter) == 'pm25') %>%
+    group_by(site,instrument,year,tfee) %>%
+    mutate(count =n())  %>%
+    filter(count<2,colour_text != 'red') %>%
+    mutate(srch_index = paste(site,instrument,year-1,tfee)) %>%
+    pull(srch_index)
+  
+  #the previously red 
+  lst2_ <- df %>%
+    filter(index %in% lst_) %>%
+    mutate(srch_index = paste(site,instrument,year+1,tfee)) %>%
+    pull(srch_index)
+  #check if previous was red
+  df <-  df %>%
+    filter(!index %in% lst2_) %>%
+    select(-index)
+  
   outputtype <- tolower(outputtype)
   if (outputtype == 'complete') {
     return(df)
@@ -1637,7 +1679,7 @@ get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_ye
   
   if (0) {
     dataDirectory = './data/out'
-    current_year <- 2013
+    current_year <- 2021
   }
   require(dplyr)
   require(ggplot2)
@@ -1853,7 +1895,9 @@ get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_ye
   )
   
   for (param in unique(table_mgmt$parameter)) {
-    
+    if (0) {
+      param <- 'o3'
+    }
     print(paste('creating table:',param))
     colour_assign <- table_mgmt %>%
       filter(parameter == param,tfee) %>%
@@ -2018,7 +2062,7 @@ add_mgmt_legend <- function() {
   ) %>%
     
     DT::formatStyle('Management Level',target = 'row',backgroundColor = styleEqual(df_colour_levels$colour_text,df_colour_levels$colour),
-                Color = styleEqual(df_colour_levels$colour_text,df_colour_levels$txt_colour)) 
+                    Color = styleEqual(df_colour_levels$colour_text,df_colour_levels$txt_colour)) 
   
   return(a)
 }
@@ -2143,7 +2187,10 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
   result <- tbl_mgmt_airzone
   # saveRDS(tbl_mgmt_airzone,'./data/out/management_summary.Rds')
   
-  
+  if (0) {
+    df_sites <- read_csv('./data/out/management_sites.csv')
+    df_data <- read_csv('./data/out/caaqs_results.csv')
+  }
   df_sites <- load_data(datapath = dirs_location,filename = 'management_sites.csv')
   df_data <- load_data(datapath = dirs_location,filename = 'caaqs_results.csv')
   
@@ -2196,7 +2243,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
   colnames(df_sites)
   df_sites %>%
     filter(basis == metric) %>%
-    filter(basis_value != metric_value)
+    filter(basis_value != metric_value) 
   
   lst_stations <- load_data(datapath = dirs_location, filename = 'liststations.csv')
   lst_stations <- envair::listBC_stations(use_CAAQS = TRUE)
@@ -2325,7 +2372,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
     
     for (site_ in lst_sites) {
       if (0) {
-        site_ <- 'Victoria Topaz'
+        site_ <- 'Williams Lake Columneetza School'
       }
       print(paste('Generating summary for:',site_))
       colnames(df_sites)
@@ -3021,8 +3068,8 @@ plot_bar_caaqs_complete <- function() {
   
   lst_stations <- read_csv(url(url_stations))
   # if (is.null(df)) {
-    df <- read_csv(url(url_data))
-    
+  df <- read_csv(url(url_data))
+  
   # } 
   
   lst_metric <- df %>%
