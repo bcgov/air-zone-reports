@@ -77,7 +77,7 @@ bcmaps::airzones() %>%
   sf::st_make_valid() %>%
   sf::st_transform(st_crs(bc_bound())) %>%
   sf::st_intersection(st_geometry(bc_bound())) %>%
-  group_by(airzone = Airzone) %>%
+  group_by(Airzone) %>%
   summarize() %>%
   sf::st_transform(4326) %>%
   saveRDS(paste(saveDirectory,'az_mgmt.Rds',sep='/'))

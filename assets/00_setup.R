@@ -1232,7 +1232,8 @@ load_data <- function(datapath = './',filename) {
   
   # if the file is an RDS, use readRDS to load it
   else if (tolower(file_ext) == "rds") {
-    data <- readRDS(url(file_path))
+    try(data <- readRDS(url(file_path)))
+    try(data <- readRDS((file_path)))
   }
   
   # if the file extension is not recognized, throw an error
