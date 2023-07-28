@@ -73,6 +73,11 @@ pm25_tfee %>%
 
 
 #create quick mapping details
+#change to (1) if update needed on the 
+#airzone polygon map
+#content update is not necessary once
+#file is already there
+if (0) {
 bcmaps::airzones() %>%
   sf::st_make_valid() %>%
   sf::st_transform(st_crs(bc_bound())) %>%
@@ -81,7 +86,7 @@ bcmaps::airzones() %>%
   summarize() %>%
   sf::st_transform(4326) %>%
   saveRDS(paste(saveDirectory,'az_mgmt.Rds',sep='/'))
-  
+}
 
 # Calculate the caaqs values----
 # Calculations are based on the rcaaqs package
