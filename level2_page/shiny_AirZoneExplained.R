@@ -29,7 +29,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
     airzone <- NULL
     size = c("300px","300px")
     polygon_a = NULL
-    airzone <- 'NULL'
+    airzone <- NULL
   }
   
   
@@ -65,6 +65,8 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
   az_mgmt <- az_mgmt0 %>%
     left_join(df_colour,by='airzone')
   
+  
+  
   if (is.null(polygon_a)) {
     
     
@@ -88,6 +90,22 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
       add_bc_home_button()
     
     for (airzone_ in df_colour$airzone) {
+      if (0) {
+        airzone_ <- df_colour$airzone[2]
+        
+        az_mgmt <- az_mgmt0 %>%
+          left_join(df_colour,by='airzone')
+        
+        az_mgmt0 <- readRDS('./data/out/az_mgmt.Rds') 
+        colnames(az_mgmt0) <- tolower(colnames(az_mgmt0))
+        list.files('./data/out')
+        
+        print(airzone_)
+        a%>%
+          addPolygons(data = az_mgmt %>% filter(airzone == airzone_))
+                      
+        
+      }
       liststations_ <- liststations %>% filter(AIRZONE == airzone_)
       a <- a %>%
         
@@ -206,7 +224,7 @@ ui <- fluidPage(
   
   fluidRow(class = 'toprow',
            
-           h6("Select an Air Zone or Click on Map",style = "color:white"),
+           h6("Select an Air Zone or Click on the Map",style = "color:white"),
            column(12, align = "left",
                   # actionButton(inputId = 'reset',label = 'Reset'),
                   # tags$button(
