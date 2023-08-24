@@ -1590,7 +1590,8 @@ get_PM_exceedancesummary <- function(dirs_location = './data/out') {
 #' This will be useful for creating management level table
 #' 
 #' @param parameter is the parameter of either 'pm25','o3','no2','so2'
-get_tbl_management <- function(parameter) {
+#' @param outputtype is either "all", "html"
+get_tbl_management <- function(parameter, outputtype = 'html') {
   
   if (0) {
     parameter <- 'pm25'
@@ -1598,6 +1599,8 @@ get_tbl_management <- function(parameter) {
   
   library(tidyr)
   library(kableExtra)
+  library(stringr)
+  library(dplyr)
   
   param_filter <- parameter
   df_params <- tibble(
@@ -1606,7 +1609,8 @@ get_tbl_management <- function(parameter) {
                '8-Hour Metric',
                '24-Hour Metric','Annual Metric',
                'Annual Metric','1-Hour Metric'),
-    parameter = c('no2','no2','o3','pm25','pm25','so2','so2')
+    parameter = c('no2','no2','o3','pm25','pm25','so2','so2'),
+    decimals = c(1,0,0,0,1,1,0)
   )
   
   
@@ -1614,7 +1618,7 @@ get_tbl_management <- function(parameter) {
   tbl_mgmt <- rcaaqs::management_levels %>%
     select(parameter,lower_breaks,upper_breaks,val_labels,colour,colour_text) %>%
     rename(metric_old = parameter) %>%
-    left_join(df_params,by='metric_old') %>% select(-metric_old) %>%
+    dplyr::left_join(df_params,by='metric_old') %>% select(-metric_old) %>%
     filter(colour_text != 'grey') %>%
     mutate(val_labels = gsub('\\^3','<sup>3</sup>',val_labels)) %>%
     mutate(val_labels = gsub('ug','µg',val_labels)) %>%
@@ -1627,7 +1631,7 @@ get_tbl_management <- function(parameter) {
     
     actions = c('Achieve CAAQS','Prevent CAAQS Exceedance','Prevent Air Quality Deterioration','Keep Clean Areas Clean')
   ) %>%
-    left_join(tbl_colour)
+    dplyr::left_join(tbl_colour)
   
   
   
@@ -1651,7 +1655,7 @@ get_tbl_management <- function(parameter) {
     mutate(index=1:n()) %>%
     arrange(desc(index)) %>% select(-index) %>%
     select(-parameter) %>%
-    left_join(df_actions) %>%
+    dplyr::left_join(df_actions) %>%
     mutate(colour_text = toupper(colour_text)) %>%
     select(-colour) %>%
     rename('Management Level' = colour_text,
@@ -1668,8 +1672,125 @@ get_tbl_management <- function(parameter) {
     row_spec(3, background = '#FEE08B') %>%
     row_spec(4, background = '#A6D96A') 
   
-  return(t)
+  #create a list - added 2023-08-21
+  result <- list()
+  result$table <- t
+  
+  #transform the table to simplified version
+  
+  #special functions
+  extract_numbers_after_arrow <- function(input_string) {
+    numbers <- str_extract_all(input_string, "(?<=\\> )\\d+(\\.\\d+)?")
+    numbers <- unlist(numbers)
+    return(numbers)
+  }
+  # Function to remove leading and repetitive spaces
+  remove_spaces <- function(input_string) {
+    lines <- strsplit(input_string, "\n")[[1]]
+    cleaned_lines <- gsub("^\\s+", "", lines)
+    cleaned_lines <- gsub("\\s+", " ", cleaned_lines)
+    cleaned_string <- paste(cleaned_lines, collapse = "\n")
+    return(cleaned_string)
+  }
+  
+  
+  tbl_mgmt_value_ <- tbl_mgmt_value %>%
+    select(c(-`Management <br>Actions`)) %>%
+    mutate(parameter = param_filter) %>% ungroup() %>%
+    pivot_longer(cols = -c('parameter','Management Level')) %>%
+    rename(metric = name) %>%
+    dplyr::left_join(df_params %>% select(-metric_old))
+  
+  #fix the value text
+  #this will conver from the complex numbers to simpler version
+  
+  
+  
+  for (i in 1:nrow(tbl_mgmt_value_)) {
+    if (0) {
+      i <- 5
+    }
+    
+    
+    i_ <- tbl_mgmt_value_[i,]
+    value <- i_$value
+    
+    #sup changed temporarily to prevent interference
+    value <- gsub('<sup>','???',value)
+    value <- gsub('</sup>','~~~',value)
+    
+    if (grepl('&',i_$value,ignore.case = TRUE)) {
+      
+      value <- gsub('&','to',value)
+      value <- gsub('≤','',value)
+      #get the number after ">", and add 0.1 or 1 depends on significant figures
+      orig_number <- extract_numbers_after_arrow(value)
+      if (i_$decimals == 1) {
+        value <-
+          gsub(paste('> ',as.character(orig_number),sep=''), 
+               as.character(as.numeric(orig_number) + 0.1), value)
+        
+      } else {
+        value <-
+          gsub(paste('> ',as.character(orig_number),sep=''), 
+               as.character(as.numeric(orig_number) + 1), value)
+      }
+      
+      value <- gsub('>','',value)
+      value <- remove_spaces(value)
+      
+      # print(value)
+    } 
+    value <- gsub('> ','>',value)
+    value <- gsub('≤ ','≤',value)
+    value <- gsub('\\?\\?\\?','<sup>',value)
+    value <- gsub('\\~~~','</sup>',value)
+    tbl_mgmt_value_[i,]$value[1] <- value[[1]]
+  }
+  
+  tbl_mgmt_value_wide <- tbl_mgmt_value_ %>%
+    select(-decimals) %>%
+    ungroup() %>%
+    distinct() %>%
+    pivot_wider(names_from = metric, values_from = value) %>%
+    select(-parameter)
+  
+  
+  
+  cols_tbl <- colnames(tbl_mgmt_value_wide)
+  cols_tbl_remove <- cols_tbl[!cols_tbl %in% c('Management Level')]
+  
+  tbl_mgmt_wide <- tbl_mgmt_value %>%
+    select(-any_of(cols_tbl_remove)) %>%
+    dplyr::left_join(tbl_mgmt_value_wide) %>%
+    select(colnames(tbl_mgmt_value)) %>%
+    ungroup()
+  
+  
+  t2 <-
+    kable(tbl_mgmt_wide, escape = F, format = 'html') %>%
+    
+    kable_styling(full_width = T) %>%
+    
+    # cell_spec(0:3,background = '#A50026' )
+    row_spec(1, background = '#A50026',color = 'white') %>%
+    row_spec(2, background = '#F46D43',color = 'white') %>%
+    row_spec(3, background = '#FEE08B',color = 'black') %>%
+    row_spec(4, background = '#A6D96A',color = 'black') 
+  
+  result$table_friendly_text <- tbl_mgmt_wide
+  result$table_friendly <- t2
+  
+  
+  if (tolower(outputtype) == 'html') {
+    result <- t2
+  }
+
+  return(result)
 }
+
+
+
 
 #' BACKEND Create a table that summarize the management level
 #' 
@@ -3106,3 +3227,205 @@ plot_bar_caaqs_complete <- function() {
   result[['data']] <- df
   return(result)
 }
+
+
+#' CREATE TRENDS of air quality in BC
+#' 
+#' @param dirs_location is the location of the data files
+get_trends <- function(dirs_location = './data/out',reporting_year=NULL,airzone_filter = 'BC') {
+  library(dplyr)
+  library(readr)
+  library(ggplot2)
+  library(plotly)
+  
+  # dirs_location <- './data/out'  #local location, two dots for final, one dot for debug
+  if (0) {
+    dirs_location <- './data/out'
+    reporting_year <- 2021
+    airzone_filter <- 'Central Interior'
+  }
+  
+  
+  list.files(dirs_location)
+  
+  df_data_trends_caaqs <- readr::read_csv(paste(dirs_location,'caaqs_results.csv',sep='/')) 
+  df_data_trends_annual <- readr::read_csv(paste(dirs_location,'annual_results.csv',sep='/')) %>%
+    filter(!is.na(value),value>-10)
+  
+  if (is.null(reporting_year)) {
+    reporting_year <- max(df_data_trends_caaqs$year)
+  }
+  
+  maxyear <- reporting_year
+  
+  df_stations <- readr::read_csv(paste(dirs_location,'liststations.csv',sep='/')) %>%
+    mutate(AQMS = ifelse(is.na(AQMS),'N/A',AQMS)) %>%
+    filter(AQMS != 'N') %>%
+    filter(site %in% df_data_trends_annual$site)
+  
+  colnames(df_stations)
+  
+  df_plot_metric <- df_data_trends_annual%>%
+    select(metric,parameter) %>%
+    distinct()
+  
+  #rolling 3-year average needed for
+  #pm25 annual
+  #pm25 24-hour
+  #o3_8hr
+  #no2 1-hour
+  #so2 1-hour
+  
+  #calculate 3-year running average
+  df_data_trends_annual_3yr <- df_data_trends_annual %>%
+    mutate(index = 1:n())
+  df_data_trends_annual_3yr_ <- NULL
+  for (i in 0:2) {
+    df_data_trends_annual_3yr_ <- df_data_trends_annual_3yr_ %>%
+      bind_rows(
+        df_data_trends_annual_3yr %>%
+          mutate(year=year+i)
+        
+        
+      )
+  }
+  
+  #those with metric "MEAN_1HR" are averaged over 1-year
+  #all the rest are averaged over 3 years
+  df_data_trends_annual_3yr <- df_data_trends_annual_3yr_ %>%
+    mutate(valid_count = ifelse(is.na(value),0,1)) %>%
+    group_by(parameter,site,instrument,tfee,year,metric) %>%
+    dplyr::mutate(value_3yr = sum(value,na.rm = TRUE),valid_n =sum(valid_count)) %>%
+    filter(valid_n>=2) %>%
+    ungroup() %>%
+    mutate(value = ifelse(grepl('MEAN_1HR',metric,ignore.case = TRUE),value,value_3yr/valid_n)) %>%
+    select(-value_3yr,-valid_count) %>%
+    filter(year<=maxyear)
+  
+  #bug found, 2023-06-21
+  #add 
+  if (0) {
+    unique(df_data_trends_annual_3yr$parameter)
+    unique(df_data_trends_annual_3yr_$parameter)
+    unique(df_data_trends_annual_3yr_$metric)
+  }
+  #summarize for air zone plot
+  df_data_trends_annual_airzone <- df_data_trends_annual_3yr %>%
+    left_join(df_stations %>%
+                select(site,AIRZONE)) %>%
+    filter(!is.na(AIRZONE)) %>%
+    group_by(parameter,tfee,year,metric,AIRZONE) %>%
+    dplyr::summarise(value_avg = mean(value,na.rm = TRUE),
+                     value_min = min(value,na.rm = TRUE),
+                     value_max = max(value,na.rm = TRUE))
+  
+  df_data_trends_annual_overall <- df_data_trends_annual_3yr %>%
+    left_join(df_stations %>%
+                select(site,AIRZONE)) %>%
+    filter(!is.na(AIRZONE)) %>%
+    group_by(parameter,tfee,year,metric) %>%
+    dplyr::summarise(value_avg = mean(value,na.rm = TRUE),
+                     value_min = min(value,na.rm = TRUE),
+                     value_max = max(value,na.rm = TRUE)) %>%
+    mutate(AIRZONE = "BC")
+  
+  df_data_trends_annual_airzone <- df_data_trends_annual_airzone %>%
+    bind_rows(df_data_trends_annual_overall) %>%
+    filter(!tfee) %>%
+    filter(grepl('RAW',metric,ignore.case = TRUE))
+  
+  #create reference years
+  #this shows how many percent increase or decrease in value
+  # result_table <- 
+  df_BC_summary_ref<- df_data_trends_annual_airzone %>%
+    filter(year %in% c(1990,2000,2010,maxyear)) %>%
+    select(parameter,year,metric,AIRZONE,value_avg) %>% 
+    tidyr::pivot_wider(names_from = year, values_from = value_avg) %>%
+    mutate(perc_2000 = envair::round2((`2021`-`2000`)/`2000`*100),
+           perc_1990 = envair::round2((`2021`-`1990`)/`1990`*100))
+  
+  #plot
+  lst_parameters <- df_data_trends_annual_airzone %>%
+    filter(!tfee) %>%
+    filter(AIRZONE == airzone_filter) %>%
+    filter(year >=1990) %>%
+    mutate(parameter_label = paste(parameter,metric)) %>%
+    pull(parameter_label) %>%
+    unique()
+  # paste(lst_parameters,collapse=',')
+  #define parameters for recoding
+  df_parameters <- tribble(
+    ~parameter_label,~label,~CAAQS,~order,
+    'NO2 RAW_ANNUAL_98P_D1HM','NO2 (1-Hour)',60,5,
+    'NO2 RAW_ANNUAL_MEAN_1HR','NO2 (Annual)',17,4,
+    'O3 RAW_ANNUAL_4TH_D8HM','O3 (8-Hour)',62,3,
+    'PM25 RAW_ANNUAL_98P_24h','PM2.5 (24-Hour)',27,2,
+    'PM25 RAW_ANNUAL_MEAN_24h','PM2.5 (Annual)',8.8,1,
+    'SO2 RAW_ANNUAL_99P_D1HM','SO2 (1-Hour)',70,7,
+    'SO2 RAW_ANNUAL_MEAN_1HR','SO2 (Annual)',5,6
+  )
+  
+  a <- df_data_trends_annual_airzone %>%
+    filter(!tfee) %>%
+    filter(AIRZONE == airzone_filter) %>%
+    filter(year >=1990) %>%
+    mutate(parameter_label = paste(parameter,metric)) %>%
+    left_join(df_parameters) %>%
+    mutate(percentAbove = (value_avg - CAAQS)/CAAQS *100) %>%
+    ungroup() 
+  
+  result_ggplot <- a %>%
+    ggplot(aes(x=year,y=percentAbove,colour = reorder(label,order))) +
+    geom_line() +
+    geom_hline(yintercept = 0, colour='red',linetype = 'dashed') +
+    annotate("text",x=2010, y=10,label = 'Current CAAQS') +
+    theme(legend.position = 'bottom', legend.title = element_blank(),
+          legend.key = element_blank(),
+          panel.background = element_rect(fill=NA,colour = 'black'),
+          axis.title.x = element_blank()) +
+    ylab('Percent Above/Below Current CAAQS')
+  
+  result_plotly <- a %>%
+    mutate(percentAbove = envair::round2(percentAbove,n=1)) %>%
+    mutate(hovertext = paste(percentAbove,'%',sep='')) %>%
+    mutate(label = gsub('PM2.5','PM<sub>2.5</sub>',label)) %>%
+    mutate(label = gsub('O3','O<sub>3</sub>',label)) %>%
+    mutate(label = gsub('NO2','NO<sub>2</sub>',label)) %>%
+    mutate(label = gsub('SO2','SO<sub>2</sub>',label)) %>%
+    
+    plotly::plot_ly(x=~year,y=~percentAbove,color =~reorder(label,order),
+                    type='scatter',mode='lines+markers',showlegend =T,
+                    hoverinfo ='y',
+                    hovertemplate = paste('%{y:.1f}','%',sep='')
+                    
+    ) %>%
+    layout(title = 'Trends in Pollutant Levels',
+           legend = list(orientation = 'h'),
+           yaxis = list(title = 'Percent Above/Below CAAQS'),
+           xaxis = list(title = 'Annual Reporting Period')
+    ) %>%
+    plotly::layout(hovermode = 'x unified')
+  
+  return(list(table = df_BC_summary_ref,ggplot = result_ggplot,plotly = result_plotly,data = a))
+}
+
+
+#' Adds an up and down arrow
+#' 
+#' #' if value is negative, it will show a downward arrod
+#' in a css format
+#' 
+#' @param value is a number that is either positve or negative
+#' 
+#' @returns css text with up or down arrow depending on the polarity of the number
+add_arrow <- function(value) {
+  
+  
+  if(value>0) {
+    result <- paste('<span style="color:red">↑</span>',abs(value),sep='')  
+  } else {
+    result <-  paste('<span style="color:blue">↓</span>',abs(value),sep='') 
+  }
+  return(result)
+}
+

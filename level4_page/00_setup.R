@@ -1,4 +1,5 @@
 #' CREATE TRENDS of air quality in BC
+#' The files here are duplicated in ./assets
 #' 
 #' @param dirs_location is the location of the data files
 get_trends <- function(dirs_location = './data/out',reporting_year=NULL,airzone_filter = 'BC') {
@@ -71,7 +72,13 @@ df_data_trends_annual_3yr <- df_data_trends_annual_3yr_ %>%
   select(-value_3yr,-valid_count) %>%
   filter(year<=maxyear)
 
-
+#bug found, 2023-06-21
+#add 
+if (0) {
+  unique(df_data_trends_annual_3yr$parameter)
+  unique(df_data_trends_annual_3yr_$parameter)
+  unique(df_data_trends_annual_3yr_$metric)
+}
 #summarize for air zone plot
 df_data_trends_annual_airzone <- df_data_trends_annual_3yr %>%
   left_join(df_stations %>%
