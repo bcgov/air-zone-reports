@@ -1,6 +1,6 @@
 ## Coastal Air Zone
 
-The Coastal Air Zone (Figure 1) is one of seven air zones across B.C. It covers coastal areas of B.C. outside of the Georgia Basin and includes Haida Gwaii, the north and central coasts, and northern Vancouver Island. Air quality monitoring in the Coastal Air Zone includes a Ministry-operated station in Terrace, a Prince Rupert Port Authority-operated station in Prince Rupert, and monitoring stations in Kitimat. Kitimat has three monitoring stations, one equipped to measure PM<sub>2.5</sub>, Ozone, NO<sub>2</sub>, and SO<sub>2</sub> and the others, equipped to measure PM2.5, SO2 and other pollutants. Kitimat also has several fenceline stations to monitor industrial emissions.
+The Coastal air zone is one of seven air zones in British Columbia. It covers the coastal areas of B.C. outside of the Georgia Basin, including Haida Gwaii, the north and central coasts, and northern Vancouver Island. Air quality monitoring in the Coastal air zone includes a station operated by the Ministry of Environment and Climate Change Strategy in Terrace, a station operated by the Prince Rupert Port Authority in Prince Rupert, and several monitoring stations operated by the Kitimat Airshed Group and industry in Kitimat. 
 
 #### Major Municipalities
 

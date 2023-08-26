@@ -1,6 +1,6 @@
 ## Air Zones
 
-British Columbia is divided into seven air zones. The air zones were defined based on common characteristics such as air quality, geography, meteorology, pollution sources, and other factors to efficiently help manage air quality.
+British Columbia is divided into geographical areas called air zones. These areas were defined based on common characteristics such as air quality, geography, meteorology, pollution sources, and other factors. The intent behind this delineation is to efficiently manage air quality in the most effective and efficient manner.
 
 -   Coastal
 
@@ -16,4 +16,4 @@ British Columbia is divided into seven air zones. The air zones were defined bas
 
 -   Southern Interior
 
-Click on the map to find more about each of B.C.'s air zones.
+Use the map to learn more about each of B.C.'s air zones.
