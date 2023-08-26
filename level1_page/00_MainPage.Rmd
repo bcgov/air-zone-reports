@@ -220,6 +220,7 @@ validation_year <- 2021
 sourcefiles <- '../assets'
 datafiles <- '../data/out'
 
+
 for (files_ in list.files(sourcefiles)) {
   print(files_)
   try(source(paste(sourcefiles,files_,sep='/')))
@@ -252,14 +253,17 @@ for (files_ in list.files(sourcefiles)) {
 ```{=html}
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Welcome!</h2></center></div></div>
 ```
-Air zone reports are prepared each year by the B.C. Ministry of Environment and Climate Change Strategy to summarize the levels of air pollution in designated areas referred to as "air zones". These reports are part of our commitment under the national [Air Quality Management System (AQMS)](https://ccme.ca/en/air-quality-report#slide-2) which aims to better protect human health and the environment.
+Air zone reports are prepared each year by the B.C. Ministry of Environment and Climate Change Strategy to summarize the levels of air pollution in areas referred to as "air zones". This report is part of our commitment under the national [Air Quality Management System (AQMS)](https://ccme.ca/en/air-quality-report#slide-2) which aims to better protect human health and the environment.
 
-The annual report titled "Air Zone Report (`r validation_year-2`-`r validation_year`)" serves as a comprehensive overview of B.C.'s air quality status. It assesses the achievement of the [Canadian Ambient Air Quality Standards (CAAQS)](https://ccme.ca/en/air-quality-report#slide-7) and assigns management levels for the four major pollutants: fine particulate matter (PM~2.5~), ozone(O~3~), nitrogen dioxide (NO~2~), and sulphur dioxide (SO~2~). These management levels are evaluated based on three years (`r validation_year-2`-`r validation_year`) of monitoring data. Guided by the principles of the AQMS, these management levels corresponds to the level of actions that are recommended for communities to keep clean areas clean and continuously improve air quality.
+The annual report titled "Air Zone Report (`r validation_year-2`-`r validation_year`)" serves as a comprehensive overview of B.C.'s air quality status. It assesses the achievement of the [Canadian Ambient Air Quality Standards (CAAQS)](https://ccme.ca/en/air-quality-report#slide-7) and assigns colour-based management levels for the four major pollutants: fine particulate matter (PM~2.5~), ozone(O~3~), nitrogen dioxide (NO~2~), and sulphur dioxide (SO~2~). These management levels are evaluated based on three years (`r validation_year-2`-`r validation_year`) of monitoring data. Guided by the principles of the AQMS, these management levels corresponds to the level of actions that are recommended for communities to keep clean areas clean and continuously improve air quality.
 
 Please read and enjoy the interactive air zone report below. You can also view [the summary document](#Summary), and explore the air quality data. 
 
 <center>![](../assets/photos/BC_ENV_H_RGB_pos.png){width="50%"}</center>
 
+## Land Acknowledgement
+
+<b>We acknowledge with respect and gratitude</b> that this report was produced on the territory of the  Lək̓ ʷəŋən peoples, and recognize the Songhees and Esquimalt (Xwsepsum), and WSÁNEĆ Nations whose deep connections with this land continue to this day.
 </br> </br> </br> </br> <!-- Air Quality Management Page -->
 
 ```{=html}
@@ -271,7 +275,7 @@ Air pollution is recognized as one of the greatest environmental threats to huma
 
 The Air Quality Management System (AQMS) provides a collaborative and comprehensive approach to managing ambient (outdoor) air quality. It is implemented across Canada to reduce emissions and levels of major air pollutants. To assist in managing air quality, provinces and territories divide their jurisdictions into defined areas called air zones.
 
-In British Columbia, the entire province is divided into seven different air zones. Click on the map below to view the details of B.C.'s air zones
+British Columbia is divided into seven different air zones. Click on the map below to view the details of B.C.'s air zones.
 
 ```{=html}
 <style>
@@ -727,7 +731,7 @@ Pollutants that cross boundaries (trans-boundary) or originate from exceptional 
 
 ### <b>Highlights of Management Levels in B.C. Air Zones</b>
 
--   The Central Interior and Southern Interior air zones have been assigned a red management level for fine particulate matter (PM~2.5~) due to high levels of PM~2.5~ in Houston, Vanderhoof, and Grand Forks. When a red management level is reached by exceeding the Canadian Ambient Air Quality Standards (CAAQS), the Air Quality Management System recommends taking the most stringent actions to attacin CAAQS.
+-   The Central Interior and Southern Interior air zones have been assigned a red management level for fine particulate matter (PM~2.5~) due to high levels of PM~2.5~ in Houston, Vanderhoof, and Grand Forks. When a red management level is reached by exceeding the Canadian Ambient Air Quality Standards (CAAQS), the Air Quality Management System recommends taking the most stringent actions to attain CAAQS.
 -   The Lower Fraser Valley air zone has been assigned an orange management level for ozone based on the level of ozone in Mission.
 -   The Central Interior, Georgia Strait, Lower Fraser Valley, Northeast, and Southern Interior air zones have been assigned an orange management level for nitrogen dioxide (NO~2~). These are due to levels at urban and industrial locations within these areas. 
 -   The Southern Interior air zone hsa been assigned a red management level for sulphur dioxide (SO~2~) due to the   levels of SO~2~ in Trail that exceeded CAAQS. All other air zones are categorized as either yellow or green management levels.
@@ -756,10 +760,14 @@ Use the interactive map below to access details about pollutants and their corre
 knitr::include_app('https://bcgov-env.shinyapps.io/airzonemanagementlevels/',height = "900px")
 ```
 
+## <b>More information about management levels </b>
+Additional details regarding management levels can be found using the links below. <br>
 
-[Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_sites/) for air quality management levels of various locations in B.C. over the years
-
-[Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_airzone/) to view the management levels of the air zones over the years.
+   - [Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_airzone/) to view the management levels for the air zones over the years.
+  
+  - [Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_sites/) for air quality management levels of various locations in B.C. over the years
+    
+ 
 <!--Wildfire -->
 
 ```{=html}
@@ -767,13 +775,9 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonemanagementlevels/',hei
 <a id="Wildfire"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Wildfire and Particulate Matter Pollution</h2></center></div></div>
 ```
-Pollution from fine particulate matter (PM<sub>2.5</sub>) remains a major air quality issue in British Columbia and many other parts of the world. The World Health Organization (WHO) considers PM<sub>2.5</sub> the most dangerous because of its health effects and the number of people affected. WHO estimates around 4.2 million people die each year due to pollution from fine particulate matter.
+Wildfire smoke is a major source of air pollution from fine particulate matter (PM<sub>2.5</sub>). Communities in British Columbia are regularly blanketed by wildfire smoke, particularly during the summer and early fall seasons. [Studies](https://www.canada.ca/en/environment-climate-change/news/2019/01/canadas-scientists-conclude-that-human-induced-climate-change-had-a-strong-impact-on-forest-fires-in-british-columbia.html) conducted by Environment and Climate Change Canada and the Pacific Climate Impacts Consortium have concluded that human influence on climate change is leading to higher frequencies and intensities of forest fires, and this trend is likely to intensify in the future.
 
-The Western part of North America experiences severe air quality issues from PM<sub>2.5</sub> during late summer and early fall due to the prevalence of wildfires. Smoke from wildfires can travel vast distances and affect large areas.
-
-Wood burning for residential heating during the winter months can also cause local air pollution problems. This method of heating releases several pollutants, including PM<sub>2.5</sub>, which can have negative effects on air quality and public health.
-
-The interactive graphics below shows the number of days that B.C.'s air zones experience 24-hour PM<sub>2.5</sub> levels that are higher than the Canadian Ambient Air Quality Standards (CAAQS) of 27 µg/m<sup>3</sup>. Use the graph below to examine the effects of wildfire smoke on the air quality of British Columbia.
+The interactive graphics below illustrate the trend of PM<sub>2.5</sub> levels in B.C. air zones. It shows the number of days when the air zones are exposed to PM<sub>2.5</sub> levels that are higher than the 24-hour value of the Canadian Ambient Air Quality Standard of 27 µg/m<sup>3</sup>. This number is shown to be increasing over the recent years.
 
 ```{r, echo = FALSE,out.width="100%",out.height="800px"}
 #located in \level_shiny\pm_exceedance
@@ -784,6 +788,13 @@ knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "800
 
 ```{r,message=FALSE,echo=FALSE,results='hide',warning=FALSE}
 library(lubridate)
+if (0)
+ {
+  library(dplyr)
+source('../assets/00_setup.R') 
+  datafiles <- '../data/out'
+  validation_year <- 2021
+  }
 # list.files(datafiles)
 pm_high <- load_data(datafiles,'pm25_excess_dates.Rds')
 liststations <- load_data(datafiles,'liststations.csv')
@@ -830,6 +841,11 @@ order_pm25 <- pm_days_summary_totals %>%
   filter(AIRZONE != 'BC') %>%
   pull(AIRZONE) %>% unique()
 
+order_wildfire <- pm_days_summary_totals %>%
+  arrange(desc(`wildfire days`)) %>%
+  filter(AIRZONE != 'BC') %>%
+  pull(AIRZONE) %>% unique()
+
 BC_days_with_highpm <- pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == 'BC'][1]
 
 BC_days_with_highpm_wildfire <- pm_days_summary_totals$`wildfire days`[pm_days_summary_totals$AIRZONE == 'BC'][1]
@@ -838,20 +854,27 @@ high_airzone <- pm_days_summary_totals %>%
   filter(AIRZONE != 'BC')
 high_airzone_pm <- pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == order_pm25[1]][1]
 
+
 high_airzone_pm_wildfire <- pm_days_summary_totals$`wildfire days`[pm_days_summary_totals$AIRZONE == order_pm25[1]][1]
 
 high_airzone_season <- pm_days_summary %>%
   filter(AIRZONE == order_pm25[1]) %>%
   arrange(desc(total))
+
+high_wildfire <- pm_days_summary %>%
+  filter(AIRZONE == order_wildfire[1]) %>%
+  arrange(desc(total))
+
+high_wildfire_daysnum <- sum(high_wildfire$`wildfire days`)
 ```
 
-Based on the graph above, in `r validation_year`, British Columbia experienced `r BC_days_with_highpm` days where 24-hour levels of PM<sub>2.5</sub> exceeded the CAAQS threshold of 27µg/m<sup>3</sup>. Out of these, `r BC_days_with_highpm_wildfire` days were from wildfire smoke that commonly occur during the summer and early fall seasons.
+## Quick Summary of Wildfire Smoke and PM<sub>2.5</sub> in `r validation_year`
 
--   In the `r order_pm25[1]` air zone, there were `r high_airzone_pm` days where the 24-hour PM<sub>2.5</sub> levels exceeded CAAQS
+-    British Columbia experienced `r BC_days_with_highpm` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). Of these, `r BC_days_with_highpm_wildfire` days were from verified wildfire smoke that regularly occurs between summer and early fall.
 
-    -   `r high_airzone_pm_wildfire` of these days were due to the seasonal wildfires, the other `r (high_airzone_pm-high_airzone_pm_wildfire)` were most likely from local emission sources.
+-   The `r order_wildfire[1]`air zone was the most impacted by wildfire smoke. It experienced `r high_wildfire_daysnum` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3") from verified wildfire smoke.
 
-    -   `r high_airzone_season$total[high_airzone_season$seasons == 'Winter']` of these days occured during the winter season. High PM<sub>2.5</sub> levels during the winter are mostly due to smoke from residential heating.
+-   The `r order_pm25[1]` air zone experienced the most number of days with high PM<sub>2.5</sub> levels. It experienced `r high_airzone_pm` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). `r high_airzone_pm_wildfire` of these days were due to wildfires, the rest were from other sources such as smoke from residential heating, and open burning.
 
 ```{=html}
 <!-- Jumping Points -->
@@ -859,8 +882,9 @@ Based on the graph above, in `r validation_year`, British Columbia experienced `
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Summary</h2></center></div></div>
 ```
 
-Summary of the air zone report for British Columbia [Air Zone Report: 2019-2021](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021.pdf)
+This report presents the status of air quality in British Columbia by using air zones as the framework for evaluating the achievement of national standards and assigning management levels. It highlights regions within the province that experience pollution issues and demonstrates the persistent challenges posed by wildfire smoke and climate change.
 
+Click this link to download and share a summary of this report: [British Columbia Air Zone Report 2019-2021](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021.pdf). 
 
 
 ```{=html}
