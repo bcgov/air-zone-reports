@@ -13,7 +13,9 @@ stations <- stations %>%
   mutate(Operator = recode(OWNER,
                            'MVRD' ='Metro Vancouver',
                            'ENV'='ENV',
-                           'INDUSTRY' = 'Industry'))
+                           'INDUSTRY' = 'Industry',
+                           'INDUSTRY-BCH'='BCHydro',
+                           'INDUSTRY-PRPA'='Port Authority'))
 
   aqhi_stations_airzone <- aqhi_stations %>%
     rename(AIRZONE = airzone) %>%
