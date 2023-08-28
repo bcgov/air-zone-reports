@@ -1,6 +1,6 @@
 ## Air Zones
 
-British Columbia is divided into geographical areas called air zones. These areas were defined based on common characteristics such as air quality, geography, meteorology, pollution sources, and other factors. The intent behind this delineation is to efficiently manage air quality in the most effective and efficient manner.
+British Columbia is divided into geographical areas called air zones. These areas were defined based on common characteristics such as air quality, geography, meteorology, pollution sources, and other factors. The intent behind this delineation is to manage air quality in the most effective and efficient manner.
 
 -   Coastal
 
