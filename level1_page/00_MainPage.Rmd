@@ -304,11 +304,13 @@ British Columbia is divided into seven different air zones. Click on the map bel
 
 ```
 
-The four pollutants listed below are recognized for having the most significant evidence of causing health concerns. As a result, these pollutants are the primary focus of health studies and are among the first to have established air quality objectives. The Canadian Ambient Air Quality Standards (CAAQS) were developed in 2012 and has been established as national air quality objectives under the [Canadian Environmental Protection Act](https://www.canada.ca/en/environment-climate-change/services/canadian-environmental-protection-act-registry/guidelines-objectives-codes-practice/guidelines-objectives.html). The initial CAAQS were defined for fine particulate matter (PM<sub>2.5</sub>) and ground-level ozone (O<sub>3</sub>) then later updated to include nitrogen dioxide (NO<sub>2</sub>) and sulphur dioxide(SO<sub>2</sub>). The CAAQS are considered as national air quality objectives under the [Canadian Environmental Protection Act](https://www.canada.ca/en/environment-climate-change/services/canadian-environmental-protection-act-registry/guidelines-objectives-codes-practice/guidelines-objectives.html).
+The four pollutants listed below are recognized for having the most significant evidence of causing health concerns. As a result, these pollutants are the primary focus of health studies and are among the first to have established air quality objectives. The Canadian Ambient Air Quality Standards (CAAQS) were developed in 2012 and has been established as national air quality objectives under the [Canadian Environmental Protection Act](https://www.canada.ca/en/environment-climate-change/services/canadian-environmental-protection-act-registry/guidelines-objectives-codes-practice/guidelines-objectives.html). The initial CAAQS were defined for fine particulate matter (PM<sub>2.5</sub>) and ground-level ozone (O<sub>3</sub>) then later updated to include nitrogen dioxide (NO<sub>2</sub>) and sulphur dioxide(SO<sub>2</sub>).
 
-The CAAQS serve as benchmarks, defining acceptable levels known as metrics for each pollutant. Three out of the four major pollutants are characterized by two CAAQS metrics representing short-term and long-term exposures. These metrics are presented as follows and are calculated for every monitoring station that are designated to report CAAQS under the Air Quality Management System:
+The CAAQS serve as benchmarks meant to drive the continuous improvement of air quality. They define thresholds where pollutant levels, known as metrics, are compared. These metrics are used to assess air quality progress by determining the achievement of CAAQS and assigning colour-based management levels. Pollutants can have one or two metrics, but the achievement of CAAQS and assignment of colour-based management levels are based on the metric with the more critical outcome.
 
-- A numerical value representing the concentration or level of the measured pollutant.
+Metrics are calculated from air quality monitoring data and contains the following elements:
+
+- A numerical value representing the level of the measured pollutant.
 
 - A unit of measurement defining the type of quantity represented by the numerical value, such as micrograms per cubic meter (μg/m³) for fine particulate matter.
 
@@ -416,7 +418,7 @@ While ground-level O<sub>3</sub> poses significant environmental and health conc
 
 **Measurement and Reporting**
 
-In this report, O<sub>3</sub> levels are presented using the [8-hour metric](## "Determined by selecting the highest daily 1-hour value, identifying the annual 98th percentile (8th highest) among these daily maximums, and then averaging it over three consecutive years."). 
+In this report, O<sub>3</sub> levels are presented using the [8-hour metric](## "Determined by selecting the 4th highest annual value from the highest daily 1-hour values obtained through the 8-hour rolling average measurements, and then calculating this annual value over a span of three consecutive years."). 
 
 **Standards and Management Levels for O<sub>3</sub>**
 
@@ -517,7 +519,7 @@ for (i = 0; i < acc.length; i++) {
 <a id="AQTrends"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Trends</h2></center></div></div>
 ```
-# On Average, pollution levels in B.C. arelower than the CAAQS values
+# On average, pollution levels in B.C. remain below the CAAQS values
 
 <!--Prepare the trend functions. will not display -->
 
@@ -562,7 +564,7 @@ htmltools::tagList(list(p))
 </div>
  <p>
 ```
-Pollutant levels have mostly remained lower than values of the Canadian Ambient Air Quality Standards and have improved in recent years. PM<sub>2.5</sub> is an exception due to the increasing intensity and frequency of wildfire smoke.
+Pollutant concentrations have generally stayed below the thresholds set by the Canadian Ambient Air Quality Standards and have shown improving trends. However, PM<sub>2.5</sub> stands as an exception due to the rising frequency and intensity of wildfire smoke.
 
 In 2021:
 
@@ -662,7 +664,7 @@ Emissions of key air pollutants from industrial and mobile sources *(excluding d
 -   Particulate Matter 10 micron (PM<sub>10</sub>) Direct Emission, `r pm10_emission`% (since 1990)
 -   Nitrogen Oxides (NO<sub>x</sub>) Emission, `r nox_emission`% (since 1990). NO<sub>x</sub> are group of compounds that include NO<sub>2</sub>. It can react with VOC to form ground-level ozone (O<sub>3</sub>).
 -   Sulfur Oxides (SO<sub>x</sub>) Emission, `r sox_emission`% (since 1990). SO<sub>x</sub> are a group of compounds that include SO<sub>2</sub>.
--   Volatile Organic Compounds (VOC), `r voc_emission`% (since 1990). Ground-level ozone (O<sub>3</sub>) are formed from the complex reactions between VOC and NO<sub>x</sub>.
+-   Volatile Organic Compounds (VOC), `r voc_emission`% (since 1990). Ground-level ozone (O<sub>3</sub>) is formed from the complex reactions between VOC and NO<sub>x</sub>.
 -   Carbon Monoxide (CO), `r co_emission`% (since 1990)
 
 ```{=html}
@@ -689,7 +691,7 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonereport_emissions/', he
 <a id="Monitoring"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Measuring Air Quality</h2></center></div></div>
 ```
-Air quality monitoring stations play an important role in measuring air quality, especially in densely populated areas, near busy roads, or in proximity to industrial facilities.  In British Columbia, these stations are operated by various agencies, including the Ministry of Environment and Climate Change Strategy, Metro Vancouver Regional District, community airshed groups and roundtables, industrial permit holders, as well as other agencies like BCHydro, Prince Rupert Port Authority, and the British Columbia Energy Regulator (formerly BC Oil and Gas Commission). Additionally, there are stations established as fenceline stations for compliance purposes and emission monitoring. Their measurements do not reflect exposure in populated areas and are not part of the Air Quality Management System (AQMS) monitoring network.
+Air quality monitoring stations play an important role in measuring pollution levels, especially in densely populated areas, near busy roads, or in proximity to industrial facilities.  In British Columbia, air quality monitoring stations are operated by various agencies, including the Ministry of Environment and Climate Change Strategy, Metro Vancouver Regional District, community airshed groups and roundtables, industrial permit holders, as well as other agencies like BCHydro, Prince Rupert Port Authority, and the British Columbia Energy Regulator (formerly BC Oil and Gas Commission). Additionally, there are stations established as fenceline stations for compliance purposes and emission monitoring. Measurements from these stations do not reflect exposure of nearby population or the environment, and are not part of the ambient air quality monitoring network used for the Air Quality Management System (AQMS).
 
 ```{r, echo = FALSE}
 # list.files('../assets/photos/')
@@ -761,11 +763,11 @@ knitr::include_app('https://bcgov-env.shinyapps.io/airzonemanagementlevels/',hei
 ```
 
 ## <b>More information about management levels </b>
-Additional details regarding management levels can be found using the links below. <br>
+For more detailed information about the management levels of each air zones and monitoring stations, please refer to the provided links. <br>
 
-   - [Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_airzone/) to view the management levels for the air zones over the years.
+   - [Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_airzone/) to view the management levels of each air zones over the years.
   
-  - [Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_sites/) for air quality management levels of various locations in B.C. over the years
+  - [Click here](https://bcgov-env.shinyapps.io/airzonemanagementlevels_sites/) for the management levels of various locations in B.C. over the years
     
  
 <!--Wildfire -->
@@ -870,11 +872,11 @@ high_wildfire_daysnum <- sum(high_wildfire$`wildfire days`)
 
 ## Quick Summary of Wildfire Smoke and PM<sub>2.5</sub> in `r validation_year`
 
--    British Columbia experienced `r BC_days_with_highpm` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). Of these, `r BC_days_with_highpm_wildfire` days were from verified wildfire smoke that regularly occurs between summer and early fall.
+-    British Columbia experienced `r BC_days_with_highpm` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). Among these, `r BC_days_with_highpm_wildfire` days were attributed to verified wildfire smoke, which commonly occurs between summer and early fall.
 
--   The `r order_wildfire[1]`air zone was the most impacted by wildfire smoke. It experienced `r high_wildfire_daysnum` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3") from verified wildfire smoke.
+-   The `r order_wildfire[1]` air zone was the most affected by wildfire smoke, experiencing `r high_wildfire_daysnum` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3") from verified wildfire smoke.
 
--   The `r order_pm25[1]` air zone experienced the most number of days with high PM<sub>2.5</sub> levels. It experienced `r high_airzone_pm` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). `r high_airzone_pm_wildfire` of these days were due to wildfires, the rest were from other sources such as smoke from residential heating, and open burning.
+-   The `r order_pm25[1]` air zone had the highest number of days with  [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). It experienced `r high_airzone_pm` such days, out of which `r high_airzone_pm_wildfire` were due to wildfires, while the remainder came from sources such as residential heating and open burning.
 
 ```{=html}
 <!-- Jumping Points -->
