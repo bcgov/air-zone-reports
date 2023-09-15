@@ -1,9 +1,23 @@
+<!--
+NOTES:
+     This is the main markdown page for the Air Zone Report
+     Created: September 2023
+     
+     Instructions:
+     > knit this markdown into html
+     > change the html filename into "airzone_report.html"
+     > open the html, edit and add the following: "<title>B.C. Air Zone Report</title>"
+     > relocate the file into the IIS server that host the site
+
+-->
+
 ---
 title: &nbsp
 output: 
    html_document:
      css: ["css/custom-main.css","css/bootstrap.min.css","css/main.css","css/envreportbc.css"]
 ---
+
 
 ```{=html}
 
@@ -271,7 +285,7 @@ Please read and enjoy the interactive air zone report below. You can also view [
 <a id="AQManagement"></a>
 <div class="row"><div class="blue-section"><center><h2 class="blue-heading-bar">Air Quality Management in B.C.</h2></center></div></div>
 ```
-Air pollution is recognized as one of the greatest environmental threats to human health ([WHO 2022](https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health)). According to Health Canada estimates, approximately 15,300 Canadians--1,900 in British Columbia--die prematurely every year due to exposure to air pollution ([Health Canada 2021](https://www.canada.ca/en/health-canada/services/publications/healthy-living/2021-health-effects-indoor-air-pollution.html#a2)). In order to protect human health and guide work on air emissions, various jurisdictions and levels of government agreed to implement a national Air Quality Management System.
+Air pollution is recognized as one of the greatest environmental threats to human health ([WHO 2022](https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health)). According to Health Canada estimates, approximately 15,300 Canadians--1,900 in British Columbia--die prematurely every year due to exposure to air pollution ([Health Canada 2021](https://www.canada.ca/en/health-canada/services/publications/healthy-living/2021-health-effects-indoor-air-pollution.html#a2)). In order to protect human health and guide work on air emissions, the federal, provincial, and territorial governments agreed to implement a national Air Quality Management System.
 
 The Air Quality Management System (AQMS) provides a collaborative and comprehensive approach to managing ambient (outdoor) air quality. It is implemented across Canada to reduce emissions and levels of major air pollutants. To assist in managing air quality, provinces and territories divide their jurisdictions into defined areas called air zones.
 
@@ -418,7 +432,7 @@ While ground-level O<sub>3</sub> poses significant environmental and health conc
 
 **Measurement and Reporting**
 
-In this report, O<sub>3</sub> levels are presented using the [8-hour metric](## "Determined by selecting the 4th highest annual value from the highest daily 1-hour values obtained through the 8-hour rolling average measurements, and then calculating this annual value over a span of three consecutive years."). 
+In this report, O<sub>3</sub> levels are presented using the [8-hour metric](## "Determined by selecting the 4th highest annual value from the highest daily 1-hour values obtained through the 8-hour rolling average measurements, and then averaging this annual value over a span of three consecutive years."). 
 
 **Standards and Management Levels for O<sub>3</sub>**
 
@@ -572,7 +586,7 @@ In 2021:
 
 -   Fine Particulate Matter (PM<sub>2.5</sub>) [24-hour metric](## "Determined by calculating the 98th percentile of the daily values and subsequently averaging it over three consecutive years."), `r pm25_24h`% (since 2000)
 
--   Ozone (O<sub>3</sub>) [8-hour metric](## "Determined by selecting the highest daily 1-hour value, identifying the annual 98th percentile (8th highest) among these daily maximums, and then averaging it over three consecutive years."),`r o3_8h`% (since 1990)
+-   Ozone (O<sub>3</sub>) [8-hour metric](## "Determined by selecting the 4th highest annual value from the highest daily 1-hour values obtained through the 8-hour rolling average measurements, and then averaging this annual value over a span of three consecutive years."),`r o3_8h`% (since 1990)
 
 -   Nitrogen Dioxide (NO<sub>2</sub>) [annual metric](## "Determined based on the annual average of all hourly measurements."),`r no2_annual`% (since 1990)
 
@@ -888,6 +902,7 @@ This report presents the status of air quality in British Columbia by using air 
 
 Click this link to download and share a summary of this report: [British Columbia Air Zone Report 2019-2021](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021.pdf). 
 
+Click this link to download and share detailed management levels of each air zone and monitoring station: [Management Levels 2019-2021](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_ManagementLevels_2021.pdf)
 
 ```{=html}
 <!--

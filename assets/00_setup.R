@@ -548,7 +548,7 @@ get_management <- function(datafile = NULL) {
   #retrieve data
   
   if (is.null(datafile)) {
-    datafile <- '../test_data/caaqs_results.csv'
+    datafile <- './data/out/caaqs_results.csv'
     # list.files(datafile)
   }
   
@@ -645,7 +645,11 @@ get_management <- function(datafile = NULL) {
   df <- readr::read_csv(datafile)
   
   
-  
+  try({
+    df$site <- gsub('[^[:alnum:]]',' ',df$site)
+    df$site <- gsub('  ',' ',df$site)
+    
+  })
   
   #Calculate 2020 CAAQS and onwards
   df_2015 <- df %>%
@@ -698,6 +702,9 @@ get_management_summary <- function(outputtype = 'complete',df_preload = NULL,
     "so2_1hr",'so2',
   )
   
+  if (is.null(datafile)) {
+    datafile = paste('./data/out/caaqs_results.csv',sep='/')
+  }
   df <- df_preload
   
   if (is.null(df_preload)) {

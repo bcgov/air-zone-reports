@@ -465,7 +465,7 @@ server <- shinyServer(function(input, output) {
     a <- graph_airzone(polygon_a=NULL,airzone=NULL,size = c('200px','400px'))
     output$map <- renderLeaflet(a)
     output$fileOutputs  <- renderUI({
-      html_file <- paste(www_git_url,'01_airzone_intro.html',sep='')
+      html_file <- paste(www_git_url,'station_intro.html',sep='')
       # includeHTML(html_file)
       tags$div(style = "height: 500px; overflow: auto;",includeHTML(html_file))
     })
