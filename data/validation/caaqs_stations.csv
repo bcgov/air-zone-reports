@@ -1,0 +1,73 @@
+site,STATION_NAME,AIRZONE,PM25,O3,NO2,SO2
+Abbotsford A Columbia Street,Abbotsford A Columbia Street,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Abbotsford Central,Abbotsford Central,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Agassiz Municipal Hall,Agassiz Municipal Hall,Lower Fraser Valley,TRUE,TRUE,TRUE,FALSE
+Burnaby Kensington Park,Burnaby Kensington Park,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Burnaby South,Burnaby South,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Burns Lake Fire Centre,Burns Lake Fire Centre,Central Interior,TRUE,FALSE,FALSE,FALSE
+Castlegar Zinio Park,Castlegar Zinio Park,Southern Interior,TRUE,TRUE,TRUE,TRUE
+Chilliwack Airport,Chilliwack Airport,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Colwood City Hall,Colwood City Hall,Georgia Strait,TRUE,TRUE,TRUE,FALSE
+Courtenay Elementary School,Courtenay Elementary School,Georgia Strait,TRUE,TRUE,TRUE,FALSE
+Cranbrook Muriel Baxter,Cranbrook Muriel Baxter,Southern Interior,TRUE,TRUE,TRUE,FALSE
+Crofton Elementary,Crofton Elementary,Georgia Strait,TRUE,FALSE,FALSE,TRUE
+Crofton Substation,Crofton Substation,Georgia Strait,TRUE,FALSE,FALSE,FALSE
+Duncan,Duncan Cairnsmore,Georgia Strait,TRUE,TRUE,TRUE,FALSE
+Duncan,Duncan College Street,Georgia Strait,TRUE,TRUE,TRUE,FALSE
+Duncan Deykin Avenue,Duncan Deykin Avenue,Georgia Strait,TRUE,FALSE,FALSE,FALSE
+Elk Falls Dogwood,Elk Falls Dogwood,Georgia Strait,TRUE,FALSE,FALSE,FALSE
+Elkford Rocky Mountain Elementary School,Elkford Rocky Mountain Elementary School,Southern Interior,TRUE,FALSE,FALSE,FALSE
+Fort St John Key Learning Centre,Fort St John Key Learning Centre,Northeast,TRUE,TRUE,TRUE,TRUE
+Golden Helipad,Golden Helipad,Southern Interior,TRUE,FALSE,FALSE,FALSE
+Grand Forks City Hall,Grand Forks City Hall,Southern Interior,TRUE,FALSE,FALSE,FALSE
+Hope Airport,Hope Airport,Lower Fraser Valley,TRUE,TRUE,TRUE,FALSE
+Horseshoe Bay,Horseshoe Bay,Lower Fraser Valley,TRUE,FALSE,TRUE,FALSE
+Houston Firehall,Houston Firehall,Central Interior,TRUE,FALSE,FALSE,FALSE
+Kamloops Federal Building,Kamloops Federal Building,Southern Interior,TRUE,TRUE,TRUE,TRUE
+Kelowna,Kelowna College,Southern Interior,TRUE,TRUE,TRUE,TRUE
+Kelowna,Kelowna KLO Road,Southern Interior,TRUE,TRUE,TRUE,TRUE
+Kitimat Haisla Village,Kitimat Haisla Village,Coastal,TRUE,FALSE,FALSE,TRUE
+Kitimat Riverlodge,Kitimat Riverlodge,Coastal,TRUE,FALSE,FALSE,TRUE
+Kitimat Whitesail,Kitimat Whitesail,Coastal,TRUE,TRUE,TRUE,TRUE
+Langdale Elementary,Langdale Elementary,Georgia Strait,TRUE,FALSE,TRUE,TRUE
+Langley Central,Langley Central,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Mission School Works Yard,Mission School Works Yard,Lower Fraser Valley,TRUE,TRUE,TRUE,FALSE
+Nanaimo Labieux Road,Nanaimo Labieux Road,Georgia Strait,TRUE,TRUE,TRUE,FALSE
+New Westminster Sapperton Park,New Westminster Sapperton Park,Lower Fraser Valley,TRUE,TRUE,TRUE,FALSE
+North Delta,North Delta,Lower Fraser Valley,TRUE,TRUE,TRUE,FALSE
+North Vancouver Mahon Park,North Vancouver Mahon Park,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Pitt Meadows Meadowlands School,Pitt Meadows Meadowlands School,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Port Alberni Elementary,Port Alberni Elementary,Georgia Strait,TRUE,FALSE,FALSE,FALSE
+Port Moody Rocky Point Park,Port Moody Rocky Point Park,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Powell River James Thomson School,Powell River James Thomson School,Georgia Strait,TRUE,FALSE,FALSE,FALSE
+Prince George Plaza 400,Prince George Plaza 400,Central Interior,TRUE,TRUE,TRUE,TRUE
+Prince Rupert Fairview,Prince Rupert Fairview,Coastal,TRUE,TRUE,TRUE,TRUE
+Quesnel,Quesnel Johnston Avenue,Central Interior,TRUE,TRUE,TRUE,TRUE
+Quesnel,Quesnel Kinchant St MAML,Central Interior,TRUE,TRUE,TRUE,TRUE
+Quesnel,Quesnel Senior Secondary,Central Interior,TRUE,TRUE,TRUE,TRUE
+Richmond South,Richmond South,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Smithers,Smithers Muheim Memorial,Central Interior,TRUE,TRUE,TRUE,FALSE
+Smithers,Smithers St Josephs,Central Interior,TRUE,TRUE,TRUE,FALSE
+Sparwood Centennial Square,Sparwood Centennial Square,Southern Interior,TRUE,TRUE,TRUE,FALSE
+Squamish Elementary,Squamish Elementary,Georgia Strait,TRUE,TRUE,TRUE,TRUE
+Surrey East,Surrey East,Lower Fraser Valley,TRUE,TRUE,TRUE,FALSE
+Terrace Skeena Middle School,Terrace Skeena Middle School,Coastal,TRUE,TRUE,TRUE,TRUE
+Tsawwassen,Tsawwassen,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Valemount,Valemount,Central Interior,TRUE,FALSE,FALSE,FALSE
+Vancouver Clark Drive,Vancouver Clark Drive,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Vancouver International Airport #2,Vancouver International Airport #2,Lower Fraser Valley,TRUE,TRUE,TRUE,TRUE
+Vanderhoof Courthouse,Vanderhoof Courthouse,Central Interior,TRUE,FALSE,FALSE,FALSE
+Vernon Science Centre,Vernon Science Centre,Southern Interior,TRUE,TRUE,TRUE,FALSE
+Victoria Topaz,Victoria Topaz,Georgia Strait,TRUE,TRUE,TRUE,TRUE
+Whistler Meadow Park,Whistler Meadow Park,Georgia Strait,TRUE,TRUE,TRUE,FALSE
+Williams Lake Columneetza School,Williams Lake Columneetza School,Central Interior,TRUE,TRUE,TRUE,FALSE
+Burnaby Mountain,Burnaby Mountain,Lower Fraser Valley,FALSE,TRUE,TRUE,FALSE
+Coquitlam Douglas College,Coquitlam Douglas College,Lower Fraser Valley,FALSE,TRUE,TRUE,FALSE
+Maple Ridge Golden Ears School,Maple Ridge Golden Ears School,Lower Fraser Valley,FALSE,TRUE,TRUE,FALSE
+Taylor Townsite,Taylor Townsite,Northeast,FALSE,TRUE,TRUE,TRUE
+Vancouver Robson Square,Vancouver Robson Square,Lower Fraser Valley,FALSE,TRUE,TRUE,TRUE
+Burnaby North Eton,Burnaby North Eton,Lower Fraser Valley,FALSE,FALSE,FALSE,TRUE
+Kitimat Industrial Ave,Kitimat Industrial Ave,Coastal,FALSE,FALSE,FALSE,TRUE
+North Burnaby Capitol Hill,North Burnaby Capitol Hill,Lower Fraser Valley,FALSE,FALSE,FALSE,TRUE
+Trail Butler Park,Trail Butler Park,Southern Interior,FALSE,FALSE,FALSE,TRUE
+Trail Columbia Gardens Airport,Trail Columbia Gardens Airport,Southern Interior,FALSE,FALSE,FALSE,TRUE

@@ -14,17 +14,33 @@ library(bcmaps)
 library(stringr)
 
 
-dirs_location <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out'  #local location, two dots for final, one dot for debug
+dirs_location <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data'  #local location, two dots for final, one dot for debug
 if (0) {
   dirs_location <- './data/out'
 }
 
 
-df_management_airzones <- readr::read_csv(paste(dirs_location,'management_airzones.csv',sep='/'))
-az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/'))
-df_stations <- readr::read_rds(paste(dirs_location,'liststations_merged.Rds',sep='/'))
-df_caaqs_results <- readr::read_csv(paste(dirs_location,'caaqs_results.csv',sep='/'))
-graph_barcaaqs <- read_rds(paste(dirs_location,'caaqs_bargraph.Rds',sep='/'))
+df_management_airzones <- readr::read_csv(paste(dirs_location,'out/management_airzones.csv',sep='/'))
+az_mgmt <- readr::read_rds(paste(dirs_location,'out/az_mgmt.Rds',sep='/'))
+df_stations <- readr::read_rds(paste(dirs_location,'out/liststations_merged.Rds',sep='/'))
+df_caaqs_results <- readr::read_csv(paste(dirs_location,'out/caaqs_results.csv',sep='/'))
+graph_barcaaqs <- read_rds(paste(dirs_location,'out/caaqs_bargraph.Rds',sep='/'))
+#download data
+df_downloads <- readr::read_csv(paste(dirs_location,'out/management.csv',sep='/')) %>% 
+  ungroup() %>%
+  select(site,instrument,year,parameter,metric,metric_value,tfee,colour_text) %>%
+  unique() %>%
+  rename(management_level = colour_text) %>%
+  mutate(tfee = ifelse(tfee,'TFEE adjusted','no TFEE adjustment'),
+         metric_value = as.character(metric_value)) %>%
+  pivot_wider(names_from = tfee, values_from = c(metric_value,management_level)) 
+  
+df_downloads_airzone <- readr::read_csv(paste(dirs_location,'out/management_airzones.csv',sep='/')) %>% 
+  ungroup() %>%distinct() %>%
+  select(year,airzone,pollutant,tfee,colour_text) %>%
+  mutate(tfee = ifelse(tfee,'TFEE adjusted','no TFEE adjustment')) %>%
+  pivot_wider(names_from = tfee,values_from = colour_text) %>%
+  arrange(airzone,pollutant,year)
 
 year_max <- max(df_caaqs_results$year)
 
@@ -394,7 +410,9 @@ ui <-
       
       ),
    
-    downloadLink('downloadData', 'Download Data')
+    fluidRow(column(9,downloadLink('downloadData2', 'Download Air Zone Management Level'))),
+    fluidRow(column(9,downloadLink('downloadData', 'Download Station Data')))
+    
     
     
     #        sidebarLayout(
@@ -483,7 +501,8 @@ output$Title <- renderText({
   return(title)
 })
   
-  data <- df_caaqs_results 
+  data <- df_downloads 
+  data2 <- df_downloads_airzone
   output$table1 <- DT::renderDT(add_mgmt_legend())
   
   
@@ -493,6 +512,14 @@ output$Title <- renderText({
     },
     content = function(con) {
       write.csv(data, con)
+    }
+  )
+  output$downloadData2 <- downloadHandler(
+    filename = function() {
+      paste('airzone_mgmt-', Sys.Date(), '.csv', sep='')
+    },
+    content = function(con) {
+      write.csv(data2, con)
     }
   )
   
