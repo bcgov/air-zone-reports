@@ -16,12 +16,17 @@
 #      - data content needs to be updated, such as, after completing Level 2 data validation
 #      - if the test data folder is missing or has no data content
 
+# enter what year this i
+validation_year <- 2021
 
 # set the working and save directory-----
 # multiple attempts to ensuer it will be at './R'
 saveDirectory <- './data/out'
+
 dir.create(saveDirectory,recursive = TRUE)
-years <- 2013:2021
+
+
+datayear <- 2013:validation_year
 
 
 print(getwd())
@@ -31,6 +36,8 @@ require(bcmaps)
 require(envair)
 require(envreportutils)
 require(rcaaqs)
+require(janitor)
+require(lubridate)
 
 # define where data files will be saved
 
@@ -38,8 +45,18 @@ require(rcaaqs)
 require(dplyr)
 source('./assets/00_setup.R')
 
+# retrieve pm, o3, no2, and so2 data
+df_data <- importBC_data(c('pm25','no2','so2','o3'), years = 2011:validation_year, flag_TFEE = TRUE,merge_Stations = TRUE)
+df_data <- clean_names(df_data) %>%
+  mutate(date_time = date_pst - hours(1)) %>%
+  select(date_time,date_pst,date,time,everything())
 
-#Create NPRI data----
+df_data <- df_data %>%
+  select(-station_name_full) %>%
+  distinct()
+
+saveRDS(df_data,paste(saveDirectory,'aq_data.Rds',sep='/'))
+# Create NPRI data----
 fileNPRI <- paste(saveDirectory,'NPRI.csv',sep='/')
 df_NPRI <- envair::get_npri()
 
@@ -47,13 +64,13 @@ df_NPRI %>%
   filter(province == 'BC') %>%
   readr::write_csv(fileNPRI)
 
-#save APEI data----
+# save APEI data----
 download.file(url = 'https://data-donnees.ec.gc.ca/data/substances/monitor/canada-s-air-pollutant-emissions-inventory/EN_APEI-Can-Prov_Terr.csv',
               destfile = paste(saveDirectory,'EN_APEI-Can-Prov_Terr.csv',sep='/')
 )
 
-#create quick list of bc stations
-#add if active within the past 5 years
+# create quick list of bc stations-----
+# add if active within the past 5 years
 envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE) %>%
   saveRDS(paste(saveDirectory,'liststations_merged.Rds',sep='/'))
 
@@ -62,9 +79,10 @@ envair::get_tfee() %>%
   readr::write_csv(paste(saveDirectory,'tfee.csv',sep='/'))
 
 #secondary_test tfee
-pm25_tfee_prelim <- readr::read_csv('./data/out/pm25_tfee_2022_prelim.csv') %>%
-  mutate(PARAMETER = 'PM25') 
-pm25_tfee <- envair::get_tfee() 
+# pm25_tfee_prelim <- readr::read_csv('./data/out/pm25_tfee_2022_prelim.csv') %>%
+#   mutate(PARAMETER = 'PM25') 
+
+pm25_tfee <- envair::get_tfee()
 
 pm25_tfee %>%
   mutate(DATE = as.Date(DATE)) %>%
@@ -97,9 +115,6 @@ create_caaqs_annual(years = years, savedirectory = saveDirectory)
 
 # Create management levels summary-----
 df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
-
-
-
 readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
 
 # OPTIONAL: Create annual metrics file----

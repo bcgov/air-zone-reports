@@ -1,39 +1,9 @@
 
-#' List of metric and parameters
-#'
-#' @description This contains a list of metrics and the parameters these are related to.
-#' Note that there are two types of parameters listed, these are created to ensure coverage for all
-#' envair and rcaaqs have different list of metrics
-#' parameter is from rcaaqs
-#' metric is from envair
-#'
-#' @export
-#'
-df_metric_list <- function() {
-  #define levels to put metrics and parameters in order
-  levels_parameter <- c('pm2.5_annual','pm2.5_24h','o3','no2_1yr','no2_3yr','so2_1yr','so2_3yr')
-  levels_metric <- c('pm25_annual','pm25_24h','o3_8h','no2_ann','no2_1hr','so2_ann','so2_1hr')
-  df_result <- tribble(
-    ~pollutant,~parameter,~metric,
-    'PM25','pm2.5_annual','pm25_annual',
-    'O3','o3','o3_8h',
-    'PM25','pm2.5_24h','pm25_24h',
-    'NO2','no2_1yr','no2_ann',
-    'NO2','no2_3yr','no2_1hr',
-    'SO2','so2_1yr','so2_ann',
-    'SO2','so2_3yr','so2_1hr'
-  )
-  
-  df_result$parameter <- factor(df_result$parameter, levels = levels_parameter)
-  df_result$metric <- factor(df_result$metric, levels = levels_metric)
-  
-  return(df_result)
-}
 
 
-#The following are stepwise process
-#to generate data
-#once created, please put into github
+# The following are stepwise process
+# to generate data
+# once created, please put into github
 
 dirs_location <- './data/out'
 df_management <- readr::read_csv(paste(dirs_location,'management.csv',sep='/'))

@@ -12,7 +12,7 @@
 
 # The functions here are meant to create functions and data to prepare shiny data
 
-
+validation_year <- 2021
 
 library(envair)
 library(rcaaqs)
@@ -1239,8 +1239,8 @@ load_data <- function(datapath = './',filename) {
   
   # if the file is an RDS, use readRDS to load it
   else if (tolower(file_ext) == "rds") {
-    try(data <- readRDS(url(file_path)))
-    try(data <- readRDS((file_path)))
+    try(data <- readRDS(url(file_path)),silent = TRUE)
+    try(data <- readRDS((file_path)),silent = TRUE)
   }
   
   # if the file extension is not recognized, throw an error
@@ -2235,36 +2235,6 @@ pad_df <- function(df,static_columns,filled_columns) {
 
 #create management level tables
 
-#' List of metric and parameters
-#'
-#' @description This contains a list of metrics and the parameters these are related to.
-#' Note that there are two types of parameters listed, these are created to ensure coverage for all
-#' envair and rcaaqs have different list of metrics
-#' parameter is from rcaaqs
-#' metric is from envair
-#'
-#' @export
-#'
-df_metric_list <- function() {
-  #define levels to put metrics and parameters in order
-  levels_parameter <- c('pm2.5_annual','pm2.5_24h','o3','no2_1yr','no2_3yr','so2_1yr','so2_3yr')
-  levels_metric <- c('pm25_annual','pm25_24h','o3_8h','no2_ann','no2_1hr','so2_ann','so2_1hr')
-  df_result <- tribble(
-    ~pollutant,~parameter,~metric,
-    'PM25','pm2.5_annual','pm25_annual',
-    'O3','o3','o3_8h',
-    'PM25','pm2.5_24h','pm25_24h',
-    'NO2','no2_1yr','no2_ann',
-    'NO2','no2_3yr','no2_1hr',
-    'SO2','so2_1yr','so2_ann',
-    'SO2','so2_3yr','so2_1hr'
-  )
-  
-  df_result$parameter <- factor(df_result$parameter, levels = levels_parameter)
-  df_result$metric <- factor(df_result$metric, levels = levels_metric)
-  
-  return(df_result)
-}
 
 #' Create a Comprehensive Result of Management Levels
 #' 
@@ -3436,3 +3406,93 @@ add_arrow <- function(value) {
   return(result)
 }
 
+#' List of metric and parameters
+#'
+#' @description This contains a list of metrics and the parameters these are related to.
+#' Note that there are two types of parameters listed, these are created to ensure coverage for all
+#' envair and rcaaqs have different list of metrics
+#' parameter is from rcaaqs
+#' metric is from envair
+#'
+#' @export
+#'
+df_metric_list <- function() {
+  #define levels to put metrics and parameters in order
+  levels_parameter <- c('pm2.5_annual','pm2.5_24h','o3','no2_1yr','no2_3yr','so2_1yr','so2_3yr')
+  levels_metric <- c('pm25_annual','pm25_24h','o3_8h','no2_ann','no2_1hr','so2_ann','so2_1hr')
+  df_result <- tribble(
+    ~pollutant,~parameter,~metric,
+    'PM25','pm2.5_annual','pm25_annual',
+    'O3','o3','o3_8h',
+    'PM25','pm2.5_24h','pm25_24h',
+    'NO2','no2_1yr','no2_ann',
+    'NO2','no2_3yr','no2_1hr',
+    'SO2','so2_1yr','so2_ann',
+    'SO2','so2_3yr','so2_1hr'
+  )
+  
+  df_result$parameter <- factor(df_result$parameter, levels = levels_parameter)
+  df_result$metric <- factor(df_result$metric, levels = levels_metric)
+  
+  return(df_result)
+}
+
+add_caaqs_historic <- function(g, metric) {
+  hist_caaqs <- tribble(
+    ~parameter,     ~labels,                                            ~lower_breaks, ~upper_breaks,
+    "o3",           "Actions for Keeping Clean Areas Clean",            0,             50,
+    "o3",           "Actions for Preventing Air Quality Deterioration", 50,            56,
+    "o3",           "Actions for Preventing CAAQS Exceedance",          56,            63,
+    "o3",           "Actions for Achieving Air Zone CAAQS",             63,            Inf,
+    
+    "pm2.5_annual", "Actions for Keeping Clean Areas Clean",            0,             4.0,
+    "pm2.5_annual", "Actions for Preventing Air Quality Deterioration", 4.0,           6.4,
+    "pm2.5_annual", "Actions for Preventing CAAQS Exceedance",          6.4,           10.0,
+    "pm2.5_annual", "Actions for Achieving Air Zone CAAQS",             10.0,          Inf,
+    
+    "pm2.5_24h",    "Actions for Keeping Clean Areas Clean",            0,             10,
+    "pm2.5_24h",    "Actions for Preventing Air Quality Deterioration", 10,            19,
+    "pm2.5_24h",    "Actions for Preventing CAAQS Exceedance",          19,            28,
+    "pm2.5_24h",    "Actions for Achieving Air Zone CAAQS",             28,            Inf) %>%
+    filter(parameter == .env$metric, !is.na(lower_breaks)) %>%
+    left_join(select(rcaaqs::management_levels, labels, colour) %>% distinct(), 
+              by = "labels")
+  
+  years <- select(g$data, caaqs_year) %>%
+    distinct() %>%
+    nrow() 
+  
+  current_caaqs <- rcaaqs::management_levels %>%
+    filter(parameter == .env$metric, !is.na(lower_breaks))
+  
+  ylim <- max(g$data$raw, na.rm = TRUE) * 1.1
+  if(ylim < (max(hist_caaqs$lower_breaks, na.rm = TRUE) * 1.1)) {
+    g <- g + 
+      ggplot2::scale_y_continuous(
+        expand = c(0,0), limits = c(NA, max(hist_caaqs$lower_breaks, na.rm = TRUE) * 1.1),
+        breaks = scales::breaks_extended(n = 7))
+  }
+  
+  g <- g + geom_rect(
+    data = hist_caaqs, xmin = -Inf, xmax = years - 0.5, 
+    aes(ymin = lower_breaks, ymax = upper_breaks, fill = labels), 
+    inherit.aes = FALSE, alpha = 0.55)
+  
+  g <- g + 
+    geom_rect(data = current_caaqs, xmin = years - 0.5, xmax = Inf,
+              aes(ymin = lower_breaks, ymax = upper_breaks, fill = labels), 
+              inherit.aes = FALSE, alpha = 0.55)
+  
+  g$layers <- list(g$layers[[2]], g$layers[[3]], g$layers[[1]])
+  
+  line_df <- data.frame(y = c(max(hist_caaqs$lower_breaks, na.rm = TRUE),
+                              max(hist_caaqs$lower_breaks, na.rm = TRUE),
+                              max(current_caaqs$lower_breaks, na.rm = TRUE),
+                              max(current_caaqs$lower_breaks, na.rm = TRUE)),
+                        x = c(0, years-0.5, years-0.5, Inf))
+  
+  g +
+    geom_line(data = line_df, aes(x = x, y = y, colour = "CAAQS Achievement"), 
+              inherit.aes = FALSE, linetype = "dashed", size = 1) +
+    scale_colour_manual(values = last(hist_caaqs$colour))
+}
