@@ -78,8 +78,8 @@ for(s in sites_pm25) {
   #        width = 778, height = 254, dpi = 72, units = "px", bg = "white")
   # 
   # Save for print version
-  stn_plots$PM25[[s]][["24h"]] <- g1
-  stn_plots$PM25[[s]][["annual"]] <- g2
+  stn_plots$PM25[[s]][["24-Hour"]] <- g1
+  stn_plots$PM25[[s]][["Annual"]] <- g2
   })
 }
 # -add ozone graphs
@@ -91,7 +91,7 @@ for(s in sites_o3) {
                      plot_std = FALSE, plot_mgmt = FALSE)
     g1 <- add_caaqs_historic(g1, metric = "o3")
     
-    stn_plots$O3[[s]][["o3"]] <- g1
+    stn_plots$O3[[s]][["8-Hour"]] <- g1
     
   })
 }
@@ -112,8 +112,8 @@ for(s in sites_no2) {
     #        width = 778, height = 254, dpi = 72, units = "px", bg = "white")
     # 
     # Save for print version
-    stn_plots$NO2[[s]][["annual"]] <- g1
-    stn_plots$NO2[[s]][["1-hour"]] <- g2
+    stn_plots$NO2[[s]][["Annual"]] <- g1
+    stn_plots$NO2[[s]][["1-Hour"]] <- g2
   })
 }
 # -add no2 graphs
@@ -133,8 +133,8 @@ for(s in sites_so2) {
     #        width = 778, height = 254, dpi = 72, units = "px", bg = "white")
     # 
     # Save for print version
-    stn_plots$SO2[[s]][["annual"]] <- g1
-    stn_plots$SO2[[s]][["1-hour"]] <- g2
+    stn_plots$SO2[[s]][["Annual"]] <- g1
+    stn_plots$SO2[[s]][["1-Hour"]] <- g2
   })
 }
 
