@@ -74,10 +74,7 @@
 <text x='412.76' y='223.18' text-anchor='middle' style='font-size: 8.00px;fill: #4D4D4D; font-family: "Arial";' textLength='38.26px' lengthAdjust='spacingAndGlyphs'>2014-2016</text>
 <text x='508.43' y='223.18' text-anchor='middle' style='font-size: 8.00px;fill: #4D4D4D; font-family: "Arial";' textLength='41.37px' lengthAdjust='spacingAndGlyphs'>2015-2017*</text>
 <text x='297.97' y='234.52' text-anchor='middle' style='font-size: 10.00px; font-family: "Arial";' textLength='75.09px' lengthAdjust='spacingAndGlyphs'>Reporting Period</text>
-<text transform='translate(12.15,172.36) rotate(-90)' style='font-size: 10.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>Daily</text>
-<text transform='translate(12.15,147.34) rotate(-90)' style='font-size: 10.00px; font-family: "Arial";' textLength='43.35px' lengthAdjust='spacingAndGlyphs'>Maximum</text>
-<text transform='translate(12.15,101.21) rotate(-90)' style='font-size: 10.00px; font-family: "Arial";' textLength='29.48px' lengthAdjust='spacingAndGlyphs'>Ozone</text>
-<text transform='translate(12.15,68.95) rotate(-90)' style='font-size: 10.00px; font-family: "Arial";' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>(ppb)</text>
+<text transform='translate(12.15,108.97) rotate(-90)' text-anchor='middle' style='font-size: 10.00px; font-family: "Arial";' textLength='126.77px' lengthAdjust='spacingAndGlyphs'>Daily Maximum Ozone (ppb)</text>
 <line x1='582.49' y1='47.17' x2='596.32' y2='47.17' style='stroke-width: 2.13; stroke: #A50026; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
 <text x='603.03' y='50.04' style='font-size: 8.00px; font-family: "Arial";' textLength='76.04px' lengthAdjust='spacingAndGlyphs'>CAAQS Achievement</text>
 <rect x='581.48' y='81.43' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A50026; fill-opacity: 0.55;' />
