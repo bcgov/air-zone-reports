@@ -1,0 +1,45 @@
+Label,year,AIRZONE,metric,parameter,management_level_no TFEE adjustment,management_level_TFEE adjusted,metric_value_TFEE adjusted,metric_value_no TFEE adjustment
+Prince George-Plaza 400,2021,Central Interior,o3_8h,o3,green,green,49,49
+Quesnel,2021,Central Interior,o3_8h,o3,green,green,46,46
+Smithers,2021,Central Interior,o3_8h,o3,green,green,44,44
+Williams Lake,2021,Central Interior,o3_8h,o3,green,green,50,50
+Kitimat-Whitesail,2021,Coastal,o3_8h,o3,green,green,42,42
+Prince Rupert-Fairview,2021,Coastal,o3_8h,o3,green,green,41,41
+Terrace,2021,Coastal,o3_8h,o3,green,green,44,44
+Colwood,2021,Georgia Strait,o3_8h,o3,yellow,yellow,51,51
+Courtenay,2021,Georgia Strait,o3_8h,o3,green,green,48,48
+Duncan-Cairnsmore,2021,Georgia Strait,o3_8h,o3,green,green,49,49
+Nanaimo,2021,Georgia Strait,o3_8h,o3,green,green,45,45
+Squamish,2021,Georgia Strait,o3_8h,o3,green,green,44,44
+Victoria,2021,Georgia Strait,o3_8h,o3,green,green,45,45
+Whistler,2021,Georgia Strait,o3_8h,o3,green,green,49,49
+Abbotsford-Airport,2021,Lower Fraser Valley,o3_8h,o3,yellow,yellow,51,52
+Abbotsford-Mill Lake,2021,Lower Fraser Valley,o3_8h,o3,green,green,50,50
+Agassiz,2021,Lower Fraser Valley,o3_8h,o3,yellow,yellow,52,54
+Burnaby-Kensington Park,2021,Lower Fraser Valley,o3_8h,o3,green,green,46,46
+Burnaby-Mtn,2021,Lower Fraser Valley,o3_8h,o3,yellow,yellow,53,53
+Burnaby-South,2021,Lower Fraser Valley,o3_8h,o3,green,green,44,44
+Chilliwack,2021,Lower Fraser Valley,o3_8h,o3,orange,yellow,55,57
+Coquitlam,2021,Lower Fraser Valley,o3_8h,o3,yellow,yellow,54,54
+Hope,2021,Lower Fraser Valley,o3_8h,o3,yellow,yellow,56,56
+Langley,2021,Lower Fraser Valley,o3_8h,o3,yellow,yellow,52,52
+Maple Ridge,2021,Lower Fraser Valley,o3_8h,o3,orange,yellow,56,57
+Mission,2021,Lower Fraser Valley,o3_8h,o3,orange,orange,57,58
+N.Vancouver-Mahon Park,2021,Lower Fraser Valley,o3_8h,o3,green,green,45,45
+New Westminster,2021,Lower Fraser Valley,o3_8h,o3,green,green,47,47
+North Delta,2021,Lower Fraser Valley,o3_8h,o3,green,green,45,45
+Pitt Meadows,2021,Lower Fraser Valley,o3_8h,o3,green,green,50,50
+Port Moody,2021,Lower Fraser Valley,o3_8h,o3,green,green,48,48
+Richmond-Airport,2021,Lower Fraser Valley,o3_8h,o3,green,green,44,44
+Richmond-South,2021,Lower Fraser Valley,o3_8h,o3,green,green,45,45
+Surrey East,2021,Lower Fraser Valley,o3_8h,o3,green,green,50,50
+Tsawwassen,2021,Lower Fraser Valley,o3_8h,o3,green,green,46,46
+Vancouver-ClarkDr,2021,Lower Fraser Valley,o3_8h,o3,green,green,41,41
+Vancouver-Downtown,2021,Lower Fraser Valley,o3_8h,o3,green,green,38,38
+FortSt.John,2021,Northeast,o3_8h,o3,green,green,50,50
+Taylor-Townsite,2021,Northeast,o3_8h,o3,yellow,yellow,51,51
+Castlegar,2021,Southern Interior,o3_8h,o3,yellow,yellow,52,52
+Cranbrook,2021,Southern Interior,o3_8h,o3,yellow,yellow,53,53
+Kamloops,2021,Southern Interior,o3_8h,o3,yellow,yellow,51,51
+Kelowna,2021,Southern Interior,o3_8h,o3,yellow,yellow,52,52
+Vernon,2021,Southern Interior,o3_8h,o3,yellow,yellow,52,52

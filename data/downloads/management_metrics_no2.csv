@@ -1,0 +1,90 @@
+Label,year,AIRZONE,metric,parameter,management_level_no TFEE adjustment,management_level_TFEE adjusted,metric_value_TFEE adjusted,metric_value_no TFEE adjustment
+Prince George-Plaza 400,2021,Central Interior,no2_1hr,no2,orange,NA,NA,43.4
+Prince George-Plaza 400,2021,Central Interior,no2_ann,no2,orange,NA,NA,8.3
+Quesnel,2021,Central Interior,no2_1hr,no2,orange,NA,NA,38.1
+Quesnel,2021,Central Interior,no2_ann,no2,orange,NA,NA,8.1
+Smithers,2021,Central Interior,no2_1hr,no2,yellow,NA,NA,29
+Smithers,2021,Central Interior,no2_ann,no2,yellow,NA,NA,6.3
+Williams Lake,2021,Central Interior,no2_1hr,no2,orange,NA,NA,34.7
+Kitimat-Whitesail,2021,Coastal,no2_1hr,no2,green,NA,NA,14.3
+Kitimat-Whitesail,2021,Coastal,no2_ann,no2,green,NA,NA,1.8
+Prince Rupert-Fairview,2021,Coastal,no2_1hr,no2,yellow,NA,NA,24.8
+Prince Rupert-Fairview,2021,Coastal,no2_ann,no2,yellow,NA,NA,3.9
+Terrace,2021,Coastal,no2_1hr,no2,yellow,NA,NA,23
+Terrace,2021,Coastal,no2_ann,no2,yellow,NA,NA,2.7
+Colwood,2021,Georgia Strait,no2_1hr,no2,yellow,NA,NA,23.3
+Colwood,2021,Georgia Strait,no2_ann,no2,yellow,NA,NA,3.8
+Courtenay,2021,Georgia Strait,no2_1hr,no2,yellow,NA,NA,23.4
+Courtenay,2021,Georgia Strait,no2_ann,no2,yellow,NA,NA,3.5
+Duncan-Cairnsmore,2021,Georgia Strait,no2_1hr,no2,yellow,NA,NA,22.1
+Duncan-Cairnsmore,2021,Georgia Strait,no2_ann,no2,yellow,NA,NA,4.2
+Langdale,2021,Georgia Strait,no2_1hr,no2,yellow,NA,NA,21.8
+Langdale,2021,Georgia Strait,no2_ann,no2,yellow,NA,NA,4
+Nanaimo,2021,Georgia Strait,no2_1hr,no2,yellow,NA,NA,26.4
+Nanaimo,2021,Georgia Strait,no2_ann,no2,yellow,NA,NA,4.9
+Squamish,2021,Georgia Strait,no2_1hr,no2,yellow,NA,NA,23
+Squamish,2021,Georgia Strait,no2_ann,no2,yellow,NA,NA,5.1
+Victoria,2021,Georgia Strait,no2_1hr,no2,orange,NA,NA,34.3
+Victoria,2021,Georgia Strait,no2_ann,no2,yellow,NA,NA,6.1
+Whistler,2021,Georgia Strait,no2_1hr,no2,yellow,NA,NA,21.1
+Whistler,2021,Georgia Strait,no2_ann,no2,yellow,NA,NA,2.8
+Abbotsford-Airport,2021,Lower Fraser Valley,no2_1hr,no2,yellow,NA,NA,28.4
+Abbotsford-Airport,2021,Lower Fraser Valley,no2_ann,no2,yellow,NA,NA,6.2
+Abbotsford-Mill Lake,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,33.3
+Abbotsford-Mill Lake,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,7.4
+Agassiz,2021,Lower Fraser Valley,no2_1hr,no2,yellow,NA,NA,28.4
+Agassiz,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,7.1
+Burnaby-Kensington Park,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,35.1
+Burnaby-Kensington Park,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,8.9
+Burnaby-Mtn,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,31.6
+Burnaby-Mtn,2021,Lower Fraser Valley,no2_ann,no2,yellow,NA,NA,6
+Burnaby-South,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,38
+Burnaby-South,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,10.6
+Chilliwack,2021,Lower Fraser Valley,no2_1hr,no2,yellow,NA,NA,28.8
+Chilliwack,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,7.2
+Coquitlam,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,32.9
+Coquitlam,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,8.3
+Hope,2021,Lower Fraser Valley,no2_1hr,no2,yellow,NA,NA,23.5
+Hope,2021,Lower Fraser Valley,no2_ann,no2,yellow,NA,NA,6
+Langley,2021,Lower Fraser Valley,no2_1hr,no2,yellow,NA,NA,23.3
+Langley,2021,Lower Fraser Valley,no2_ann,no2,yellow,NA,NA,5.3
+Maple Ridge,2021,Lower Fraser Valley,no2_1hr,no2,yellow,NA,NA,30.7
+Maple Ridge,2021,Lower Fraser Valley,no2_ann,no2,yellow,NA,NA,6.5
+Mission,2021,Lower Fraser Valley,no2_1hr,no2,yellow,NA,NA,28.8
+Mission,2021,Lower Fraser Valley,no2_ann,no2,yellow,NA,NA,5.5
+N.Vancouver-Mahon Park,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,37.4
+N.Vancouver-Mahon Park,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,9.6
+New Westminster,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,40
+New Westminster,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,13.9
+North Delta,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,40.1
+North Delta,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,10.5
+Pitt Meadows,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,36
+Pitt Meadows,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,7.3
+Port Moody,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,36.5
+Port Moody,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,10.8
+Richmond-Airport,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,41.1
+Richmond-Airport,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,11.1
+Richmond-South,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,37.1
+Richmond-South,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,10.1
+Surrey East,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,33
+Surrey East,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,7.3
+Tsawwassen,2021,Lower Fraser Valley,no2_1hr,no2,yellow,NA,NA,29.6
+Tsawwassen,2021,Lower Fraser Valley,no2_ann,no2,yellow,NA,NA,5.4
+Vancouver-ClarkDr,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,47.6
+Vancouver-ClarkDr,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,16.4
+Vancouver-Downtown,2021,Lower Fraser Valley,no2_1hr,no2,orange,NA,NA,39.9
+Vancouver-Downtown,2021,Lower Fraser Valley,no2_ann,no2,orange,NA,NA,15.8
+FortSt.John,2021,Northeast,no2_1hr,no2,orange,NA,NA,45.9
+FortSt.John,2021,Northeast,no2_ann,no2,yellow,NA,NA,6.4
+Taylor-Townsite,2021,Northeast,no2_1hr,no2,orange,NA,NA,37.1
+Taylor-Townsite,2021,Northeast,no2_ann,no2,yellow,NA,NA,5.4
+Castlegar,2021,Southern Interior,no2_1hr,no2,yellow,NA,NA,25.7
+Castlegar,2021,Southern Interior,no2_ann,no2,yellow,NA,NA,5.9
+Cranbrook,2021,Southern Interior,no2_1hr,no2,yellow,NA,NA,28.2
+Cranbrook,2021,Southern Interior,no2_ann,no2,yellow,NA,NA,4.3
+Kamloops,2021,Southern Interior,no2_1hr,no2,orange,NA,NA,38.3
+Kamloops,2021,Southern Interior,no2_ann,no2,orange,NA,NA,10.5
+Kelowna,2021,Southern Interior,no2_1hr,no2,yellow,NA,NA,25.5
+Kelowna,2021,Southern Interior,no2_ann,no2,yellow,NA,NA,5.8
+Vernon,2021,Southern Interior,no2_1hr,no2,orange,NA,NA,35
+Vernon,2021,Southern Interior,no2_ann,no2,orange,NA,NA,10

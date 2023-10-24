@@ -1,0 +1,68 @@
+Label,year,AIRZONE,metric,parameter,management_level_no TFEE adjustment,management_level_TFEE adjusted,metric_value_TFEE adjusted,metric_value_no TFEE adjustment
+Prince George-Plaza 400,2021,Central Interior,so2_1hr,so2,yellow,NA,NA,33.8
+Prince George-Plaza 400,2021,Central Interior,so2_ann,so2,green,NA,NA,1.6
+Quesnel,2021,Central Interior,so2_1hr,so2,green,NA,NA,9.3
+Quesnel,2021,Central Interior,so2_ann,so2,green,NA,NA,0.4
+Kitimat-Haisla Village,2021,Coastal,so2_1hr,so2,green,NA,NA,15.6
+Kitimat-Haisla Village,2021,Coastal,so2_ann,so2,green,NA,NA,0.2
+Kitimat-Riverlodge,2021,Coastal,so2_1hr,so2,green,NA,NA,28.7
+Kitimat-Riverlodge,2021,Coastal,so2_ann,so2,green,NA,NA,0.4
+Kitimat-Whitesail,2021,Coastal,so2_1hr,so2,green,NA,NA,18.7
+Kitimat-Whitesail,2021,Coastal,so2_ann,so2,green,NA,NA,0.3
+Prince Rupert-Fairview,2021,Coastal,so2_1hr,so2,green,NA,NA,1.6
+Prince Rupert-Fairview,2021,Coastal,so2_ann,so2,green,NA,NA,0.1
+Terrace,2021,Coastal,so2_1hr,so2,green,NA,NA,4.5
+Terrace,2021,Coastal,so2_ann,so2,green,NA,NA,0.5
+Crofton-Elementary,2021,Georgia Strait,so2_ann,so2,green,NA,NA,0.6
+Langdale,2021,Georgia Strait,so2_1hr,so2,green,NA,NA,14.3
+Langdale,2021,Georgia Strait,so2_ann,so2,green,NA,NA,0.8
+Squamish,2021,Georgia Strait,so2_1hr,so2,green,NA,NA,4
+Squamish,2021,Georgia Strait,so2_ann,so2,green,NA,NA,0.3
+Victoria,2021,Georgia Strait,so2_1hr,so2,green,NA,NA,5.2
+Victoria,2021,Georgia Strait,so2_ann,so2,green,NA,NA,0.2
+Abbotsford-Airport,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,2.3
+Abbotsford-Airport,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.2
+Abbotsford-Mill Lake,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,2.1
+Abbotsford-Mill Lake,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.2
+Burnaby-Capitol Hill,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,25
+Burnaby-Capitol Hill,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.4
+Burnaby-Kensington Park,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,5.5
+Burnaby-Kensington Park,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.3
+Burnaby-North,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,12.2
+Burnaby-North,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.6
+Burnaby-South,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,3.7
+Burnaby-South,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.2
+Chilliwack,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,1.7
+Chilliwack,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.1
+Langley,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,2.3
+Langley,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.1
+N.Vancouver-Mahon Park,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,3.6
+N.Vancouver-Mahon Park,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.3
+Pitt Meadows,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,3
+Pitt Meadows,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.1
+Port Moody,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,5.1
+Port Moody,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.2
+Richmond-Airport,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,4.8
+Richmond-Airport,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.2
+Richmond-South,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,2.1
+Richmond-South,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.1
+Tsawwassen,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,2.6
+Tsawwassen,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.2
+Vancouver-ClarkDr,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,3.3
+Vancouver-ClarkDr,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.3
+Vancouver-Downtown,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,4.8
+Vancouver-Downtown,2021,Lower Fraser Valley,so2_ann,so2,green,NA,NA,0.4
+Vancouver-Pandora Park,2021,Lower Fraser Valley,so2_1hr,so2,green,NA,NA,5.6
+FortSt.John,2021,Northeast,so2_1hr,so2,green,NA,NA,5.1
+Taylor-Townsite,2021,Northeast,so2_1hr,so2,yellow,NA,NA,37.6
+Taylor-Townsite,2021,Northeast,so2_ann,so2,green,NA,NA,0.5
+Castlegar,2021,Southern Interior,so2_1hr,so2,yellow,NA,NA,35.4
+Castlegar,2021,Southern Interior,so2_ann,so2,green,NA,NA,1.2
+Kamloops,2021,Southern Interior,so2_1hr,so2,green,NA,NA,4.3
+Kamloops,2021,Southern Interior,so2_ann,so2,green,NA,NA,0.4
+Kelowna,2021,Southern Interior,so2_1hr,so2,green,NA,NA,1.5
+Kelowna,2021,Southern Interior,so2_ann,so2,green,NA,NA,0.3
+Trail-Airport,2021,Southern Interior,so2_1hr,so2,orange,NA,NA,58
+Trail-Airport,2021,Southern Interior,so2_ann,so2,yellow,NA,NA,3
+Trail-Butler Park,2021,Southern Interior,so2_1hr,so2,red,NA,NA,174.6
+Trail-Butler Park,2021,Southern Interior,so2_ann,so2,red,NA,NA,5.4
