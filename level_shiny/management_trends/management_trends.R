@@ -32,8 +32,11 @@ az_mgmt_polygon <- readr::read_rds(paste(dirs_location,'out/az_mgmt.Rds',sep='/'
 df_stations <- readr::read_csv(paste(dirs_location,'out/liststations.csv',sep='/'))
 df_stn_mgmt <- readr::read_csv(paste(dirs_location,'out/management.csv',sep='/'))
 df_az_mgmt <- readr::read_csv(paste(dirs_location,'out/management_airzones.csv',sep='/'))
-
 graph_mgmt_trends <-  readr::read_rds(paste(dirs_location,'out/management_plots.Rds',sep='/'))
+
+#location of plots
+dir_plots <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/plots/'
+
 #download data
 df_downloads <- readr::read_csv(paste(dirs_location,'out/management.csv',sep='/')) %>% 
   ungroup() %>%
@@ -669,14 +672,12 @@ tfee_initial <- TRUE
         # -display the management trend
         # -management graphics are here: graph_mgmt_trends
         
-        # -debug testing
-        df1 <- data.frame(x = 1:10, y = 1:10)
-        df2 <- data.frame(x = c(rep('a', 10), rep('b', 10)),
-                          y = c(rnorm(10), rnorm(10, 3, 1)))
-        
+        # -determine the url of image
+        img_url <- paste(dir_plots,df_detail$site[1],'_',parameter_select,'.svg',sep='')
+        message(paste('Retriving image from:',img_url))
         
         # -prepare display, heading to have subscripts for paramter
-        title_display <- paste(df_detail$site[1],' Mangement Level for ',parameter_select,sep='')
+        title_display <- paste(df_detail$label[1],' Management Level for ',parameter_select,sep='')
         title_display <- gsub('pm25','PM<sub>2.5</sub>',title_display,ignore.case = TRUE)
         title_display <- gsub('o3','O<sub>3</sub>',title_display,ignore.case = TRUE)
         title_display <- gsub('no2','NO<sub>2</sub>',title_display,ignore.case = TRUE)
@@ -685,8 +686,8 @@ tfee_initial <- TRUE
         showModal(
           modalDialog(
             title = HTML(title_display),
-            # plot_ly(df1, x = df1$x, y = df1$y, type = 'bar', source = 'scatter'),
-            HTML('<img src = "../test.svg" />'),
+            tags$img(src = img_url,
+                     width = "100%"),
             easyClose = TRUE,
             footer = modalButton("Close")
           )
@@ -720,16 +721,17 @@ tfee_initial <- TRUE
           title_display <- gsub('so2','SO<sub>2</sub>',title_display,ignore.case = TRUE)
           
           print(title_display)
-          showModal(
-            modalDialog(
-              title = HTML(title_display),
-              plot_ly(df1, x = df1$x, y = df1$y, type = 'bar', source = 'scatter'),
-              # tags$img(src = graph_mgmt_trends$PM25$`Abbotsford Central`, 
-              #          width = "100%"),
-              footer = modalButton("Close"),
-              size = "l"
-            )
-          )}
+          # showModal(
+          #   modalDialog(
+          #     title = HTML(title_display),
+          #     tags$img(src = 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/plots/Abbotsford%20A%20Columbia%20Street_no2.svg',
+          #              width = "100%"),
+          #     footer = modalButton("Close"),
+          #     size = "l"
+          #   )
+          # )
+          
+          }
         
       })
     })
