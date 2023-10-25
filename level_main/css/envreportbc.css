@@ -1,0 +1,211 @@
+img.envreportbc-wordmark {
+    width: 100px;
+}
+
+@media (min-width:1200px) {
+    a.envreportbc-wordmark {
+        margin-left: 20px;
+    }
+}
+
+.bucketHeader-container {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px;
+}
+
+.bucketHeader-container h1 {
+	margin-bottom: 0 !important;
+}
+
+h1.bucketHeader {
+	font-size: 3em;
+	height: 95px;
+	margin: 0px 0px 0px 0px;
+	font-weight: normal;
+	padding-right: 0px;
+	padding-left: 105px;
+	display: table; /*for vertical centering text*/
+}
+
+h1.bucketHeader a {
+	display: table-cell; /*for vertical centering text*/
+	vertical-align: middle; /*for vertical centering text*/
+}
+
+@media (max-width: 470px) {
+    h1.bucketHeader {
+        font-size: 2em;
+        padding-left: 95px;
+    }
+}
+
+.bucketWater {
+	background: url(../images/envreportbc/bucketimages/water.png) no-repeat left top;
+}
+
+.bucketAir {
+	background: url(../images/envreportbc/bucketimages/air.png) no-repeat left top;
+}
+
+.bucketPlants-and-animals {
+	background: url(../images/envreportbc/bucketimages/plants-and-animals.png) no-repeat left top;
+}
+
+.bucketClimate-change {
+	background: url(../images/envreportbc/bucketimages/climate-change.png) no-repeat left top;
+}
+
+.bucketLand {
+	background: url(../images/envreportbc/bucketimages/land.png) no-repeat left top;
+}
+
+.bucketSustainability {
+	background: url(../images/envreportbc/bucketimages/sustainability.png) no-repeat left top;
+}
+
+img.img-chart {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: auto; 
+	margin-right: auto; 
+	display: block;
+}
+
+p:first-of-type {
+	margin-top: 0px;
+}
+
+.blue-section h2.blue-heading-bar {
+	margin-bottom: 10px !important;
+}
+
+
+.well  {
+	text-align:left;
+}
+
+
+.print_ver {
+	font-size:1.1em;
+	margin-top:1.1em;
+	margin-bottom:1.1em;
+}
+
+/* Multi-panel graph layout */
+table.multi-panel-graph {
+	width: 930px;
+	margin-top:	0;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+table.multi-panel-graph td {
+	border: none; 
+	border-top: none !important;
+}
+
+table.multi-panel-graph td.right {
+	padding: 0 0 5px 5px;
+}
+
+table.multi-panel-graph td.left {
+	padding: 0 5px 5px 0;
+}
+
+/* --- Tab Control styling --- */
+
+.tab-list ul {
+  text-align: center;
+  list-style-type: none;
+  font-size: 1em;
+  padding: 10px 0 0px 10px;
+  margin: 0 0 15px 0;
+}
+
+.tab-list ul li {
+  background-image: none;
+  display: inline-block;
+  float: none;
+  padding: 0 5px 0 0;
+}
+
+#tabCtrl img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* dropdown subnavigation */
+.level2Navigation .navbar-nav > li > a {
+	color: #fff !important;
+}
+
+.level2Navigation .navbar-nav > .open > a,
+.level2Navigation .navbar-nav > .open > a:hover,
+.level2Navigation .navbar-nav > .open > a:focus {
+  background-color: #38598a !important;
+}
+
+.navigationRibbon .level2Navigation li > a {
+	color: #fff;
+	padding: 10px 15px;
+}
+
+.navigationRibbon .level2Navigation li:hover > a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.navigationRibbon .level2Navigation .level3Navigation li:hover > a:hover {
+	background-color: #5475a7;
+}
+
+ul.dropdown-menu.level3Navigation {
+	margin-top: -1px;
+	min-width: 125px;
+}
+
+ul.dropdown-menu.level3Navigation a {
+	text-align: left;
+	font-size: 13px;
+	padding: 8px 15px;
+}
+
+/* For hamburger menu sublist */
+ul.nested-hamburger {
+	list-style-type: none;
+	margin: 0 30px;
+	padding: 0;
+}
+
+ul.nested-hamburger li {
+	margin-bottom: 8px;
+	padding: 0;
+}
+
+ul.nested-hamburger li > a {
+	color: #fff;
+}
+
+.viz {
+	text-align: center;
+}
+
+img.img-chart {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: auto; 
+	margin-right: auto; 
+	display: block;
+}
+
+.photo-center {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: block;
+	text-align: left;
+	font-size: 0.9em;
+}
