@@ -16,6 +16,7 @@ library(sf)
 library(bcmaps)
 library(stringr)
 library(janitor)
+library(rcaaqs)
 
 
 dirs_location <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data'  #local location, two dots for final, one dot for debug
@@ -191,7 +192,7 @@ add_mgmt_legend <- function() {
 #' @param year is the data year
 #' @param polygon_a is the polygon. Prevents redrawing
 map_mgmt <- function(stn_mgmt,az_mgmt,parameter,year,
-                     size = c('200px','400px'),
+                     size = c('600px','1200px'),
                      airzone = NULL) 
 {
   
@@ -369,6 +370,13 @@ map_mgmt <- function(stn_mgmt,az_mgmt,parameter,year,
                       closeOnEscapeKey = TRUE, 
                       keepInView = TRUE)
   # - create initial map
+  # Management labels
+  labels_mgmt <- rcaaqs::management_levels %>%
+    filter(str_detect(parameter, "pm2.5")) %>%
+    select(labels, colour, colour_text, units_html) %>%
+    distinct() %>%
+    mutate(icons = paste0("assets/marker_", colour_text, ".svg"),
+           text_colour = c("white", "black", "black", "white", "white"))
   
   message('displaying map')
   print(unique(az_mgmt$parameter))
@@ -393,13 +401,24 @@ map_mgmt <- function(stn_mgmt,az_mgmt,parameter,year,
     addPolylines(data = az_mgmt$geometry,
                  layerId = paste(az_mgmt$airzone,'01'),
                  color = 'black',weight = 2) %>%
+    
     leaflet::addMarkers(data = stn_mgmt_mapped,
                         icon = markers, label = ~label,
                         # popup = ~popup,
                         # Stick to marker, not mouse
                         labelOptions = labelOptions(sticky = FALSE,
                                                     offset = c(0, -icon_size/2))
-    )
+    ) %>%
+    #                       # Legend
+    addLegend("bottomleft", group = "Annual",
+              data = stn_mgmt_mapped,
+              # Ensure we get all levels
+              colors = rev(labels_mgmt$colour),
+              labels = rev(labels_mgmt$labels),
+              opacity = 1,
+              title = htmltools::HTML(
+                "<h3>Management Levels</h3>"))
+  
   
   return(a)
   
@@ -495,7 +514,10 @@ tfee_initial <- TRUE
     
     # -heading
     (fluidPage(
-      h4(HTML('Air Quality Management Levels')),
+      # h4(HTML(paste('Air Quality Management Levels'))),
+      # h4(HTML(uiOutput("text_header"))),
+      uiOutput('text_header'),
+      h6('Map markers are monitoring stations. Click for details on their management levels.'),
       tags$head(
         tags$style(HTML("
       body { background-color: #f2efe9; }
@@ -524,6 +546,7 @@ tfee_initial <- TRUE
                                #                choices = df_parameter$display,width = "5%"),
                         ),
                         # -tab selecting the pollutant, initial is PM2.5
+                        # h6('Click to select pollutant and display management level'),
                         column(12, align = "center",
                                
                                actionButton(inputId = 'pm25',label = HTML('PM<sub>2.5</sub>'),width = "12.5%",title = 'Central Interior Air Zone'),
@@ -543,7 +566,7 @@ tfee_initial <- TRUE
       
       fluidRow(
         column(12,
-               leaflet::leafletOutput("map",height = '800px'),
+               leaflet::leafletOutput("map",width = "100%"),
         ),
       ),
       
@@ -564,9 +587,13 @@ tfee_initial <- TRUE
     # configure input options-------
     parameter_select <- reactiveValues(param = NULL)
     
-    #initial value
+    
+    #initial value----
     observe({
       parameter_select$param <- list(parameter = 'pm25')
+      output$text_header <- renderUI({h4(HTML(
+        ('Air Quality Management Level for PM<sub>2.5</sub>')
+      ))})
     })
     
     airzone_select <- NULL
@@ -611,12 +638,18 @@ tfee_initial <- TRUE
     observeEvent(input$pm25, {
       message('pm25 clicked')
       parameter_select$param$parameter <- 'pm25'
+      output$text_header <- renderUI({h4(HTML(
+        ('Air Quality Management Level for PM<sub>2.5</sub>')
+      ))})
       a <-    map_mgmt(stn_mgmt = df_stn_mgmt,az_mgmt = df_az_mgmt,parameter = 'pm25',
                        year = rep_year)
       output$map <- renderLeaflet(a)
     })
     observeEvent(input$o3, {
       message('o3 clicked')
+      output$text_header <- renderUI({h4(HTML(
+        ('Air Quality Management Level for O<sub>3</sub>')
+      ))})
       parameter_select$param$parameter <- 'o3'
       a <-    map_mgmt(stn_mgmt = df_stn_mgmt,az_mgmt = df_az_mgmt,parameter = 'o3',
                        year = rep_year)
@@ -624,6 +657,9 @@ tfee_initial <- TRUE
     })
     observeEvent(input$no2, {
       message('no2 clicked')
+      output$text_header <- renderUI({h4(HTML(
+        ('Air Quality Management Level for NO<sub>2</sub>')
+      ))})
       parameter_select$param$parameter <-  'no2'
       a <-    map_mgmt(stn_mgmt = df_stn_mgmt,az_mgmt = df_az_mgmt,parameter = 'no2',
                        year = rep_year)
@@ -631,6 +667,9 @@ tfee_initial <- TRUE
     })
     observeEvent(input$so2, {
       message('so2 clicked')
+      output$text_header <- renderUI({h4(HTML(
+        ('Air Quality Management Level for SO<sub>2</sub>')
+      ))})
       parameter_select$param$parameter <-  'so2'
       a <-    map_mgmt(stn_mgmt = df_stn_mgmt,az_mgmt = df_az_mgmt,parameter = 'so2',
                        year = rep_year)
@@ -699,6 +738,7 @@ tfee_initial <- TRUE
     
     
     # -clicking on air zone-----
+    # -currently no action applied, but can add popup modal action
     observeEvent(input$map_shape_click, {
       
       p <- input$map_shape_click
@@ -720,7 +760,7 @@ tfee_initial <- TRUE
           title_display <- gsub('no2','NO<sub>2</sub>',title_display,ignore.case = TRUE)
           title_display <- gsub('so2','SO<sub>2</sub>',title_display,ignore.case = TRUE)
           
-          print(title_display)
+          message(title_display)
           # showModal(
           #   modalDialog(
           #     title = HTML(title_display),
@@ -731,7 +771,7 @@ tfee_initial <- TRUE
           #   )
           # )
           
-          }
+        }
         
       })
     })
