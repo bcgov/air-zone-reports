@@ -324,6 +324,7 @@ The CAAQS serve as benchmarks meant to drive the continuous improvement of air q
 
 Metrics are calculated from air quality monitoring data and contains the following elements:
 
+- The specific pollutant measured from 
 - A numerical value representing the level of the measured pollutant.
 
 - A unit of measurement defining the type of quantity represented by the numerical value, such as micrograms per cubic meter (μg/m³) for fine particulate matter.
@@ -773,7 +774,7 @@ tbl_mgmt$graph
 Use the interactive map below to access details about pollutants and their corresponding metrics as reported from various monitoring locations within the air zones.  
 ```{r, echo = FALSE,out.width="100%",out.height="900px"}
 
-knitr::include_app('https://bcgov-env.shinyapps.io/airzonemanagementlevels/',height = "900px")
+knitr::include_app('https://bcgov-env.shinyapps.io/airzonemanagementtrends/',height = "600px")
 ```
 
 ## <b>More information about management levels </b>
