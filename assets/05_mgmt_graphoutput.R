@@ -14,6 +14,7 @@ library(envreportutils)
 library(sf)
 library(bcmaps)
 library(tidyr)
+library(patchwork)
 
 #create savedirectory
 dir.create(saveDirectory)
