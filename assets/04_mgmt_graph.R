@@ -57,14 +57,16 @@ sites_so2 <- pm25_results %>%
 # generate plots for each parameter-----
 stn_plots <- list('PM25','NO2','O3','SO2')
 
+
 # -add pm25 graphs
 for(s in sites_pm25) {
   message("Creating PM2.5 plots for ", s)
 
   try({
+    
   g1 <- plot_caaqs(pm25_24h_mgmt, id = s, id_col = "site", year_min = 2013,
                    plot_std = FALSE, plot_mgmt = FALSE)
-  g1 <- add_caaqs_historic(g1, metric = "pm2.5_24h")
+  g1 <- add_caaqs_historic(g1, metric = "pm2.5_24h") 
   
   g2 <- plot_caaqs(pm25_annual_mgmt, id = s, id_col = "site", year_min = 2013,
                    plot_std = FALSE, plot_mgmt = FALSE)
@@ -91,6 +93,7 @@ for(s in sites_o3) {
                      plot_std = FALSE, plot_mgmt = FALSE)
     g1 <- add_caaqs_historic(g1, metric = "o3")
     
+   
     stn_plots$O3[[s]][["8-Hour"]] <- g1
     
   })
