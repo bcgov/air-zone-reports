@@ -202,7 +202,7 @@ map_mgmt <- function(stn_mgmt,az_mgmt,parameter,year,
     polygon_a = NULL
     stn_mgmt <- df_stn_mgmt
     az_mgmt <- df_az_mgmt
-    parameter <- 'so2'
+    parameter <- 'pm25'
     year <- year_max
     size = c('600','400px')
     airzone = NULL
@@ -305,8 +305,22 @@ map_mgmt <- function(stn_mgmt,az_mgmt,parameter,year,
   #process station----
   #create a list of stations with that parameter
   #selected stations that are around within the airzone reporting period
+  
+  # -this selects or filters stations,removes those not enough data
+  # -we'll have to include core sites, important stations
+  
+  # -list as of 2023-12-01
+  lst_core_stations <- c('Fort St John Key Learning Centre',
+                         'Kelowna',
+                         'Kamloops Federal Building',
+                         'Quesnel',
+                         'Prince George Plaza 400','Vernon Science Centre',
+                         'Victoria Topaz',
+                         'Williams Lake Columneetza School')
+  
   lst_stns <- stn_mgmt %>%
-    filter(year %in% (year_select-2):year_select) %>%
+    filter(year %in% (year_select-2):year_select |
+             site %in% lst_core_stations) %>%
     select(site,label,parameter,lat,lon) %>%
     distinct()
   
