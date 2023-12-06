@@ -2495,7 +2495,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
                        'NO<sub>2</sub>, ppb<br>(annual/1-hour)',
                        'SO<sub>2</sub>, ppb<br>(annual/1-hour)')
       
-      p <- a %>%
+      try({p <- a %>%
         kbl('html', escape = F,caption = site_) %>%
         kable_styling("bordered",position = 'center') %>%
         kableExtra::column_spec(column=1,width="15em",color = 'black') %>%
@@ -2517,7 +2517,7 @@ get_management_summary_complete <- function(data_directory = NULL,data_years = N
         kableExtra::row_spec(row = nrow(tbl_display),
                              extra_css = "border-top: 2px solid black; 
                            border-bottom: 2px solid black;")
-      result[[site_]] <- p
+      result[[site_]] <- p})
       
     }
     
