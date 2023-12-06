@@ -1807,8 +1807,8 @@ get_tbl_management <- function(parameter, outputtype = 'html') {
 get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_year = NULL) {
   
   if (0) {
-    dataDirectory = './data/out'
-    current_year <- 2021
+    dataDirectory = 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/'
+    current_year <- 2013
   }
   require(dplyr)
   require(ggplot2)
@@ -2057,8 +2057,8 @@ get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_ye
 #' @output is a list of graph_<year>, data_<year>, and raw_data
 get_tbl_management_summary <-  function(dataDirectory = '../data/out',current_year = NULL) {
   if (0) {
-    dataDirectory = './data/out'
-    current_year <- 2021
+    dataDirectory = 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/'
+    current_year <- NULL
   }
   dataDirectory_ <- dataDirectory
   current_year_ <- current_year

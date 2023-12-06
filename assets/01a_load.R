@@ -11,7 +11,7 @@ validation_year <- 2021
 
 #fix for Port Alice Lake Road, and Rumble Beach
 sort(unique(df_management$site))
-df_management <- df_management[df_management$site != 'Rumble Beach Hospital',]
+
 df_management <- df_management[df_management$site != 'Port Alice Lake Road',]
 
 labels_mgmt <- rcaaqs::management_levels %>%
