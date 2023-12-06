@@ -5,7 +5,7 @@
 source('./assets/00_setup.R')
 
 #create management level
-management <- get_management_summary_complete()
+management <- get_management_summary_complete('./data/out')
 saveRDS(management,'./data/out/managementsummary_tables.Rds')
 
 #create bar graphs

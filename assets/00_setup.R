@@ -2058,7 +2058,7 @@ get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_ye
 get_tbl_management_summary <-  function(dataDirectory = '../data/out',current_year = NULL) {
   if (0) {
     dataDirectory = './data/out'
-    current_year <- NULL
+    current_year <- 2021
   }
   dataDirectory_ <- dataDirectory
   current_year_ <- current_year
