@@ -1,3 +1,15 @@
+# Copyright 2023 Province of British Columbia
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and limitations under the License.
+
 # This creates a shiny app that visualizes emissions
 
 library(DT)
@@ -214,7 +226,8 @@ plot_apei_complete <- function(df_apei = NULL) {
   
   df <- df_apei
   if (is.null(df)) {
-    df <- envair::get_apei(categorytype = 'Source') 
+    df <- envair::get_apei(categorytype = 'Source', 
+                           URL = 'https://data-donnees.az.ec.gc.ca/api/file?path=/substances%2Fmonitor%2Fcanada-s-air-pollutant-emissions-inventory%2FEN_APEI-Can-Prov_Terr.csv') 
   }
   lst_source <- df %>%
     pull(Source) %>%

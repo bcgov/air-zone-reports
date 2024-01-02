@@ -74,7 +74,7 @@ liststations <- readr::read_csv(liststations_URL) %>%
   mutate(index = 1:n()) %>%
   left_join(df_icons,by='OWNER') %>%
   mutate(display = paste(Label,'<br>','Monitors:<br>',monitors,'<br><img src="',
-                         icons,'" alt = "operator" style ="width:50px;height:50px">',sep=''))
+                         icons,'" alt = "operator" style ="width:50px;height:70px">',sep=''))
 
 
 #define centroid and zoom for each airzone
@@ -109,7 +109,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
     airzone <- NULL
     size = c("300px","300px")
     polygon_a = NULL
-    airzone <- 'NULL'
+    airzone <- 'Central Interior'
   }
   
   
@@ -252,7 +252,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
           addMarkers(data = liststations_,
                      lng=~LONG,
                      lat=~LAT,
-                     icon = ~leaflet::makeIcon(icons, iconWidth = icon_wh[1], iconHeight = icon_wh[2],
+                     icon = ~leaflet::makeIcon(icons, iconWidth = icon_wh[1]*1.4, iconHeight = icon_wh[2],
                                                iconAnchorX = icon_anchor[1], iconAnchorY = icon_anchor[2],
                                                popupAnchorX = popup_anchor[1], popupAnchorY = popup_anchor[2]),
                      # color = liststations_$OWNER,
@@ -265,7 +265,7 @@ graph_airzone <- function(polygon_a = NULL,airzone=NULL, size = c("900px","700px
                      lat=~LATITUDE,
                      
                      group = 'AQHI',
-                     icon = ~leaflet::makeIcon(icons, iconWidth = icon_wh[1], iconHeight = icon_wh[2],
+                     icon = ~leaflet::makeIcon(icons, iconWidth = icon_wh[1]*1.4, iconHeight = icon_wh[2],
                                                iconAnchorX = icon_anchor[1], iconAnchorY = icon_anchor[2],
                                                popupAnchorX = popup_anchor[1], popupAnchorY = popup_anchor[2]),
                      
@@ -353,17 +353,6 @@ ui <- fluidPage(
            
            h6("Select an Air Zone or Click on Map",style = "color:white"),
            column(12, align = "left",
-                  # actionButton(inputId = 'reset',label = 'Reset'),
-                  # tags$button(
-                  #   id = "centralinterior",
-                  #   class = "btn action-button",
-                  #   tags$img(src = df_buttons$buttons[df_buttons$AIRZONE == 'Central Interior'],height = '50px',width ='100px'),
-                  #   
-                  # ),
-                  # actionButton(inputId = 'centralinterior',class = "action-button",label = '',
-                  #              style = "background-image: url('https://raw.githubusercontent.com/bcgov/air-zone-reports/master/assets/photos/btn_central.png');,
-                  #              height = 50, width = 50, style = border:none; padding:0; margin: 0"
-                  #              ),
                   actionButton(inputId = 'reset',label = 'Reset',width = "7.5%",title = 'Reset map'),
                   actionButton(inputId = 'centralinterior',label = 'Central',width = "12.5%",title = 'Central Interior Air Zone'),
                   actionButton(inputId = 'coastal',label = 'Coastal',width = "12.5%",title = 'Coastal Air Zone'),

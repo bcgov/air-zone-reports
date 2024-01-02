@@ -794,17 +794,18 @@ For more detailed information about the management levels of each air zones and 
 ```
 Wildfire smoke is a major source of air pollution from fine particulate matter (PM<sub>2.5</sub>). Communities in British Columbia are regularly blanketed by wildfire smoke, particularly during the summer and early fall seasons. [Studies](https://www.canada.ca/en/environment-climate-change/news/2019/01/canadas-scientists-conclude-that-human-induced-climate-change-had-a-strong-impact-on-forest-fires-in-british-columbia.html) conducted by Environment and Climate Change Canada and the Pacific Climate Impacts Consortium have concluded that human influence on climate change is leading to higher frequencies and intensities of forest fires, and this trend is likely to intensify in the future.
 
-The interactive graphics below illustrate the trend of PM<sub>2.5</sub> levels in B.C. air zones. It shows the number of days when the air zones are exposed to PM<sub>2.5</sub> levels that are higher than the 24-hour value of the Canadian Ambient Air Quality Standard of 27 µg/m<sup>3</sup>. This number is shown to be increasing over the recent years.
+The interactive graphics below illustrate the trend of PM<sub>2.5</sub> levels in B.C. air zones. It shows the number of days when the air zones are exposed to PM<sub>2.5</sub> levels that are higher than the 24-hour value of the Canadian Ambient Air Quality Standard of 27 µg/m<sup>3</sup>. 
 
-```{r, echo = FALSE,out.width="100%",out.height="800px"}
+```{r, echo = FALSE,out.width="90%",out.height="700px"}
 #located in \level_shiny\pm_exceedance
-knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "800px")
+knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "700px")
 ```
 
 <!--Added to calculate the summary for wildfire -->
 
 ```{r,message=FALSE,echo=FALSE,results='hide',warning=FALSE}
 library(lubridate)
+library(tidyr)
 if (0)
  {
   library(dplyr)
@@ -904,6 +905,8 @@ This report presents the status of air quality in British Columbia by using air 
 Click this link to download and share a summary of this report: [British Columbia Air Zone Report 2019-2021](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_Flyer_2021.pdf). 
 
 Click this link to download and share detailed management levels of each air zone and monitoring station: [Management Levels 2019-2021](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_ManagementLevels_2021.pdf)
+
+Click this link to download and share details of the transboundary flows and exceptional events adjustment that were made to the dataset: [Transboundary Flows and Exceptional Events 2021](https://envistaweb.env.gov.bc.ca/aqo/files/az_report/AirZoneReport_TFEE_20192021.pdf)
 
 ```{=html}
 <!--

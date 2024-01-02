@@ -83,7 +83,7 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
       set_bc_view(zoom=3.5) %>%
       # setView(zoom =5) %>%
       setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-      addProviderTiles(providers$Stamen.TonerLite,
+      addProviderTiles(providers$Esri.NatGeoWorldMap,
                        options = providerTileOptions(opacity = 1)
       ) %>%
       # addProviderTiles(providers$Stamen.TonerLabels) %>%
@@ -763,7 +763,7 @@ ui <- {
     tags$head(
       tags$style(HTML("
       body { background-color: #f2efe9; }
-      .container-fluid { background-color: #fff; width: 1200px; padding: 5px; }
+      .container-fluid { background-color: #fff; width: 1000px; padding: 5px; }
       .topimg { width: 0px; display: block; margin: 0px auto 0px auto; }
       .title { text-align: center; }
       .toprow { margin: 5px 0px; padding: 5px; background-color: #38598a; }
@@ -800,7 +800,7 @@ ui <- {
              leaflet::leafletOutput("map",height = '400px',width = '400px')),
       column(8,h6(HTML("Scroll through the graph to view the number of days with high PM<sub>2.5</sub> Levels.")),
              # div(style='height:400px;overflow-y: scroll;'),
-             plotlyOutput("plot1",height = '400px',width = '800px')
+             plotlyOutput("plot1",height = '400px',width = '600px')
              )
     )
     
