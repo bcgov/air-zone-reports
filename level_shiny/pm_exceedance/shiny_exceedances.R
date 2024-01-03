@@ -29,7 +29,7 @@ if (0) {
 
 #define functions-------
 
-map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px','400px'),
+map_exceedance_dep <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px','400px'),
                            airzone = NULL) {
   
   if (0) {
@@ -135,9 +135,9 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
     
     #add stations
     if (nrow(liststations_) >0) {
-      # print('trace inside map function')
-      # print(nrow(liststations_))
-      # print(year_select)
+      # message('trace inside map function')
+      # message(nrow(liststations_))
+      # message(year_select)
       
       
       
@@ -173,7 +173,206 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
   }
   #add for selected airzone
   if (!is.null(airzone_select)) {
-    print(paste('updating,highlighting area',airzone_select))
+    message(paste('updating,highlighting area',airzone_select))
+    a <- a %>%
+      addPolylines(data = az_mgmt %>% filter(airzone == airzone_select),
+                   layerId = 'selectedairzone',
+                   group = 'airzonehighlight',
+                   color = 'blue',weight = 5)
+  } else {
+    a <- a %>%
+      clearGroup('airzonehighlight')
+  }
+  plot_a <- a
+  
+  
+  
+  
+  
+  
+  
+  return(a)
+}
+map_exceedance(exceedances = exceedances, az_mgmt = az_mgmt, year = 2010)
+
+
+#define functions-------
+
+map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px','400px'),
+                           airzone = NULL) {
+  
+  if (0) {
+    source('./level4_page/03_setup.R')
+    source('./level4_page/02_setup.R')
+    dirs_location <- './data/out'
+    year = 2017
+    map_a <- NULL
+    exceedances <- get_PM_exceedancesummary()
+    airzone = NULL
+    az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
+      left_join(df_colour)
+    
+    size <- c('200px','400px')
+    
+  }
+  
+  df_colour <- tribble(
+    ~airzone,~colour_01,
+    "Northeast",'#CDC08C',
+    "Georgia Strait"  ,'#F4B5BD',
+    "Southern Interior",'#9C964A',
+    "Lower Fraser Valley",'#85D4E3',
+    "Central Interior" ,'#FAD77B',
+    "Coastal",'#CEAB07',
+    "Northwest","#24281A"
+  )
+  
+  airzone_select <- airzone
+  
+  lst_airzones <- az_mgmt %>%
+    pull(airzone)
+  
+  airzone_exceedance_season <- exceedances$season
+  airzone_exceedance <- exceedances$annual
+  station_exceedance <- exceedances$annual_stations
+  station_exceedance_season <- exceedances$season_stations
+  lst_stations <- exceedances$stations
+  year_select <- year
+  
+  
+  colfunc <- colorRampPalette(c("blue", "red"))
+  
+  
+  # station_exceedance$colorscaled <- color_scales[station_exceedance$days_exceed]
+  
+  if (is.null(map_a)) {
+    #create map for annual station
+    a <-  leaflet(width = size[1],height = size[2],
+                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
+      set_bc_view(zoom=3.5) %>%
+      # setView(zoom =5) %>%
+      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
+      addProviderTiles(providers$Esri.NatGeoWorldMap,
+                       options = providerTileOptions(opacity = 1)
+      ) %>%
+      # addProviderTiles(providers$Stamen.TonerLabels) %>%
+      add_bc_home_button()
+  } else {
+    a <- map_a
+  }
+  
+  #add colour for the station circles
+  max_days <- station_exceedance %>%
+    filter(year == year_select) %>%
+    pull(days_exceed) %>%
+    max()
+  
+  #develop levels for the exceedance legends
+  color_scales <- colfunc(max_days)
+  
+  
+  
+  for (airzone_ in lst_airzones) {
+    
+    if (0) {
+      airzone_ <- lst_airzones[1]
+    }
+    
+    
+    liststations_ <- lst_stations %>% 
+      filter(AIRZONE == airzone_, year == year_select)
+    
+    station_exceedance_ <- station_exceedance %>% 
+      filter(AIRZONE == airzone_, year == year_select)
+    
+    lst_sites <- station_exceedance %>%
+      filter(AIRZONE == airzone_) %>%
+      pull(site) %>% unique()
+    a <- a %>%
+      
+      addPolygons(data = az_mgmt %>% filter(airzone == airzone_),
+                  layerId = airzone_,
+                  color = 'black',
+                  fillColor = ~colour_01,
+                  weight = 1, opacity = 1, fillOpacity = 0.6,
+                  label = paste(airzone_,'Air Zone'),
+                  labelOptions = labelOptions(textsize = "15px"),
+                  highlight = highlightOptions(weight = 3,
+                                               color = "blue",
+                                               bringToFront = FALSE))
+    
+    
+    #add stations
+    if (nrow(liststations_) >0) {
+      # message('trace inside map function')
+      # message(nrow(liststations_))
+      # message(year_select)
+      
+      
+      
+      
+      a <- a %>%
+        #remove all stations from that airzone
+        removeMarker( layerId = lst_sites) %>%
+        addCircleMarkers(lng=station_exceedance_$LONG,
+                         lat = station_exceedance_$LAT,
+                         layerId = station_exceedance_$site,
+                         label = station_exceedance_$site,
+                         color = color_scales[station_exceedance_$days_exceed+1],
+                         radius=3
+                         
+        )
+      # addMarkers(lng=liststations_$LONG,
+      #            lat=liststations_$LAT,
+      #            # layerId = liststations$AIRZONE,
+      #            # group = airzone_,
+      #            label = liststations_$site,
+      #            options=markerOptions())
+      
+    }
+  }
+  
+  if (is.null(map_a)) {
+    #add legend based on color_scales
+    tot_ <- length(color_scales)
+    lbl <- c(round(tot_/10*1),
+             round(tot_/10*2),
+             round(tot_/10*3),
+             round(tot_/10*4),
+             round(tot_/10*5),
+             round(tot_/10*6),
+             round(tot_/10*7),
+             round(tot_/10*8),
+             round(tot_/10*9),
+             round(tot_/10*10))
+    scl <- c(color_scales[tot_/10*1],
+             color_scales[tot_/10*2],
+             color_scales[tot_/10*3],
+             color_scales[tot_/10*4],
+             color_scales[tot_/10*5],
+             color_scales[tot_/10*6],
+             color_scales[tot_/10*7],
+             color_scales[tot_/10*8],
+             color_scales[tot_/10*9],
+             color_scales[tot_/10*10])
+    
+    
+    # lbl <- c('<5 days',
+    #          paste(round(tot_/2),'days'),
+    #          paste('>',round(tot_*0.8),
+    #                ' days',sep=''))
+    a <-    
+      a %>%
+      addLegend(position ="bottomleft", colors = rev(scl),label = rev(lbl),
+                title = 'Days')
+    
+    
+    
+    
+  }
+  #add for selected airzone
+  if (!is.null(airzone_select)) {
+    message(paste('updating,highlighting area',airzone_select))
     a <- a %>%
       addPolylines(data = az_mgmt %>% filter(airzone == airzone_select),
                    layerId = 'selectedairzone',
@@ -194,6 +393,9 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
   return(a)
 }
 
+
+
+
 #' Get a count of PM exceedances
 #' 
 #' 
@@ -207,7 +409,7 @@ get_PM_exceedancesummary <- function(dirs_location = './data/out') {
   
   # list.files(dirs_location)
   
-  print('get PM exceedance')
+  message('get PM exceedance')
   
   # df_stations <- readRDS(paste(dirs_location,'liststations_merged.Rds',sep='/'))
   df_stations <- envair::listBC_stations(use_CAAQS = TRUE,merge_Stations = TRUE)
@@ -749,9 +951,9 @@ lst_airzones <- df_colour$airzone
 exceedances <- get_PM_exceedancesummary(dirs_location)
 az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
   left_join(df_colour)
-print('Load az_mgmt complete')
+message('Load az_mgmt complete')
 plots_list <- graph_exceedance(exceedances = exceedances,year =  max(exceedances$annual$year))
-print('Load Complete')
+message('Load Complete')
 
 
 #---SHINY SECTION----------------
@@ -795,10 +997,11 @@ ui <- {
     
     fluidRow(
       
-      column(4,h6(HTML("Number of Days with High PM<sub>2.5</sub> Levels</br>Click the map to select an air zone")),
+      column(4,h6(HTML("Frequency (in days) of elevated PM<sub>2.5</sub> levels in B.C. air zones.</br>Click the map to select an air zone")),
              # fluidRow(
              leaflet::leafletOutput("map",height = '400px',width = '400px')),
-      column(8,h6(HTML("Scroll through the graph to view the number of days with high PM<sub>2.5</sub> Levels.")),
+      column(8,h6(HTML("Click on the graph to view details of days with high PM<sub>2.5</sub> Levels.</br>
+                       Wildfire counts before 2014 are not included.")),
              # div(style='height:400px;overflow-y: scroll;'),
              plotlyOutput("plot1",height = '400px',width = '600px')
              )
@@ -832,8 +1035,8 @@ server <- {shinyServer(function(input, output) {
   
   observeEvent(input$year_slider,
                {
-                 print('Slider')
-                 print(input$year_slider)
+                 message('Slider')
+                 message(input$year_slider)
                  
                  leafletProxy("map") %>%
                    map_exceedance(exceedances = exceedances ,az_mgmt = az_mgmt,year =input$year_slider)
@@ -860,9 +1063,9 @@ server <- {shinyServer(function(input, output) {
     
     try({
       airzone_select <- get_airzone(p$lat,p$lng)
-      print(p$lat)
-      print(p$lng)
-      print(airzone_select)
+      message(p$lat)
+      message(p$lng)
+      message(airzone_select)
       plots_list <- reactive_plot1()
       if (airzone_select != 'Northwest') {
         output$plot1 <- renderPlotly({
@@ -874,17 +1077,17 @@ server <- {shinyServer(function(input, output) {
             x = 2000, y = 8,
             # xref = "paper",
             # yref = "paper",
-            text = "*Counts for wildfire days before 2014 are not included",
+            text = NA,#"*Counts for wildfire days before 2014 are not included",
             showarrow = FALSE
           )
           
           p <- layout(p, annotations = list(footnote))
-          print(p) # Check if the footnote is included in the annotations list
-          print('annotations inserted')
+          message(p) # Check if the footnote is included in the annotations list
+          message('annotations inserted')
           # Return the plotly graph
           p
           })
-        print('Plot Refreshed')
+        message('Plot Refreshed')
       }
       
       leafletProxy("map") %>%
@@ -897,7 +1100,7 @@ server <- {shinyServer(function(input, output) {
   #clicking on the graph
   # observeEvent(event_data("plotly_click", source = "plot1"), { 
   #   values$plot.click.results <- event_data("plotly_click", source = "plot1") 
-  #   print(values$plot.click.results)
+  #   message(values$plot.click.results)
   # })
   
 })
