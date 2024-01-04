@@ -27,6 +27,7 @@ library(readr)
 library(ggplot2)
 library(envair)
 library(rcaaqs)
+library(janitor)
 
 dirs_location <- 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out'
 if (0) {
@@ -37,175 +38,6 @@ if (0) {
     filter(parameter=='PM25')
 }
 
-
-
-#define functions-------
-
-map_exceedance_dep <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px','400px'),
-                           airzone = NULL) {
-  
-  if (0) {
-    source('./level4_page/03_setup.R')
-    source('./level4_page/02_setup.R')
-    dirs_location <- './data/out'
-    year = 2017
-    map_a <- NULL
-    exceedances <- get_PM_exceedancesummary()
-    
-    az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
-      left_join(df_colour)
-    
-    size <- c('200px','400px')
-    
-  }
-  
-  df_colour <- tribble(
-    ~airzone,~colour_01,
-    "Northeast",'#CDC08C',
-    "Georgia Strait"  ,'#F4B5BD',
-    "Southern Interior",'#9C964A',
-    "Lower Fraser Valley",'#85D4E3',
-    "Central Interior" ,'#FAD77B',
-    "Coastal",'#CEAB07',
-    "Northwest","#24281A"
-  )
-  
-  airzone_select <- airzone
-  
-  lst_airzones <- az_mgmt %>%
-    pull(airzone)
-  
-  airzone_exceedance_season <- exceedances$season
-  airzone_exceedance <- exceedances$annual
-  station_exceedance <- exceedances$annual_stations
-  station_exceedance_season <- exceedances$season_stations
-  lst_stations <- exceedances$stations
-  year_select <- year
-  
-  
-  colfunc <- colorRampPalette(c("blue", "red"))
-  
-  
-  # station_exceedance$colorscaled <- color_scales[station_exceedance$days_exceed]
-  
-  if (is.null(map_a)) {
-    #create map for annual station
-    a <-  leaflet(width = size[1],height = size[2],
-                  options = leafletOptions(attributionControl=FALSE, dragging = TRUE, minZoom = 4, maxZoom=10)) %>%
-      set_bc_view(zoom=3.5) %>%
-      # setView(zoom =5) %>%
-      setMaxBounds(lng1 = -110,lat1=45,lng2=-137,lat2=62) %>%
-      addProviderTiles(providers$Esri.NatGeoWorldMap,
-                       options = providerTileOptions(opacity = 1)
-      ) %>%
-      # addProviderTiles(providers$Stamen.TonerLabels) %>%
-      add_bc_home_button()
-  } else {
-    a <- map_a
-  }
-  
-  #add colour for the station circles
-  max_days <- station_exceedance %>%
-    filter(year == year_select) %>%
-    pull(days_exceed) %>%
-    max()
-  
-  #develop levels for the exceedance legends
-  color_scales <- colfunc(max_days)
-  
-  
-  
-  for (airzone_ in lst_airzones) {
-    
-    if (0) {
-      airzone_ <- lst_airzones[1]
-    }
-    
-    
-    liststations_ <- lst_stations %>% 
-      filter(AIRZONE == airzone_, year == year_select)
-    
-    station_exceedance_ <- station_exceedance %>% 
-      filter(AIRZONE == airzone_, year == year_select)
-    
-    lst_sites <- station_exceedance %>%
-      filter(AIRZONE == airzone_) %>%
-      pull(site) %>% unique()
-    a <- a %>%
-      
-      addPolygons(data = az_mgmt %>% filter(airzone == airzone_),
-                  layerId = airzone_,
-                  color = 'black',
-                  fillColor = ~colour_01,
-                  weight = 1, opacity = 1, fillOpacity = 0.6,
-                  label = paste(airzone_,'Air Zone'),
-                  labelOptions = labelOptions(textsize = "15px"),
-                  highlight = highlightOptions(weight = 3,
-                                               color = "blue",
-                                               bringToFront = FALSE))
-    
-    
-    #add stations
-    if (nrow(liststations_) >0) {
-      # message('trace inside map function')
-      # message(nrow(liststations_))
-      # message(year_select)
-      
-      
-      
-      
-      a <- a %>%
-        #remove all stations from that airzone
-        removeMarker( layerId = lst_sites) %>%
-        addCircleMarkers(lng=station_exceedance_$LONG,
-                         lat = station_exceedance_$LAT,
-                         layerId = station_exceedance_$site,
-                         label = station_exceedance_$site,
-                         color = color_scales[station_exceedance_$days_exceed+1],
-                         radius=3
-                         
-        )
-      # addMarkers(lng=liststations_$LONG,
-      #            lat=liststations_$LAT,
-      #            # layerId = liststations$AIRZONE,
-      #            # group = airzone_,
-      #            label = liststations_$site,
-      #            options=markerOptions())
-      
-    }
-  }
-  
-  if (is.null(map_a)) {
-  #add legend based on color_scales
-  tot_ <- length(color_scales)
-  scl <- c(color_scales[5],color_scales[tot_/2],color_scales[tot_])
-  lbl <- c('<5 days',paste(round(tot_/2),'days'),paste('>',round(tot_*0.8),' days',sep=''))
-  a <- a %>%
-    addLegend(position ="bottomleft", colors = scl,label = lbl)
-  }
-  #add for selected airzone
-  if (!is.null(airzone_select)) {
-    message(paste('updating,highlighting area',airzone_select))
-    a <- a %>%
-      addPolylines(data = az_mgmt %>% filter(airzone == airzone_select),
-                   layerId = 'selectedairzone',
-                   group = 'airzonehighlight',
-                   color = 'blue',weight = 5)
-  } else {
-    a <- a %>%
-      clearGroup('airzonehighlight')
-  }
-  plot_a <- a
-  
-  
-  
-  
-  
-  
-  
-  return(a)
-}
-map_exceedance(exceedances = exceedances, az_mgmt = az_mgmt, year = 2010)
 
 
 #define functions-------
@@ -300,37 +132,48 @@ map_exceedance <- function(map_a = NULL,exceedances,az_mgmt,year,size = c('200px
     lst_sites <- station_exceedance %>%
       filter(AIRZONE == airzone_) %>%
       pull(site) %>% unique()
+    
+    
+    # -polygons marking air zones
     a <- a %>%
-      
-      addPolygons(data = az_mgmt %>% filter(airzone == airzone_),
+        addPolygons(data = az_mgmt %>% filter(airzone == airzone_),
                   layerId = airzone_,
                   color = 'black',
                   fillColor = ~colour_01,
                   weight = 1, opacity = 1, fillOpacity = 0.6,
-                  label = paste(airzone_,'Air Zone'),
+                  label = HTML(paste(airzone_,'Air Zone<br>Click for details.')),
                   labelOptions = labelOptions(textsize = "15px"),
                   highlight = highlightOptions(weight = 3,
                                                color = "blue",
                                                bringToFront = FALSE))
     
     
-    #add stations
+    # -add stations
     if (nrow(liststations_) >0) {
-      # message('trace inside map function')
-      # message(nrow(liststations_))
-      # message(year_select)
       
+      # -create label for the markers or points
+      stn_list <- exceedances$stationlist %>%
+        clean_names() %>%
+        select(station_name,label) %>%
+        rename(site=station_name) %>%
+        group_by(site) %>%
+        slice(1) %>% ungroup()
+        
       
+      df_lbl <- station_exceedance_ %>%
+        left_join(stn_list) %>%
+        mutate(label =ifelse(is.na(label),site,label)) %>%
+        mutate(label = (paste(label,'<br>High PM<sub>2.5</sub>:',days_exceed,' days',sep='')))
       
-      
-      a <- a %>%
+      a <- 
+      a %>%
         #remove all stations from that airzone
         removeMarker( layerId = lst_sites) %>%
-        addCircleMarkers(lng=station_exceedance_$LONG,
-                         lat = station_exceedance_$LAT,
-                         layerId = station_exceedance_$site,
-                         label = station_exceedance_$site,
-                         color = color_scales[station_exceedance_$days_exceed+1],
+        addCircleMarkers(lng=df_lbl$LONG,
+                         lat = df_lbl$LAT,
+                         layerId = df_lbl$site,
+                         label =  lapply(df_lbl$label, htmltools::HTML),
+                         color = color_scales[df_lbl$days_exceed+1],
                          radius=3
                          
         )
@@ -744,7 +587,8 @@ get_PM_exceedancesummary <- function(dirs_location = './data/out') {
                         annual_stations_tfee = df_exceedances_station_year_tfee,
                         season_stations = df_exceedances_station_seasonal,
                         season_stations_tfee = df_exceedances_station_seasonal_tfee,
-                        stations = df_stationdata)
+                        stations = df_stationdata,
+                        stationlist = df_stations)
   
   
   return(df_exceedance)
@@ -961,6 +805,7 @@ lst_airzones <- df_colour$airzone
 
 #define external data------
 exceedances <- get_PM_exceedancesummary(dirs_location)
+
 az_mgmt <- readr::read_rds(paste(dirs_location,'az_mgmt.Rds',sep='/')) %>%
   left_join(df_colour)
 message('Load az_mgmt complete')
@@ -994,13 +839,13 @@ ui <- {
                              tags$style(type='text/css', 
                                         '.selectize-input { font-size: 15px; line-height: 10px;} 
                           .selectize-dropdown { font-size: 16px; line-height: 20px; }
-                          .control-label {font-size: 24px; color: white !important;}
+                          .control-label {font-size: 16px; color: white !important;}
                           .irs-min {font-size: 0px; color: white; !important}
                           .irs-max {font-size: 0px; color: white;}
                           .irs-single {font-size: 20px; color: white;}
                           .irs-grid-text {font-size: 10px; color: white;}'
                              ),
-                             sliderInput('year_slider',label ='Year',
+                             sliderInput('year_slider',label ='Scroll to select year',
                                          min = 1997,
                                          max = max(exceedances$annual$year),
                                          value = max(exceedances$annual$year),
@@ -1009,11 +854,11 @@ ui <- {
     
     fluidRow(
       
-      column(4,h6(HTML("Frequency (in days) of elevated PM<sub>2.5</sub> levels in B.C. air zones.</br>Click the map to select an air zone")),
+      column(4,h6(HTML("Number of days with high PM<sub>2.5</sub> levels in B.C.</br>Dots represent monitoring stations.")),
              # fluidRow(
              leaflet::leafletOutput("map",height = '400px',width = '400px')),
       column(8,h6(HTML("Click on the graph to view details of days with high PM<sub>2.5</sub> Levels.</br>
-                       Wildfire counts before 2014 are not included.")),
+                       Details of wildfires before 2014 are not included.")),
              # div(style='height:400px;overflow-y: scroll;'),
              plotlyOutput("plot1",height = '400px',width = '600px')
              )
@@ -1093,7 +938,7 @@ server <- {shinyServer(function(input, output) {
             showarrow = FALSE
           )
           
-          p <- layout(p, annotations = list(footnote))
+          # p <- layout(p, annotations = list(footnote))
           message(p) # Check if the footnote is included in the annotations list
           message('annotations inserted')
           # Return the plotly graph
