@@ -845,7 +845,7 @@ ui <- {
                           .irs-single {font-size: 20px; color: white;}
                           .irs-grid-text {font-size: 10px; color: white;}'
                              ),
-                             sliderInput('year_slider',label ='Scroll to select year',
+                             sliderInput('year_slider',label ='Select a year:',
                                          min = 1997,
                                          max = max(exceedances$annual$year),
                                          value = max(exceedances$annual$year),
