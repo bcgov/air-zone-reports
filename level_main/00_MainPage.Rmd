@@ -796,7 +796,7 @@ Wildfire smoke is a major source of air pollution from fine particulate matter (
 
 The interactive graphics below illustrate the trend of PM<sub>2.5</sub> levels in B.C. air zones. It shows the number of days when the air zones are exposed to PM<sub>2.5</sub> levels that are higher than the 24-hour value of the Canadian Ambient Air Quality Standard of 27 µg/m<sup>3</sup>. 
 
-```{r, echo = FALSE,out.width="90%",out.height="700px"}
+```{r, echo = FALSE,out.width="100%",out.height="700px"}
 #located in \level_shiny\pm_exceedance
 knitr::include_app('https://bcgov-env.shinyapps.io/pm_exceedance/',height = "700px")
 ```
@@ -809,7 +809,7 @@ library(tidyr)
 if (0)
  {
   library(dplyr)
-source('../assets/00_setup.R') 
+  source('../assets/00_setup.R') 
   datafiles <- '../data/out'
   validation_year <- 2021
   }
@@ -848,12 +848,12 @@ pm_exceedance_summary$season_tfee %>%
   mutate(total = ifelse(is.na(total),0,total),
          `wildfire days` = ifelse(is.na(`wildfire days`),0,`wildfire days`))
 
-pm_days_summary_totals <-
-pm_days_summary %>%
+pm_days_summary_totals <- pm_days_summary %>%
   group_by(AIRZONE,year) %>%
   summarize(total = sum(total,na.rm = TRUE),
             `wildfire days` = sum(`wildfire days`,na.rm = TRUE))
 
+# -sort for the order of airzones based on PM and wildfire
 order_pm25 <- pm_days_summary_totals %>%
   arrange(desc(total)) %>%
   filter(AIRZONE != 'BC') %>%
@@ -864,35 +864,31 @@ order_wildfire <- pm_days_summary_totals %>%
   filter(AIRZONE != 'BC') %>%
   pull(AIRZONE) %>% unique()
 
-BC_days_with_highpm <- pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == 'BC'][1]
 
+# -adding details for BC
+BC_days_with_highpm <- pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == 'BC'][1]
 BC_days_with_highpm_wildfire <- pm_days_summary_totals$`wildfire days`[pm_days_summary_totals$AIRZONE == 'BC'][1]
 
-high_airzone <- pm_days_summary_totals %>%
-  filter(AIRZONE != 'BC')
-high_airzone_pm <- pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == order_pm25[1]][1]
+# -adding details for the airzone with most days of high PM levels
+mostdays_airzone <- order_pm25[1]
+mostdays_totaldays <- pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == order_pm25[1]][1]
+mostdays_wildfiredays <- pm_days_summary_totals$`wildfire days`[pm_days_summary_totals$AIRZONE == order_pm25[1]][1]
 
+# -adding details for the airzone with most wildfires
+mostwildfire_airzone <- order_wildfire[1]
+mostwildfire_totaldays <-  pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == order_wildfire[1]][1]
+mostwildfire_wildfiredays <-  pm_days_summary_totals$total[pm_days_summary_totals$AIRZONE == order_wildfire[1]][1]
 
-high_airzone_pm_wildfire <- pm_days_summary_totals$`wildfire days`[pm_days_summary_totals$AIRZONE == order_pm25[1]][1]
-
-high_airzone_season <- pm_days_summary %>%
-  filter(AIRZONE == order_pm25[1]) %>%
-  arrange(desc(total))
-
-high_wildfire <- pm_days_summary %>%
-  filter(AIRZONE == order_wildfire[1]) %>%
-  arrange(desc(total))
-
-high_wildfire_daysnum <- sum(high_wildfire$`wildfire days`)
 ```
 
 ## Quick Summary of Wildfire Smoke and PM<sub>2.5</sub> in `r validation_year`
 
--    British Columbia experienced `r BC_days_with_highpm` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). Among these, `r BC_days_with_highpm_wildfire` days were attributed to verified wildfire smoke, which commonly occurs between summer and early fall.
+-    British Columbia experienced `r BC_days_with_highpm` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). Among these, `r BC_days_with_highpm_wildfire` days were caused by verified wildfire smoke, which occurs between summer and early fall.
 
--   The `r order_wildfire[1]` air zone was the most affected by wildfire smoke, experiencing `r high_wildfire_daysnum` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3") from verified wildfire smoke.
+-   The `r mostdays_airzone` air zone had the highest number of days with  [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). It experienced `r mostdays_totaldays` such days, out of which `r mostdays_wildfiredays` were due to verified wildfires, while the remainder came from other sources such as residential heating and open burning.
 
--   The `r order_pm25[1]` air zone had the highest number of days with  [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3"). It experienced `r high_airzone_pm` such days, out of which `r high_airzone_pm_wildfire` were due to wildfires, while the remainder came from sources such as residential heating and open burning.
+- The `r mostwildfire_airzone` air zone was the most affected by wildfire smoke, experiencing `r mostwildfire_wildfiredays` days with [high PM<sub>2.5</sub> levels](## "Days where the 24-hour value of the Canadian Ambient Air Quality Standards is exceeded. This means PM2.5 level is higher than 27 µg/m3") from verified wildfire smoke.
+
 
 ```{=html}
 <!-- Jumping Points -->
