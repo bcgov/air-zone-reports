@@ -236,7 +236,8 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
   savefile_final = paste(savedirectory,'caaqs_results.csv',sep='/')
   #temporary save filelocation
   savefile <- tempfile()
-  #defines the resulting column names in this order
+  
+  #- defines the resulting column names in this order
   cols_final <- c('parameter','site','instrument','year',
                   'tfee','metric_value','metric','flag_two_of_three_years')
   
@@ -245,10 +246,30 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
                            flag_TFEE = TRUE,merge_Stations = TRUE)
   
   for (param in c('pm25','o3','no2','so2')) {
+    
+    message(paste('Processing:',param))
+    if (0) {
+      param <- 'pm25'
+      df_data <- importBC_data(c('pm25'),
+                               years = (min(years)-3):max(years),
+                               flag_TFEE = TRUE,merge_Stations = TRUE)
+      df_data %>%
+        clean_names %>%
+        mutate(year = year(date), quarter = quarter(date)) %>%
+        filter(parameter == 'PM25') %>%
+        filter(station_name == 'Quesnel') %>%
+        filter(!is.na(raw_value)) %>%
+        group_by(station_name,instrument,year,date) %>%
+        summarize(days = n()) %>%
+        filter(days >= 0.75*24) %>%
+        ungroup() %>%
+        group_by(station_name,instrument,year) %>%
+        summarize(valid_days = n())
+    }
   # for (param in c('o3')) {
     df <- NULL
     
-    #Retrieve data, different retrieval for ozone
+    # -Retrieve data, add extra year for ozone
     if(param != 'o3') {
       try(
         df <- df_data %>%
@@ -270,6 +291,7 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       )
     }
     
+    # -checks for data
     #if there was no data retrieved
     if (is.null(df)) {
       next
@@ -279,33 +301,79 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       next
     }
     
-    #remove duplicate entries
-    #note for pm, instrument is included in grouping
+    # -remove duplicate entries
+    # note for pm, instrument is included in grouping
     if (param == 'pm25') {
       
       df <- df %>%
         ungroup() %>%
         dplyr::mutate(date_time = DATE_PST - lubridate::hours(1)) %>%
         dplyr::rename(value = RAW_VALUE, site = STATION_NAME, instrument = INSTRUMENT) %>%
-        # filter(!is.na(value)) %>%
+        filter(!is.na(value)) %>%
         group_by(date_time,site,instrument) %>%
         dplyr::mutate(index = 1:n()) %>%
         filter(index == 1) %>% select(-index) %>%
-        ungroup()
+        ungroup() %>%
+        select(date_time,site,instrument,value,flag_tfee)
+      
+      # - pad data to include missing years
+      start_date <- min(df$date_time)
+      end_date <- max(df$date_time)
+      
+      df_fill <- df %>%
+        select(site,instrument) %>%
+        distinct() %>%
+        cross_join(
+          tibble(
+            date_time = seq(from = start_date,to = end_date, by = 'hour')
+          )
+        )
+      
+      df <- left_join(df_fill,df)
     } else {
       df <- df %>%
         ungroup() %>%
         dplyr::mutate(date_time = DATE_PST - lubridate::hours(1)) %>%
         dplyr::rename(value = RAW_VALUE, site = STATION_NAME, instrument = INSTRUMENT) %>%
-        # filter(!is.na(value)) %>%  #this cause a bug, removes entire year
+        filter(!is.na(value)) %>%  
         group_by(date_time,site) %>%
         dplyr::mutate(index = 1:n()) %>%
         filter(index == 1) %>% select(-index) %>%
-        ungroup()
+        ungroup() %>%
+        select(date_time,site,instrument,value,flag_tfee)
+      
+      # - pad data to include missing years
+      start_date <- min(df$date_time)
+      end_date <- max(df$date_time)
+      
+      df_fill <- df %>%
+        select(site) %>%
+        distinct() %>%
+        cross_join(
+          tibble(
+            date_time = seq(from = start_date,to = end_date, by = 'hour')
+          )
+        )
+      
+      df <- left_join(df_fill,df)
     }
     
+  
     
+    
+    
+    # -perform calculations for PM2.5
     if (param == 'pm25') {
+      
+      if (0) {
+        # a <- df
+        df <- a %>%
+          filter(!is.na(value))
+        df %>%
+          # filter(!is.na(value)) %>%
+          nrow()
+      }
+      
       #without TFEE
       pm25_annual <- rcaaqs::pm_annual_caaqs(df,by=c('site','instrument'))
       pm25_24h <- rcaaqs::pm_24h_caaqs(df,by=c('site','instrument'))
@@ -329,10 +397,41 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       df_result <- pm25_caaqs %>%
         bind_rows(pm25_yoy)
       
-      #with TFEE
-      pm25_annual <- rcaaqs::pm_annual_caaqs(df %>% filter(!flag_tfee),by=c('site','instrument'))
-      pm25_24h <- rcaaqs::pm_24h_caaqs(df %>% filter(!flag_tfee),by=c('site','instrument'))
       
+      #add the values with TFEE
+      #with TFEE
+      # -retrieve tfee dates
+      tfee_dates <- df %>%
+        filter(flag_tfee) %>%
+        # Ceiling TFEE to capture original dates
+        mutate(date = ceiling_date(date_time, unit = "hour"),
+               date = as_date(date)) %>%
+        select(site, instrument, date) %>%
+        distinct()
+      
+      pm25_ann_mgmt <- caaqs_management(pm25_annual, 
+                                        exclude_df = tfee_dates, 
+                                        exclude_df_dt = "date")
+      pm25_ann_tfee <- pm25_ann_mgmt$caaqs %>%
+        select(site,instrument,caaqs_year,metric,metric_value_mgmt) %>%
+        rename(metric_value  = metric_value_mgmt)
+      pm25_24h_mgmt <- caaqs_management(pm25_24h, 
+                                        exclude_df = tfee_dates, 
+                                        exclude_df_dt = "date")
+      pm25_24h_tfee <- pm25_24h_mgmt$caaqs %>%
+        select(site,instrument,caaqs_year,metric,metric_value_mgmt) %>%
+        rename(metric_value  = metric_value_mgmt)
+      
+      # - copy formatting from non-tfee values, then replace with calculated tfee value
+      pm25_annual$caaqs <- pm25_annual$caaqs %>%
+        select(-metric_value) %>%
+        left_join(pm25_ann_tfee)
+      
+      pm25_24h$caaqs <- pm25_24h$caaqs %>%
+        select(-metric_value) %>%
+        left_join(pm25_24h_tfee)
+      
+
       pm25_caaqs <- pm25_annual$caaqs %>%
         bind_rows(pm25_24h$caaqs) %>%
         mutate(parameter = 'PM25',tfee = TRUE) %>%
@@ -360,6 +459,7 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       
       rm('pm25_annual')
       rm('pm25_24h')
+      gc()
     }
     
     if (param == 'o3') {
@@ -367,8 +467,32 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       #without TFEE
       o3_8h <- rcaaqs::o3_caaqs(df,by=c('site'))
       
+      # calculate tfee
+      tfee_dates <- df %>%
+        filter(flag_tfee) %>%
+        # Ceiling TFEE to capture original dates
+        mutate(date = ceiling_date(date_time, unit = "hour"),
+               date = as_date(date)) %>%
+        select(site, instrument, date) %>%
+        distinct()
+      
+      o3_mgmt <- caaqs_management(o3_8h, 
+                                  exclude_df = tfee_dates, 
+                                  exclude_df_dt = "date")
       #with TFEE
-      o3_8h_tfee <- rcaaqs::o3_caaqs(df %>% filter(!flag_tfee) ,by=c('site'))
+      # - copy formatting from non-tfee values, then replace with calculated tfee value
+      o3_tfee <- o3_mgmt$caaqs %>%
+        select(site,caaqs_year,metric,metric_value_mgmt) %>%
+        rename(metric_value  = metric_value_mgmt)
+      
+      # - copy formatting from non-tfee values, then replace with calculated tfee value
+      o3_8h_tfee <- o3_8h
+      o3_8h_tfee$caaqs <- o3_8h_tfee$caaqs %>%
+        select(-metric_value) %>%
+        left_join(o3_tfee)
+      
+      
+        
       
       o3_caaqs <-  o3_8h$caaqs%>% mutate(tfee = FALSE) %>%
         bind_rows(o3_8h_tfee$caaqs%>% mutate(tfee = TRUE)) %>%
@@ -393,6 +517,7 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       
       rm('o3_8h')
       rm('o3_8h_tfee')
+      gc()
     }
     
     if (param == 'no2') {
@@ -433,6 +558,7 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       
       rm('no2_1hr')
       rm('no2_ann')
+      gc()
       
     }
     
@@ -472,6 +598,7 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
       
       rm('so2_1hr')
       rm('so2_ann')
+      gc()
       
     }
     
@@ -610,8 +737,6 @@ get_management <- function(datafile = NULL) {
     '2015 CAAQS',2013,2019,'pm25_24h',27,Inf,'red',
     
   )
-  
-  
   
   #retrieve most recent CAAQS
   #these are in the rcaaqs package
@@ -1808,7 +1933,7 @@ get_tbl_management_summary_ <- function(dataDirectory = '../data/out',current_ye
   
   if (0) {
     dataDirectory = 'https://raw.githubusercontent.com/bcgov/air-zone-reports/master/data/out/'
-    current_year <- 2013
+    current_year <- 2019
   }
   require(dplyr)
   require(ggplot2)
