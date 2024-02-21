@@ -17,6 +17,9 @@
 #      - if the test data folder is missing or has no data content
 
 # enter what year this i
+#load sources----
+
+source('./assets/00_setup.R')
 validation_year <- 2021
 
 # set the working and save directory-----
@@ -38,12 +41,11 @@ require(envreportutils)
 require(rcaaqs)
 require(janitor)
 require(lubridate)
+require(dplyr)
 
 # define where data files will be saved
 
-#load sources----
-require(dplyr)
-source('./assets/00_setup.R')
+
 
 # retrieve pm, o3, no2, and so2 data
 df_data <- importBC_data(c('pm25','no2','so2','o3'), years = 2011:validation_year, flag_TFEE = TRUE,merge_Stations = TRUE)
@@ -56,6 +58,7 @@ df_data <- df_data %>%
   distinct()
 
 saveRDS(df_data,paste(saveDirectory,'aq_data.Rds',sep='/'))
+
 # Create NPRI data----
 fileNPRI <- paste(saveDirectory,'NPRI.csv',sep='/')
 df_NPRI <- envair::get_npri()
@@ -111,7 +114,9 @@ bcmaps::airzones() %>%
 # using envair for data retrieval
 # this generates the file: caaqs_results.csv
 # this function output will append on itself, so years can be operated in chunks
-create_caaqs_annual(years = years, savedirectory = saveDirectory)
+
+# -saves data into caaqs_results.csv
+create_caaqs_annual(years = datayear, savedirectory = saveDirectory)
 
 # Create management levels summary-----
 df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
