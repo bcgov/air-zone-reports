@@ -215,12 +215,11 @@ create_metrics_annual <- function(years, savedirectory = NULL) {
 #' Better than create_metrics_annual() but may take longer to complete
 #'
 #' @param years is vector listing the years for CAAQS calculation
-#' @param savedirectory is the location where the result files are saved
 #'
 #' @return caaqs_results.csv file
-create_caaqs_annual <- function(years, savedirectory = NULL) {
+create_caaqs_annual <- function(years) {
   if (0) {
-    years <- 2019:2021
+    years <- 2022
     savedirectory <- './test_data'
     
     for (files in list.files('././r/',full.names = TRUE)) {
@@ -228,15 +227,15 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
     }
   }
   
-  if (is.null(savedirectory)) {
-    savedirectory <- '././test_data'
-    list.files(savedirectory)
-  }
-  #where files will be saved
-  savefile_final = paste(savedirectory,'caaqs_results.csv',sep='/')
-  #temporary save filelocation
   savefile <- tempfile()
   
+  #- create list of stations to remove
+  lst_stations <- listBC_stations(merge_Stations = TRUE,use_CAAQS = TRUE)
+  lst_exclude <- lst_stations %>%
+    clean_names() %>%
+    select(station_name,site,label,aqms) %>%
+    filter(aqms == 'N') %>%
+    distinct()
   #- defines the resulting column names in this order
   cols_final <- c('parameter','site','instrument','year',
                   'tfee','metric_value','metric','flag_two_of_three_years')
@@ -245,6 +244,13 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
                            years = (min(years)-3):max(years),
                            flag_TFEE = TRUE,merge_Stations = TRUE)
   
+  # -remove excluded stations
+  df_data <- df_data %>%
+    filter(!STATION_NAME %in% lst_exclude$station_name) %>%
+    filter(!STATION_NAME %in% lst_exclude$site) %>%
+    filter(!STATION_NAME %in% lst_exclude$label)
+    
+    
   for (param in c('pm25','o3','no2','so2')) {
     
     message(paste('Processing:',param))
@@ -630,7 +636,7 @@ create_caaqs_annual <- function(years, savedirectory = NULL) {
   
   #transfer to final savefile
   
-  file.copy(from = savefile, to=savefile_final,overwrite = TRUE)
+  # file.copy(from = savefile, to=savefile_final,overwrite = TRUE)
   df_result <- readr::read_csv(savefile)
   return(df_result)
 }
@@ -667,10 +673,12 @@ create_CAAQS_graph_files <- function(filedirectory = NULL) {
 #'
 #' This dataset was created with the create_metrics_annual function
 #'
+
+
 get_management <- function(datafile = NULL) {
   
   if (0) {
-    datafile <- './data/out/caaqs_results.csv'
+    datafile <- './data/export/caaqs_results.csv'
   }
   #retrieve data
   
@@ -734,7 +742,7 @@ get_management <- function(datafile = NULL) {
     ~CAAQS_name,~start_year,~end_year,~metric,~lower_breaks,~upper_breaks,~colour_text,
     '2015 CAAQS',2013,2019,'o3_8h',63,Inf,'red',
     '2015 CAAQS',2013,2019,'pm25_annual',10,Inf,'red',
-    '2015 CAAQS',2013,2019,'pm25_24h',27,Inf,'red',
+    '2015 CAAQS',2013,2019,'pm25_24h',28,Inf,'red',
     
   )
   
@@ -766,6 +774,10 @@ get_management <- function(datafile = NULL) {
     dplyr::bind_rows(df_levels_current %>%
                        filter(!index %in% df_levels_old$index))
   
+  # -make corrections to the upper breaks for orange management level for old levels
+  df_levels_old$upper_breaks[df_levels_old$colour_text == 'orange'] <- 
+    df_levels_old$lower_breaks[df_levels_old$colour_text == 'red']
+  
   print(paste('Reading data from:',datafile))
   df <- readr::read_csv(datafile)
   
@@ -784,9 +796,12 @@ get_management <- function(datafile = NULL) {
   df_2020 <- df %>%
     filter(!(metric %in% df_levels_current$metric &
                year <2020))
+  df_result_old <- NULL
+  df_result_new <- NULL
   
-  df_result_old <- assess_levels(df=df_2015,df_levels = df_levels_old)
-  df_result_new <- assess_levels(df_2020,df_levels = df_levels_current) 
+  try(df_result_old <- assess_levels(df=df_2015,df_levels = df_levels_old))
+  try(df_result_new <- assess_levels(df_2020,df_levels = df_levels_current))
+  
   #consideration for years
   #note that CAAQS was different in other years
   

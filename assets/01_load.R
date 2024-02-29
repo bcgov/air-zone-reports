@@ -20,11 +20,25 @@
 #load sources----
 
 source('./assets/00_setup.R')
+
+
+# -for validated year
 validation_year <- 2021
+saveDirectory <- './data/out'
+
+# -for test output
+if (0) {
+validation_year <- 2023
+saveDirectory <- './data/export'
+df_caaqs_annual <- create_caaqs_annual(years = datayear)
+readr::write_csv(df_caaqs_annual,paste(saveDirectory,'caaqs_results.csv',sep='/'))
+df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
+readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
+
+}
 
 # set the working and save directory-----
-# multiple attempts to ensuer it will be at './R'
-saveDirectory <- './data/out'
+
 
 dir.create(saveDirectory,recursive = TRUE)
 
@@ -58,6 +72,23 @@ df_data <- df_data %>%
   distinct()
 
 saveRDS(df_data,paste(saveDirectory,'aq_data.Rds',sep='/'))
+
+# Calculate the caaqs values----
+# Calculations are based on the rcaaqs package
+# using envair for data retrieval
+# this generates the file: caaqs_results.csv
+# this function output will append on itself, so years can be operated in chunks
+
+# -saves data into caaqs_results.csv
+df_caaqs_annual <- create_caaqs_annual(years = datayear)
+readr::write_csv(df_caaqs_annual,paste(saveDirectory,'caaqs_results.csv',sep='/'))
+
+# Create management levels summary-----
+# -create management.csv
+df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
+readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
+
+
 
 # Create NPRI data----
 fileNPRI <- paste(saveDirectory,'NPRI.csv',sep='/')
@@ -109,18 +140,6 @@ bcmaps::airzones() %>%
   saveRDS(paste(saveDirectory,'az_mgmt.Rds',sep='/'))
 }
 
-# Calculate the caaqs values----
-# Calculations are based on the rcaaqs package
-# using envair for data retrieval
-# this generates the file: caaqs_results.csv
-# this function output will append on itself, so years can be operated in chunks
-
-# -saves data into caaqs_results.csv
-create_caaqs_annual(years = datayear, savedirectory = saveDirectory)
-
-# Create management levels summary-----
-df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
-readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
 
 # OPTIONAL: Create annual metrics file----
 # Calculations for YOY metrics are based on the envair package
