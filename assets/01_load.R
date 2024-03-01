@@ -29,6 +29,7 @@ saveDirectory <- './data/out'
 # -for test output
 if (0) {
 validation_year <- 2023
+datayear <- 2013:validation_year
 saveDirectory <- './data/export'
 df_caaqs_annual <- create_caaqs_annual(years = datayear)
 readr::write_csv(df_caaqs_annual,paste(saveDirectory,'caaqs_results.csv',sep='/'))

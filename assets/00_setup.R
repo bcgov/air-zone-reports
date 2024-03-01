@@ -214,10 +214,11 @@ create_metrics_annual <- function(years, savedirectory = NULL) {
 #' it already properly applies GDAD in calculation of yearly metrics, and the CAAQS
 #' Better than create_metrics_annual() but may take longer to complete
 #'
+#' WARNING: There is a rounding bug on rcaaqs, please use only one year of data at a time
 #' @param years is vector listing the years for CAAQS calculation
 #'
 #' @return caaqs_results.csv file
-create_caaqs_annual <- function(years) {
+create_caaqs_annual0 <- function(years) {
   if (0) {
     years <- 2022
     savedirectory <- './test_data'
@@ -640,6 +641,28 @@ create_caaqs_annual <- function(years) {
   df_result <- readr::read_csv(savefile)
   return(df_result)
 }
+
+#' Calculate annual CORRECTED
+#' 
+#' @description is the corrected version of create_caaqs_annual
+#' NOTE: This is temporary and slow option to fix rounding bug of rcaaqs
+#' 
+#' @param years is vector listing the years for CAAQS calculation
+create_caaqs_annual <- function(years) {
+  if (0) {
+    years <- 2015:2016
+  }
+  
+  df_result <- NULL
+  for (year in years) {
+    df <- create_caaqs_annual0(year)
+    
+    df_result <- bind_rows(df_result,df)
+  }
+  
+  return(df_result)
+}
+
 
 
 #' INCOMPLETE:
