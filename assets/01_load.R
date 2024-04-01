@@ -28,14 +28,14 @@ saveDirectory <- './data/out'
 
 # -for test output
 if (0) {
-validation_year <- 2023
-datayear <- 2013:validation_year
-saveDirectory <- './data/export'
-df_caaqs_annual <- create_caaqs_annual(years = datayear)
-readr::write_csv(df_caaqs_annual,paste(saveDirectory,'caaqs_results.csv',sep='/'))
-df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
-readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
-
+  validation_year <- 2023
+  datayear <- 2013:validation_year
+  saveDirectory <- './data/export'
+  df_caaqs_annual <- create_caaqs_annual(years = datayear)
+  readr::write_csv(df_caaqs_annual,paste(saveDirectory,'caaqs_results.csv',sep='/'))
+  df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
+  readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
+  
 }
 
 # set the working and save directory-----
@@ -131,14 +131,14 @@ pm25_tfee %>%
 #content update is not necessary once
 #file is already there
 if (0) {
-bcmaps::airzones() %>%
-  sf::st_make_valid() %>%
-  sf::st_transform(st_crs(bc_bound())) %>%
-  sf::st_intersection(st_geometry(bc_bound())) %>%
-  group_by(Airzone) %>%
-  summarize() %>%
-  sf::st_transform(4326) %>%
-  saveRDS(paste(saveDirectory,'az_mgmt.Rds',sep='/'))
+  bcmaps::airzones() %>%
+    sf::st_make_valid() %>%
+    sf::st_transform(st_crs(bc_bound())) %>%
+    sf::st_intersection(st_geometry(bc_bound())) %>%
+    group_by(Airzone) %>%
+    summarize() %>%
+    sf::st_transform(4326) %>%
+    saveRDS(paste(saveDirectory,'az_mgmt.Rds',sep='/'))
 }
 
 

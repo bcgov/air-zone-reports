@@ -3315,6 +3315,350 @@ plot_bar_caaqs <- function(metric, year, df = NULL,airzone = NULL) {
   
   return(p)
 }
+
+# -management.csv and caaqs_results.csv are official
+
+#' Creates a plot of management level changes from previous
+#' 
+#' @param param is the parameter, either pm25,no2,o3, or so2
+#' @param validation_year is the year to make the comparison. 
+#' #' @param reference_year is the year to make the basis for comparison
+#' @param management is the dataframe containing manamagent level history. default is NULL 
+plot_mgmt <- function(param,validation_year, reference_year = NULL,management = NULL)
+{
+  
+  if (0) {
+    management <- NULL
+    validation_year <- 2020
+    reference_year <- NULL
+    param <- 'pm25'
+  }
+  
+  require(dplyr)
+  require(lubridate)
+  require(readr)
+  require(envair)
+  require(ggplot2)
+  require(tidyr)
+  require(janitor)
+  
+  
+  # -default value if NULL data
+  param <- tolower(param)
+  
+  # -default values if not specified
+  if (is.null(management)) {
+    management <- read_csv('./data/export/management.csv')
+  }
+  if (is.null(reference_year)) {
+    reference_year <-validation_year -1
+  }
+  
+  management <- management %>%
+    filter(year %in% c(validation_year,reference_year)) %>%
+    # filter(year<2023) %>%
+    select(site,instrument,year,tfee,parameter,metric,metric_value,colour,colour_order,colour_text)
+  
+  # -retrieve station details
+  stations <- listBC_stations(merge_Stations = TRUE,use_CAAQS = TRUE)
+  
+  stations <- stations %>%
+    clean_names() %>%
+    select(site,label,airzone) %>%
+    group_by(site) %>%
+    slice(1) %>% ungroup()
+  
+  # -retrieve management level limits
+  df_management_levels <- rcaaqs::management_levels %>%
+    select(parameter,lower_breaks,upper_breaks,colour_text) %>%
+    rename(metric=parameter) %>%
+    mutate(metric = recode(metric,
+                           'no2_1yr'= 'no2_ann',
+                           'no2_3yr'= 'no2_1hr',
+                           'o3' = 'o3_8h',
+                           'pm2.5_24h'= 'pm25_24h',
+                           'pm2.5_annual' = 'pm25_annual',
+                           'so2_1yr' = 'so2_ann',
+                           'so2_3yr' = 'so2_1hr'
+    )) 
+  
+  
+  
+  # -filter the selected management levels
+  management <-  management %>%
+    filter(parameter %in% param,
+           tfee == (param %in% c('pm25','o3')))
+  # -calculate a linear metric value
+  
+  # -retrieve the highest scale for each metric that are on red zone
+  # -this will set the scale of maximum value
+  # -minimum is red management level
+  df_highest <- management %>%
+    bind_rows(
+      df_management_levels %>%
+        filter(colour_text == 'red') %>%
+        select(metric,lower_breaks) %>%
+        rename(metric_value = lower_breaks   )
+    ) %>%
+    select(metric,metric_value) %>%
+    group_by(metric) %>%
+    summarize(highest_metric_value = max(metric_value,na.rm = TRUE))
+  
+  # -replace the upper limit for red values
+  # -with the highest value
+  
+  # -then normalize the value to the scale
+  management_recalc <- management %>%
+    left_join(df_management_levels) %>%
+    left_join(df_highest) %>%
+    left_join(stations) %>%
+    
+    mutate(upper_breaks = ifelse(is.infinite(upper_breaks),highest_metric_value,upper_breaks)) %>%
+    select(-highest_metric_value) %>%
+    mutate(metric_value_norm = colour_order + (metric_value-lower_breaks)/(upper_breaks - lower_breaks)) %>%
+    group_by(site,instrument,year,tfee,parameter) %>%
+    dplyr::mutate(max_colour_order = max(colour_order,na.rm = TRUE)) %>%
+    filter(colour_order == max_colour_order) %>%
+    arrange(desc(metric_value_norm )) %>%
+    dplyr::mutate(count = n(), index = 1:n()) %>%
+    filter(index == 1) %>%
+    ungroup() %>%
+    select(site,label,airzone,instrument,
+           parameter,year,tfee,metric_value_norm,colour_order) %>%
+    arrange(airzone,desc(metric_value_norm)) %>%
+    mutate(idx = 1:n())
+  
+  # -create for air zones
+  # -this will be inserted in the final results
+  management_airzone <- management_recalc %>%
+    group_by(airzone,parameter,year,tfee) %>%
+    summarize(metric_value_norm = max(metric_value_norm ,na.rm = TRUE),
+              colour_order = max(colour_order,na.rm = TRUE)) %>%
+    mutate(site = airzone, label = airzone,idx=0) %>%
+    # -remove value
+    mutate(metric_value_norm =NA)
+  
+  # -combine results with station management
+  management_combined <- bind_rows(management_airzone,management_recalc)
+  
+  # -create single order for stations
+  # -redefine the index, idx
+  management_combined <- management_combined %>%
+    group_by(airzone,site,parameter,tfee,instrument) %>%
+    mutate(idx = min(idx)) %>%
+    ungroup()
+  
+  
+  # -add based on special case
+  # -this includes red management level, changed from previous year
+  lst_red_airzones <- management_recalc %>%
+    filter(colour_order == 4) %>%
+    pull(idx) 
+  
+  lst_changed <- management_recalc %>%
+    arrange(year) %>%
+    group_by(site,instrument,tfee,parameter) %>%
+    dplyr::mutate(prev_yr_colour = lag(colour_order)) %>%
+    filter(colour_order != prev_yr_colour) %>%
+    filter(!is.na(prev_yr_colour),!is.na(colour_order)) %>%
+    ungroup() %>%
+    pull(idx) 
+  
+  
+  # -add based on order
+  lst_stations <- management_recalc %>%
+    arrange(desc(metric_value_norm )) %>%
+    group_by(parameter,tfee,airzone,year) %>%
+    mutate(index = 1:n()) %>%
+    # - filter top 5
+    filter(index<=5) %>%
+    ungroup() %>%
+    pull(idx) 
+  
+  
+  lst_include <- unique(c(0,lst_red_airzones,lst_changed,lst_stations))
+  
+  lst_sites <- management_combined %>%
+    filter(idx %in% lst_include) %>%
+    pull(site) %>%
+    unique()
+  # -summary of results
+  # The following 
+  
+  # -plot
+  
+  
+  current_period <- paste('Report(',validation_year-2,'-',validation_year,')',sep='')
+  prev_period <- paste('Report(',reference_year-2,'-',reference_year,')',sep='')
+  
+  df_plt <- management_combined %>%
+    ungroup() %>%
+    mutate(label = ifelse(idx == 0,
+                          paste('',toupper(label),'',sep=''),
+                          label)) %>%
+    filter(site %in% lst_sites) %>%
+    filter(year %in% c(validation_year ,reference_year )) %>%
+    mutate(reporting_period =  paste('Report(',year-2,'-',year,')',sep='')) %>%
+    arrange(airzone,metric_value_norm) %>%
+    ungroup()  %>%
+    arrange(airzone, idx,metric_value_norm) %>%
+    mutate(idx2 = 1:n())
+  
+  df_order <- df_plt %>%
+    arrange(idx2) %>%
+    select(site,instrument) %>%
+    distinct() %>%
+    mutate(idx_order = 1:n())
+  
+  # -get maximum and minimums
+  # - note that all management colours must be shown
+  # -and in increment of 0,5
+  
+  # -max
+  max_metric = max(df_plt$metric_value_norm,na.rm = TRUE) * 1.1
+  max_metric <- ceiling(max_metric/0.5) * 0.5
+  max_metric <- max(4.1,max_metric)
+  
+  min_metric = min(df_plt$metric_value_norm,na.rm = TRUE)
+  min_metric <- floor(min_metric/0.5) * 0.5
+  min_metric <- min(1.9,min_metric)
+  
+  # -add arrow details
+  df_plt_arrow <- df_plt %>%
+    group_by(parameter,tfee,site,instrument) %>%
+    arrange(year) %>%
+    mutate(prev_metric = lag(metric_value_norm )) %>%
+    mutate(arrow_length = metric_value_norm-prev_metric) %>%
+    left_join(df_order) %>%
+    filter(!is.na(arrow_length), year == validation_year) %>%
+    mutate(arrowcolour = ifelse(arrow_length<=0,'blue','blue'),
+                  size = 0.15
+    # mutate(arrowcolour = ifelse(arrow_length<=0,'green','red'),
+    #        size = 0.10
+    )
+  
+  # df_plt
+  
+  
+  # -create graph
+  plt <-
+    ggplot(data = df_plt, aes(x = reorder(label,idx2,decreasing = FALSE), 
+                              y= metric_value_norm, shape = reporting_period)) +
+    geom_point(size = 5) +
+    # geom_col() +
+    coord_flip() +
+    scale_x_discrete(limits = rev) +
+    scale_shape_manual(values = c(1,16,20)) +
+    # scale_size_manual(values = c(1,2,5)) +
+    guides(colour = 'none')
+  
+  # -add background management level colours
+  # -add management levels background colours
+  df_management_levels_background <- tibble(
+    lower_breaks = c(-999,2,3,4),
+    upper_breaks = c(2,3,4,999),
+    colour_text = c('green','yellow','orange','red'),
+    # colours = c('#A6D96A','#FEE08B','#F46D43','#A50026')
+    colours = c('#A6D96A','#FEE08B','#F46D43','#A50026')
+  )
+  
+  df_management_levels_background$lower_breaks[df_management_levels_background$colour_text == 'green'] <- 
+    min_metric
+  df_management_levels_background$upper_breaks[df_management_levels_background$colour_text == 'red'] <- 
+    max_metric
+  
+  # -number of rows
+  rows_max <- length(unique(df_plt$label))
+  
+  plt <-   plt + 
+    geom_rect(aes(ymin=df_management_levels_background$lower_breaks[1],
+                  ymax=df_management_levels_background$upper_breaks[1],
+                  xmin=0,xmax=rows_max),
+              fill = df_management_levels_background$colour_text[1],
+              colour="black", alpha=0.002) +
+    geom_rect(aes(ymin=df_management_levels_background$lower_breaks[2],
+                  ymax=df_management_levels_background$upper_breaks[2],
+                  xmin=0,xmax=rows_max),
+              fill = df_management_levels_background$colour_text[2],
+              colour="black", alpha=0.002) +
+    geom_rect(aes(ymin=df_management_levels_background$lower_breaks[3],
+                  ymax=df_management_levels_background$upper_breaks[3],
+                  xmin=0,xmax=rows_max),
+              fill = df_management_levels_background$colour_text[3],
+              colour="black", alpha=0.01) +
+    geom_rect(aes(ymin=df_management_levels_background$lower_breaks[4],
+                  ymax=df_management_levels_background$upper_breaks[4],
+                  xmin=0,xmax=rows_max),
+              fill = df_management_levels_background$colour_text[4],
+              colour="black", alpha=0.01) +
+    scale_fill_manual(values = df_management_levels_background$colours)
+  
+  # -add arrows
+  
+  plt <- plt +
+    geom_segment(data = df_plt_arrow, aes(x=label,y=prev_metric , 
+                                          xend=label,yend=metric_value_norm),
+                 arrow = arrow(type = "open",
+                               length = unit(df_plt_arrow$size,"inches")),
+                 color = df_plt_arrow$arrowcolour, size = 1.5) +
+    scale_y_continuous(limits = c(min_metric,max_metric),expand = c(0,0))
+  
+  
+  
+  
+  # -add air zone category dividers
+  lst_lines <- df_plt %>%
+    ungroup() %>%
+    group_by(airzone,label) %>%
+    slice(1) %>%
+    ungroup() %>%
+    arrange(desc(idx2)) %>%
+    mutate(idx3 = 1:n()) %>%
+    filter(idx ==0) %>% # - airzone label
+    pull(idx3)
+  
+  for (lst_ in lst_lines) {
+    plt <- plt +
+      geom_vline(xintercept =lst_,colour = 'black',linetype = 'dashed')
+  }
+  
+  
+  
+  
+  plt <-  plt +
+    theme(legend.position = 'bottom',
+          axis.title.y = element_blank(),
+          axis.title.x = element_text(size=20),
+          
+          axis.text.x = element_blank(),
+          # legend.background = element_blank(),
+          legend.key = element_blank(),
+          legend.title = element_blank(),
+          panel.background = element_rect(fill=NA,colour = 'black')) 
+  
+  # -add x-axis labels
+  
+  if ( grepl('pm25',param)) {
+    plt <- plt +
+      labs(y =bquote({PM} [2.5] ~ .('Management Level (Latest CAAQS)')))
+  }
+  if ( grepl('o3',param)) {
+    plt <- plt +
+      labs(y =bquote({O} [3] ~ .('Management Level (Latest CAAQS)')))
+  }
+  if ( grepl('no2',param)) {
+    plt <- plt +
+      labs(y =bquote({NO} [2] ~ .('Management Level (Latest CAAQS)')))
+  }
+  if ( grepl('so2',param)) {
+    plt <- plt +
+      labs(y =bquote({SO} [2] ~ .('Management Level (Latest CAAQS)')))
+  }
+  
+  
+  return(plt)
+}
+
 #end of functions----------
 
 #' This creates a list containing all the bar graphs for all years and air zones
