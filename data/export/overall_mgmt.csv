@@ -1,0 +1,249 @@
+airzone,parameter,year,no adjustment,adjusted
+Central Interior,no2,2013,orange,NA
+Central Interior,no2,2014,orange,NA
+Central Interior,no2,2015,orange,NA
+Central Interior,no2,2016,orange,NA
+Central Interior,no2,2017,orange,NA
+Central Interior,no2,2018,orange,NA
+Central Interior,no2,2019,orange,NA
+Central Interior,no2,2020,orange,NA
+Central Interior,no2,2021,orange,NA
+Central Interior,no2,2022,orange,NA
+Central Interior,no2,2023,orange,NA
+Central Interior,o3,2013,yellow,yellow
+Central Interior,o3,2014,yellow,yellow
+Central Interior,o3,2015,yellow,yellow
+Central Interior,o3,2016,yellow,yellow
+Central Interior,o3,2017,yellow,yellow
+Central Interior,o3,2018,yellow,yellow
+Central Interior,o3,2019,yellow,yellow
+Central Interior,o3,2020,yellow,yellow
+Central Interior,o3,2021,green,green
+Central Interior,o3,2022,green,green
+Central Interior,o3,2023,green,green
+Central Interior,pm25,2013,red,red
+Central Interior,pm25,2014,red,red
+Central Interior,pm25,2015,red,red
+Central Interior,pm25,2016,red,red
+Central Interior,pm25,2017,red,red
+Central Interior,pm25,2018,red,red
+Central Interior,pm25,2019,red,red
+Central Interior,pm25,2020,red,red
+Central Interior,pm25,2021,red,red
+Central Interior,pm25,2022,red,red
+Central Interior,pm25,2023,red,red
+Central Interior,so2,2013,orange,NA
+Central Interior,so2,2014,orange,NA
+Central Interior,so2,2015,orange,NA
+Central Interior,so2,2016,yellow,NA
+Central Interior,so2,2017,green,NA
+Central Interior,so2,2018,yellow,NA
+Central Interior,so2,2019,yellow,NA
+Central Interior,so2,2020,yellow,NA
+Central Interior,so2,2021,yellow,NA
+Central Interior,so2,2022,yellow,NA
+Central Interior,so2,2023,yellow,NA
+Coastal,no2,2016,yellow,NA
+Coastal,no2,2017,yellow,NA
+Coastal,no2,2018,yellow,NA
+Coastal,no2,2019,yellow,NA
+Coastal,no2,2020,yellow,NA
+Coastal,no2,2021,yellow,NA
+Coastal,no2,2022,yellow,NA
+Coastal,no2,2023,yellow,NA
+Coastal,o3,2016,green,green
+Coastal,o3,2017,green,green
+Coastal,o3,2018,green,green
+Coastal,o3,2019,green,green
+Coastal,o3,2020,green,green
+Coastal,o3,2021,green,green
+Coastal,o3,2022,green,green
+Coastal,o3,2023,green,green
+Coastal,pm25,2013,red,red
+Coastal,pm25,2014,orange,orange
+Coastal,pm25,2015,orange,orange
+Coastal,pm25,2016,orange,orange
+Coastal,pm25,2017,yellow,yellow
+Coastal,pm25,2018,yellow,yellow
+Coastal,pm25,2019,yellow,yellow
+Coastal,pm25,2020,yellow,yellow
+Coastal,pm25,2021,yellow,yellow
+Coastal,pm25,2022,yellow,yellow
+Coastal,pm25,2023,yellow,yellow
+Coastal,so2,2013,red,NA
+Coastal,so2,2014,red,NA
+Coastal,so2,2015,red,NA
+Coastal,so2,2016,red,NA
+Coastal,so2,2017,red,NA
+Coastal,so2,2018,green,NA
+Coastal,so2,2019,yellow,NA
+Coastal,so2,2020,green,NA
+Coastal,so2,2021,green,NA
+Coastal,so2,2022,green,NA
+Coastal,so2,2023,green,NA
+Georgia Strait,no2,2013,orange,NA
+Georgia Strait,no2,2014,orange,NA
+Georgia Strait,no2,2015,orange,NA
+Georgia Strait,no2,2016,orange,NA
+Georgia Strait,no2,2017,orange,NA
+Georgia Strait,no2,2018,orange,NA
+Georgia Strait,no2,2019,orange,NA
+Georgia Strait,no2,2020,orange,NA
+Georgia Strait,no2,2021,orange,NA
+Georgia Strait,no2,2022,orange,NA
+Georgia Strait,no2,2023,orange,NA
+Georgia Strait,o3,2013,yellow,yellow
+Georgia Strait,o3,2014,yellow,yellow
+Georgia Strait,o3,2015,yellow,yellow
+Georgia Strait,o3,2016,yellow,yellow
+Georgia Strait,o3,2017,yellow,yellow
+Georgia Strait,o3,2018,yellow,yellow
+Georgia Strait,o3,2019,yellow,yellow
+Georgia Strait,o3,2020,yellow,yellow
+Georgia Strait,o3,2021,yellow,yellow
+Georgia Strait,o3,2022,yellow,yellow
+Georgia Strait,o3,2023,yellow,yellow
+Georgia Strait,pm25,2013,red,red
+Georgia Strait,pm25,2014,red,red
+Georgia Strait,pm25,2015,red,red
+Georgia Strait,pm25,2016,red,red
+Georgia Strait,pm25,2017,red,red
+Georgia Strait,pm25,2018,red,red
+Georgia Strait,pm25,2019,red,orange
+Georgia Strait,pm25,2020,red,orange
+Georgia Strait,pm25,2021,red,orange
+Georgia Strait,pm25,2022,red,orange
+Georgia Strait,pm25,2023,orange,orange
+Georgia Strait,so2,2013,orange,NA
+Georgia Strait,so2,2014,yellow,NA
+Georgia Strait,so2,2015,yellow,NA
+Georgia Strait,so2,2016,yellow,NA
+Georgia Strait,so2,2017,red,NA
+Georgia Strait,so2,2018,red,NA
+Georgia Strait,so2,2019,red,NA
+Georgia Strait,so2,2020,green,NA
+Georgia Strait,so2,2021,green,NA
+Georgia Strait,so2,2022,green,NA
+Georgia Strait,so2,2023,green,NA
+Lower Fraser Valley,no2,2013,red,NA
+Lower Fraser Valley,no2,2014,red,NA
+Lower Fraser Valley,no2,2015,red,NA
+Lower Fraser Valley,no2,2016,red,NA
+Lower Fraser Valley,no2,2017,red,NA
+Lower Fraser Valley,no2,2018,red,NA
+Lower Fraser Valley,no2,2019,red,NA
+Lower Fraser Valley,no2,2020,orange,NA
+Lower Fraser Valley,no2,2021,orange,NA
+Lower Fraser Valley,no2,2022,orange,NA
+Lower Fraser Valley,no2,2023,orange,NA
+Lower Fraser Valley,o3,2013,yellow,yellow
+Lower Fraser Valley,o3,2014,orange,orange
+Lower Fraser Valley,o3,2015,red,orange
+Lower Fraser Valley,o3,2016,orange,orange
+Lower Fraser Valley,o3,2017,red,orange
+Lower Fraser Valley,o3,2018,red,orange
+Lower Fraser Valley,o3,2019,red,orange
+Lower Fraser Valley,o3,2020,orange,orange
+Lower Fraser Valley,o3,2021,orange,orange
+Lower Fraser Valley,o3,2022,orange,orange
+Lower Fraser Valley,o3,2023,red,orange
+Lower Fraser Valley,pm25,2013,yellow,yellow
+Lower Fraser Valley,pm25,2014,orange,orange
+Lower Fraser Valley,pm25,2015,orange,orange
+Lower Fraser Valley,pm25,2016,yellow,yellow
+Lower Fraser Valley,pm25,2017,red,orange
+Lower Fraser Valley,pm25,2018,red,orange
+Lower Fraser Valley,pm25,2019,red,orange
+Lower Fraser Valley,pm25,2020,red,orange
+Lower Fraser Valley,pm25,2021,red,yellow
+Lower Fraser Valley,pm25,2022,red,yellow
+Lower Fraser Valley,pm25,2023,red,orange
+Lower Fraser Valley,so2,2013,red,NA
+Lower Fraser Valley,so2,2014,red,NA
+Lower Fraser Valley,so2,2015,red,NA
+Lower Fraser Valley,so2,2016,orange,NA
+Lower Fraser Valley,so2,2017,orange,NA
+Lower Fraser Valley,so2,2018,orange,NA
+Lower Fraser Valley,so2,2019,orange,NA
+Lower Fraser Valley,so2,2020,yellow,NA
+Lower Fraser Valley,so2,2021,green,NA
+Lower Fraser Valley,so2,2022,green,NA
+Lower Fraser Valley,so2,2023,yellow,NA
+Northeast,no2,2016,yellow,NA
+Northeast,no2,2017,yellow,NA
+Northeast,no2,2018,orange,NA
+Northeast,no2,2019,orange,NA
+Northeast,no2,2020,orange,NA
+Northeast,no2,2021,orange,NA
+Northeast,no2,2022,orange,NA
+Northeast,no2,2023,orange,NA
+Northeast,o3,2016,yellow,yellow
+Northeast,o3,2017,yellow,yellow
+Northeast,o3,2018,yellow,yellow
+Northeast,o3,2019,yellow,yellow
+Northeast,o3,2020,yellow,yellow
+Northeast,o3,2021,yellow,yellow
+Northeast,o3,2022,yellow,yellow
+Northeast,o3,2023,yellow,yellow
+Northeast,pm25,2017,yellow,yellow
+Northeast,pm25,2018,orange,yellow
+Northeast,pm25,2019,red,yellow
+Northeast,pm25,2020,red,yellow
+Northeast,pm25,2021,orange,yellow
+Northeast,pm25,2022,orange,yellow
+Northeast,pm25,2023,red,red
+Northeast,so2,2013,orange,NA
+Northeast,so2,2014,orange,NA
+Northeast,so2,2015,orange,NA
+Northeast,so2,2016,yellow,NA
+Northeast,so2,2017,yellow,NA
+Northeast,so2,2018,yellow,NA
+Northeast,so2,2019,yellow,NA
+Northeast,so2,2020,yellow,NA
+Northeast,so2,2021,yellow,NA
+Northeast,so2,2022,green,NA
+Northeast,so2,2023,green,NA
+Southern Interior,no2,2013,orange,NA
+Southern Interior,no2,2014,orange,NA
+Southern Interior,no2,2015,orange,NA
+Southern Interior,no2,2016,orange,NA
+Southern Interior,no2,2017,orange,NA
+Southern Interior,no2,2018,orange,NA
+Southern Interior,no2,2019,orange,NA
+Southern Interior,no2,2020,orange,NA
+Southern Interior,no2,2021,orange,NA
+Southern Interior,no2,2022,orange,NA
+Southern Interior,no2,2023,orange,NA
+Southern Interior,o3,2013,orange,orange
+Southern Interior,o3,2014,orange,orange
+Southern Interior,o3,2015,yellow,yellow
+Southern Interior,o3,2016,yellow,yellow
+Southern Interior,o3,2017,yellow,yellow
+Southern Interior,o3,2018,yellow,yellow
+Southern Interior,o3,2019,orange,orange
+Southern Interior,o3,2020,yellow,yellow
+Southern Interior,o3,2021,yellow,yellow
+Southern Interior,o3,2022,yellow,yellow
+Southern Interior,o3,2023,orange,orange
+Southern Interior,pm25,2013,orange,orange
+Southern Interior,pm25,2014,orange,orange
+Southern Interior,pm25,2015,orange,orange
+Southern Interior,pm25,2016,orange,orange
+Southern Interior,pm25,2017,red,orange
+Southern Interior,pm25,2018,red,orange
+Southern Interior,pm25,2019,red,orange
+Southern Interior,pm25,2020,red,red
+Southern Interior,pm25,2021,red,red
+Southern Interior,pm25,2022,red,red
+Southern Interior,pm25,2023,red,red
+Southern Interior,so2,2013,red,NA
+Southern Interior,so2,2014,red,NA
+Southern Interior,so2,2015,red,NA
+Southern Interior,so2,2016,red,NA
+Southern Interior,so2,2017,red,NA
+Southern Interior,so2,2018,red,NA
+Southern Interior,so2,2019,red,NA
+Southern Interior,so2,2020,red,NA
+Southern Interior,so2,2021,red,NA
+Southern Interior,so2,2022,red,NA
+Southern Interior,so2,2023,red,NA

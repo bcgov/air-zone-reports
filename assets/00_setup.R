@@ -3349,6 +3349,8 @@ plot_mgmt <- function(param,validation_year, reference_year = NULL,management = 
   # -default values if not specified
   if (is.null(management)) {
     management <- read_csv('./data/export/management.csv')
+  } else {
+    management <- read_csv(management)
   }
   if (is.null(reference_year)) {
     reference_year <-validation_year -1

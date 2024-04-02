@@ -1,0 +1,595 @@
+airzone,site,location,parameter,year,8-hour metric,8-hour metric (tfee-adjusted),no adjustment,adjusted
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2013,53,53,yellow,yellow
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2014,52,52,yellow,yellow
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2015,54,54,yellow,yellow
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2016,53,53,yellow,yellow
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2017,52,52,yellow,yellow
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2018,51,51,yellow,yellow
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2019,51,51,yellow,yellow
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2020,51,51,yellow,yellow
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2021,49,49,green,green
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2022,46,46,green,green
+Central Interior,Prince George Plaza 400,Prince George-Plaza 400,o3,2023,49,49,green,green
+Central Interior,Quesnel,Quesnel,o3,2013,53,53,yellow,yellow
+Central Interior,Quesnel,Quesnel,o3,2014,54,54,yellow,yellow
+Central Interior,Quesnel,Quesnel,o3,2015,54,54,yellow,yellow
+Central Interior,Quesnel,Quesnel,o3,2016,52,52,yellow,yellow
+Central Interior,Quesnel,Quesnel,o3,2017,50,50,green,green
+Central Interior,Quesnel,Quesnel,o3,2018,50,50,green,green
+Central Interior,Quesnel,Quesnel,o3,2019,50,50,green,green
+Central Interior,Quesnel,Quesnel,o3,2020,49,49,green,green
+Central Interior,Quesnel,Quesnel,o3,2021,46,46,green,green
+Central Interior,Quesnel,Quesnel,o3,2022,46,46,green,green
+Central Interior,Quesnel,Quesnel,o3,2023,49,49,green,green
+Central Interior,Smithers,Smithers,o3,2013,54,54,yellow,yellow
+Central Interior,Smithers,Smithers,o3,2014,NA,NA,NA,NA
+Central Interior,Smithers,Smithers,o3,2015,NA,NA,NA,NA
+Central Interior,Smithers,Smithers,o3,2016,47,47,green,green
+Central Interior,Smithers,Smithers,o3,2017,48,48,green,green
+Central Interior,Smithers,Smithers,o3,2018,48,48,green,green
+Central Interior,Smithers,Smithers,o3,2019,48,48,green,green
+Central Interior,Smithers,Smithers,o3,2020,46,46,green,green
+Central Interior,Smithers,Smithers,o3,2021,44,44,green,green
+Central Interior,Smithers,Smithers,o3,2022,44,44,green,green
+Central Interior,Smithers,Smithers,o3,2023,42,42,green,green
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2013,54,54,yellow,yellow
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2014,55,55,yellow,yellow
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2015,50,50,green,green
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2016,49,49,green,green
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2017,49,49,green,green
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2018,50,50,green,green
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2019,51,51,yellow,yellow
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2020,52,52,yellow,yellow
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2021,49,49,green,green
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2022,48,48,green,green
+Central Interior,Williams Lake Columneetza School,Williams Lake,o3,2023,50,50,green,green
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2013,NA,NA,NA,NA
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2014,NA,NA,NA,NA
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2015,NA,NA,NA,NA
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2016,NA,NA,NA,NA
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2017,NA,NA,NA,NA
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2018,NA,NA,NA,NA
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2019,NA,NA,NA,NA
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2020,NA,NA,NA,NA
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2021,42,42,green,green
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2022,41,41,green,green
+Coastal,Kitimat Whitesail,Kitimat-Whitesail,o3,2023,42,42,green,green
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2013,NA,NA,NA,NA
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2014,NA,NA,NA,NA
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2015,NA,NA,NA,NA
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2016,NA,NA,NA,NA
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2017,NA,NA,NA,NA
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2018,NA,NA,NA,NA
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2019,NA,NA,NA,NA
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2020,41,41,green,green
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2021,41,41,green,green
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2022,41,41,green,green
+Coastal,Prince Rupert Fairview,Prince Rupert-Fairview,o3,2023,44,44,green,green
+Coastal,Terrace Skeena Middle School,Terrace,o3,2013,NA,NA,NA,NA
+Coastal,Terrace Skeena Middle School,Terrace,o3,2014,NA,NA,NA,NA
+Coastal,Terrace Skeena Middle School,Terrace,o3,2015,NA,NA,NA,NA
+Coastal,Terrace Skeena Middle School,Terrace,o3,2016,45,45,green,green
+Coastal,Terrace Skeena Middle School,Terrace,o3,2017,45,45,green,green
+Coastal,Terrace Skeena Middle School,Terrace,o3,2018,46,46,green,green
+Coastal,Terrace Skeena Middle School,Terrace,o3,2019,45,45,green,green
+Coastal,Terrace Skeena Middle School,Terrace,o3,2020,45,45,green,green
+Coastal,Terrace Skeena Middle School,Terrace,o3,2021,44,44,green,green
+Coastal,Terrace Skeena Middle School,Terrace,o3,2022,46,46,green,green
+Coastal,Terrace Skeena Middle School,Terrace,o3,2023,46,46,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2013,49,49,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2014,50,50,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2015,49,49,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2016,49,49,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2017,49,49,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2018,50,50,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2019,50,50,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2020,50,50,green,green
+Georgia Strait,Colwood City Hall,Colwood,o3,2021,51,51,yellow,yellow
+Georgia Strait,Colwood City Hall,Colwood,o3,2022,51,51,yellow,yellow
+Georgia Strait,Colwood City Hall,Colwood,o3,2023,51,51,yellow,yellow
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2013,47,47,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2014,47,47,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2015,47,47,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2016,46,46,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2017,47,47,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2018,47,47,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2019,48,48,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2020,48,48,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2021,48,48,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2022,48,48,green,green
+Georgia Strait,Courtenay Elementary School,Courtenay,o3,2023,49,49,green,green
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2013,49,49,green,green
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2014,50,50,green,green
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2015,51,51,yellow,yellow
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2016,51,51,yellow,yellow
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2017,52,52,yellow,yellow
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2018,53,53,yellow,yellow
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2019,53,53,yellow,yellow
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2020,52,52,yellow,yellow
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2021,49,49,green,green
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2022,50,50,green,green
+Georgia Strait,Duncan,Duncan-Cairnsmore,o3,2023,51,51,yellow,yellow
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2013,45,45,green,green
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2014,46,46,green,green
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2015,NA,NA,NA,NA
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2016,NA,NA,NA,NA
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2017,NA,NA,NA,NA
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2018,NA,NA,NA,NA
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2019,NA,NA,NA,NA
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2020,NA,NA,NA,NA
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2021,NA,NA,NA,NA
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2022,NA,NA,NA,NA
+Georgia Strait,Elk Falls Dogwood,Campbell River,o3,2023,NA,NA,NA,NA
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2013,46,46,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2014,45,45,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2015,45,45,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2016,44,44,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2017,45,45,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2018,45,45,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2019,46,46,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2020,46,46,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2021,45,45,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2022,45,45,green,green
+Georgia Strait,Nanaimo Labieux Road,Nanaimo,o3,2023,46,46,green,green
+Georgia Strait,Squamish Elementary,Squamish,o3,2013,NA,NA,NA,NA
+Georgia Strait,Squamish Elementary,Squamish,o3,2014,NA,NA,NA,NA
+Georgia Strait,Squamish Elementary,Squamish,o3,2015,NA,NA,NA,NA
+Georgia Strait,Squamish Elementary,Squamish,o3,2016,NA,NA,NA,NA
+Georgia Strait,Squamish Elementary,Squamish,o3,2017,46,46,green,green
+Georgia Strait,Squamish Elementary,Squamish,o3,2018,48,48,green,green
+Georgia Strait,Squamish Elementary,Squamish,o3,2019,50,50,green,green
+Georgia Strait,Squamish Elementary,Squamish,o3,2020,47,47,green,green
+Georgia Strait,Squamish Elementary,Squamish,o3,2021,44,44,green,green
+Georgia Strait,Squamish Elementary,Squamish,o3,2022,46,46,green,green
+Georgia Strait,Squamish Elementary,Squamish,o3,2023,48,48,green,green
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2013,46,46,green,green
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2014,48,48,green,green
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2015,48,48,green,green
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2016,50,50,green,green
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2017,NA,NA,NA,NA
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2018,NA,NA,NA,NA
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2019,NA,NA,NA,NA
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2020,NA,NA,NA,NA
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2021,NA,NA,NA,NA
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2022,NA,NA,NA,NA
+Georgia Strait,Squamish Gov t Bldg,Squamish,o3,2023,NA,NA,NA,NA
+Georgia Strait,Victoria Topaz,Victoria,o3,2013,44,44,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2014,46,46,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2015,46,46,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2016,45,45,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2017,45,45,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2018,46,46,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2019,46,46,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2020,46,46,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2021,45,45,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2022,45,45,green,green
+Georgia Strait,Victoria Topaz,Victoria,o3,2023,47,47,green,green
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2013,53,53,yellow,yellow
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2014,53,53,yellow,yellow
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2015,53,53,yellow,yellow
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2016,52,52,yellow,yellow
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2017,54,54,yellow,yellow
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2018,53,53,yellow,yellow
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2019,53,53,yellow,yellow
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2020,50,50,green,green
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2021,49,49,green,green
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2022,48,48,green,green
+Georgia Strait,Whistler Meadow Park,Whistler,o3,2023,50,50,green,green
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2013,NA,NA,NA,NA
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2014,50,50,green,green
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2015,50,50,green,green
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2016,49,49,green,green
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2017,53,53,yellow,yellow
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2018,58,58,orange,orange
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2019,59,59,orange,orange
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2020,55,54,yellow,yellow
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2021,52,51,yellow,yellow
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2022,54,53,yellow,yellow
+Lower Fraser Valley,Abbotsford A Columbia Street,Abbotsford-Airport,o3,2023,55,55,yellow,yellow
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2013,50,50,green,green
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2014,51,51,yellow,yellow
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2015,52,52,yellow,yellow
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2016,51,51,yellow,yellow
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2017,55,55,yellow,yellow
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2018,60,60,orange,orange
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2019,60,60,orange,orange
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2020,56,56,yellow,yellow
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2021,50,50,green,green
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2022,52,52,yellow,yellow
+Lower Fraser Valley,Abbotsford Central,Abbotsford-Mill Lake,o3,2023,54,54,yellow,yellow
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2013,NA,NA,NA,NA
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2014,NA,NA,NA,NA
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2015,64,63,red,orange
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2016,58,58,orange,orange
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2017,60,60,orange,orange
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2018,60,60,orange,orange
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2019,61,61,orange,orange
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2020,56,55,yellow,yellow
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2021,54,53,yellow,yellow
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2022,56,55,yellow,yellow
+Lower Fraser Valley,Agassiz Municipal Hall,Agassiz,o3,2023,60,60,orange,orange
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2013,42,42,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2014,43,43,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2015,44,44,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2016,43,43,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2017,45,45,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2018,48,48,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2019,49,49,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2020,47,47,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2021,46,46,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2022,47,47,green,green
+Lower Fraser Valley,Burnaby Kensington Park,Burnaby-Kensington Park,o3,2023,48,48,green,green
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2013,51,51,yellow,yellow
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2014,52,52,yellow,yellow
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2015,51,51,yellow,yellow
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2016,50,50,green,green
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2017,55,55,yellow,yellow
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2018,58,58,orange,orange
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2019,57,57,orange,orange
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2020,53,53,yellow,yellow
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2021,53,53,yellow,yellow
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2022,57,56,orange,yellow
+Lower Fraser Valley,Burnaby Mountain,Burnaby-Mtn,o3,2023,57,57,orange,orange
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2013,42,42,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2014,42,42,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2015,42,42,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2016,40,40,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2017,42,42,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2018,44,44,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2019,45,45,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2020,45,45,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2021,44,44,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2022,45,45,green,green
+Lower Fraser Valley,Burnaby South,Burnaby-South,o3,2023,47,47,green,green
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2013,52,52,yellow,yellow
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2014,52,52,yellow,yellow
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2015,53,53,yellow,yellow
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2016,52,52,yellow,yellow
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2017,56,56,yellow,yellow
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2018,59,59,orange,orange
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2019,61,61,orange,orange
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2020,58,57,orange,orange
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2021,57,55,orange,yellow
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2022,59,57,orange,orange
+Lower Fraser Valley,Chilliwack Airport,Chilliwack,o3,2023,61,61,orange,orange
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2013,47,47,green,green
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2014,49,49,green,green
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2015,49,49,green,green
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2016,49,49,green,green
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2017,48,48,green,green
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2018,53,53,yellow,yellow
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2019,54,54,yellow,yellow
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2020,53,53,yellow,yellow
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2021,54,54,yellow,yellow
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2022,57,57,orange,orange
+Lower Fraser Valley,Coquitlam Douglas College,Coquitlam,o3,2023,59,58,orange,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2013,54,54,yellow,yellow
+Lower Fraser Valley,Hope Airport,Hope,o3,2014,58,58,orange,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2015,61,61,orange,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2016,60,60,orange,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2017,64,60,red,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2018,65,60,red,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2019,65,61,red,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2020,59,57,orange,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2021,56,56,yellow,yellow
+Lower Fraser Valley,Hope Airport,Hope,o3,2022,58,57,orange,orange
+Lower Fraser Valley,Hope Airport,Hope,o3,2023,58,58,orange,orange
+Lower Fraser Valley,Langley Central,Langley,o3,2013,49,49,green,green
+Lower Fraser Valley,Langley Central,Langley,o3,2014,50,50,green,green
+Lower Fraser Valley,Langley Central,Langley,o3,2015,50,50,green,green
+Lower Fraser Valley,Langley Central,Langley,o3,2016,50,50,green,green
+Lower Fraser Valley,Langley Central,Langley,o3,2017,53,53,yellow,yellow
+Lower Fraser Valley,Langley Central,Langley,o3,2018,59,59,orange,orange
+Lower Fraser Valley,Langley Central,Langley,o3,2019,59,59,orange,orange
+Lower Fraser Valley,Langley Central,Langley,o3,2020,57,57,orange,orange
+Lower Fraser Valley,Langley Central,Langley,o3,2021,52,52,yellow,yellow
+Lower Fraser Valley,Langley Central,Langley,o3,2022,54,54,yellow,yellow
+Lower Fraser Valley,Langley Central,Langley,o3,2023,54,54,yellow,yellow
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2013,50,50,green,green
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2014,51,51,yellow,yellow
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2015,53,53,yellow,yellow
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2016,53,53,yellow,yellow
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2017,58,58,orange,orange
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2018,62,62,orange,orange
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2019,63,63,orange,orange
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2020,59,58,orange,orange
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2021,57,56,orange,yellow
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2022,61,58,orange,orange
+Lower Fraser Valley,Maple Ridge Golden Ears School,Maple Ridge,o3,2023,63,60,red,orange
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2013,NA,NA,NA,NA
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2014,NA,NA,NA,NA
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2015,NA,NA,NA,NA
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2016,54,54,yellow,yellow
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2017,60,60,orange,orange
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2018,66,60,red,orange
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2019,66,61,red,orange
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2020,62,56,orange,yellow
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2021,58,57,orange,orange
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2022,60,59,orange,orange
+Lower Fraser Valley,Mission School Works Yard,Mission,o3,2023,63,62,red,orange
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2013,NA,NA,NA,NA
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2014,NA,NA,NA,NA
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2015,NA,NA,NA,NA
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2016,NA,NA,NA,NA
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2017,47,47,green,green
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2018,48,48,green,green
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2019,48,48,green,green
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2020,47,47,green,green
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2021,47,47,green,green
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2022,50,50,green,green
+Lower Fraser Valley,New Westminster Sapperton Park,New Westminster,o3,2023,50,50,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2013,44,44,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2014,44,44,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2015,44,44,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2016,44,44,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2017,44,44,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2018,45,45,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2019,45,45,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2020,45,45,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2021,45,45,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2022,47,47,green,green
+Lower Fraser Valley,North Delta,North Delta,o3,2023,48,48,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2013,45,45,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2014,45,45,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2015,46,46,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2016,45,45,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2017,46,46,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2018,47,47,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2019,48,48,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2020,46,46,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2021,45,45,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2022,46,46,green,green
+Lower Fraser Valley,North Vancouver Mahon Park,N.Vancouver-Mahon Park,o3,2023,48,48,green,green
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2013,40,40,green,green
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2014,40,40,green,green
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2015,41,41,green,green
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2016,40,40,green,green
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2017,40,40,green,green
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2018,41,41,green,green
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2019,NA,NA,NA,NA
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2020,NA,NA,NA,NA
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2021,NA,NA,NA,NA
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2022,38,38,green,green
+Lower Fraser Valley,North Vancouver Second Narrows,N.Vancouver-2nd Narrows,o3,2023,37,37,green,green
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2013,48,48,green,green
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2014,48,48,green,green
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2015,48,48,green,green
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2016,47,47,green,green
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2017,51,51,yellow,yellow
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2018,54,54,yellow,yellow
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2019,56,56,yellow,yellow
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2020,51,51,yellow,yellow
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2021,50,50,green,green
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2022,53,52,yellow,yellow
+Lower Fraser Valley,Pitt Meadows Meadowlands School,Pitt Meadows,o3,2023,55,54,yellow,yellow
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2013,43,43,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2014,44,44,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2015,44,44,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2016,44,44,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2017,46,46,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2018,48,48,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2019,49,49,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2020,47,47,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2021,48,48,green,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2022,51,50,yellow,green
+Lower Fraser Valley,Port Moody Rocky Point Park,Port Moody,o3,2023,52,51,yellow,yellow
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2013,46,46,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2014,46,46,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2015,47,47,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2016,46,46,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2017,47,47,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2018,47,47,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2019,48,48,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2020,46,46,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2021,45,45,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2022,46,46,green,green
+Lower Fraser Valley,Richmond South,Richmond-South,o3,2023,46,46,green,green
+Lower Fraser Valley,Surrey East,Surrey East,o3,2013,48,48,green,green
+Lower Fraser Valley,Surrey East,Surrey East,o3,2014,47,47,green,green
+Lower Fraser Valley,Surrey East,Surrey East,o3,2015,48,48,green,green
+Lower Fraser Valley,Surrey East,Surrey East,o3,2016,47,47,green,green
+Lower Fraser Valley,Surrey East,Surrey East,o3,2017,49,49,green,green
+Lower Fraser Valley,Surrey East,Surrey East,o3,2018,53,53,yellow,yellow
+Lower Fraser Valley,Surrey East,Surrey East,o3,2019,54,54,yellow,yellow
+Lower Fraser Valley,Surrey East,Surrey East,o3,2020,53,53,yellow,yellow
+Lower Fraser Valley,Surrey East,Surrey East,o3,2021,50,50,green,green
+Lower Fraser Valley,Surrey East,Surrey East,o3,2022,52,52,yellow,yellow
+Lower Fraser Valley,Surrey East,Surrey East,o3,2023,53,53,yellow,yellow
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2013,47,47,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2014,47,47,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2015,47,47,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2016,47,47,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2017,49,49,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2018,49,49,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2019,49,49,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2020,47,47,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2021,46,46,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2022,47,47,green,green
+Lower Fraser Valley,Tsawwassen,Tsawwassen,o3,2023,46,46,green,green
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2013,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2014,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2015,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2016,42,42,green,green
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2017,42,42,green,green
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2018,43,43,green,green
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2019,43,43,green,green
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2020,43,43,green,green
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2021,41,41,green,green
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2022,42,42,green,green
+Lower Fraser Valley,Vancouver Clark Drive,Vancouver-ClarkDr,o3,2023,42,42,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2013,43,43,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2014,44,44,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2015,45,45,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2016,43,43,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2017,43,43,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2018,43,43,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2019,44,44,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2020,45,45,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2021,44,44,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2022,45,45,green,green
+Lower Fraser Valley,Vancouver International Airport 2,Richmond-Airport,o3,2023,44,44,green,green
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2013,46,46,green,green
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2014,46,46,green,green
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2015,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2016,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2017,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2018,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2019,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2020,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2021,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2022,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Kitsilano,Vancouver-Kitsilano,o3,2023,NA,NA,NA,NA
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2013,38,38,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2014,37,37,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2015,37,37,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2016,34,34,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2017,34,34,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2018,36,36,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2019,36,36,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2020,38,38,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2021,38,38,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2022,40,40,green,green
+Lower Fraser Valley,Vancouver Robson Square,Vancouver-Downtown,o3,2023,40,40,green,green
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2013,NA,NA,NA,NA
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2014,NA,NA,NA,NA
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2015,NA,NA,NA,NA
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2016,54,54,yellow,yellow
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2017,53,53,yellow,yellow
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2018,50,50,green,green
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2019,51,51,yellow,yellow
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2020,51,51,yellow,yellow
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2021,50,50,green,green
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2022,48,48,green,green
+Northeast,Fort St John Key Learning Centre,FortSt.John,o3,2023,49,49,green,green
+Northeast,Rolla 213 Road,Rolla,o3,2013,NA,NA,NA,NA
+Northeast,Rolla 213 Road,Rolla,o3,2014,NA,NA,NA,NA
+Northeast,Rolla 213 Road,Rolla,o3,2015,NA,NA,NA,NA
+Northeast,Rolla 213 Road,Rolla,o3,2016,NA,NA,NA,NA
+Northeast,Rolla 213 Road,Rolla,o3,2017,50,50,green,green
+Northeast,Rolla 213 Road,Rolla,o3,2018,50,50,green,green
+Northeast,Rolla 213 Road,Rolla,o3,2019,NA,NA,NA,NA
+Northeast,Rolla 213 Road,Rolla,o3,2020,NA,NA,NA,NA
+Northeast,Rolla 213 Road,Rolla,o3,2021,NA,NA,NA,NA
+Northeast,Rolla 213 Road,Rolla,o3,2022,NA,NA,NA,NA
+Northeast,Rolla 213 Road,Rolla,o3,2023,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2013,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2014,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2015,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2016,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2017,51,51,yellow,yellow
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2018,51,51,yellow,yellow
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2019,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2020,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2021,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2022,NA,NA,NA,NA
+Northeast,Taylor Lone Wolf Golf Course,Taylor,o3,2023,NA,NA,NA,NA
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2013,NA,NA,NA,NA
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2014,NA,NA,NA,NA
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2015,NA,NA,NA,NA
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2016,NA,NA,NA,NA
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2017,NA,NA,NA,NA
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2018,NA,NA,NA,NA
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2019,53,53,yellow,yellow
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2020,52,52,yellow,yellow
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2021,51,51,yellow,yellow
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2022,51,51,yellow,yellow
+Northeast,Taylor Townsite,Taylor-Townsite,o3,2023,54,54,yellow,yellow
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2013,50,50,green,green
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2014,49,49,green,green
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2015,48,48,green,green
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2016,42,42,green,green
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2017,45,45,green,green
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2018,46,46,green,green
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2019,50,50,green,green
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2020,48,48,green,green
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2021,52,52,yellow,yellow
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2022,52,52,yellow,yellow
+Southern Interior,Castlegar Zinio Park,Castlegar,o3,2023,54,54,yellow,yellow
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2013,NA,NA,NA,NA
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2014,NA,NA,NA,NA
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2015,NA,NA,NA,NA
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2016,NA,NA,NA,NA
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2017,NA,NA,NA,NA
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2018,NA,NA,NA,NA
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2019,NA,NA,NA,NA
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2020,50,50,green,green
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2021,53,53,yellow,yellow
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2022,53,53,yellow,yellow
+Southern Interior,Cranbrook Muriel Baxter,Cranbrook,o3,2023,57,57,orange,orange
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2013,NA,NA,NA,NA
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2014,NA,NA,NA,NA
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2015,54,54,yellow,yellow
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2016,52,52,yellow,yellow
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2017,53,53,yellow,yellow
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2018,52,52,yellow,yellow
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2019,53,53,yellow,yellow
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2020,50,50,green,green
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2021,51,51,yellow,yellow
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2022,51,51,yellow,yellow
+Southern Interior,Kamloops Federal Building,Kamloops,o3,2023,53,53,yellow,yellow
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2013,51,51,yellow,yellow
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2014,51,51,yellow,yellow
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2015,NA,NA,NA,NA
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2016,NA,NA,NA,NA
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2017,NA,NA,NA,NA
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2018,NA,NA,NA,NA
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2019,NA,NA,NA,NA
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2020,NA,NA,NA,NA
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2021,NA,NA,NA,NA
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2022,NA,NA,NA,NA
+Southern Interior,Kamloops Fire Station 2,Kamloops-Fire Station #2,o3,2023,NA,NA,NA,NA
+Southern Interior,Kelowna,Kelowna,o3,2013,60,60,orange,orange
+Southern Interior,Kelowna,Kelowna,o3,2014,59,59,orange,orange
+Southern Interior,Kelowna,Kelowna,o3,2015,54,54,yellow,yellow
+Southern Interior,Kelowna,Kelowna,o3,2016,53,53,yellow,yellow
+Southern Interior,Kelowna,Kelowna,o3,2017,55,55,yellow,yellow
+Southern Interior,Kelowna,Kelowna,o3,2018,55,55,yellow,yellow
+Southern Interior,Kelowna,Kelowna,o3,2019,57,57,orange,orange
+Southern Interior,Kelowna,Kelowna,o3,2020,51,51,yellow,yellow
+Southern Interior,Kelowna,Kelowna,o3,2021,52,52,yellow,yellow
+Southern Interior,Kelowna,Kelowna,o3,2022,50,50,green,green
+Southern Interior,Kelowna,Kelowna,o3,2023,49,49,green,green
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2013,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2014,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2015,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2016,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2017,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2018,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2019,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2020,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2021,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2022,NA,NA,NA,NA
+Southern Interior,Merritt Nicola Ave MAML,Merritt-NicolaAve,o3,2023,50,50,green,green
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2013,51,51,yellow,yellow
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2014,48,48,green,green
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2015,46,46,green,green
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2016,NA,NA,NA,NA
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2017,NA,NA,NA,NA
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2018,NA,NA,NA,NA
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2019,NA,NA,NA,NA
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2020,NA,NA,NA,NA
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2021,NA,NA,NA,NA
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2022,NA,NA,NA,NA
+Southern Interior,Nelson Kutenai Place,Nelson,o3,2023,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2013,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2014,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2015,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2016,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2017,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2018,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2019,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2020,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2021,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2022,NA,NA,NA,NA
+Southern Interior,Sparwood Centennial Square,Sparwood,o3,2023,56,56,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2013,52,52,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2014,51,51,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2015,51,51,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2016,50,50,green,green
+Southern Interior,Vernon Science Centre,Vernon,o3,2017,51,51,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2018,51,51,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2019,53,53,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2020,51,51,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2021,52,52,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2022,51,51,yellow,yellow
+Southern Interior,Vernon Science Centre,Vernon,o3,2023,52,52,yellow,yellow
