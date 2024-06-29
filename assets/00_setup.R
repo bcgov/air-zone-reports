@@ -20,6 +20,51 @@ library(tibble)
 library(readr)
 library(ggplot2)
 library(plotly)
+library(janitor)
+
+# -create list of CAAQS standards----
+# -values here are deifined in caaqs_results.csv
+
+df_standards <- 
+  tribble(
+  ~metric,~year,~caaqs_value,
+  'pm25_annual',2015,10,
+  'pm25_annual',2020,8.8,
+  'pm25_24h',2015,28,
+  'pm25_24h',2020,27,
+  'o3_8h',2015,63,
+  'o3_8h',2020,62,
+  'o3_8h',2025,60,
+  'no2_1hr',2020,60,
+  'no2_1hr',2025,42,
+  'no2_ann',2020,17,
+  'no2_ann',2025,12,
+  'so2_1hr',2020,70,
+  'so2_1hr',2025,65,
+  'so2_ann',2020,5,
+  'so2_ann',2025,4,
+)
+df_standards$year[df_standards$year == 2015] <- 2013
+
+yrs <- 2013:validation_year  # -defines range of years
+df_standards_ <- df_standards
+for (yr in yrs) {
+  df_std_prev_yr <- df_standards_ %>%
+    filter(year == (yr-1))
+  
+  df_std_curr_yr <- df_standards_ %>%
+    filter(year == (yr))
+  
+  df_ <- df_std_prev_yr %>%
+    filter(!metric %in% df_std_curr_yr$metric)
+  df_$year <- yr
+  
+  df_standards_ <- bind_rows(df_standards_,df_)
+}
+
+df_standards <- df_standards_ %>%
+  arrange(metric,year)# - final list of standards, contain all covered years
+
 
 # CAAQS-related Calculatons-----
 
@@ -657,8 +702,17 @@ create_caaqs_annual <- function(years) {
   for (year in years) {
     df <- create_caaqs_annual0(year)
     
+    #- assess for caaqs achievement
+    #- required df_standards declared at beginning of this file
+    df <- df %>% 
+      left_join(df_standards) %>%
+      mutate(achieve_caaqs = (metric_value <= caaqs_value))
+  
+    
     df_result <- bind_rows(df_result,df)
   }
+  
+  
   
   return(df_result)
 }

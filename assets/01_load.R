@@ -29,9 +29,9 @@ saveDirectory <- './data/out'
 # -for test output
 if (0) {
   validation_year <- 2023
-  datayear <- 2013:validation_year
+  yrs <- 2013:validation_year
   saveDirectory <- './data/export'
-  df_caaqs_annual <- create_caaqs_annual(years = datayear)
+  df_caaqs_annual <- create_caaqs_annual(years = yrs)
   readr::write_csv(df_caaqs_annual,paste(saveDirectory,'caaqs_results.csv',sep='/'))
   df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
   readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
@@ -44,7 +44,7 @@ if (0) {
 dir.create(saveDirectory,recursive = TRUE)
 
 
-datayear <- 2013:validation_year
+yrs <- 2013:validation_year
 
 
 print(getwd())
@@ -61,7 +61,7 @@ require(dplyr)
 # define where data files will be saved
 
 
-
+# -saves the data from 2011 to current validation year
 # retrieve pm, o3, no2, and so2 data
 df_data <- importBC_data(c('pm25','no2','so2','o3'), years = 2011:validation_year, flag_TFEE = TRUE,merge_Stations = TRUE)
 df_data <- clean_names(df_data) %>%
@@ -81,7 +81,7 @@ saveRDS(df_data,paste(saveDirectory,'aq_data.Rds',sep='/'))
 # this function output will append on itself, so years can be operated in chunks
 
 # -saves data into caaqs_results.csv
-df_caaqs_annual <- create_caaqs_annual(years = datayear)
+df_caaqs_annual <- create_caaqs_annual(years = yrs)
 readr::write_csv(df_caaqs_annual,paste(saveDirectory,'caaqs_results.csv',sep='/'))
 
 # Create management levels summary-----
