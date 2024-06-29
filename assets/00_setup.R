@@ -3324,6 +3324,7 @@ plot_bar_caaqs <- function(metric, year, df = NULL,airzone = NULL) {
 #' @param validation_year is the year to make the comparison. 
 #' #' @param reference_year is the year to make the basis for comparison
 #' @param management is the dataframe containing manamagent level history. default is NULL 
+
 plot_mgmt <- function(param,validation_year, reference_year = NULL,management = NULL)
 {
   
@@ -3534,9 +3535,9 @@ plot_mgmt <- function(param,validation_year, reference_year = NULL,management = 
     left_join(df_order) %>%
     filter(!is.na(arrow_length), year == validation_year) %>%
     mutate(arrowcolour = ifelse(arrow_length<=0,'blue','blue'),
-                  size = 0.15
-    # mutate(arrowcolour = ifelse(arrow_length<=0,'green','red'),
-    #        size = 0.10
+           size = 0.15
+           # mutate(arrowcolour = ifelse(arrow_length<=0,'green','red'),
+           #        size = 0.10
     )
   
   # df_plt
@@ -3627,11 +3628,11 @@ plot_mgmt <- function(param,validation_year, reference_year = NULL,management = 
   
   
   
-  plt <-  plt +
+  plt <-   plt +
     theme(legend.position = 'bottom',
           axis.title.y = element_blank(),
           axis.title.x = element_text(size=20),
-          
+          axis.text.y = element_text(size=20),
           axis.text.x = element_blank(),
           # legend.background = element_blank(),
           legend.key = element_blank(),
@@ -3660,6 +3661,7 @@ plot_mgmt <- function(param,validation_year, reference_year = NULL,management = 
   
   return(plt)
 }
+
 
 #end of functions----------
 
