@@ -57,6 +57,7 @@ require(rcaaqs)
 require(janitor)
 require(lubridate)
 require(dplyr)
+library(readr)
 
 # define where data files will be saved
 
@@ -86,9 +87,12 @@ readr::write_csv(df_caaqs_annual,paste(saveDirectory,'caaqs_results.csv',sep='/'
 
 # Create management levels summary-----
 # -create management.csv
-df_management_summary <- get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
+df_management_summary <-  get_management_summary(datafile = paste(saveDirectory,'caaqs_results.csv',sep='/'))
 readr::write_csv(df_management_summary,paste(saveDirectory,'management.csv',sep='/'))
 
+# Create summary of achievement of CAAQS
+df_achievement <- get_caaqs_achievement(caaqs_result_dir = paste(saveDirectory,'caaqs_results.csv',sep='/'))
+readr::write_csv(df_achievement[['detailed']],paste(saveDirectory,'achievement.csv',sep='/'))
 
 
 # Create NPRI data----

@@ -3771,6 +3771,102 @@ plot_bar_caaqs_complete <- function() {
 }
 
 
+#' Determine the CAAQS achievement and identify if TFEE is cause of not achievement
+#' 
+#' @param caaqs_result_dir is a string defining the full path where caaqs_results.csv is located
+#' this file is created using the create_caaqs_annual() function
+#' 
+#' @output  is a list containing airzone and sites. These would have the values for the site and airzone, respectively
+get_caaqs_achievement <- function(caaqs_result_dir = NULL) {
+  
+  if (0) {
+    caaqs_result_dir <- './data/out/caaqs_results.csv'
+  }
+  
+  
+  
+  # -assign default value if NULL
+  if (is.null(caaqs_result_dir)) {
+    caaqs_result_dir <- './data/out/caaqs_results.csv'
+  }
+  
+  
+  df_data <- read_csv(caaqs_result_dir)
+  
+  df_mgmt <- get_management_summary(datafile = caaqs_result_dir)
+  
+  df_mgmt_sel <- df_mgmt %>%
+    clean_names() %>%
+    select(site,station_name,label,instrument,latitude,longitude,airzone,aqms,year,parameter,metric,metric_value,tfee) %>%
+    left_join(
+      df_data %>%
+        select(site,year,instrument,metric,flag_two_of_three_years,achieve_caaqs,tfee),
+      by = c('site','year','instrument','metric','tfee')
+    ) 
+  
+  # -assessment for each station
+  df_mgmt_sel <- df_mgmt_sel %>%
+    group_by(site,instrument,year,metric,metric_value ) %>%
+    arrange(tfee) %>%
+    dplyr::mutate(count = n(), index = 1:n(),
+                  not_achieved_due_to_tfee = any(achieve_caaqs) & any(!achieve_caaqs)) %>%
+    ungroup()
+  
+  # -assessment for each air zone
+  df_mgmt_sel_az <- df_mgmt_sel %>%
+    select(airzone,year,achieve_caaqs,metric,tfee,parameter) %>%
+    distinct() %>%
+    group_by(airzone,year,metric,tfee,parameter ) %>%
+    summarise(achieve_caaqs_airzone = !any(!achieve_caaqs)) %>%
+    ungroup() %>%
+    group_by(airzone,year,metric,parameter ) %>%
+    arrange(tfee) %>%
+    # -of achievement differs between tfee and tfee-free data, then it was not achieved due to tfee
+    dplyr::mutate(count = n(), index = 1:n(),
+                  not_achieved_due_to_tfee = any(achieve_caaqs_airzone) & any(!achieve_caaqs_airzone)) %>%
+    mutate(not_achieved_due_to_tfee = ifelse(achieve_caaqs_airzone == TRUE,NA,not_achieved_due_to_tfee)) %>%
+    # -force value of NA to TRUE
+    mutate(not_achieved_due_to_tfee = ifelse(is.na(not_achieved_due_to_tfee),TRUE,not_achieved_due_to_tfee)) %>%
+    ungroup() %>%
+    filter(index ==1) %>%
+    group_by(airzone,year,parameter) %>%
+    summarise(achieve_caaqs_airzone = !any(!achieve_caaqs_airzone),
+              not_achieved_due_to_tfee = !any(!not_achieved_due_to_tfee)) %>%
+    mutate(not_achieved_due_to_tfee = ifelse(achieve_caaqs_airzone,NA,not_achieved_due_to_tfee))
+  
+  
+  # -develop the output properly
+  
+  df_mgmt_sel_sites <- df_mgmt_sel %>%
+    ungroup() %>%
+    select(site,instrument,airzone,parameter,year,metric,metric_value,tfee,achieve_caaqs,not_achieved_due_to_tfee,index) %>%
+    filter(index == 1) %>%
+    # -default answer to TRUE for not_achieved_due_to_tfee
+    # -
+    mutate(not_achieved_due_to_tfee = ifelse(achieve_caaqs,TRUE,not_achieved_due_to_tfee)) %>%
+    mutate(not_achieved_due_to_tfee = ifelse(is.na(not_achieved_due_to_tfee),TRUE,not_achieved_due_to_tfee)) %>%
+    select(-index)
+  
+  df_mgmt_sel_sites_param <- df_mgmt_sel_sites %>%
+    group_by(site,instrument,airzone,parameter,year) %>%
+    summarise(not_achieved_due_to_tfee = !any(!not_achieved_due_to_tfee),
+              achieve_caaqs_site = !any(!achieve_caaqs)) %>%
+    ungroup() %>%
+    mutate(not_achieved_due_to_tfee = ifelse(achieve_caaqs_site,NA,not_achieved_due_to_tfee))
+  
+  df_mgmt_sel_sites_output <- df_mgmt_sel_sites %>% 
+    select(-tfee) %>%
+    mutate(not_achieved_due_to_tfee = ifelse(achieve_caaqs,NA,not_achieved_due_to_tfee))
+  
+  
+  result <- list()
+  result[['airzone']] <- df_mgmt_sel_az 
+  result[['sites']] <- df_mgmt_sel_sites_param  
+  result[['detailed']] <- df_mgmt_sel_sites_output
+  return(result)
+}
+
+
 #' CREATE TRENDS of air quality in BC
 #' 
 #' @param dirs_location is the location of the data files
